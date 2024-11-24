@@ -7,7 +7,7 @@ interface StyledTooltipProps extends TooltipProps {
 
 export const StyledTooltip = styled(({ className, ...props }: StyledTooltipProps) => (
     <Tooltip {...props} arrow disableInteractive classes={{ popper: className }} />
-))(({ theme, fontSize = 13.5 }) => ({
+))(({ theme, fontSize = 12 }) => ({
     [`& .${tooltipClasses.arrow}`]: {
         color: `black`
     },
@@ -15,6 +15,7 @@ export const StyledTooltip = styled(({ className, ...props }: StyledTooltipProps
         backgroundColor: `black`,
         fontSize: theme.typography.pxToRem(fontSize),
         fontFamily: theme.font.styled.family,
+        fontWeight: theme.font.styled.weight,
         maxWidth: "none",
     },
 }))
