@@ -1,20 +1,30 @@
-import reactLogo from "/react.svg"
-import viteLogo from "/vite.svg"
-import "./App.css"
+import "App.css"
+
+// Component imports
+import Nav from "components/Nav"
+import NavBottom from "components/NavBottom"
+
+// MUI imports
+import { Box, CssBaseline, ThemeProvider } from "@mui/material"
+
+// Helper imports
+import theme from "themes/theme"
 
 function App() {
 
     return (
-        <>
-            {/* <div>
-                <a href="https://vite.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div> */}
-        </>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Box id="back-to-top-anchor" />
+            <Box sx={{ display: "flex" }}>
+                <Nav />
+                <Box sx={{ minWidth: "50vw", width: "100vw" }}>
+                    <Box sx={{ px: "20px", pt: "100px", pb: "50px", minHeight: "100vh" }}>
+                    </Box>
+                    <NavBottom />
+                </Box>
+            </Box>
+        </ThemeProvider>
     )
 }
 
