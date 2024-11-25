@@ -1,12 +1,13 @@
-import { CSSProperties, Fragment, useState } from "react"
+import React from "react"
 
 // Component imports
 import Image from "custom/Image"
 import { TextStyled } from "styled/StyledTypography"
 import { StyledTooltip } from "styled/StyledTooltip"
+import Logo from "./Logo"
 
 // MUI imports
-import { styled, useTheme, Theme, CSSObject, SxProps, Toolbar, Box, IconButton, ButtonBase, CardHeader, List, Divider, Collapse } from "@mui/material"
+import { styled, useTheme, Theme, CSSObject, SxProps, Toolbar, Box, IconButton, ButtonBase, List, Divider, Collapse } from "@mui/material"
 import MuiDrawer from "@mui/material/Drawer"
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
 import MenuOpenIcon from "@mui/icons-material/MenuOpen"
@@ -22,23 +23,23 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
 
     const theme = useTheme()
 
-    const [drawerOpen, setDrawerOpen] = useState(onHomePage)
+    const [drawerOpen, setDrawerOpen] = React.useState(onHomePage)
     const toggleDrawerState = () => {
         setDrawerOpen(!drawerOpen)
     }
 
-    const [dropdownOpen, setDropdownOpen] = useState(false)
+    const [dropdownOpen, setDropdownOpen] = React.useState(false)
     const toggleDropdownState = () => {
         setDropdownOpen(!dropdownOpen)
     }
 
-    const navItemsStyle: CSSProperties = {
+    const navItemsStyle: React.CSSProperties = {
         width: iconSize,
         height: iconSize,
         padding: "2px"
     }
 
-    const linkItemsStyle: CSSProperties = {
+    const linkItemsStyle: React.CSSProperties = {
         width: iconSize,
         height: iconSize,
         borderRadius: "5px"
@@ -74,7 +75,7 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
     }
 
     return (
-        <Fragment>
+        <React.Fragment>
             <AppBar position="fixed">
                 <Toolbar disableGutters>
                     <Box sx={{ width: "64px", px: "14px" }}>
@@ -87,13 +88,7 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
                             <MenuOpenIcon sx={[{ ...listIconStyle }, { transform: drawerOpen ? "rotateY(0deg)" : "rotateY(180deg)", transition: "transform 0.25s" }]} />
                         </IconButton>
                     </Box>
-                    <ButtonBase disableRipple href={onHomePage ? "https://irminsul.gg/" : "/"}>
-                        <CardHeader
-                            avatar={<Image src="https://assets.irminsul.gg/main/icons/Irminsul.png" alt="IRMINSUL.GG" style={{ width: "48px", height: "48px" }} />}
-                            title={<TextStyled variant="sitename">IRMINSUL.GG</TextStyled>}
-                            sx={{ px: 0 }}
-                        />
-                    </ButtonBase>
+                    <Logo onHomePage={onHomePage} />
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -167,7 +162,7 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
                     </Collapse>
                 </List>
             </Drawer>
-        </Fragment>
+        </React.Fragment>
     )
 
 }

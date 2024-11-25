@@ -1,8 +1,8 @@
 import "App.css"
 
 // Component imports
-import Nav from "components/Nav"
-import NavBottom from "components/NavBottom"
+import Nav from "components/nav/Nav"
+import NavBottom from "components/nav/NavBottom"
 
 // MUI imports
 import { Box, CssBaseline, ThemeProvider } from "@mui/material"
