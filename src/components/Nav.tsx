@@ -1,7 +1,8 @@
-import { Fragment } from "react"
+import React from "react"
 
 // Component imports
 import NavDesktop from "./NavDesktop"
+import NavMobile from "./NavMobile"
 
 // MUI imports
 import { useTheme, useMediaQuery } from "@mui/material"
@@ -14,15 +15,14 @@ function Nav() {
     const onHomePage = window.location.pathname === "/"
 
     return (
-        <Fragment>
+        <React.Fragment>
             {
                 matches_up_sm ?
                     <NavDesktop onHomePage={onHomePage} navItems={navItems} linkItems={linkItems} />
                     :
-                    // <NavMobile onHomePage={onHomePage} navItems={navItems} linkItems={linkItems} />
-                    null
+                    <NavMobile onHomePage={onHomePage} navItems={navItems} linkItems={linkItems} />
             }
-        </Fragment>
+        </React.Fragment>
     )
 
 }
@@ -43,7 +43,7 @@ export interface NavItem {
 
 const navItems: NavItem[] = [
     {
-        icon: "icons/Medal",
+        icon: "icons/Home",
         text: "Home",
         link: "/"
     },
