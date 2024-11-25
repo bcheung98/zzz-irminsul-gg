@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { combineReducers } from "redux"
-
-const rootReducer = combineReducers({
-    
-})
+import characterReducer from "reducers/character"
 
 const store = configureStore({
-    reducer: rootReducer
+    reducer: {
+        characters: characterReducer
+    }
 })
 
 export default store
