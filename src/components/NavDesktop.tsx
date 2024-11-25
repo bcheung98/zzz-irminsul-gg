@@ -87,7 +87,7 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
                             <MenuOpenIcon sx={[{ ...listIconStyle }, { transform: drawerOpen ? "rotateY(0deg)" : "rotateY(180deg)", transition: "transform 0.25s" }]} />
                         </IconButton>
                     </Box>
-                    <ButtonBase disableRipple href={onHomePage ? "https://irminsul.gg/" : `${process.env.REACT_APP_BASENAME}/`}>
+                    <ButtonBase disableRipple href={onHomePage ? "https://irminsul.gg/" : "/"}>
                         <CardHeader
                             avatar={<Image src="https://assets.irminsul.gg/main/icons/Irminsul.png" alt="IRMINSUL.GG" style={{ width: "48px", height: "48px" }} />}
                             title={<TextStyled variant="sitename">IRMINSUL.GG</TextStyled>}
