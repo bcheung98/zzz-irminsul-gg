@@ -1,5 +1,6 @@
-import "App.css"
+import React from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router"
+import "App.css"
 
 // Component imports
 import Nav from "components/nav/Nav"
@@ -10,9 +11,18 @@ import Home from "components/home/Home"
 import { Box, CssBaseline, ThemeProvider } from "@mui/material"
 
 // Helper imports
+import { fetchCharacters } from "rtk/fetch"
+import { useAppDispatch } from "helpers/hooks"
 import theme from "themes/theme"
 
+
 function App() {
+
+    const dispatch = useAppDispatch()
+
+    React.useEffect(() => {
+        dispatch(fetchCharacters())
+    })
 
     return (
         <ThemeProvider theme={theme}>

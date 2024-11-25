@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { fetchCharacters, LoadingStatus } from "helpers/fetch"
-import { RootState } from "store"
+import { fetchCharacters, LoadingStatus } from "rtk/fetch"
+import { listenerMiddleware } from "rtk/middleware"
+import { RootState } from "rtk/store"
 import { Character } from "types/character"
 
 export interface CharacterState {
@@ -8,9 +9,11 @@ export interface CharacterState {
     characters: Character[]
 }
 
+const storedCharacters = localStorage.getItem("characters") || "null"
+
 const initialState: CharacterState = {
     status: "idle",
-    characters: []
+    characters: storedCharacters !== null ? JSON.parse(storedCharacters) : []
 }
 
 export const characterSlice = createSlice({
@@ -22,9 +25,10 @@ export const characterSlice = createSlice({
             state.status = "pending"
         })
         builder.addCase(fetchCharacters.fulfilled, (state, action) => {
+            if (JSON.stringify(action.payload) !== storedCharacters) {
+                state.characters = action.payload.sort((a, b) => a.name.localeCompare(b.name))
+            }
             state.status = "success"
-            state.characters = action.payload.sort((a, b) => a.name.localeCompare(b.name))
-            state.status = "idle"
         })
         builder.addCase(fetchCharacters.rejected, (state) => {
             state.status = "error"
@@ -34,3 +38,13 @@ export const characterSlice = createSlice({
 
 export const selectCharacters = (state: RootState) => state.characters.characters
 export default characterSlice.reducer
+
+listenerMiddleware.startListening({
+    actionCreator: fetchCharacters.fulfilled,
+    effect: (action) => {
+        const data = JSON.stringify(action.payload)
+        if (data !== storedCharacters) {
+            localStorage.setItem("characters", data)
+        }
+    }
+})
