@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react"
+import { CSSProperties, Fragment, useState } from "react"
 
 // Component imports
 import Image from "custom/Image"
@@ -6,19 +6,17 @@ import { TextStyled } from "styled/StyledTypography"
 import { StyledTooltip } from "styled/StyledTooltip"
 
 // MUI imports
-import { styled, useTheme, Theme, CSSObject, SxProps, Toolbar, Box, IconButton, ButtonBase, CardHeader, List, ListItem, ListItemButton, ListItemAvatar, ListItemText, ListItemIcon, Divider, Collapse } from "@mui/material"
+import { styled, useTheme, Theme, CSSObject, SxProps, Toolbar, Box, IconButton, ButtonBase, CardHeader, List, Divider, Collapse } from "@mui/material"
 import MuiDrawer from "@mui/material/Drawer"
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
 import MenuOpenIcon from "@mui/icons-material/MenuOpen"
-import ExpandLess from "@mui/icons-material/ExpandLess"
 import ExpandMore from "@mui/icons-material/ExpandMore"
 
-// Type imports
+// Helper imports
 import { NavProps } from "./Nav"
 
-const drawerWidth = 240 //px
-const buttonHoverWidth = drawerWidth * 0.9 // px
-const iconSize = 32 //px
+const drawerWidth = 240 // px
+const iconSize = 32 // px
 
 function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
 
@@ -34,176 +32,139 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
         setDropdownOpen(!dropdownOpen)
     }
 
-    const listItemButtonStyle: SxProps = [
-        {
-            px: "4px",
-            py: 0,
-            borderRadius: "5px",
-            "&:hover": {
-                backgroundColor: theme.table.body.hover
-            }
-        },
-        drawerOpen ?
-            {
-                width: buttonHoverWidth,
-                height: "50px",
-                my: 0,
-                justifyContent: "initial"
-            }
-            :
-            {
-                width: `calc(${iconSize}px + ${iconSize * 0.25}px)`,
-                height: `calc(${iconSize}px + ${iconSize * 0.25}px)`,
-                my: "5px",
-                justifyContent: "center"
-            }
-    ]
+    const navItemsStyle: CSSProperties = {
+        width: iconSize,
+        height: iconSize,
+        padding: "2px"
+    }
+
+    const linkItemsStyle: CSSProperties = {
+        width: iconSize,
+        height: iconSize,
+        borderRadius: "5px"
+    }
+
+    const listItemStyle: SxProps = {
+        px: `${(iconSize * 2) / 8}px`,
+    }
+
+    const listIconStyle: SxProps = {
+        minWidth: iconSize,
+        width: iconSize,
+        height: iconSize,
+        padding: "4px",
+        transform: dropdownOpen ? "rotateZ(-90deg)" : "rotateZ(0deg)",
+        transition: "transform 0.25s"
+    }
+
+    const listItemButtonStyle: SxProps = {
+        borderRadius: "5px",
+        justifyContent: "left",
+        px: `${(iconSize * 2) / 8}px`,
+        width: "100%",
+        height: `${iconSize * 1.5}px`,
+        "&:hover": {
+            backgroundColor: theme.table.body.hover
+        }
+    }
+
+    const listItemTextStyle: SxProps = {
+        display: drawerOpen ? "block" : "none",
+        ml: "20px"
+    }
 
     return (
         <Fragment>
             <AppBar position="fixed">
-                <Toolbar>
-                    <Box sx={{ display: "flex", flexGrow: 0.97 }}>
+                <Toolbar disableGutters>
+                    <Box sx={{ width: "64px", px: "14px" }}>
                         <IconButton
                             onClick={toggleDrawerState}
-                            sx={{ ml: "-10px", mr: "15px" }}
+                            disableRipple
+                            disableTouchRipple
+                            sx={[{ ...listItemButtonStyle }, { px: "2px", width: "36px", height: "36px" }]}
                         >
-                            {
-                                drawerOpen ?
-                                    <MenuOpenIcon />
-                                    :
-                                    <MenuOpenIcon sx={{ transform: "rotate(180deg)" }} />
-                            }
+                            <MenuOpenIcon sx={[{ ...listIconStyle }, { transform: drawerOpen ? "rotateY(0deg)" : "rotateY(180deg)", transition: "transform 0.25s" }]} />
                         </IconButton>
-                        <ButtonBase disableRipple href={onHomePage ? "https://irminsul.gg/" : `${process.env.REACT_APP_BASENAME}/`}>
-                            <CardHeader
-                                avatar={<Image src="https://assets.irminsul.gg/main/icons/Irminsul.png" alt="irminsul.gg" style={{ width: "48px", height: "48px" }} />}
-                                title={
-                                    <TextStyled variant="sitename">
-                                        IRMINSUL.GG
-                                    </TextStyled>
-                                }
-                                sx={{ px: 0 }}
-                            />
-                        </ButtonBase>
                     </Box>
+                    <ButtonBase disableRipple href={onHomePage ? "https://irminsul.gg/" : `${process.env.REACT_APP_BASENAME}/`}>
+                        <CardHeader
+                            avatar={<Image src="https://assets.irminsul.gg/main/icons/Irminsul.png" alt="IRMINSUL.GG" style={{ width: "48px", height: "48px" }} />}
+                            title={<TextStyled variant="sitename">IRMINSUL.GG</TextStyled>}
+                            sx={{ px: 0 }}
+                        />
+                    </ButtonBase>
                 </Toolbar>
             </AppBar>
             <Drawer
                 variant="permanent"
                 open={drawerOpen}
-                sx={{ [`& .MuiDrawer-paper`]: { borderRight: `1px solid ${theme.border.color}`, backgroundColor: theme.appbar.backgroundColor, pt: 2.5 } }}
+                sx={{
+                    boxSizing: "content-box",
+                    [`& .MuiDrawer-paper`]: {
+                        borderRight: `1px solid ${theme.border.color}`,
+                        backgroundColor: theme.appbar.backgroundColor,
+                        pt: 2.5
+                    }
+                }}
             >
                 {/* Empty toolbar necessary for content to be below app bar */}
                 <Toolbar />
                 <List>
                     {
                         navItems.map((item, index) =>
-                            <ListItem
-                                key={index}
-                                disablePadding
-                                sx={{ mx: "12px" }}
-                            >
-                                <ButtonBase disableRipple href={item.link}>
-                                    <ListItemButton
-                                        disableTouchRipple
-                                        sx={listItemButtonStyle}
-                                    >
-                                        <StyledTooltip title={!drawerOpen ? item.text : null} arrow placement="right">
-                                            <ListItemAvatar sx={{ minWidth: 0, justifyContent: "center", mr: drawerOpen ? 2.5 : "auto" }}>
-                                                {item.icon}
-                                            </ListItemAvatar>
-                                        </StyledTooltip>
-                                        <ListItemText
-                                            primary={<TextStyled>{item.text}</TextStyled>}
-                                            sx={{ opacity: drawerOpen ? 1 : 0 }}
-                                        />
-                                    </ListItemButton>
+                            <Box key={index} sx={listItemStyle}>
+                                <ButtonBase
+                                    href={item.link}
+                                    disableRipple
+                                    disableTouchRipple
+                                    sx={listItemButtonStyle}
+                                >
+                                    <Image src={item.icon} alt={item.text} style={navItemsStyle} tooltip={!drawerOpen ? item.text : null} tooltipArrow="right" />
+                                    <TextStyled sx={listItemTextStyle}>
+                                        {item.text}
+                                    </TextStyled>
                                 </ButtonBase>
-                            </ListItem>
+                            </Box>
                         )
                     }
                 </List>
                 <Divider variant="middle" />
                 <List>
-                    <ListItem
-                        disablePadding
-                        sx={{ mx: "17px" }}
-                    >
-                        <ButtonBase disableRipple onClick={toggleDropdownState}>
-                            <ListItemButton
-                                disableTouchRipple
-                                sx={[
-                                    {
-                                        px: "4px",
-                                        py: 0,
-                                        borderRadius: "5px",
-                                        "&:hover": {
-                                            backgroundColor: `${theme.table.body.hover}`
-                                        }
-                                    },
-                                    drawerOpen ?
-                                        {
-                                            width: `${drawerWidth * 0.8}px`,
-                                            height: "50px",
-                                            my: 0,
-                                            justifyContent: "center"
-                                        }
-                                        :
-                                        {
-                                            width: `${iconSize}px`,
-                                            height: `calc(${iconSize}px + ${iconSize * 0.25}px)`,
-                                            my: "5px",
-                                            justifyContent: "center"
-                                        }
-                                ]}
-                            >
-                                <StyledTooltip title={!drawerOpen ? "Other Games" : null} arrow placement="right">
-                                    <ListItemIcon sx={{ color: theme.text.main, minWidth: 0, justifyContent: "center", mr: drawerOpen ? 3 : "auto" }}>
-                                        {dropdownOpen ? <ExpandLess /> : <ExpandMore />}
-                                    </ListItemIcon>
-                                </StyledTooltip>
-                                <ListItemText
-                                    primary={<TextStyled>Other Games</TextStyled>}
-                                    sx={{ opacity: drawerOpen ? 1 : 0 }}
-                                />
-                            </ListItemButton>
-                        </ButtonBase>
-                    </ListItem>
-                    <ListItem
-                        disablePadding
-                        sx={{ mx: "13px" }}
-                    >
-                        <Collapse in={dropdownOpen} timeout="auto" unmountOnExit>
-                            <List disablePadding>
-                                {
-                                    linkItems.map((item, index) =>
-                                        <ListItem
-                                            key={index}
-                                            disablePadding
-                                        >
-                                            <ButtonBase disableRipple href={item.link}>
-                                                <ListItemButton
-                                                    disableTouchRipple
-                                                    sx={listItemButtonStyle}
-                                                >
-                                                    <StyledTooltip title={!drawerOpen ? item.text : null} arrow placement="right">
-                                                        <ListItemAvatar sx={{ minWidth: 0, justifyContent: "center", mr: drawerOpen ? 2.5 : "auto" }}>
-                                                            {item.icon}
-                                                        </ListItemAvatar>
-                                                    </StyledTooltip>
-                                                    <ListItemText
-                                                        primary={<TextStyled>{item.text}</TextStyled>}
-                                                        sx={{ opacity: drawerOpen ? 1 : 0 }}
-                                                    />
-                                                </ListItemButton>
-                                            </ButtonBase>
-                                        </ListItem>
-                                    )
-                                }
-                            </List>
-                        </Collapse>
-                    </ListItem>
+                    <Box sx={listItemStyle}>
+                        <IconButton
+                            onClick={toggleDropdownState}
+                            disableRipple
+                            disableTouchRipple
+                            sx={listItemButtonStyle}
+                        >
+                            <StyledTooltip title={!drawerOpen ? "Other Games" : null} arrow placement="right">
+                                <ExpandMore sx={listIconStyle} />
+                            </StyledTooltip>
+                            <TextStyled sx={[{ ...listItemTextStyle }, { ml: "5px" }]}>
+                                Other Games
+                            </TextStyled>
+                        </IconButton>
+                    </Box>
+                    <Collapse in={dropdownOpen} timeout="auto" unmountOnExit>
+                        {
+                            linkItems.map((item, index) =>
+                                <Box key={index} sx={listItemStyle}>
+                                    <ButtonBase
+                                        href={item.link}
+                                        disableRipple
+                                        disableTouchRipple
+                                        sx={listItemButtonStyle}
+                                    >
+                                        <Image src={item.icon} alt={item.text} style={linkItemsStyle} tooltip={!drawerOpen ? item.text : null} tooltipArrow="right" />
+                                        <TextStyled sx={listItemTextStyle}>
+                                            {item.text}
+                                        </TextStyled>
+                                    </ButtonBase>
+                                </Box>
+                            )
+                        }
+                    </Collapse>
                 </List>
             </Drawer>
         </Fragment>
@@ -228,7 +189,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: `${iconSize * 2 + 1}px`,
+    width: `${iconSize * 2}px`,
 })
 
 interface AppBarProps extends MuiAppBarProps {

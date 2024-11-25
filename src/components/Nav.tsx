@@ -1,13 +1,10 @@
 import { Fragment } from "react"
 
 // Component imports
-import Image from "custom/Image"
 import NavDesktop from "./NavDesktop"
 
 // MUI imports
 import { useTheme, useMediaQuery } from "@mui/material"
-
-const iconSize = 32
 
 function Nav() {
 
@@ -20,7 +17,7 @@ function Nav() {
         <Fragment>
             {
                 matches_up_sm ?
-                    <NavDesktop onHomePage={onHomePage} iconSize={iconSize} navItems={navItems} linkItems={linkItems} />
+                    <NavDesktop onHomePage={onHomePage} navItems={navItems} linkItems={linkItems} />
                     :
                     // <NavMobile onHomePage={onHomePage} navItems={navItems} linkItems={linkItems} />
                     null
@@ -34,49 +31,62 @@ export default Nav
 
 export interface NavProps {
     onHomePage: boolean,
-    iconSize: number,
     navItems: NavItem[],
     linkItems: NavItem[]
 }
 
 export interface NavItem {
-    icon: JSX.Element,
+    icon: string,
     text: string,
     link: string
 }
 
-const navItemsStyle = {
-    width: iconSize,
-    height: iconSize
-}
-
-const linkItemsStyle = {
-    width: iconSize,
-    height: iconSize,
-    borderRadius: "5px"
-}
-
 const navItems: NavItem[] = [
     {
-        icon: <Image src="icons/Home" alt="Home" style={navItemsStyle} />,
+        icon: "icons/Medal",
         text: "Home",
         link: "/"
+    },
+    {
+        icon: "icons/Agents",
+        text: "Agents",
+        link: ""
+    },
+    {
+        icon: "icons/W-Engine",
+        text: "W-Engines",
+        link: ""
+    },
+    {
+        icon: "icons/Drive_Disc",
+        text: "Drive Discs",
+        link: ""
+    },
+    {
+        icon: "icons/Bangboo",
+        text: "Bangboos",
+        link: ""
+    },
+    {
+        icon: "icons/Signal_Search",
+        text: "Banner Archive",
+        link: ""
     },
 ]
 
 const linkItems: NavItem[] = [
     {
-        icon: <Image src="https://assets.irminsul.gg/main/game-icons/Genshin.png" alt="genshin.irminsul.gg" style={linkItemsStyle} />,
+        icon: "https://assets.irminsul.gg/main/game-icons/Genshin.png",
         text: "Genshin Impact",
         link: "https://genshin.irminsul.gg/"
     },
     {
-        icon: <Image src="https://assets.irminsul.gg/main/game-icons/HSR.png" alt="hsr.irminsul.gg" style={linkItemsStyle} />,
+        icon: "https://assets.irminsul.gg/main/game-icons/HSR.png",
         text: "Honkai: Star Rail",
         link: "https://hsr.irminsul.gg/"
     },
     {
-        icon: <Image src="https://assets.irminsul.gg/main/game-icons/WutheringWaves.png" alt="wuwa.irminsul.gg" style={linkItemsStyle} />,
+        icon: "https://assets.irminsul.gg/main/game-icons/WutheringWaves.png",
         text: "Wuthering Waves",
         link: "https://wuwa.irminsul.gg/"
     }
