@@ -28,7 +28,7 @@
       "custom/*": ["components/_custom/*"],
       "data/*": ["data/*"],
       "helpers/*": ["helpers/*"],
-      "reducers/*": ["reducers/*"],
+      "reducers/*": ["rtk/reducers/*"],
       "styled/*": ["components/_styled/*"],
       "themes/*": ["themes/*"],
       "types/*": ["types/*"],
