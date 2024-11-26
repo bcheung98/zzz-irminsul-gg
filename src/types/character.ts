@@ -1,4 +1,4 @@
-import { AttackType, Faction, Rarity, Specialty, Version } from "./_common"
+import { AttackType, Element, Faction, Rarity, Specialty, Version } from "./_common"
 import { Materials } from "./materials"
 import { Skill, SkillWithSplash } from "./skill"
 
@@ -11,6 +11,7 @@ export interface Character {
     name: string,
     fullName?: string
     rarity: Rarity,
+    element: Element,
     specialty: Specialty,
     attackType: AttackType,
     skills: CharacterSkills,
