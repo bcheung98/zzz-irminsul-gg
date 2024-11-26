@@ -1,19 +1,21 @@
 import { Rarity } from "types/_common"
 
-export function getRarityColor(rarity: Rarity) {
+export function getRarityColor(rarity?: Rarity) {
     switch (rarity) {
         case "S":
-            return "rgb(255, 238, 157)"
+            return "rgb(255, 181, 0)"
         case "A":
-            return "rgb(175, 134, 255)"
+            return "rgb(233, 0, 255)"
         case "B":
-            return "rgb(105, 157, 237)"
+            return "rgb(0, 169, 255)"
         case "C":
+            return "rgb(125, 168, 155)"
+        default:
             return "rgb(175, 175, 175)"
     }
 }
 
-export function getBackgroundColor(rarity: Rarity, opacity = 0.45) {
+export function getBackgroundColor(rarity?: Rarity, opacity = 0.45) {
     switch (rarity) {
         case "S":
             return `rgba(255, 199, 129, ${opacity})`
@@ -22,6 +24,8 @@ export function getBackgroundColor(rarity: Rarity, opacity = 0.45) {
         case "B":
             return `rgba(115, 176, 244, ${opacity})`
         case "C":
+            return `rgba(167, 197, 188, ${opacity})`
+        default:
             return `rgba(195, 195, 195, ${opacity})`
     }
 }
