@@ -51,7 +51,7 @@ function DisplayCard({
     id = `${id.split(" ").join("")}-${variant}-displayCard`
 
     const backgroundColor = () => {
-        const baseBG = theme.appbar.backgroundColor
+        const baseBG = theme.background(8)
         if (variant === "icon") {
             return baseBG
         }
@@ -83,7 +83,7 @@ function DisplayCard({
         position: "relative",
         width: size,
         height: variant === "card" ? "auto" : size,
-        background: theme.appbar.backgroundColor,
+        background: theme.background(8),
         border: "solid",
         borderWidth: borderWidth,
         borderColor: variant === "card" ? theme.border.color : getRarityColor(rarity),
@@ -101,10 +101,10 @@ function DisplayCard({
         height: `calc(${size} / 6)`,
         minWidth: "16px",
         minHeight: "16px",
-        backgroundColor: theme.background(0),
-        border: `1px solid ${theme.border.color}`,
+        backgroundColor: theme.background(3),
+        border: `2px solid ${theme.border.color}`,
         borderRadius: "16px",
-        padding: "4px"
+        padding: "3px"
     }
 
     return (
