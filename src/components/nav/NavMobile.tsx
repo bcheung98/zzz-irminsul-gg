@@ -78,7 +78,7 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
                 onOpen={toggleDrawer(true)}
                 sx={{
                     [`& .MuiDrawer-paper`]: {
-                        backgroundColor: theme.background[0],
+                        backgroundColor: theme.background(0),
                         borderBottom: `1px solid ${theme.border.color}`,
                         height: "100%",
                         overflowX: "hidden",

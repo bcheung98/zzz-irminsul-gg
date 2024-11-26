@@ -6,7 +6,7 @@ let theme = darkTheme
 theme = createTheme(theme, {
     palette: {
         background: {
-            default: theme.background[0]
+            default: theme.background(0)
         }
     },
     components: {

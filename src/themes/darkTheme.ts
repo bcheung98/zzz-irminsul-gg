@@ -1,9 +1,17 @@
 import { createTheme } from "@mui/material"
 
+let [r, g, b] = [32, 56, 96]
+const max = (b - 32) / 8
+const backgroundColors: string[] = []
+for (let i = 0; i <= max; i++) {
+    backgroundColors.push(`rgb(${r}, ${g}, ${b})`)
+    if (r > 0) { r -= 8 }
+    if (g > 16) { g -= 8 }
+    if (b > 32) { b -= 8 }
+}
+
 export const darkThemeData = {
-    background: [
-        "rgb(23, 46, 98)",
-    ],
+    background: (i: number) => backgroundColors[i],
     font: {
         main: {
             family: "Rowdies, Roboto, sans-serif",
@@ -19,15 +27,14 @@ export const darkThemeData = {
         selected: "rgb(25, 118, 210)"
     },
     appbar: {
-        backgroundColor: "rgb(0, 16, 32)"
+        backgroundColor: backgroundColors[8]
     },
     border: {
         color: "rgb(168, 147, 105)",
-        radius: "5px"
     },
     table: {
         body: {
-            hover: "rgb(19, 47, 76)"
+            hover: backgroundColors[2]
         }
     }
 }

@@ -101,7 +101,7 @@ function DisplayCard({
         height: `calc(${size} / 6)`,
         minWidth: "16px",
         minHeight: "16px",
-        backgroundColor: theme.background[0],
+        backgroundColor: theme.background(0),
         border: `1px solid ${theme.border.color}`,
         borderRadius: "16px",
         padding: "4px"
@@ -167,7 +167,7 @@ function DisplayCard({
                                     mb: "5px"
                                 }}
                             >
-                                {showName && name}
+                                {showName && displayName}
                             </TextStyled>
                         </ButtonBase>
                     </Box>
