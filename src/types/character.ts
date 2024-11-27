@@ -9,7 +9,7 @@ export interface CharacterProps {
 export interface Character {
     id: number,
     name: string,
-    fullName?: string
+    fullName: string
     rarity: Rarity,
     element: Element,
     specialty: Specialty,
