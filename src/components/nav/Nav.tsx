@@ -5,7 +5,7 @@ import NavDesktop from "./NavDesktop";
 import NavMobile from "./NavMobile";
 
 // MUI imports
-import { useTheme, useMediaQuery } from "@mui/material";
+import { useTheme, useMediaQuery, Theme, SxProps } from "@mui/material";
 
 function Nav() {
     const theme = useTheme();
@@ -96,3 +96,42 @@ const linkItems: NavItem[] = [
         link: "https://wuwa.irminsul.gg/",
     },
 ];
+
+export const navStyles = (paramTheme: Theme) => ({
+    navItem: (size = 32): React.CSSProperties => ({
+        width: size,
+        height: size,
+        padding: "2px",
+    }),
+    linkItem: (size = 32): React.CSSProperties => ({
+        width: size,
+        height: size,
+        borderRadius: "5px",
+    }),
+    listItem: (link: string, size = 32): SxProps => ({
+        display: link !== "" ? "block" : "none",
+        px: `${(size * 2) / 8}px`,
+    }),
+    listIcon: (open: boolean, size = 32): SxProps => ({
+        minWidth: size,
+        width: size,
+        height: size,
+        p: "4px",
+        transform: open ? "rotateZ(-180deg)" : "rotateZ(0deg)",
+        transition: "transform 0.25s",
+    }),
+    listItemButton: (theme = paramTheme, size = 32): SxProps => ({
+        borderRadius: "5px",
+        justifyContent: "left",
+        px: `${(size * 2) / 8}px`,
+        width: "100%",
+        height: `${size * 1.5}px`,
+        "&:hover": {
+            backgroundColor: theme.table.body.hover,
+        },
+    }),
+    listItemText: (open = true): SxProps => ({
+        display: open ? "block" : "none",
+        ml: "20px",
+    }),
+});

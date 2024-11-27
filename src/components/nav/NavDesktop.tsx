@@ -1,78 +1,69 @@
-import React from "react"
+import React from "react";
 
 // Component imports
-import Image from "custom/Image"
-import { TextStyled } from "styled/StyledTypography"
-import { StyledTooltip } from "styled/StyledTooltip"
-import Logo from "./Logo"
+import Image from "custom/Image";
+import { TextStyled } from "styled/StyledTypography";
+import { StyledTooltip } from "styled/StyledTooltip";
+import Logo from "./Logo";
 
 // MUI imports
-import { styled, useTheme, Theme, CSSObject, SxProps, Toolbar, Box, IconButton, ButtonBase, List, Divider, Collapse } from "@mui/material"
-import MuiDrawer from "@mui/material/Drawer"
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
-import MenuOpenIcon from "@mui/icons-material/MenuOpen"
-import ExpandMore from "@mui/icons-material/ExpandMore"
+import {
+    styled,
+    useTheme,
+    Theme,
+    CSSObject,
+    SxProps,
+    Toolbar,
+    Box,
+    IconButton,
+    ButtonBase,
+    List,
+    Divider,
+    Collapse,
+} from "@mui/material";
+import MuiDrawer from "@mui/material/Drawer";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 
 // Helper imports
-import { NavProps } from "./Nav"
+import { NavProps, navStyles } from "./Nav";
 
-const drawerWidth = 240 // px
-const iconSize = 32 // px
+const drawerWidth = 240; // px
+const iconSize = 32; // px
 
 function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
+    const theme = useTheme();
+    const styles = navStyles(theme);
 
-    const theme = useTheme()
-
-    const [drawerOpen, setDrawerOpen] = React.useState(onHomePage)
+    const [drawerOpen, setDrawerOpen] = React.useState(onHomePage);
     const toggleDrawerState = () => {
-        setDrawerOpen(!drawerOpen)
-    }
+        setDrawerOpen(!drawerOpen);
+    };
 
-    const [dropdownOpen, setDropdownOpen] = React.useState(false)
+    const [dropdownOpen, setDropdownOpen] = React.useState(false);
     const toggleDropdownState = () => {
-        setDropdownOpen(!dropdownOpen)
-    }
+        setDropdownOpen(!dropdownOpen);
+    };
 
-    const navItemsStyle: React.CSSProperties = {
-        width: iconSize,
-        height: iconSize,
-        padding: "2px"
-    }
-
-    const linkItemsStyle: React.CSSProperties = {
-        width: iconSize,
-        height: iconSize,
-        borderRadius: "5px"
-    }
-
-    const listItemStyle: SxProps = {
-        px: `${(iconSize * 2) / 8}px`,
-    }
-
-    const listIconStyle: SxProps = {
-        minWidth: iconSize,
-        width: iconSize,
-        height: iconSize,
-        padding: "4px",
-        transform: dropdownOpen ? "rotateZ(-90deg)" : "rotateZ(0deg)",
-        transition: "transform 0.25s"
-    }
-
-    const listItemButtonStyle: SxProps = {
+    const menuButtonStyle: SxProps = {
         borderRadius: "5px",
-        justifyContent: "left",
-        px: `${(iconSize * 2) / 8}px`,
-        width: "100%",
-        height: `${iconSize * 1.5}px`,
+        px: "2px",
+        width: "36px",
+        height: "36px",
         "&:hover": {
-            backgroundColor: theme.table.body.hover
-        }
-    }
+            backgroundColor: theme.table.body.hover,
+        },
+    };
 
-    const listItemTextStyle: SxProps = {
-        display: drawerOpen ? "block" : "none",
-        ml: "20px"
-    }
+    const menuIconStyle: SxProps = {
+        minWidth: "32px",
+        width: "32px",
+        height: "32px",
+        padding: "4px",
+        transform: drawerOpen ? "rotateY(0deg)" : "rotateY(180deg)",
+        transition: "transform 0.25s",
+    };
 
     return (
         <React.Fragment>
@@ -83,9 +74,9 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
                             onClick={toggleDrawerState}
                             disableRipple
                             disableTouchRipple
-                            sx={[{ ...listItemButtonStyle }, { px: "2px", width: "36px", height: "36px" }]}
+                            sx={menuButtonStyle}
                         >
-                            <MenuOpenIcon sx={[{ ...listIconStyle }, { transform: drawerOpen ? "rotateY(0deg)" : "rotateY(180deg)", transition: "transform 0.25s" }]} />
+                            <MenuOpenIcon sx={menuIconStyle} />
                         </IconButton>
                     </Box>
                     <Logo onHomePage={onHomePage} />
@@ -99,75 +90,92 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
                     [`& .MuiDrawer-paper`]: {
                         borderRight: `1px solid ${theme.border.color}`,
                         backgroundColor: theme.appbar.backgroundColor,
-                        pt: 2.5
-                    }
+                        pt: 2.5,
+                    },
                 }}
             >
                 {/* Empty toolbar necessary for content to be below app bar */}
                 <Toolbar />
                 <List>
-                    {
-                        navItems.map((item, index) =>
-                            <Box key={index} sx={listItemStyle}>
-                                <ButtonBase
-                                    href={item.link}
-                                    disableRipple
-                                    disableTouchRipple
-                                    sx={listItemButtonStyle}
+                    {navItems.map((item, index) => (
+                        <Box key={index} sx={styles.listItem(item.link)}>
+                            <ButtonBase
+                                href={item.link}
+                                disableRipple
+                                disableTouchRipple
+                                sx={styles.listItemButton()}
+                            >
+                                <Image
+                                    src={item.icon}
+                                    alt={item.text}
+                                    style={styles.navItem()}
+                                    tooltip={!drawerOpen ? item.text : null}
+                                    tooltipArrow="right"
+                                />
+                                <TextStyled
+                                    sx={styles.listItemText(drawerOpen)}
                                 >
-                                    <Image src={item.icon} alt={item.text} style={navItemsStyle} tooltip={!drawerOpen ? item.text : null} tooltipArrow="right" />
-                                    <TextStyled sx={listItemTextStyle}>
-                                        {item.text}
-                                    </TextStyled>
-                                </ButtonBase>
-                            </Box>
-                        )
-                    }
+                                    {item.text}
+                                </TextStyled>
+                            </ButtonBase>
+                        </Box>
+                    ))}
                 </List>
                 <Divider variant="middle" />
                 <List>
-                    <Box sx={listItemStyle}>
+                    <Box sx={styles.listItem("_")}>
                         <IconButton
                             onClick={toggleDropdownState}
                             disableRipple
                             disableTouchRipple
-                            sx={listItemButtonStyle}
+                            sx={styles.listItemButton()}
                         >
-                            <StyledTooltip title={!drawerOpen ? "Other Games" : null} arrow placement="right">
-                                <ExpandMore sx={listIconStyle} />
+                            <StyledTooltip
+                                title={!drawerOpen ? "Other Games" : null}
+                                arrow
+                                placement="right"
+                            >
+                                <ExpandMore
+                                    sx={styles.listIcon(dropdownOpen)}
+                                />
                             </StyledTooltip>
-                            <TextStyled sx={[{ ...listItemTextStyle }, { ml: "5px" }]}>
+                            <TextStyled sx={styles.listItemText(drawerOpen)}>
                                 Other Games
                             </TextStyled>
                         </IconButton>
                     </Box>
                     <Collapse in={dropdownOpen} timeout="auto" unmountOnExit>
-                        {
-                            linkItems.map((item, index) =>
-                                <Box key={index} sx={listItemStyle}>
-                                    <ButtonBase
-                                        href={item.link}
-                                        disableRipple
-                                        disableTouchRipple
-                                        sx={listItemButtonStyle}
+                        {linkItems.map((item, index) => (
+                            <Box key={index} sx={styles.listItem(item.link)}>
+                                <ButtonBase
+                                    href={item.link}
+                                    disableRipple
+                                    disableTouchRipple
+                                    sx={styles.listItemButton()}
+                                >
+                                    <Image
+                                        src={item.icon}
+                                        alt={item.text}
+                                        style={styles.linkItem()}
+                                        tooltip={!drawerOpen ? item.text : null}
+                                        tooltipArrow="right"
+                                    />
+                                    <TextStyled
+                                        sx={styles.listItemText(drawerOpen)}
                                     >
-                                        <Image src={item.icon} alt={item.text} style={linkItemsStyle} tooltip={!drawerOpen ? item.text : null} tooltipArrow="right" />
-                                        <TextStyled sx={listItemTextStyle}>
-                                            {item.text}
-                                        </TextStyled>
-                                    </ButtonBase>
-                                </Box>
-                            )
-                        }
+                                        {item.text}
+                                    </TextStyled>
+                                </ButtonBase>
+                            </Box>
+                        ))}
                     </Collapse>
                 </List>
             </Drawer>
         </React.Fragment>
-    )
-
+    );
 }
 
-export default NavDesktop
+export default NavDesktop;
 
 const openedMixin = (theme: Theme): CSSObject => ({
     width: drawerWidth,
@@ -176,7 +184,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
         duration: theme.transitions.duration.enteringScreen,
     }),
     overflowX: "hidden",
-})
+});
 
 const closedMixin = (theme: Theme): CSSObject => ({
     transition: theme.transitions.create("width", {
@@ -185,10 +193,10 @@ const closedMixin = (theme: Theme): CSSObject => ({
     }),
     overflowX: "hidden",
     width: `${iconSize * 2}px`,
-})
+});
 
 interface AppBarProps extends MuiAppBarProps {
-    open?: boolean
+    open?: boolean;
 }
 
 const AppBar = styled(MuiAppBar, {
@@ -212,29 +220,29 @@ const AppBar = styled(MuiAppBar, {
             },
         },
     ],
-}))
+}));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(
-    ({ theme }) => ({
-        width: drawerWidth,
-        flexShrink: 0,
-        whiteSpace: "nowrap",
-        boxSizing: "border-box",
-        variants: [
-            {
-                props: ({ open }) => open,
-                style: {
-                    ...openedMixin(theme),
-                    "& .MuiDrawer-paper": openedMixin(theme),
-                },
+const Drawer = styled(MuiDrawer, {
+    shouldForwardProp: (prop) => prop !== "open",
+})(({ theme }) => ({
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: "nowrap",
+    boxSizing: "border-box",
+    variants: [
+        {
+            props: ({ open }) => open,
+            style: {
+                ...openedMixin(theme),
+                "& .MuiDrawer-paper": openedMixin(theme),
             },
-            {
-                props: ({ open }) => !open,
-                style: {
-                    ...closedMixin(theme),
-                    "& .MuiDrawer-paper": closedMixin(theme),
-                },
+        },
+        {
+            props: ({ open }) => !open,
+            style: {
+                ...closedMixin(theme),
+                "& .MuiDrawer-paper": closedMixin(theme),
             },
-        ],
-    }),
-)
+        },
+    ],
+}));
