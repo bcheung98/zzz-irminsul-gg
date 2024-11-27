@@ -14,3 +14,8 @@
 .logo.mui:hover {
     filter: drop-shadow(0 0 7px #0073e6aa);
 }
+
+.page-name {
+    margin-right: 25px;
+    line-height: 40px;
+}
