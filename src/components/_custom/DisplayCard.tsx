@@ -75,7 +75,7 @@ function DisplayCard({
         }
     };
 
-    const borderWidth = variant === "card" ? 0 : 2;
+    const borderWidth = variant === "card" ? theme.displayCard.borderWidth : 2;
     const imgSize = `calc(${size} - ${borderWidth * 2}px)`;
 
     let imgSrc = "";

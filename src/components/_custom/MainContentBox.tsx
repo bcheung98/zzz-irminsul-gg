@@ -14,7 +14,8 @@ function MainContentBox({ children, title, actions }: MainContentBoxProps) {
         <Card
             sx={{
                 backgroundColor: theme.background(3),
-                borderRadius: "5px",
+                border: theme.mainContentBox.border,
+                borderRadius: theme.mainContentBox.borderRadius,
             }}
         >
             <AppBar

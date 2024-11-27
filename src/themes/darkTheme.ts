@@ -16,6 +16,8 @@ for (let i = 0; i <= max; i++) {
     }
 }
 
+const borderColor = "rgb(168, 147, 105)";
+
 export const darkThemeData = {
     background: (i: number) => backgroundColors[i],
     font: {
@@ -36,7 +38,17 @@ export const darkThemeData = {
         backgroundColor: backgroundColors[8],
     },
     border: {
-        color: "rgb(168, 147, 105)",
+        color: borderColor,
+    },
+    displayCard: {
+        borderWidth: 0,
+        border: `0px solid ${borderColor}`,
+        borderRadius: "5px",
+    },
+    mainContentBox: {
+        borderWidth: 0,
+        border: `0px solid ${borderColor}`,
+        borderRadius: "5px",
     },
     menu: {
         default: backgroundColors[1],
