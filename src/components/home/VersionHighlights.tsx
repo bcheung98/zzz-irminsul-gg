@@ -4,6 +4,7 @@ import React from "react";
 import Image from "custom/Image";
 import DisplayCard from "custom/DisplayCard";
 import MainContentBox from "custom/MainContentBox";
+import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
 import { StyledInput } from "styled/StyledInput";
 import { StyledMenuItem } from "styled/StyledMenu";
@@ -18,9 +19,6 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { updates } from "data/versions";
 import { useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
-
-// Type imports
-import { Character } from "types/character";
 
 function VersionHighlights() {
     const [index, setIndex] = React.useState(0);
@@ -39,14 +37,14 @@ function VersionHighlights() {
     const characters = useAppSelector(selectCharacters);
 
     const currentCharacters = characters.filter(
-        (char: Character) => char.release.version === version
+        (char) => char.release.version === version
     );
 
     return (
         <MainContentBox
             title="Version Highlights"
             actions={
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+                <FlexBox>
                     <Box sx={{ width: "24px" }}>
                         {index < updates.length - 1 && (
                             <IconButton
@@ -80,20 +78,20 @@ function VersionHighlights() {
                             </IconButton>
                         )}
                     </Box>
-                </Box>
+                </FlexBox>
             }
         >
             <TextStyled variant="h5" sx={{ mb: "20px" }}>
                 {updates[index].version} - <i>{updates[index].name}</i>
             </TextStyled>
-            <Box sx={{ display: "inline-flex", mb: "20px" }}>
+            <FlexBox sx={{ mb: "20px" }}>
                 <Image
-                    src="icons/Agents"
+                    src="icons/Characters"
                     alt="New Agents"
                     style={{ width: "32px", marginRight: "10px" }}
                 />
                 <TextStyled variant="h6">New Agents</TextStyled>
-            </Box>
+            </FlexBox>
             <Grid container spacing={2}>
                 {currentCharacters.map((char, index) => (
                     <DisplayCard

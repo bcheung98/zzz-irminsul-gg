@@ -1,5 +1,9 @@
-import { useTheme, Card, AppBar, Box } from "@mui/material";
+// Component imports
+import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
+
+// MUI imports
+import { useTheme, Card, AppBar, Box } from "@mui/material";
 
 interface MainContentBoxProps {
     children?: React.ReactNode;
@@ -25,18 +29,12 @@ function MainContentBox({ children, title, actions }: MainContentBoxProps) {
                     p: "10px",
                 }}
             >
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        justifyContent: "space-between",
-                    }}
-                >
+                <FlexBox flexWrap="wrap" justifyContent="space-between">
                     <TextStyled variant="h6" sx={{ lineHeight: "45px" }}>
                         {title && title}
                     </TextStyled>
                     {actions && actions}
-                </Box>
+                </FlexBox>
             </AppBar>
             <Box sx={{ p: "25px" }}>{children && children}</Box>
         </Card>

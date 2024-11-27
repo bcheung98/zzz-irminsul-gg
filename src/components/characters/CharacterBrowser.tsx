@@ -2,17 +2,16 @@ import React from "react";
 
 // Component imports
 import DisplayCard from "custom/DisplayCard";
+import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, Box, LinearProgress } from "@mui/material";
+import { LinearProgress } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
 
 function CharacterBrowser() {
-    const theme = useTheme();
-
     const characters = useAppSelector(selectCharacters);
     const currentCharacters = characters;
 
@@ -27,11 +26,11 @@ function CharacterBrowser() {
                 sx={{ mb: "20px" }}
             >
                 <Grid size={{ xs: 12, sm: "auto" }}>
-                    <Box sx={{ display: "flex" }}>
+                    <FlexBox>
                         <TextStyled variant="h5" className="page-name">
                             Agents
                         </TextStyled>
-                    </Box>
+                    </FlexBox>
                 </Grid>
             </Grid>
             <Grid container spacing={3}>
