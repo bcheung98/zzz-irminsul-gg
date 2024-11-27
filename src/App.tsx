@@ -5,8 +5,9 @@ import "App.css";
 // Component imports
 import Nav from "components/nav/Nav";
 import NavBottom from "components/nav/NavBottom";
+import PageNotFound from "components/PageNotFound";
 import Home from "components/home/Home";
-import CharacterBrowser from "components/characters/CharacterBrowser";
+import CharacterBrowser from "components/characters/browser/CharacterBrowser";
 
 // MUI imports
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
@@ -45,6 +46,7 @@ function App() {
                                     path="/agents"
                                     element={<CharacterBrowser />}
                                 />
+                                <Route path="*" element={<PageNotFound />} />
                             </Routes>
                         </Box>
                         <NavBottom />
