@@ -91,8 +91,9 @@ function DisplayCard({
     } else {
         route = "drive-discs";
     }
-    const href = "";
-    // const href = !disableLink ? `/${route}/${name.split(" ").join("_").toLowerCase()}` : ""
+    const href = !disableLink
+        ? `/${route}/${name.split(" ").join("_").toLowerCase()}`
+        : "";
 
     const handleHover = (direction: "enter" | "leave") => {
         !disableZoomOnHover && zoomImageOnHover(direction, `${id}-img`, 1.05);
