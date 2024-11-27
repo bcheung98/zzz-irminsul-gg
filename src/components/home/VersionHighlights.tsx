@@ -1,48 +1,117 @@
-import React from "react"
+import React from "react";
 
 // Component imports
-import Image from "custom/Image"
-import DisplayCard from "custom/DisplayCard"
+import Image from "custom/Image";
+import DisplayCard from "custom/DisplayCard";
+import MainContentBox from "custom/MainContentBox";
+import { TextStyled } from "styled/StyledTypography";
+import { StyledInput } from "styled/StyledInput";
+import { StyledMenuItem } from "styled/StyledMenu";
 
 // MUI imports
-import { useTheme, Box } from "@mui/material"
-import Grid from "@mui/material/Grid2"
+import { Box, Select, SelectChangeEvent, IconButton } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 // Helper imports
-import { updates } from "data/versions"
-import { useAppSelector } from "helpers/hooks"
-import { selectCharacters } from "reducers/character"
+import { updates } from "data/versions";
+import { useAppSelector } from "helpers/hooks";
+import { selectCharacters } from "reducers/character";
+
+// Type imports
+import { Character } from "types/character";
 
 function VersionHighlights() {
+    const [index, setIndex] = React.useState(0);
+    const handleIndexChange = (event: SelectChangeEvent) => {
+        setIndex(Number(event.target.value));
+    };
+    const handleIndexChangeLeft = () => {
+        if (index + 1 < updates.length) setIndex(index + 1);
+    };
+    const handleIndexChangeRight = () => {
+        if (index - 1 >= 0) setIndex(index - 1);
+    };
 
-    const theme = useTheme()
+    const version = updates[index].version;
 
-    const version = updates[0].version
+    const characters = useAppSelector(selectCharacters);
 
-    const characters = useAppSelector(selectCharacters)
-
-    const currentCharacters = characters.filter(char => char.release.version === version)
+    const currentCharacters = characters.filter(
+        (char: Character) => char.release.version === version
+    );
 
     return (
-        <React.Fragment>
+        <MainContentBox
+            title="Version Highlights"
+            actions={
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Box sx={{ width: "24px" }}>
+                        {index < updates.length - 1 && (
+                            <IconButton
+                                onClick={handleIndexChangeLeft}
+                                sx={{ px: 0 }}
+                            >
+                                <KeyboardArrowLeftIcon />
+                            </IconButton>
+                        )}
+                    </Box>
+                    <Select
+                        value={index.toString()}
+                        label="Version"
+                        onChange={handleIndexChange}
+                        input={<StyledInput />}
+                        sx={{ width: "75px", mx: "5px" }}
+                    >
+                        {updates.map((version, index) => (
+                            <StyledMenuItem key={index} value={index}>
+                                <TextStyled>{version.version}</TextStyled>
+                            </StyledMenuItem>
+                        ))}
+                    </Select>
+                    <Box sx={{ width: "24px" }}>
+                        {index > 0 && (
+                            <IconButton
+                                onClick={handleIndexChangeRight}
+                                sx={{ px: 0 }}
+                            >
+                                <KeyboardArrowRightIcon />
+                            </IconButton>
+                        )}
+                    </Box>
+                </Box>
+            }
+        >
+            <TextStyled variant="h5" sx={{ mb: "20px" }}>
+                {updates[index].version} - <i>{updates[index].name}</i>
+            </TextStyled>
+            <Box sx={{ display: "inline-flex", mb: "20px" }}>
+                <Image
+                    src="icons/Agents"
+                    alt="New Agents"
+                    style={{ width: "32px", marginRight: "10px" }}
+                />
+                <TextStyled variant="h6">New Agents</TextStyled>
+            </Box>
             <Grid container spacing={2}>
-                {
-                    currentCharacters.map((char, index) =>
-                        <DisplayCard
-                            key={index}
-                            id={`${char.name}-versionHighlights`}
-                            name={char.name}
-                            displayName={char.fullName}
-                            type="character"
-                            rarity={char.rarity}
-                            info={{ element: char.element, specialty: char.specialty }}
-                        />
-                    )
-                }
+                {currentCharacters.map((char, index) => (
+                    <DisplayCard
+                        key={index}
+                        id={`${char.name}-versionHighlights`}
+                        name={char.name}
+                        displayName={char.fullName}
+                        type="character"
+                        rarity={char.rarity}
+                        info={{
+                            element: char.element,
+                            specialty: char.specialty,
+                        }}
+                    />
+                ))}
             </Grid>
-        </React.Fragment>
-    )
-
+        </MainContentBox>
+    );
 }
 
-export default VersionHighlights
+export default VersionHighlights;
