@@ -52,6 +52,14 @@ theme = createTheme(theme, {
                 },
             },
         },
+        MuiTableContainer: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "5px",
+                    backgroundColor: theme.background(1)
+                },
+            },
+        },
     },
     typography: {
         sitename: {
@@ -59,6 +67,14 @@ theme = createTheme(theme, {
             fontSize: "1.333rem",
             fontWeight: "400 !important",
             letterSpacing: ".1rem",
+        },
+        h4: {
+            [theme.breakpoints.up("xs")]: {
+                fontSize: theme.typography.pxToRem(26),
+            },
+            [theme.breakpoints.up("sm")]: {
+                fontSize: theme.typography.pxToRem(28),
+            },
         },
         h5: {
             [theme.breakpoints.up("xs")]: {
