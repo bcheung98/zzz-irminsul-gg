@@ -1,62 +1,67 @@
-import { AttackType, Element, Faction, Rarity, Specialty, Version } from "./_common"
-import { Materials } from "./materials"
-import { Skill, SkillWithSplash } from "./skill"
+import { AttackType, Element, Faction, Rarity, Specialty } from "./_common";
+import { Materials } from "./materials";
+import { Skill, SkillWithSplash } from "./skill";
+import { VersionWithDate } from "./version";
 
 export interface CharacterProps {
-    character: Character
+    character: Character;
 }
 
 export interface Character {
-    id: number,
-    name: string,
-    fullName: string
-    rarity: Rarity,
-    element: Element,
-    specialty: Specialty,
-    attackType: AttackType,
-    skills: CharacterSkills,
-    cinema: CharacterCinema,
-    stats: CharacterStats,
-    materials: Materials,
-    birthday: string,
-    gender: "Male" | "Female",
-    faction: Faction,
+    id: number;
+    name: string;
+    fullName: string;
+    rarity: Rarity;
+    element: Element;
+    specialty: Specialty;
+    attackType: AttackType;
+    skills: CharacterSkills;
+    cinema: CharacterCinema;
+    stats: CharacterStats;
+    materials: Materials;
+    birthday: string;
+    gender: "Male" | "Female";
+    faction: Faction;
     colors: {
-        primary: string,
-        secondary: string
-    },
+        primary: string;
+        secondary: string;
+    };
     voiceActors: {
-        en: string,
-        jp: string
-    },
-    release: Version
+        en: string;
+        jp: string;
+    };
+    release: VersionWithDate;
 }
+
+export type CharacterSkillKey = keyof CharacterSkills;
 
 export interface CharacterSkills {
-    basic: Skill[],
-    dodge: Skill[],
-    assist: Skill[],
-    special: Skill[],
-    chain: Skill[],
-    core: Skill[]
+    basic: Skill[];
+    dodge: Skill[];
+    assist: Skill[];
+    special: Skill[];
+    chain: Skill[];
+    core: Skill[];
 }
 
+export type CharacterCinemaKey = keyof CharacterCinema;
+
 export interface CharacterCinema {
-    c1: SkillWithSplash,
-    c2: SkillWithSplash,
-    c3: SkillWithSplash,
-    c4: SkillWithSplash,
-    c5: SkillWithSplash,
-    c6: SkillWithSplash
+    c1: SkillWithSplash;
+    c2: SkillWithSplash;
+    c3: SkillWithSplash;
+    c4: SkillWithSplash;
+    c5: SkillWithSplash;
+    c6: SkillWithSplash;
 }
 
 export interface CharacterAscensionStat {
-    [stat: string]: number[]
+    [stat: string]: number[];
 }
 
 export interface CharacterStats {
-    ascension: CharacterAscensionStat,
-    hp: number[],
-    atk: number[],
-    def: number[]
+    ascension: CharacterAscensionStat;
+    hp: number[];
+    atk: number[];
+    def: number[];
 }
