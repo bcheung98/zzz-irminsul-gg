@@ -8,6 +8,8 @@ import { TextStyled } from "styled/StyledTypography";
 // MUI imports
 import { LinearProgress } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+
+// Helper imports
 import { useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
 
