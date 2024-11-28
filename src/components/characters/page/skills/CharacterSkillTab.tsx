@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 // Type imports
 import { CharacterSkillKey } from "types/character";
 import { Skill } from "types/skill";
+import CharacterSkillScalingTable from "./CharacterSkillScalingTable";
 
 interface CharacterSkillTabProps {
     skillKey: CharacterSkillKey;
@@ -22,11 +23,16 @@ function CharacterSkillTab({ skillKey, skillData }: CharacterSkillTabProps) {
                 {formatSkillKey(skillKey)}
             </TextStyled>
             {skillData.map((skill, index) => (
-                <Box key={index} sx={{ mb: "20px" }}>
-                    <TextStyled variant="h6" sx={{ mb: "5px" }}>
-                        {skill.name}
-                    </TextStyled>
-                    <Text>{parse(skill.description)}</Text>
+                <Box key={index} sx={{ mb: "25px" }}>
+                    <Box sx={{ mb: "20px" }}>
+                        <TextStyled variant="h6" sx={{ mb: "5px" }}>
+                            {skill.name}
+                        </TextStyled>
+                        <Text>{parse(skill.description)}</Text>
+                    </Box>
+                    {skill.scaling && skillKey !== "core" && (
+                        <CharacterSkillScalingTable scaling={skill.scaling} />
+                    )}
                 </Box>
             ))}
         </Box>
