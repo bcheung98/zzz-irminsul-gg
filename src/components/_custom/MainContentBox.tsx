@@ -9,9 +9,15 @@ interface MainContentBoxProps {
     children?: React.ReactNode;
     title?: React.ReactNode;
     actions?: React.ReactNode;
+    contentPadding?: string | number;
 }
 
-function MainContentBox({ children, title, actions }: MainContentBoxProps) {
+function MainContentBox({
+    children,
+    title,
+    actions,
+    contentPadding = "25px",
+}: MainContentBoxProps) {
     const theme = useTheme();
 
     return (
@@ -26,7 +32,7 @@ function MainContentBox({ children, title, actions }: MainContentBoxProps) {
                 position="static"
                 sx={{
                     minHeight: "70px",
-                    p: "10px",
+                    p: "10px 10px 10px 20px",
                 }}
             >
                 <FlexBox flexWrap="wrap" justifyContent="space-between">
@@ -36,7 +42,7 @@ function MainContentBox({ children, title, actions }: MainContentBoxProps) {
                     {actions && actions}
                 </FlexBox>
             </AppBar>
-            <Box sx={{ p: "25px" }}>{children && children}</Box>
+            <Box sx={{ p: contentPadding }}>{children && children}</Box>
         </Card>
     );
 }
