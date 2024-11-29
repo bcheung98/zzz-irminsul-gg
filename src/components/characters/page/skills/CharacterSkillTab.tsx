@@ -23,6 +23,7 @@ interface CharacterSkillTabProps {
 }
 
 function CharacterSkillTab({ skillKey, skillData }: CharacterSkillTabProps) {
+    const theme = useTheme();
     return (
         <Box>
             <TextStyled sx={{ mb: "10px", fontStyle: "italic" }}>
@@ -37,7 +38,9 @@ function CharacterSkillTab({ skillKey, skillData }: CharacterSkillTabProps) {
                         {skill.name}
                     </TextStyled>
                     {skill.description.split("<br />").map((line, i) => (
-                        <Text key={i}>{parseSkillDescription(line)}</Text>
+                        <Text sx={{ color: theme.text.description }} key={i}>
+                            {parseSkillDescription(line)}
+                        </Text>
                     ))}
                     <Box sx={{ minHeight: "12px" }}>
                         {skill.scaling && skillKey !== "core" && (
@@ -76,15 +79,18 @@ function parseSkillDescription(description: string) {
                         />
                     );
                 } else if (className.split("-")[0].startsWith("text")) {
-                    const element = className.split(
-                        "-"
-                    )[1] as keyof typeof theme.text;
+                    const tag = className.split("-")[1];
                     return (
                         <Text
                             component="span"
                             sx={{
-                                color: theme.text[element],
-                                fontWeight: theme.font.element.weight,
+                                color: theme.text[
+                                    tag as keyof typeof theme.text
+                                ],
+                                fontWeight:
+                                    tag === "highlight"
+                                        ? theme.font.highlight.weight
+                                        : theme.font.element.weight,
                             }}
                         >
                             {domToReact(domNode.children as DOMNode[], options)}

@@ -25,17 +25,22 @@ export const darkThemeData = {
             family: "Rowdies, Roboto, sans-serif",
             weight: 300,
         },
+        styled: {
+            family: "Rowdies, Roboto, sans-serif",
+            weight: 300,
+        },
         element: {
             weight: 300,
         },
-        styled: {
-            family: "Rowdies, Roboto, sans-serif",
+        highlight: {
             weight: 300,
         },
     },
     text: {
         main: "white",
         selected: "rgb(25, 118, 210)",
+        description: "rgb(205, 205, 205)",
+        highlight: "white",
     },
     appbar: {
         backgroundColor: backgroundColors[8],

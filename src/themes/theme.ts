@@ -112,7 +112,7 @@ theme = createTheme(theme, {
     text: {
         physical: "#edcc2c",
         ice: "#95eae9",
-        fire: "ff5623",
+        fire: "#ff5623",
         electric: "#33b6fe",
         ether: "#fe427e",
         wind: "#48eea7",
