@@ -1,6 +1,6 @@
 // Component imports
 import { StyledTableCell, StyledTableRow } from "styled/StyledTable";
-import { TextStyled } from "styled/StyledTypography";
+import { Text, TextStyled } from "styled/StyledTypography";
 
 // MUI imports
 import {
@@ -53,12 +53,12 @@ function CharacterSkillScalingTable({ scaling }: { scaling: string[][] }) {
                                 <StyledTableCell
                                     key={`${row[`col${index}`][0]}-${i}`}
                                 >
-                                    <TextStyled
+                                    <Text
                                         variant="body2"
                                         sx={tableTextStyle}
                                     >
                                         {level}
-                                    </TextStyled>
+                                    </Text>
                                 </StyledTableCell>
                             ))}
                         </StyledTableRow>

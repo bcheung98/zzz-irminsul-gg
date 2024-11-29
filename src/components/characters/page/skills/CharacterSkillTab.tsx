@@ -1,4 +1,9 @@
-import parse, { HTMLReactParserOptions, Element } from "html-react-parser";
+import parse, {
+    HTMLReactParserOptions,
+    Element,
+    domToReact,
+    DOMNode,
+} from "html-react-parser";
 
 // Component imports
 import CharacterSkillScalingTable from "./CharacterSkillScalingTable";
@@ -49,29 +54,39 @@ function parseSkillDescription(description: string) {
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
     const options: HTMLReactParserOptions = {
         replace: (domNode) => {
-            if (domNode instanceof Element && domNode.attribs) {
-                const { attribs } = domNode;
-                if (attribs.class) {
-                    const className = attribs.class;
-                    if (className.split(" ")[0].startsWith("icon")) {
-                        const skill = className.split(
-                            " "
-                        )[1] as CharacterSkillKey;
-                        return (
-                            <Image
-                                src={`skills/${getSkillIcon(skill)}`}
-                                alt={skill}
-                                style={{
-                                    verticalAlign: "middle",
-                                    width: "auto",
-                                    height: matches_sm_up
-                                        ? `calc(${theme.typography.body1.fontSize} + 0.625rem)`
-                                        : `calc(${theme.typography.body1.fontSize} + 0.5rem)`,
-                                    marginBottom: "1.5px",
-                                }}
-                            />
-                        );
-                    }
+            if (domNode instanceof Element && domNode.attribs.class) {
+                const className = domNode.attribs.class;
+                if (className.split(" ")[0].startsWith("icon")) {
+                    const skill = className.split(" ")[1];
+                    return (
+                        <Image
+                            src={`skills/${getSkillIcon(skill)}`}
+                            alt={skill}
+                            style={{
+                                verticalAlign: "middle",
+                                width: "auto",
+                                height: matches_sm_up
+                                    ? `calc(${theme.typography.body1.fontSize} + 0.625rem)`
+                                    : `calc(${theme.typography.body1.fontSize} + 0.5rem)`,
+                                marginBottom: "1.5px",
+                            }}
+                        />
+                    );
+                } else if (className.split("-")[0].startsWith("text")) {
+                    const element = className.split(
+                        "-"
+                    )[1] as keyof typeof theme.text;
+                    return (
+                        <Text
+                            component="span"
+                            sx={{
+                                color: theme.text[element],
+                                fontWeight: theme.font.element.weight,
+                            }}
+                        >
+                            {domToReact(domNode.children as DOMNode[], options)}
+                        </Text>
+                    );
                 }
             }
         },

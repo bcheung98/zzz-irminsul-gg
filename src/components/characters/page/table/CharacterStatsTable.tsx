@@ -11,7 +11,7 @@ import {
     TableRow,
 } from "@mui/material";
 import { StyledTableCell, StyledTableRow } from "styled/StyledTable";
-import { TextStyled } from "styled/StyledTypography";
+import { Text, TextStyled } from "styled/StyledTypography";
 
 // Type imports
 import { CharacterProps } from "types/character";
@@ -75,24 +75,24 @@ function CharacterStatsTable({ character }: CharacterProps) {
                     {rows.map((row) => (
                         <StyledTableRow key={row.level}>
                             <StyledTableCell>
-                                <TextStyled variant="body2" sx={tableTextStyle}>
+                                <Text variant="body2" sx={tableTextStyle}>
                                     {row.level}
-                                </TextStyled>
+                                </Text>
                             </StyledTableCell>
                             <StyledTableCell>
-                                <TextStyled variant="body2" sx={tableTextStyle}>
+                                <Text variant="body2" sx={tableTextStyle}>
                                     {row.hp}
-                                </TextStyled>
+                                </Text>
                             </StyledTableCell>
                             <StyledTableCell>
-                                <TextStyled variant="body2" sx={tableTextStyle}>
+                                <Text variant="body2" sx={tableTextStyle}>
                                     {row.atk}
-                                </TextStyled>
+                                </Text>
                             </StyledTableCell>
                             <StyledTableCell>
-                                <TextStyled variant="body2" sx={tableTextStyle}>
+                                <Text variant="body2" sx={tableTextStyle}>
                                     {row.def}
-                                </TextStyled>
+                                </Text>
                             </StyledTableCell>
                         </StyledTableRow>
                     ))}

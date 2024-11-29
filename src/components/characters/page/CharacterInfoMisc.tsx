@@ -11,7 +11,7 @@ import {
 
 // Helper imports
 import { createDateObject } from "helpers/dates";
-import { TextStyled } from "styled/StyledTypography";
+import { Text, TextStyled } from "styled/StyledTypography";
 
 // Type imports
 import { CharacterProps } from "types/character";
@@ -59,9 +59,9 @@ function CharacterInfoMisc({ character }: CharacterProps) {
                                 align="right"
                                 sx={{ border: "none", py: "1.5px" }}
                             >
-                                <TextStyled variant="body2">
+                                <Text variant="body2">
                                     {row.value}
-                                </TextStyled>
+                                </Text>
                             </TableCell>
                         </TableRow>
                     ))}

@@ -2,7 +2,7 @@ import parse from "html-react-parser";
 
 // Component imports
 import MainContentBox from "custom/MainContentBox";
-import { TextStyled } from "styled/StyledTypography";
+import { Text, TextStyled } from "styled/StyledTypography";
 
 // MUI imports
 import { useTheme } from "@mui/material";
@@ -34,11 +34,11 @@ function CharacterCinemaDisplay({ character }: CharacterProps) {
                                 cinema[key as CharacterCinemaKey].name
                             }`}
                         </TextStyled>
-                        <TextStyled>
+                        <Text>
                             {parse(
                                 cinema[key as CharacterCinemaKey].description
                             )}
-                        </TextStyled>
+                        </Text>
                     </Grid>
                 ))}
             </Grid>

@@ -25,6 +25,9 @@ export const darkThemeData = {
             family: "Rowdies, Roboto, sans-serif",
             weight: 300,
         },
+        element: {
+            weight: 300,
+        },
         styled: {
             family: "Rowdies, Roboto, sans-serif",
             weight: 300,
