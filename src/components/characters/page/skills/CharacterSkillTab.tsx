@@ -6,7 +6,7 @@ import Image from "custom/Image";
 import { Text, TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { Box } from "@mui/material";
+import { useTheme, useMediaQuery, Box } from "@mui/material";
 
 // Type imports
 import { CharacterSkillKey } from "types/character";
@@ -26,16 +26,11 @@ function CharacterSkillTab({ skillKey, skillData }: CharacterSkillTabProps) {
             {skillData.map((skill, index) => (
                 <Box key={`${skillKey}-${index}`} sx={{ mb: "25px" }}>
                     <Box sx={{ mb: "20px" }}>
-                        <TextStyled variant="h6" sx={{ mb: "5px" }}>
+                        <TextStyled variant="h5" sx={{ mb: "5px" }}>
                             {skill.name}
                         </TextStyled>
                         {skill.description.split("<br />").map((line, i) => (
-                            <span key={i}>
-                                <Text sx={{ display: "inline" }}>
-                                    {parseSkillDescription(line)}
-                                </Text>
-                                <br />
-                            </span>
+                            <Text key={i}>{parseSkillDescription(line)}</Text>
                         ))}
                     </Box>
                     {skill.scaling && skillKey !== "core" && (
@@ -49,7 +44,51 @@ function CharacterSkillTab({ skillKey, skillData }: CharacterSkillTabProps) {
 
 export default CharacterSkillTab;
 
-export function getSkillIcon(skill: string) {
+function parseSkillDescription(description: string) {
+    const theme = useTheme();
+    const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
+    const options: HTMLReactParserOptions = {
+        replace: (domNode) => {
+            if (domNode instanceof Element && domNode.attribs) {
+                const { attribs } = domNode;
+                if (attribs.class) {
+                    const className = attribs.class;
+                    if (className.split(" ")[0].startsWith("icon")) {
+                        const skill = className.split(
+                            " "
+                        )[1] as CharacterSkillKey;
+                        return (
+                            <Image
+                                src={`skills/${getSkillIcon(skill)}`}
+                                alt={skill}
+                                style={{
+                                    verticalAlign: "middle",
+                                    width: "auto",
+                                    height: matches_sm_up
+                                        ? `calc(${theme.typography.body1.fontSize} + 0.625rem)`
+                                        : `calc(${theme.typography.body1.fontSize} + 0.5rem)`,
+                                    marginBottom: "1.5px",
+                                }}
+                            />
+                        );
+                    }
+                }
+            }
+        },
+    };
+
+    const text = description
+        .replace(`Icon_Basic`, `<span class="icon basic"></span>`)
+        .replace(`Icon_Dodge`, `<span class="icon dodge"></span>`)
+        .replace(`Icon_Assist`, `<span class="icon assist"></span>`)
+        .replace(`Icon_Special`, `<span class="icon special"></span>`)
+        .replace(`Icon_EXSpecial`, `<span class="icon ex-special"></span>`)
+        .replace(`Icon_Ultimate`, `<span class="icon ultimate"></span>`)
+        .replace(`Icon_Core`, `<span class="icon core"></span>`);
+    return parse(text, options);
+}
+
+function getSkillIcon(skill: string) {
     switch (skill) {
         case "basic":
             return "Basic";
@@ -86,40 +125,3 @@ function formatSkillKey(skill: CharacterSkillKey) {
             return "Core Skill";
     }
 }
-
-function parseSkillDescription(description: string) {
-    const text = description
-        .replace(`Icon_Basic`, `<span class="icon basic"></span>`)
-        .replace(`Icon_Dodge`, `<span class="icon dodge"></span>`)
-        .replace(`Icon_Assist`, `<span class="icon assist"></span>`)
-        .replace(`Icon_Special`, `<span class="icon special"></span>`)
-        .replace(`Icon_EXSpecial`, `<span class="icon ex-special"></span>`)
-        .replace(`Icon_Ultimate`, `<span class="icon ultimate"></span>`)
-        .replace(`Icon_Core`, `<span class="icon core"></span>`);
-    return parse(text, options);
-}
-
-const options: HTMLReactParserOptions = {
-    replace: (domNode) => {
-        if (domNode instanceof Element && domNode.attribs) {
-            const { attribs } = domNode;
-            if (attribs.class) {
-                const className = attribs.class;
-                if (className.split(" ")[0].startsWith("icon")) {
-                    const skill = className.split(" ")[1] as CharacterSkillKey;
-                    return (
-                        <Image
-                            src={`skills/${getSkillIcon(skill)}`}
-                            alt={skill}
-                            style={{
-                                margin: "0 0.25rem",
-                                width: "24px",
-                                height: "24px",
-                            }}
-                        />
-                    );
-                }
-            }
-        }
-    },
-};
