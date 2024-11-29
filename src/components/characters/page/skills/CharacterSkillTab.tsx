@@ -6,7 +6,7 @@ import parse, {
 } from "html-react-parser";
 
 // Component imports
-import CharacterSkillScalingTable from "./CharacterSkillScalingTable";
+import CharacterSkillScaling from "./CharacterSkillScaling";
 import Image from "custom/Image";
 import { Text, TextStyled } from "styled/StyledTypography";
 
@@ -29,18 +29,21 @@ function CharacterSkillTab({ skillKey, skillData }: CharacterSkillTabProps) {
                 {formatSkillKey(skillKey)}
             </TextStyled>
             {skillData.map((skill, index) => (
-                <Box key={`${skillKey}-${index}`} sx={{ mb: "25px" }}>
-                    <Box sx={{ mb: "20px" }}>
-                        <TextStyled variant="h5" sx={{ mb: "5px" }}>
-                            {skill.name}
-                        </TextStyled>
-                        {skill.description.split("<br />").map((line, i) => (
-                            <Text key={i}>{parseSkillDescription(line)}</Text>
-                        ))}
+                <Box
+                    key={`${skillKey}-${index}`}
+                    sx={{ pb: index < skillData.length - 1 ? "12px" : 0 }}
+                >
+                    <TextStyled variant="h5" sx={{ mb: "5px" }}>
+                        {skill.name}
+                    </TextStyled>
+                    {skill.description.split("<br />").map((line, i) => (
+                        <Text key={i}>{parseSkillDescription(line)}</Text>
+                    ))}
+                    <Box sx={{ minHeight: "12px" }}>
+                        {skill.scaling && skillKey !== "core" && (
+                            <CharacterSkillScaling scaling={skill.scaling} />
+                        )}
                     </Box>
-                    {skill.scaling && skillKey !== "core" && (
-                        <CharacterSkillScalingTable scaling={skill.scaling} />
-                    )}
                 </Box>
             ))}
         </Box>
