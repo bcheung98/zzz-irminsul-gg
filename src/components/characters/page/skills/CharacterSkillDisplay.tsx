@@ -38,16 +38,13 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
         return {
             width: "48px",
             height: "48px",
-            padding: "2px",
             margin: "5px 0",
-            borderWidth: selected ? "thick" : "2px",
+            borderWidth: selected ? "thick" : "3px",
             borderStyle: selected ? "double" : "solid",
-            borderColor: selected
-                ? getCharacterColor("accent")
-                : getCharacterColor("primary"),
+            borderColor: getCharacterColor("accent"),
             borderRadius: "64px",
             boxShadow: selected
-                ? `0 0 8px 2px ${getCharacterColor("accent")}`
+                ? `0 0 12px 2px ${getCharacterColor("accent")}`
                 : "none",
             transition: "box-shadow 250ms",
         };

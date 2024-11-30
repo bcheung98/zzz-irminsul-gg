@@ -110,13 +110,13 @@ theme = createTheme(theme, {
         },
     },
     text: {
-        physical: "#edcc2c",
-        ice: "#95eae9",
-        fire: "#ff5623",
-        electric: "#33b6fe",
-        ether: "#fe427e",
-        wind: "#48eea7",
-        value: "#2bad00",
+        physical: "#F0D12B",
+        ice: "#98EFF0",
+        fire: "#FF5521",
+        electric: "#2EB6FF",
+        ether: "#FE437E",
+        wind: "#48EEA7",
+        value: "#2BAD00",
     },
 });
 

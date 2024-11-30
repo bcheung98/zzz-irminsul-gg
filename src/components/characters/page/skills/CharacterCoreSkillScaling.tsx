@@ -47,7 +47,7 @@ function CharacterCoreSkillScaling({
     const bonusStats = Object.entries(ascension)
         .map(([stat, scaling]) => ({
             stat: stat,
-            value: scaling[0],
+            value: stat === "CRIT Rate" || stat === "CRIT DMG" ? `${scaling[0] / 100}%` : scaling[0],
         }))
         .reverse();
 
