@@ -22,10 +22,7 @@ export interface Character {
     birthday: string;
     gender: "Male" | "Female";
     faction: Faction;
-    colors: {
-        primary: string;
-        secondary: string;
-    };
+    colors: CharacterColors;
     voiceActors: {
         en: string;
         jp: string;
@@ -64,4 +61,9 @@ export interface CharacterStats {
     hp: number[];
     atk: number[];
     def: number[];
+}
+
+export interface CharacterColors {
+    primary: string;
+    secondary: string;
 }
