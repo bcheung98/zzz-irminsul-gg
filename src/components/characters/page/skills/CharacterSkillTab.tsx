@@ -16,20 +16,34 @@ import { Text, TextStyled } from "styled/StyledTypography";
 import { useTheme, useMediaQuery, Box } from "@mui/material";
 
 // Type imports
-import { CharacterAscensionStat, CharacterColors, CharacterSkillKey } from "types/character";
+import {
+    CharacterAscensionStat,
+    CharacterColors,
+    CharacterSkillKey,
+} from "types/character";
 import { Skill } from "types/skill";
+import { Element } from "types/_common";
 
 interface CharacterSkillTabProps {
     skillKey: CharacterSkillKey;
     skillData: Skill[];
     ascension: CharacterAscensionStat;
+    element: Element;
     colors: CharacterColors;
+}
+
+export interface CharacterSkillScalingProps {
+    scaling: string[][];
+    colors: CharacterColors;
+    element: Element;
+    ascension?: CharacterAscensionStat;
 }
 
 function CharacterSkillTab({
     skillKey,
     skillData,
     ascension,
+    element,
     colors,
 }: CharacterSkillTabProps) {
     const theme = useTheme();
@@ -39,10 +53,7 @@ function CharacterSkillTab({
                 {formatSkillKey(skillKey)}
             </TextStyled>
             {skillData.map((skill, index) => (
-                <Box
-                    key={`${skillKey}-${index}`}
-                    sx={{ pb: index < skillData.length - 1 ? "12px" : 0 }}
-                >
+                <Box key={`${skillKey}-${index}`} sx={{ pb: "16px" }}>
                     <TextStyled variant="h5" sx={{ mb: "5px" }}>
                         {skill.name}
                     </TextStyled>
@@ -51,18 +62,21 @@ function CharacterSkillTab({
                             {parseSkillDescription(line)}
                         </Text>
                     ))}
-                    <Box sx={{ pt: "12px" }}>
+                    <Box sx={{ pt: "16px" }}>
                         {skill.scaling && (
                             <React.Fragment>
                                 {skillKey !== "core" ? (
                                     <CharacterSkillScaling
                                         scaling={skill.scaling}
+                                        element={element}
+                                        colors={colors}
                                     />
                                 ) : (
                                     <CharacterCoreSkillScaling
                                         scaling={skill.scaling}
-                                        ascension={ascension}
+                                        element={element}
                                         colors={colors}
+                                        ascension={ascension}
                                     />
                                 )}
                             </React.Fragment>

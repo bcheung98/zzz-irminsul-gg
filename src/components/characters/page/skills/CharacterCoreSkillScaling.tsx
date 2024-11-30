@@ -7,20 +7,24 @@ import { StyledSlider } from "styled/StyledSlider";
 // MUI imports
 import { useTheme, useMediaQuery, Box } from "@mui/material";
 
+// Helper imports
+import { characterColors } from "helpers/characterColors";
+
 // Type imports
-import { CharacterAscensionStat, CharacterColors } from "types/character";
+import { CharacterSkillScalingProps } from "./CharacterSkillTab";
+import { CharacterColors } from "types/character";
 
 function CharacterCoreSkillScaling({
     scaling,
-    ascension,
+    element,
     colors,
-}: {
-    scaling: string[][];
-    ascension: CharacterAscensionStat;
-    colors: CharacterColors;
-}) {
+    ascension = {},
+}: CharacterSkillScalingProps) {
     const theme = useTheme();
     const matches_md_up = useMediaQuery(theme.breakpoints.up("md"));
+
+    const getCharacterColor = (option: keyof CharacterColors) =>
+        characterColors(colors, option, element);
 
     const [sliderValue, setSliderValue] = React.useState(0);
     const handleSliderChange = (_: Event, newValue: number | number[]) => {
@@ -40,14 +44,16 @@ function CharacterCoreSkillScaling({
         }
     });
 
-    const bonusStats = Object.entries(ascension).map(([stat, scaling]) => ({
-        stat: stat,
-        value: scaling[0],
-    }));
+    const bonusStats = Object.entries(ascension)
+        .map(([stat, scaling]) => ({
+            stat: stat,
+            value: scaling[0],
+        }))
+        .reverse();
 
     return (
         <Box sx={{ pb: "15px" }}>
-            <Box sx={{ width: { xs: "90%", md: "50vw" }, mb: "15px" }}>
+            <Box sx={{ width: { xs: "90%", md: "50vw" } }}>
                 <StyledSlider
                     value={sliderValue}
                     marks={marks}
@@ -60,16 +66,18 @@ function CharacterCoreSkillScaling({
                         minWidth: "100px",
                         maxWidth: "500px",
                         ml: "10px",
-                        color: colors.primary,
+                        color: getCharacterColor("accent"),
                     }}
                 />
             </Box>
-            <Text sx={{ color: theme.text.description }}>
-                {bonusStats[sliderValue % 2].stat} increases by{" "}
-                <span style={{ color: theme.text.highlight }}>
-                    {bonusStats[sliderValue % 2].value}
-                </span>
-            </Text>
+            {sliderValue > 0 && (
+                <Text sx={{ color: theme.text.description, mt: "15px" }}>
+                    {bonusStats[sliderValue % 2].stat} increases by{" "}
+                    <span style={{ color: theme.text.highlight }}>
+                        {bonusStats[sliderValue % 2].value}
+                    </span>
+                </Text>
+            )}
         </Box>
     );
 }

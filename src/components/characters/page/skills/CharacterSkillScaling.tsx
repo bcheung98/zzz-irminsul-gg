@@ -6,7 +6,6 @@ import { StyledTableCell, StyledTableRow } from "styled/StyledTable";
 
 // MUI imports
 import {
-    useTheme,
     SxProps,
     IconButton,
     Collapse,
@@ -20,8 +19,20 @@ import {
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 
-function CharacterSkillScaling({ scaling }: { scaling: string[][] }) {
-    const theme = useTheme();
+// Helper imports
+import { characterColors } from "helpers/characterColors";
+
+// Type imports
+import { CharacterSkillScalingProps } from "./CharacterSkillTab";
+import { CharacterColors } from "types/character";
+
+function CharacterSkillScaling({
+    scaling,
+    colors,
+    element,
+}: CharacterSkillScalingProps) {
+    const getCharacterColor = (option: keyof CharacterColors) =>
+        characterColors(colors, option, element);
 
     const [dropdownOpen, setDropdownOpen] = React.useState(false);
     const toggleDropdownState = () => {
@@ -53,7 +64,7 @@ function CharacterSkillScaling({ scaling }: { scaling: string[][] }) {
             >
                 <ExpandMore
                     sx={{
-                        color: theme.border.color,
+                        color: getCharacterColor("accent"),
                         mr: "2px",
                         transform: dropdownOpen
                             ? "rotateZ(0deg)"

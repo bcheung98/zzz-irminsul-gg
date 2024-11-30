@@ -8,20 +8,30 @@ import { StyledTab, StyledTabs, TabPanel } from "styled/StyledTabs";
 // MUI imports
 import { useMediaQuery, useTheme } from "@mui/material";
 
+// Helper imports
+import { characterColors } from "helpers/characterColors";
+
 // Type imports
-import { CharacterProps, CharacterSkillKey } from "types/character";
+import {
+    CharacterColors,
+    CharacterProps,
+    CharacterSkillKey,
+} from "types/character";
 import CharacterSkillTab from "./CharacterSkillTab";
 
 function CharacterSkillDisplay({ character }: CharacterProps) {
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
 
-    const { skills } = character;
+    const { skills, stats, colors, element } = character;
 
     const [tabValue, setTabValue] = React.useState(0);
     const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
+
+    const getCharacterColor = (option: keyof CharacterColors) =>
+        characterColors(colors, option, element);
 
     const skillIcon = (index: number): React.CSSProperties => {
         const selected = index === tabValue;
@@ -29,10 +39,17 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
             width: "48px",
             height: "48px",
             padding: "2px",
-            margin: "5px auto 5px auto",
+            margin: "5px 0",
+            borderWidth: selected ? "thick" : "2px",
+            borderStyle: selected ? "double" : "solid",
+            borderColor: selected
+                ? getCharacterColor("accent")
+                : getCharacterColor("primary"),
             borderRadius: "64px",
-            filter: selected ? "drop-shadow(0 0 8px white)" : "none",
-            transition: "filter 250ms",
+            boxShadow: selected
+                ? `0 0 8px 2px ${getCharacterColor("accent")}`
+                : "none",
+            transition: "box-shadow 250ms",
         };
     };
 
@@ -55,21 +72,25 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
                     },
                     "& .MuiTabs-indicatorSpan": {
                         width: "100%",
+                        backgroundColor: getCharacterColor("accent"),
                     },
                 }}
             >
                 {Object.keys(skills).map((key, index) => (
                     <StyledTab
                         key={key}
-                        label={
-                            <Image
-                                src={`skills/${getSkillImage(
-                                    key as CharacterSkillKey
-                                )}`}
-                                alt={key}
-                                style={skillIcon(index)}
-                            />
+                        icon={
+                            <React.Fragment>
+                                <Image
+                                    src={`skills/${getSkillImage(
+                                        key as CharacterSkillKey
+                                    )}`}
+                                    alt={key}
+                                    style={skillIcon(index)}
+                                />
+                            </React.Fragment>
                         }
+                        sx={{ px: 0 }}
                     />
                 ))}
             </StyledTabs>
@@ -78,8 +99,9 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
                     <CharacterSkillTab
                         skillKey={key as CharacterSkillKey}
                         skillData={skills[key as CharacterSkillKey]}
-                        ascension={character.stats.ascension}
-                        colors={character.colors}
+                        ascension={stats.ascension}
+                        element={element}
+                        colors={colors}
                     />
                 </TabPanel>
             ))}
