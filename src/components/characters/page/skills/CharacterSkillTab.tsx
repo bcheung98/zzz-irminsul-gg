@@ -1,12 +1,14 @@
+import React from "react";
 import parse, {
     HTMLReactParserOptions,
-    Element,
+    Element as DOMElement,
     domToReact,
     DOMNode,
 } from "html-react-parser";
 
 // Component imports
 import CharacterSkillScaling from "./CharacterSkillScaling";
+import CharacterCoreSkillScaling from "./CharacterCoreSkillScaling";
 import Image from "custom/Image";
 import { Text, TextStyled } from "styled/StyledTypography";
 
@@ -14,15 +16,22 @@ import { Text, TextStyled } from "styled/StyledTypography";
 import { useTheme, useMediaQuery, Box } from "@mui/material";
 
 // Type imports
-import { CharacterSkillKey } from "types/character";
+import { CharacterAscensionStat, CharacterColors, CharacterSkillKey } from "types/character";
 import { Skill } from "types/skill";
 
 interface CharacterSkillTabProps {
     skillKey: CharacterSkillKey;
     skillData: Skill[];
+    ascension: CharacterAscensionStat;
+    colors: CharacterColors;
 }
 
-function CharacterSkillTab({ skillKey, skillData }: CharacterSkillTabProps) {
+function CharacterSkillTab({
+    skillKey,
+    skillData,
+    ascension,
+    colors,
+}: CharacterSkillTabProps) {
     const theme = useTheme();
     return (
         <Box>
@@ -42,9 +51,21 @@ function CharacterSkillTab({ skillKey, skillData }: CharacterSkillTabProps) {
                             {parseSkillDescription(line)}
                         </Text>
                     ))}
-                    <Box sx={{ minHeight: "12px" }}>
-                        {skill.scaling && skillKey !== "core" && (
-                            <CharacterSkillScaling scaling={skill.scaling} />
+                    <Box sx={{ pt: "12px" }}>
+                        {skill.scaling && (
+                            <React.Fragment>
+                                {skillKey !== "core" ? (
+                                    <CharacterSkillScaling
+                                        scaling={skill.scaling}
+                                    />
+                                ) : (
+                                    <CharacterCoreSkillScaling
+                                        scaling={skill.scaling}
+                                        ascension={ascension}
+                                        colors={colors}
+                                    />
+                                )}
+                            </React.Fragment>
                         )}
                     </Box>
                 </Box>
@@ -60,7 +81,7 @@ function parseSkillDescription(description: string) {
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
     const options: HTMLReactParserOptions = {
         replace: (domNode) => {
-            if (domNode instanceof Element && domNode.attribs.class) {
+            if (domNode instanceof DOMElement && domNode.attribs.class) {
                 const className = domNode.attribs.class;
                 if (className.split(" ")[0].startsWith("icon")) {
                     const skill = className.split(" ")[1];
@@ -83,6 +104,7 @@ function parseSkillDescription(description: string) {
                     return (
                         <Text
                             component="span"
+                            className={className}
                             sx={{
                                 color: theme.text[
                                     tag as keyof typeof theme.text

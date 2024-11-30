@@ -78,6 +78,8 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
                     <CharacterSkillTab
                         skillKey={key as CharacterSkillKey}
                         skillData={skills[key as CharacterSkillKey]}
+                        ascension={character.stats.ascension}
+                        colors={character.colors}
                     />
                 </TabPanel>
             ))}

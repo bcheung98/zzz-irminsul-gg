@@ -8,15 +8,15 @@ import { StyledTableCell, StyledTableRow } from "styled/StyledTable";
 import {
     useTheme,
     SxProps,
-    Box,
+    IconButton,
     Collapse,
+    Box,
     Card,
     TableContainer,
     Table,
     TableHead,
     TableBody,
     TableRow,
-    IconButton,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 
@@ -44,7 +44,7 @@ function CharacterSkillScaling({ scaling }: { scaling: string[][] }) {
     };
 
     return (
-        <Box sx={{ pt: "12px" }}>
+        <React.Fragment>
             <IconButton
                 onClick={toggleDropdownState}
                 disableRipple
@@ -64,7 +64,7 @@ function CharacterSkillScaling({ scaling }: { scaling: string[][] }) {
                 <TextStyled>Skill Scaling</TextStyled>
             </IconButton>
             <Collapse in={dropdownOpen} timeout="auto" unmountOnExit>
-                <Box sx={{ py: "15px", px: { xs: 0, md: "25px" } }}>
+                <Box sx={{ px: { xs: 0, md: "25px" }, py: "15px" }}>
                     <TableContainer component={Card}>
                         <Table>
                             <TableHead>
@@ -107,7 +107,7 @@ function CharacterSkillScaling({ scaling }: { scaling: string[][] }) {
                     </TableContainer>
                 </Box>
             </Collapse>
-        </Box>
+        </React.Fragment>
     );
 }
 
