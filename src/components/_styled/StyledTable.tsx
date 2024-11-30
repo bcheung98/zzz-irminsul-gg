@@ -1,9 +1,17 @@
-import { styled, TableRow, TableCell, tableCellClasses } from "@mui/material";
+import {
+    styled,
+    TableRow,
+    TableCell,
+    tableCellClasses,
+    tableRowClasses,
+} from "@mui/material";
 
 export const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: theme.menu.default,
-    "&: hover": {
-        backgroundColor: theme.menu.hover,
+    [`&.${tableRowClasses.hover}`]: {
+        "&:hover": {
+            backgroundColor: theme.menu.hover,
+        },
     },
     "&:last-child td, &:last-child th": {
         border: 0,
