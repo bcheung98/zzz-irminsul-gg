@@ -66,4 +66,5 @@ export interface CharacterStats {
 export interface CharacterColors {
     primary: string;
     secondary: string;
+    accent: string;
 }
