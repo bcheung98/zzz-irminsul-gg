@@ -18,8 +18,8 @@ function CharacterCoreSkillScaling({
     scaling,
     element,
     colors,
-    ascension = {},
-}: CharacterSkillScalingProps) {
+    ascension,
+}: Omit<CharacterSkillScalingProps, "mode">) {
     const theme = useTheme();
     const matches_md_up = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -47,7 +47,10 @@ function CharacterCoreSkillScaling({
     const bonusStats = Object.entries(ascension)
         .map(([stat, scaling]) => ({
             stat: stat,
-            value: stat === "CRIT Rate" || stat === "CRIT DMG" ? `${scaling[0] / 100}%` : scaling[0],
+            value:
+                stat === "CRIT Rate" || stat === "CRIT DMG"
+                    ? `${scaling[0] / 100}%`
+                    : scaling[0],
         }))
         .reverse();
 

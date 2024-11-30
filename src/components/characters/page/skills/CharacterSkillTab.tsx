@@ -25,6 +25,7 @@ import { Skill } from "types/skill";
 import { Element } from "types/_common";
 
 interface CharacterSkillTabProps {
+    mode: "table" | "slider";
     skillKey: CharacterSkillKey;
     skillData: Skill[];
     ascension: CharacterAscensionStat;
@@ -33,13 +34,15 @@ interface CharacterSkillTabProps {
 }
 
 export interface CharacterSkillScalingProps {
+    mode: "table" | "slider";
     scaling: string[][];
     colors: CharacterColors;
     element: Element;
-    ascension?: CharacterAscensionStat;
+    ascension: CharacterAscensionStat;
 }
 
 function CharacterSkillTab({
+    mode,
     skillKey,
     skillData,
     ascension,
@@ -67,6 +70,7 @@ function CharacterSkillTab({
                             <React.Fragment>
                                 {skillKey !== "core" ? (
                                     <CharacterSkillScaling
+                                        mode={mode}
                                         scaling={skill.scaling}
                                         element={element}
                                         colors={colors}

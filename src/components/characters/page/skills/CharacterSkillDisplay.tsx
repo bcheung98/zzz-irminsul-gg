@@ -1,8 +1,10 @@
 import React from "react";
 
 // Component imports
+import CharacterSkillTab from "./CharacterSkillTab";
 import MainContentBox from "custom/MainContentBox";
 import Image from "custom/Image";
+import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
 import { StyledTab, StyledTabs, TabPanel } from "styled/StyledTabs";
 
 // MUI imports
@@ -17,7 +19,6 @@ import {
     CharacterProps,
     CharacterSkillKey,
 } from "types/character";
-import CharacterSkillTab from "./CharacterSkillTab";
 
 function CharacterSkillDisplay({ character }: CharacterProps) {
     const theme = useTheme();
@@ -29,6 +30,21 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
     const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
+
+    const [mode, setMode] = React.useState<"table" | "slider">("table");
+    const handleMode = (
+        _: React.BaseSyntheticEvent,
+        newView: "table" | "slider"
+    ) => {
+        if (newView !== null) {
+            setMode(newView);
+        }
+    };
+
+    const buttons: CustomToggleButtonProps[] = [
+        { variant: "text", value: "table", label: "Table" },
+        { variant: "text", value: "slider", label: "Slider" },
+    ];
 
     const getCharacterColor = (option: keyof CharacterColors) =>
         characterColors(colors, option, element);
@@ -44,14 +60,26 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
             borderColor: getCharacterColor("accent"),
             borderRadius: "64px",
             boxShadow: selected
-                ? `0 0 12px 2px ${getCharacterColor("accent")}`
+                ? `0 0 12px 4px ${getCharacterColor("accent")}`
                 : "none",
             transition: "box-shadow 250ms",
         };
     };
 
     return (
-        <MainContentBox title="Skills" contentPadding={0}>
+        <MainContentBox
+            contentPadding={0}
+            title="Skills"
+            actions={
+                <ToggleButtons
+                    buttons={buttons}
+                    value={mode}
+                    exclusive
+                    onChange={handleMode}
+                    spacing={0}
+                />
+            }
+        >
             <StyledTabs
                 variant="scrollable"
                 value={tabValue}
@@ -94,6 +122,7 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
             {Object.keys(skills).map((key, index) => (
                 <TabPanel key={key} index={index} value={tabValue}>
                     <CharacterSkillTab
+                        mode={mode}
                         skillKey={key as CharacterSkillKey}
                         skillData={skills[key as CharacterSkillKey]}
                         ascension={stats.ascension}
