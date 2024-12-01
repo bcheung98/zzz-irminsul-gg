@@ -73,7 +73,7 @@ function CharacterStatsTable({ character }: CharacterProps) {
                 </TableHead>
                 <TableBody>
                     {rows.map((row) => (
-                        <StyledTableRow key={row.level}>
+                        <StyledTableRow key={row.level} hover>
                             <StyledTableCell>
                                 <Text variant="body2" sx={tableTextStyle}>
                                     {row.level}
