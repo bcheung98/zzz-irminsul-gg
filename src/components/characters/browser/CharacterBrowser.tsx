@@ -74,7 +74,10 @@ function CharacterBrowser() {
                 >
                     <Grid size={{ xs: 12, sm: "auto" }}>
                         <FlexBox>
-                            <TextStyled variant="h5" className="page-name">
+                            <TextStyled
+                                variant="h5"
+                                sx={{ lineHeight: "36px" }}
+                            >
                                 Agents
                             </TextStyled>
                         </FlexBox>
@@ -98,7 +101,7 @@ function CharacterBrowser() {
                                 sx={{
                                     backgroundColor: theme.menu.hover,
                                     color: theme.text.main,
-                                    height: "40px",
+                                    height: "36px",
                                     mr: "25px",
                                 }}
                             >
