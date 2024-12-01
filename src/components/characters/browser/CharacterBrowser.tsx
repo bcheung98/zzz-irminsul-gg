@@ -3,6 +3,7 @@ import React from "react";
 // Component imports
 import CharacterFilters from "./CharacterFilters";
 import DisplayCard from "custom/DisplayCard";
+import SearchBar from "custom/SearchBar";
 import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
 
@@ -10,7 +11,8 @@ import { TextStyled } from "styled/StyledTypography";
 import {
     useTheme,
     useMediaQuery,
-    styled,
+    SxProps,
+    Theme,
     Box,
     Button,
     Drawer,
@@ -19,7 +21,7 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import TuneIcon from "@mui/icons-material/Tune";
-import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 // Helper imports
 import { useAppSelector } from "helpers/hooks";
@@ -27,7 +29,7 @@ import { filterCharacters } from "helpers/filterCharacters";
 import { selectCharacters } from "reducers/character";
 import { selectCharacterFilters } from "reducers/characterFilters";
 
-const drawerWidth = 350; // px
+const drawerWidth = 300; // px
 
 function CharacterBrowser() {
     const theme = useTheme();
@@ -36,10 +38,10 @@ function CharacterBrowser() {
     const characters = useAppSelector(selectCharacters);
     const filters = useAppSelector(selectCharacterFilters);
 
-    const currentCharacters = React.useMemo(
-        () => filterCharacters(characters, filters),
-        [characters, filters]
-    );
+    const [searchValue, setSearchValue] = React.useState("");
+    const handleInputChange = (event: React.BaseSyntheticEvent) => {
+        setSearchValue(event.target.value);
+    };
 
     const [desktopDrawerOpen, setDesktopDrawerOpen] = React.useState(true);
     const toggleDesktopDrawerState = () => {
@@ -63,9 +65,16 @@ function CharacterBrowser() {
             setMobileDrawerOpen(open);
         };
 
-    function CharacterBrowserRoot() {
-        return (
-            <React.Fragment>
+    const currentCharacters = React.useMemo(
+        () => filterCharacters(characters, filters, searchValue),
+        [characters, filters, searchValue]
+    );
+
+    document.title = `Agents ${import.meta.env.VITE_DOCUMENT_TITLE}`;
+
+    return (
+        <Box sx={{ display: "flex" }}>
+            <Box sx={rootStyle(theme, desktopDrawerOpen, matches_md_up)}>
                 <Grid
                     container
                     rowSpacing={2}
@@ -84,6 +93,14 @@ function CharacterBrowser() {
                     </Grid>
                     <Grid size="grow">
                         <FlexBox>
+                            <Box sx={{ width: "80%", mr: "20px" }}>
+                                <SearchBar
+                                    placeholder="Search"
+                                    value={searchValue}
+                                    onChange={handleInputChange}
+                                    size={{ height: "36px" }}
+                                />
+                            </Box>
                             <Button
                                 onClick={
                                     matches_md_up
@@ -91,135 +108,110 @@ function CharacterBrowser() {
                                         : toggleMobileDrawer(true)
                                 }
                                 variant="outlined"
+                                disableRipple
                                 startIcon={
                                     matches_md_up && desktopDrawerOpen ? (
-                                        <CloseIcon />
+                                        <KeyboardArrowRightIcon />
                                     ) : (
                                         <TuneIcon />
                                     )
                                 }
                                 sx={{
-                                    backgroundColor: theme.menu.hover,
-                                    color: theme.text.main,
                                     height: "36px",
-                                    mr: "25px",
+                                    border: 0,
+                                    backgroundColor: theme.menu.selectedHover,
                                 }}
                             >
-                                <TextStyled sx={{ textTransform: "none" }}>
-                                    Filters
-                                </TextStyled>
+                                Filters
                             </Button>
                         </FlexBox>
                     </Grid>
                 </Grid>
                 <Grid container spacing={3}>
                     <Grid size="grow">
-                        {currentCharacters.length > 0 ? (
-                            <React.Fragment>
-                                <Grid container spacing={2.5}>
-                                    {currentCharacters.map((char) => (
-                                        <DisplayCard
-                                            key={char.id}
-                                            id={`${char.name}-characterBrowser`}
-                                            name={char.name}
-                                            displayName={char.fullName}
-                                            type="character"
-                                            rarity={char.rarity}
-                                            info={{
-                                                element: char.element,
-                                                specialty: char.specialty,
-                                            }}
-                                        />
-                                    ))}
-                                </Grid>
-                            </React.Fragment>
-                        ) : null}
+                        <React.Fragment>
+                            <Grid container spacing={2.5}>
+                                {currentCharacters.map((char) => (
+                                    <DisplayCard
+                                        key={char.id}
+                                        id={`${char.name}-characterBrowser`}
+                                        name={char.name}
+                                        displayName={char.fullName}
+                                        type="character"
+                                        rarity={char.rarity}
+                                        info={{
+                                            element: char.element,
+                                            specialty: char.specialty,
+                                        }}
+                                    />
+                                ))}
+                            </Grid>
+                        </React.Fragment>
                     </Grid>
                 </Grid>
-            </React.Fragment>
-        );
-    }
-
-    document.title = `Agents ${import.meta.env.VITE_DOCUMENT_TITLE}`;
-
-    return (
-        <React.Fragment>
+            </Box>
             {matches_md_up ? (
-                <Box sx={{ display: "flex" }}>
-                    <Main open={desktopDrawerOpen}>
-                        <CharacterBrowserRoot />
-                    </Main>
-                    <Drawer
-                        sx={{
+                <Drawer
+                    sx={{
+                        width: drawerWidth,
+                        flexShrink: 0,
+                        "& .MuiDrawer-paper": {
                             width: drawerWidth,
-                            flexShrink: 0,
-                            "& .MuiDrawer-paper": {
-                                width: drawerWidth,
-                                borderLeft: `1px solid ${theme.border.color}`,
-                                backgroundColor: theme.background(3),
-                                pt: 2.5,
-                            },
-                        }}
-                        variant="persistent"
-                        anchor="right"
-                        open={desktopDrawerOpen}
-                    >
-                        {/* Empty toolbar necessary for content to be below app bar */}
-                        <Toolbar />
-                        <CharacterFilters
-                            handleClose={handleDesktopDrawerClose}
-                        />
-                    </Drawer>
-                </Box>
+                            borderLeft: `1px solid ${theme.border.color}`,
+                            backgroundColor: theme.background(3),
+                            pt: 2.5,
+                        },
+                    }}
+                    variant={matches_md_up ? "persistent" : "temporary"}
+                    anchor="right"
+                    open={desktopDrawerOpen}
+                >
+                    {/* Empty toolbar necessary for content to be below app bar */}
+                    <Toolbar />
+                    <CharacterFilters handleClose={handleDesktopDrawerClose} />
+                </Drawer>
             ) : (
-                <React.Fragment>
-                    <CharacterBrowserRoot />
-                    <SwipeableDrawer
-                        anchor="bottom"
-                        open={mobileDrawerOpen}
-                        onClose={toggleMobileDrawer(false)}
-                        onOpen={toggleMobileDrawer(true)}
-                        sx={{
-                            [`& .MuiDrawer-paper`]: {
-                                borderTop: `2px solid ${theme.border.color}`,
-                                backgroundColor: theme.background(3),
-                                height: "auto",
-                                maxHeight: "88%",
-                            },
-                        }}
-                    >
-                        <CharacterFilters
-                            handleClose={toggleMobileDrawer(false)}
-                        />
-                    </SwipeableDrawer>
-                </React.Fragment>
+                <SwipeableDrawer
+                    anchor="bottom"
+                    open={mobileDrawerOpen}
+                    onClose={toggleMobileDrawer(false)}
+                    onOpen={toggleMobileDrawer(true)}
+                    sx={{
+                        [`& .MuiDrawer-paper`]: {
+                            borderTop: `2px solid ${theme.border.color}`,
+                            backgroundColor: theme.background(3),
+                            height: "auto",
+                            maxHeight: "88%",
+                        },
+                    }}
+                >
+                    <CharacterFilters handleClose={toggleMobileDrawer(false)} />
+                </SwipeableDrawer>
             )}
-        </React.Fragment>
+        </Box>
     );
 }
 
 export default CharacterBrowser;
 
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
-    open?: boolean;
-}>(({ theme }) => ({
-    flexGrow: 1,
-    transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginRight: `-${drawerWidth}px`,
-    position: "relative",
-    variants: [
-        {
-            props: ({ open }) => open,
-            style: {
-                transition: theme.transitions.create("margin", {
-                    easing: theme.transitions.easing.easeOut,
-                    duration: theme.transitions.duration.enteringScreen,
-                }),
-                marginRight: 0,
-            },
-        },
-    ],
-}));
+const rootStyle = (theme: Theme, open: boolean, matches: boolean): SxProps =>
+    matches
+        ? {
+              flexGrow: 1,
+              transition: open
+                  ? theme.transitions.create("margin", {
+                        easing: theme.transitions.easing.easeOut,
+                        duration: theme.transitions.duration.enteringScreen,
+                    })
+                  : theme.transitions.create("margin", {
+                        easing: theme.transitions.easing.sharp,
+                        duration: theme.transitions.duration.leavingScreen,
+                    }),
+              marginRight: open ? 0 : `-${drawerWidth}px`,
+              position: "relative",
+          }
+        : {
+              flexGrow: 0,
+              marginRight: 0,
+              position: "static",
+          };
