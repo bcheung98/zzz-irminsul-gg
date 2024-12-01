@@ -7,87 +7,97 @@ import { TextStyled } from "styled/StyledTypography";
 import {
     useTheme,
     SxProps,
-    ToggleButton,
+    ToggleButton as MuiToggleButton,
     ToggleButtonProps,
     ToggleButtonGroupProps,
     ToggleButtonGroup,
-    toggleButtonGroupClasses,
 } from "@mui/material";
 
-// Interface for individual button
 export interface CustomToggleButtonProps extends ToggleButtonProps {
-    variant: "icon" | "text";
-    label: React.ReactNode;
+    variant?: "icon" | "text";
+    icon?: React.ReactNode;
+    label?: React.ReactNode;
+    highlightonhover?: boolean;
 }
 
-// Interface for button group
-export interface ToggleButtonsProps extends ToggleButtonGroupProps {
-    buttons: CustomToggleButtonProps[];
-    spacing?: number;
-    highlightOnHover?: boolean;
-}
-
-function ToggleButtons(props: ToggleButtonsProps) {
+export function ToggleButton(props: CustomToggleButtonProps) {
     const theme = useTheme();
 
-    const { buttons, spacing, highlightOnHover = false } = props;
-
-    const toggleButtonGroupStyle: SxProps = {
-        [`& .${toggleButtonGroupClasses.grouped}`]: {
-            mx: spacing ? `${spacing}px` : "none",
-            border: `1px solid ${theme.border.color}`,
-            borderRadius: spacing ? "5px" : "none",
-        },
-    };
+    const { value, size, icon, label, highlightonhover = true } = props;
 
     const toggleButtonStyle: SxProps = [
         {
             "&.MuiToggleButton-root": {
+                p: label ? "10px" : "0px",
                 backgroundColor: theme.menu.default,
                 opacity: 0.5,
                 "&:hover": {
                     backgroundColor: theme.menu.hover,
                 },
-                "&.Mui-selected": {
-                    backgroundColor: theme.menu.selected,
-                    opacity: 1,
-                    "&:hover": {
-                        backgroundColor: theme.menu.selectedHover,
-                    },
-                },
             },
         },
-        highlightOnHover && {
+        highlightonhover && {
             "&.MuiToggleButton-root": {
                 "&:hover": {
-                    border: `1px solid rgb(233, 194, 39)`,
-                    boxShadow: `0 0 5px 1px rgb(233, 194, 39)`,
+                    borderColor: `rgb(233, 194, 39)`,
+                    boxShadow: `0 0 4px 1px rgb(233, 194, 39)`,
                 },
             },
         },
     ];
 
     return (
+        <MuiToggleButton
+            value={value}
+            size={size}
+            disableRipple
+            sx={toggleButtonStyle}
+        >
+            {icon}
+            <TextStyled variant="body2" sx={{ textTransform: "none" }}>
+                {label}
+            </TextStyled>
+        </MuiToggleButton>
+    );
+}
+
+export interface ToggleButtonsProps extends ToggleButtonGroupProps {
+    buttons: CustomToggleButtonProps[];
+    spacing?: number;
+    highlightonhover?: boolean;
+}
+
+function ToggleButtons(props: ToggleButtonsProps) {
+    const theme = useTheme();
+
+    const { buttons, spacing = false, highlightonhover = true } = props;
+
+    const toggleButtonGroupStyle: SxProps = {
+        flexWrap: "wrap",
+        "& .MuiToggleButtonGroup-grouped": {
+            m: spacing ? `${spacing}px !important` : "0px",
+            border: spacing
+                ? `1px solid ${theme.border.color} !important`
+                : `1px solid ${theme.border.color}`,
+            borderRadius: spacing ? "5px" : "none",
+            "&.Mui-selected": {
+                backgroundColor: theme.menu.selected,
+                opacity: 1,
+                "&:hover": {
+                    backgroundColor: theme.menu.selectedHover,
+                },
+            },
+        },
+    };
+
+    return (
         <ToggleButtonGroup {...props} sx={toggleButtonGroupStyle}>
             {buttons.map((button, index) => (
                 <ToggleButton
                     key={index}
-                    value={button.value}
-                    size={button.size}
-                    disableRipple
-                    sx={toggleButtonStyle}
-                >
-                    {button.variant === "icon" ? (
-                        button.label
-                    ) : (
-                        <TextStyled
-                            variant="body2"
-                            sx={{ textTransform: "none" }}
-                        >
-                            {button.label}
-                        </TextStyled>
-                    )}
-                </ToggleButton>
+                    {...button}
+                    highlightonhover={highlightonhover}
+                />
             ))}
         </ToggleButtonGroup>
     );
