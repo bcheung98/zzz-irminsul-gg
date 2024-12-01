@@ -27,6 +27,10 @@ theme = createTheme(theme, {
             styleOverrides: {
                 root: {
                     borderColor: theme.border.color,
+                    color: theme.text.main,
+                    fontFamily: theme.font.styled.family,
+                    fontWeight: theme.font.styled.weight,
+                    textTransform: "none",
                 },
             },
         },
