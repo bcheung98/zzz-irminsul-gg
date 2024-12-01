@@ -9,6 +9,9 @@ theme = createTheme(theme, {
             default: theme.background(0),
         },
     },
+    shape: {
+        borderRadius: "5px",
+    },
     components: {
         MuiAppBar: {
             styleOverrides: {

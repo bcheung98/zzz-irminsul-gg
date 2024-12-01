@@ -16,7 +16,10 @@ for (let i = 0; i <= max; i++) {
     }
 }
 
-const borderColor = "rgb(168, 147, 105)";
+const border = {
+    color: "rgb(168, 147, 105)",
+    highlight: `rgb(233, 194, 39)`,
+};
 
 export const darkThemeData = {
     background: (i: number) => backgroundColors[i],
@@ -46,17 +49,17 @@ export const darkThemeData = {
         backgroundColor: backgroundColors[8],
     },
     border: {
-        color: borderColor,
-        highlight: `rgb(233, 194, 39)`,
+        color: border.color,
+        highlight: border.highlight,
     },
     displayCard: {
         borderWidth: 0,
-        border: `0px solid ${borderColor}`,
+        border: `0px solid ${border.color}`,
         borderRadius: "5px",
     },
     mainContentBox: {
         borderWidth: 0,
-        border: `0px solid ${borderColor}`,
+        border: `0px solid ${border.color}`,
         borderRadius: "5px",
     },
     menu: {
