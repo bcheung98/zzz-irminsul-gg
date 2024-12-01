@@ -20,6 +20,13 @@ theme = createTheme(theme, {
                 },
             },
         },
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    borderColor: theme.border.color,
+                },
+            },
+        },
         MuiDivider: {
             styleOverrides: {
                 root: {
