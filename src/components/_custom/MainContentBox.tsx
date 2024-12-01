@@ -32,7 +32,7 @@ function MainContentBox({
                 position="static"
                 sx={{
                     minHeight: "70px",
-                    p: "10px 10px 10px 20px",
+                    p: "10px 20px",
                 }}
             >
                 <FlexBox flexWrap="wrap" justifyContent="space-between">

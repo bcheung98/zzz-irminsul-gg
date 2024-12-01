@@ -8,8 +8,7 @@ export const StyledInput = styled(InputBase)(({ theme }) => ({
         padding: "10px 10px 10px 15px",
         "&:focus": {
             borderRadius: 4,
-            borderColor: "#80bdff",
-            boxShadow: "0 0 0 0.2rem rgba(0, 12, 255, .25)",
+            borderColor: theme.border.highlight,
             backgroundColor: theme.menu.default,
         },
     },

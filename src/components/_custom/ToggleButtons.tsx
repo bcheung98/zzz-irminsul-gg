@@ -39,8 +39,8 @@ export function ToggleButton(props: CustomToggleButtonProps) {
         highlightonhover && {
             "&.MuiToggleButton-root": {
                 "&:hover": {
-                    borderColor: `rgb(233, 194, 39)`,
-                    boxShadow: `0 0 4px 1px rgb(233, 194, 39)`,
+                    borderColor: theme.border.highlight,
+                    boxShadow: `0 0 4px 1px ${theme.border.highlight}`,
                 },
             },
         },

@@ -77,6 +77,7 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
                     exclusive
                     onChange={handleMode}
                     spacing={0}
+                    highlightonhover={false}
                 />
             }
         >

@@ -10,7 +10,14 @@ import { StyledInput } from "styled/StyledInput";
 import { StyledMenuItem } from "styled/StyledMenu";
 
 // MUI imports
-import { Box, Select, SelectChangeEvent, IconButton } from "@mui/material";
+import {
+    useTheme,
+    SxProps,
+    Box,
+    Select,
+    SelectChangeEvent,
+    IconButton,
+} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -21,6 +28,8 @@ import { useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
 
 function VersionHighlights() {
+    const theme = useTheme();
+
     const [index, setIndex] = React.useState(0);
     const handleIndexChange = (event: SelectChangeEvent) => {
         setIndex(Number(event.target.value));
@@ -30,6 +39,14 @@ function VersionHighlights() {
     };
     const handleIndexChangeRight = () => {
         if (index - 1 >= 0) setIndex(index - 1);
+    };
+
+    const buttonStyle: SxProps = {
+        px: 0,
+        "&.Mui-disabled": {
+            opacity: 0.35,
+            color: theme.text.main,
+        },
     };
 
     const version = updates[index].version;
@@ -46,14 +63,14 @@ function VersionHighlights() {
             actions={
                 <FlexBox>
                     <Box sx={{ width: "24px" }}>
-                        {index < updates.length - 1 && (
-                            <IconButton
-                                onClick={handleIndexChangeLeft}
-                                sx={{ px: 0 }}
-                            >
-                                <KeyboardArrowLeftIcon />
-                            </IconButton>
-                        )}
+                        <IconButton
+                            onClick={handleIndexChangeLeft}
+                            disabled={index >= updates.length - 1}
+                            sx={buttonStyle}
+                            disableRipple
+                        >
+                            <KeyboardArrowLeftIcon />
+                        </IconButton>
                     </Box>
                     <Select
                         value={index.toString()}
@@ -69,14 +86,14 @@ function VersionHighlights() {
                         ))}
                     </Select>
                     <Box sx={{ width: "24px" }}>
-                        {index > 0 && (
-                            <IconButton
-                                onClick={handleIndexChangeRight}
-                                sx={{ px: 0 }}
-                            >
-                                <KeyboardArrowRightIcon />
-                            </IconButton>
-                        )}
+                        <IconButton
+                            onClick={handleIndexChangeRight}
+                            disabled={index === 0}
+                            sx={buttonStyle}
+                            disableRipple
+                        >
+                            <KeyboardArrowRightIcon />
+                        </IconButton>
                     </Box>
                 </FlexBox>
             }

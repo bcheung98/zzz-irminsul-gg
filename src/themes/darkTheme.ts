@@ -47,6 +47,7 @@ export const darkThemeData = {
     },
     border: {
         color: borderColor,
+        highlight: `rgb(233, 194, 39)`,
     },
     displayCard: {
         borderWidth: 0,
