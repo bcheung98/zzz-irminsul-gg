@@ -11,9 +11,15 @@ interface DropdownProps {
     children?: React.ReactNode;
     title?: string;
     titleColor?: string;
+    iconColor?: string;
 }
 
-function Dropdown({ children, title = "", titleColor }: DropdownProps) {
+function Dropdown({
+    children,
+    title = "",
+    titleColor,
+    iconColor,
+}: DropdownProps) {
     const theme = useTheme();
 
     const [open, setOpen] = React.useState(false);
@@ -32,7 +38,7 @@ function Dropdown({ children, title = "", titleColor }: DropdownProps) {
                 <ExpandMore
                     sx={{
                         mr: "5px",
-                        color: theme.border.color,
+                        color: iconColor || theme.border.color,
                         transform: open ? "rotateZ(0deg)" : "rotateZ(-90deg)",
                         transition: "transform 0.25s",
                     }}
