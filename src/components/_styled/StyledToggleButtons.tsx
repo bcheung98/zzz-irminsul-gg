@@ -13,8 +13,9 @@ export const StyledToggleButton = styled(
     { shouldForwardProp: (prop) => prop !== "highlightOnHover" }
 )(({ theme, label, highlightOnHover }) => ({
     "&.MuiToggleButton-root": {
-        padding: label ? "10px" : "0px",
+        padding: label ? "10px" : "4px",
         opacity: 0.4,
+        color: theme.text.main,
         "&:hover": {
             backgroundColor: theme.menu.hover,
             borderColor: highlightOnHover

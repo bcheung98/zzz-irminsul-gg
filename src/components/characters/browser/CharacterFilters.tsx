@@ -46,7 +46,7 @@ function CharacterFilters({
                 <Image
                     src={`${url}/${item}`}
                     alt={`${item}`}
-                    style={{ width: "32px", padding: "2px" }}
+                    style={{ width: "24px" }}
                     tooltip={`${item}`}
                 />
             ),
