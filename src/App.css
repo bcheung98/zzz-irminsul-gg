@@ -3,7 +3,11 @@
     transition: filter 300ms;
 }
 
-.logo:hover {
+.logo.github:hover {
+    filter: drop-shadow(0 0 7px #ebeef5aa);
+}
+
+.logo.vite:hover {
     filter: drop-shadow(0 0 7px #646cffaa);
 }
 

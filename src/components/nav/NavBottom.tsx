@@ -80,6 +80,7 @@ function NavBottom() {
                                 target="_blank"
                                 color="inherit"
                                 sx={{ display: "flex", mx: "auto", px: "4px" }}
+                                className="logo github"
                             >
                                 <GitHubIcon sx={svgStyle} />
                             </IconButton>
@@ -109,11 +110,11 @@ function NavBottom() {
                                     target="_blank"
                                     color="inherit"
                                     sx={iconButtonStyle}
+                                    className="logo vite"
                                 >
                                     <Avatar
                                         variant="square"
                                         src={viteLogo}
-                                        className="logo"
                                         alt="Vite logo"
                                         sx={svgStyle}
                                     />
@@ -124,12 +125,12 @@ function NavBottom() {
                                     target="_blank"
                                     color="inherit"
                                     sx={iconButtonStyle}
+                                    className="logo react"
                                 >
                                     <Avatar
                                         variant="square"
                                         src={reactLogo}
-                                        className="logo"
-                                        alt="Vite logo"
+                                        alt="React logo"
                                         sx={svgStyle}
                                     />
                                 </IconButton>
@@ -139,12 +140,12 @@ function NavBottom() {
                                     target="_blank"
                                     color="inherit"
                                     sx={iconButtonStyle}
+                                    className="logo mui"
                                 >
                                     <Avatar
                                         variant="square"
                                         src={muiLogo}
-                                        className="logo"
-                                        alt="Vite logo"
+                                        alt="MUI logo"
                                         sx={svgStyle}
                                     />
                                 </IconButton>
