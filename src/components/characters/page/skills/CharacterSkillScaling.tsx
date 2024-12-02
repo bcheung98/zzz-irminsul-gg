@@ -1,6 +1,7 @@
 import React from "react";
 
 // Component imports
+import Dropdown from "custom/Dropdown";
 import { FlexBox } from "styled/StyledBox";
 import { Text, TextStyled } from "styled/StyledTypography";
 import { StyledTableCell, StyledTableRow } from "styled/StyledTable";
@@ -11,9 +12,6 @@ import {
     useTheme,
     useMediaQuery,
     SxProps,
-    IconButton,
-    Collapse,
-    Box,
     Card,
     TableContainer,
     Table,
@@ -21,7 +19,6 @@ import {
     TableBody,
     TableRow,
 } from "@mui/material";
-import { ExpandMore } from "@mui/icons-material";
 
 // Helper imports
 import { characterColors } from "helpers/characterColors";
@@ -42,11 +39,6 @@ function CharacterSkillScaling({
     const getCharacterColor = (option: keyof CharacterColors) =>
         characterColors(colors, option, element);
 
-    const [dropdownOpen, setDropdownOpen] = React.useState(false);
-    const toggleDropdownState = () => {
-        setDropdownOpen(!dropdownOpen);
-    };
-
     const levels = 16;
     const [sliderValue, setSliderValue] = React.useState(12);
     const handleSliderChange = (_: Event, newValue: number | number[]) => {
@@ -56,126 +48,98 @@ function CharacterSkillScaling({
     const tableTextStyle: SxProps = { textAlign: { xs: "left", md: "center" } };
 
     return (
-        <React.Fragment>
-            <IconButton
-                onClick={toggleDropdownState}
-                disableRipple
-                disableTouchRipple
-                sx={{ pl: 0 }}
+        <Dropdown title="Skill Scaling" iconColor={getCharacterColor("accent")}>
+            <FlexBox
+                sx={{
+                    display: mode === "slider" ? "flex" : "none",
+                    flexWrap: { xs: "wrap", md: "nowrap" },
+                    width: { xs: "90%", md: "50vw" },
+                    mb: "15px",
+                }}
             >
-                <ExpandMore
+                <TextStyled sx={{ minWidth: "60px" }}>
+                    Lv. {sliderValue}
+                </TextStyled>
+                <StyledSlider
+                    value={sliderValue}
+                    step={1}
+                    min={1}
+                    max={levels}
+                    onChange={handleSliderChange}
+                    size={matches_md_up ? "medium" : "small"}
                     sx={{
+                        minWidth: "100px",
+                        maxWidth: "500px",
+                        ml: "10px",
                         color: getCharacterColor("accent"),
-                        mr: "2px",
-                        transform: dropdownOpen
-                            ? "rotateZ(0deg)"
-                            : "rotateZ(-90deg)",
-                        transition: "transform 0.25s",
                     }}
                 />
-                <TextStyled>Skill Scaling</TextStyled>
-            </IconButton>
-            <Collapse in={dropdownOpen} timeout="auto" unmountOnExit>
-                <Box sx={{ px: { xs: 0, md: "25px" }, py: "5px" }}>
-                    <FlexBox
-                        sx={{
-                            display: mode === "slider" ? "flex" : "none",
-                            flexWrap: { xs: "wrap", md: "nowrap" },
-                            width: { xs: "90%", md: "50vw" },
-                            mb: "15px",
-                        }}
-                    >
-                        <TextStyled sx={{ minWidth: "60px" }}>
-                            Lv. {sliderValue}
-                        </TextStyled>
-                        <StyledSlider
-                            value={sliderValue}
-                            step={1}
-                            min={1}
-                            max={levels}
-                            onChange={handleSliderChange}
-                            size={matches_md_up ? "medium" : "small"}
-                            sx={{
-                                minWidth: "100px",
-                                maxWidth: "500px",
-                                ml: "10px",
-                                color: getCharacterColor("accent"),
-                            }}
-                        />
-                    </FlexBox>
-                    <TableContainer
-                        component={Card}
-                        sx={{
-                            maxWidth: mode === "table" ? "100%" : "400px",
-                            mt: "10px",
-                        }}
-                    >
-                        <Table>
-                            {mode === "table" && (
-                                <TableHead>
-                                    <TableRow>
-                                        <StyledTableCell>
-                                            <TextStyled sx={tableTextStyle}>
-                                                Level
-                                            </TextStyled>
-                                        </StyledTableCell>
-                                        {[...Array(levels).keys()].map(
-                                            (level) => (
-                                                <StyledTableCell
-                                                    key={level + 1}
-                                                >
-                                                    <TextStyled
-                                                        sx={tableTextStyle}
-                                                    >
-                                                        {level + 1}
-                                                    </TextStyled>
-                                                </StyledTableCell>
-                                            )
-                                        )}
-                                    </TableRow>
-                                </TableHead>
-                            )}
-                            <TableBody>
-                                {scaling.map((row) => (
-                                    <StyledTableRow
-                                        key={row[0]}
-                                        hover={mode === "table"}
-                                    >
-                                        {mode === "table" ? (
-                                            row.map((level, index) => (
-                                                <StyledTableCell
-                                                    key={`${row[0]}-${index}`}
-                                                >
-                                                    <Text
-                                                        variant="body2"
-                                                        sx={tableTextStyle}
-                                                    >
-                                                        {level}
-                                                    </Text>
-                                                </StyledTableCell>
-                                            ))
-                                        ) : (
-                                            <React.Fragment>
-                                                <StyledTableCell align="left">
-                                                    <Text variant="body2">
-                                                        {row[0]}
-                                                    </Text>
-                                                </StyledTableCell>
-                                                <StyledTableCell align="right">
-                                                    <Text variant="body2">
-                                                        {row[sliderValue]}
-                                                    </Text>
-                                                </StyledTableCell>
-                                            </React.Fragment>
-                                        )}
-                                    </StyledTableRow>
+            </FlexBox>
+            <TableContainer
+                component={Card}
+                sx={{
+                    maxWidth: mode === "table" ? "100%" : "400px",
+                    mt: "10px",
+                }}
+            >
+                <Table>
+                    {mode === "table" && (
+                        <TableHead>
+                            <TableRow>
+                                <StyledTableCell>
+                                    <TextStyled sx={tableTextStyle}>
+                                        Level
+                                    </TextStyled>
+                                </StyledTableCell>
+                                {[...Array(levels).keys()].map((level) => (
+                                    <StyledTableCell key={level + 1}>
+                                        <TextStyled sx={tableTextStyle}>
+                                            {level + 1}
+                                        </TextStyled>
+                                    </StyledTableCell>
                                 ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Box>
-            </Collapse>
-        </React.Fragment>
+                            </TableRow>
+                        </TableHead>
+                    )}
+                    <TableBody>
+                        {scaling.map((row) => (
+                            <StyledTableRow
+                                key={row[0]}
+                                hover={mode === "table"}
+                            >
+                                {mode === "table" ? (
+                                    row.map((level, index) => (
+                                        <StyledTableCell
+                                            key={`${row[0]}-${index}`}
+                                        >
+                                            <Text
+                                                variant="body2"
+                                                sx={tableTextStyle}
+                                            >
+                                                {level}
+                                            </Text>
+                                        </StyledTableCell>
+                                    ))
+                                ) : (
+                                    <React.Fragment>
+                                        <StyledTableCell align="left">
+                                            <Text variant="body2">
+                                                {row[0]}
+                                            </Text>
+                                        </StyledTableCell>
+                                        <StyledTableCell align="right">
+                                            <Text variant="body2">
+                                                {row[sliderValue]}
+                                            </Text>
+                                        </StyledTableCell>
+                                    </React.Fragment>
+                                )}
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Dropdown>
     );
 }
 
