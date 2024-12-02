@@ -17,7 +17,6 @@ import {
     Box,
     Button,
     Drawer,
-    SwipeableDrawer,
     Toolbar,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
@@ -45,27 +44,13 @@ function CharacterBrowser() {
         setSearchValue(event.target.value);
     };
 
-    const [desktopDrawerOpen, setDesktopDrawerOpen] = React.useState(true);
-    const toggleDesktopDrawerState = () => {
-        setDesktopDrawerOpen(!desktopDrawerOpen);
+    const [drawerOpen, setDrawerOpen] = React.useState(true);
+    const toggleDrawerState = () => {
+        setDrawerOpen(!drawerOpen);
     };
-    const handleDesktopDrawerClose = () => {
-        setDesktopDrawerOpen(false);
+    const handleDrawerClose = () => {
+        setDrawerOpen(false);
     };
-
-    const [mobileDrawerOpen, setMobileDrawerOpen] = React.useState(false);
-    const toggleMobileDrawer =
-        (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-            if (
-                event &&
-                event.type === "keydown" &&
-                ((event as React.KeyboardEvent).key === "Tab" ||
-                    (event as React.KeyboardEvent).key === "Shift")
-            ) {
-                return;
-            }
-            setMobileDrawerOpen(open);
-        };
 
     const currentCharacters = React.useMemo(
         () => filterCharacters(characters, filters, searchValue),
@@ -77,7 +62,7 @@ function CharacterBrowser() {
     return (
         <React.Fragment>
             <Box sx={{ display: "flex" }}>
-                <Box sx={rootStyle(theme, desktopDrawerOpen, matches_md_up)}>
+                <Box sx={rootStyle(theme, drawerOpen, matches_md_up)}>
                     <Grid
                         container
                         rowSpacing={2}
@@ -105,15 +90,11 @@ function CharacterBrowser() {
                                     />
                                 </Box>
                                 <Button
-                                    onClick={
-                                        matches_sm_up
-                                            ? toggleDesktopDrawerState
-                                            : toggleMobileDrawer(true)
-                                    }
+                                    onClick={toggleDrawerState}
                                     variant="outlined"
                                     disableRipple
                                     startIcon={
-                                        matches_sm_up && desktopDrawerOpen ? (
+                                        matches_sm_up && drawerOpen ? (
                                             <KeyboardArrowRightIcon />
                                         ) : (
                                             <TuneIcon />
@@ -153,58 +134,41 @@ function CharacterBrowser() {
                             </React.Fragment>
                         </Grid>
                     </Grid>
-                    <ActionFab
-                        action={
-                            matches_sm_up
-                                ? toggleDesktopDrawerState
-                                : toggleMobileDrawer(true)
-                        }
-                        icon={<TuneIcon />}
-                    />
+                    <ActionFab action={toggleDrawerState} icon={<TuneIcon />} />
                 </Box>
-                {matches_sm_up ? (
-                    <Drawer
-                        sx={{
-                            width: drawerWidth,
-                            flexShrink: 0,
-                            "& .MuiDrawer-paper": {
-                                width: drawerWidth,
-                                borderLeft: `1px solid ${theme.border.color}`,
-                                backgroundColor: theme.background(3),
-                                pt: 2.5,
-                            },
-                        }}
-                        variant={matches_md_up ? "persistent" : "temporary"}
-                        anchor="right"
-                        open={desktopDrawerOpen}
-                        onClose={handleDesktopDrawerClose}
-                    >
-                        {/* Empty toolbar necessary for content to be below app bar */}
-                        <Toolbar />
-                        <CharacterFilters
-                            handleClose={handleDesktopDrawerClose}
-                        />
-                    </Drawer>
-                ) : (
-                    <SwipeableDrawer
-                        anchor="bottom"
-                        open={mobileDrawerOpen}
-                        onClose={toggleMobileDrawer(false)}
-                        onOpen={toggleMobileDrawer(true)}
-                        sx={{
-                            [`& .MuiDrawer-paper`]: {
-                                borderTop: `2px solid ${theme.border.color}`,
-                                backgroundColor: theme.background(3),
-                                height: "auto",
-                                maxHeight: "88%",
-                            },
-                        }}
-                    >
-                        <CharacterFilters
-                            handleClose={toggleMobileDrawer(false)}
-                        />
-                    </SwipeableDrawer>
-                )}
+                <Drawer
+                    sx={
+                        matches_sm_up
+                            ? {
+                                  width: drawerWidth,
+                                  flexShrink: 0,
+                                  "& .MuiDrawer-paper": {
+                                      width: drawerWidth,
+                                      borderLeft: `1px solid ${theme.border.color}`,
+                                      backgroundColor: theme.background(3),
+                                      pt: 2.5,
+                                  },
+                              }
+                            : {
+                                  "& .MuiDrawer-paper": {
+                                      borderTop: `1px solid ${theme.border.color}`,
+                                      backgroundColor: theme.background(3),
+                                      height: "auto",
+                                      maxHeight: "88%",
+                                  },
+                              }
+                    }
+                    variant={matches_md_up ? "persistent" : "temporary"}
+                    anchor={matches_sm_up ? "right" : "bottom"}
+                    open={drawerOpen}
+                    onClose={handleDrawerClose}
+                >
+                    {/* Empty toolbar necessary for desktop for content to be below app bar
+                    Not needed for mobile because drawer will be above the app bar
+                    */}
+                    {matches_sm_up && <Toolbar />}
+                    <CharacterFilters handleClose={handleDrawerClose} />
+                </Drawer>
             </Box>
         </React.Fragment>
     );
