@@ -36,8 +36,9 @@ function App() {
                         <Box
                             sx={{
                                 px: "20px",
-                                pt: "100px",
+                                pt: "20px",
                                 pb: "50px",
+                                mt: "80px",
                                 minHeight: "100vh",
                             }}
                         >
