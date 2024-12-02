@@ -42,8 +42,8 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
     };
 
     const buttons: CustomToggleButtonProps[] = [
-        { variant: "text", value: "table", label: "Table" },
-        { variant: "text", value: "slider", label: "Slider" },
+        { value: "table", label: "Table" },
+        { value: "slider", label: "Slider" },
     ];
 
     const getCharacterColor = (option: keyof CharacterColors) =>
@@ -77,7 +77,7 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
                     exclusive
                     onChange={handleMode}
                     spacing={0}
-                    highlightonhover={false}
+                    highlightOnHover={false}
                 />
             }
         >
