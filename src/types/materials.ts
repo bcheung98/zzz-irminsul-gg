@@ -1,4 +1,4 @@
 export interface Materials {
-    bossMat: string,
-    weeklyBossMat: string
+    bossMat: string;
+    weeklyBossMat: string;
 }

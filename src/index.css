@@ -1,25 +1,25 @@
 body {
-  margin: 0;
-  background-color: rgb(23, 46, 98);
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    background-color: rgb(23, 46, 98);
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+    width: 10px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(16, 16, 16);
+    background: rgb(16, 16, 16);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(100, 100, 100);
+    background: rgb(100, 100, 100);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(125, 125, 125);
+    background: rgb(125, 125, 125);
 }
