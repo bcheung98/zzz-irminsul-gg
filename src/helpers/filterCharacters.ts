@@ -4,7 +4,7 @@ import { Character } from "types/character";
 export function filterCharacters(
     characters: Character[],
     filters: CharacterFilterState,
-    searchValue = ""
+    searchValue: string
 ) {
     let chars = [...characters];
     if (filters.element.length > 0) {
@@ -27,10 +27,14 @@ export function filterCharacters(
         chars = chars.filter((char) => filters.faction.includes(char.faction));
     }
     if (searchValue) {
-        chars = chars.filter((char) =>
-            char.fullName
-                .toLocaleLowerCase()
-                .includes(searchValue.toLocaleLowerCase())
+        chars = chars.filter(
+            (char) =>
+                char.name
+                    .toLocaleLowerCase()
+                    .includes(searchValue.toLocaleLowerCase()) ||
+                char.fullName
+                    .toLocaleLowerCase()
+                    .includes(searchValue.toLocaleLowerCase())
         );
     }
     return chars;
