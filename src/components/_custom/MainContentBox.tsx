@@ -1,3 +1,5 @@
+import React from "react";
+
 // Component imports
 import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
@@ -10,6 +12,7 @@ interface MainContentBoxProps {
     title?: React.ReactNode;
     actions?: React.ReactNode;
     contentPadding?: string | number;
+    component?: React.ElementType;
 }
 
 function MainContentBox({
@@ -17,6 +20,7 @@ function MainContentBox({
     title,
     actions,
     contentPadding = "25px",
+    component = "div",
 }: MainContentBoxProps) {
     const theme = useTheme();
 
@@ -42,7 +46,9 @@ function MainContentBox({
                     {actions && actions}
                 </FlexBox>
             </AppBar>
-            <Box sx={{ p: contentPadding }}>{children && children}</Box>
+            <Box sx={{ p: contentPadding }} component={component}>
+                {children && children}
+            </Box>
         </Card>
     );
 }
