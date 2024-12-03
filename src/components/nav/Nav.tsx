@@ -9,13 +9,13 @@ import { useTheme, useMediaQuery, Theme, SxProps } from "@mui/material";
 
 function Nav() {
     const theme = useTheme();
-    const matches_up_sm = useMediaQuery(theme.breakpoints.up("sm"));
+    const matches_up_md = useMediaQuery(theme.breakpoints.up("md"));
 
     const onHomePage = window.location.pathname === "/";
 
     return (
         <React.Fragment>
-            {matches_up_sm ? (
+            {matches_up_md ? (
                 <NavDesktop
                     onHomePage={onHomePage}
                     navItems={navItems}

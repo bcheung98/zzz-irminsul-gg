@@ -21,7 +21,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 
 function NavBottom() {
     const theme = useTheme();
-    const matches_down_sm = useMediaQuery(theme.breakpoints.down("sm"));
+    const matches_down_md = useMediaQuery(theme.breakpoints.down("md"));
 
     const iconButtonStyle: SxProps = {
         px: "4px",
@@ -36,8 +36,10 @@ function NavBottom() {
         <AppBar
             position="relative"
             sx={{
-                borderWidth: matches_down_sm ? "1px 0 0 0" : "1px 0 0 1px",
-                zIndex: theme.zIndex.drawer + 1,
+                borderWidth: matches_down_md ? "1px 0 0 0" : "1px 0 0 1px",
+                zIndex: matches_down_md
+                    ? theme.zIndex.drawer
+                    : theme.zIndex.drawer + 1,
             }}
         >
             <Toolbar
