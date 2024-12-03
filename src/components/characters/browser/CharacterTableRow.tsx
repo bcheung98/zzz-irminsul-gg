@@ -29,10 +29,10 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
                     textDecoration: "underline",
                 },
             },
-            img: `characters/icons/${row.name}`,
+            img: `characters/avatars/${row.name}`,
             imgStyle: {
                 width: "48px",
-                height: "48px",
+                height: "auto",
                 cursor: "pointer",
             },
             href: `/agents/${row.name.split(" ").join("_").toLowerCase()}`,
