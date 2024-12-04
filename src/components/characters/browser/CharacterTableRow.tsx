@@ -16,6 +16,7 @@ import { CharacterRow } from "./CharacterTable";
 
 interface CharacterTableRowProps extends CharacterRow {
     releaseDate: string;
+    version: string;
 }
 
 function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
@@ -58,7 +59,8 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
             imgStyle: { width: "48px", height: "48px" },
         },
         {
-            label: createDateObject(row.releaseDate).date,
+            label: `${createDateObject(row.releaseDate).date} (${row.version})`,
+            labelStyle: { marginLeft: "0px" },
         },
     ];
 

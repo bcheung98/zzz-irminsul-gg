@@ -58,6 +58,7 @@ function CharacterTable({ characters }: { characters: Character[] }) {
         attackType: char.attackType,
         faction: char.faction,
         releaseDate: char.release.date,
+        version: char.release.version
     }));
 
     return (
