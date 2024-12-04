@@ -161,6 +161,7 @@ function CharacterFilters({
                             value={filter.value}
                             onChange={filter.onChange}
                             spacing={4}
+                            padding={0}
                         />
                     </Dropdown>
                 ))}
@@ -173,6 +174,7 @@ export default CharacterFilters;
 
 function createButtons<T>(items: readonly T[], url: string) {
     const ext = url.startsWith("materials/") ? "gif" : "png";
+    const padding = url.startsWith("materials/") ? "0px" : "4px";
     return items.map((item) => ({
         value: item,
         icon: (
@@ -180,7 +182,7 @@ function createButtons<T>(items: readonly T[], url: string) {
                 src={`${url}/${item}`}
                 ext={ext}
                 alt={`${item}`}
-                style={{ width: "24px" }}
+                style={{ width: "32px", padding: padding, borderRadius: "5px" }}
                 tooltip={getTooltip(item, url)}
             />
         ),
@@ -197,6 +199,8 @@ function getTooltip<T>(item: T, url: string) {
         tooltip = `${formatNotoriousHuntMaterials(
             item as NotoriousHuntMaterial
         )}`;
+    } else if (url.startsWith("ranks")) {
+        tooltip = "";
     } else {
         tooltip = `${item}`;
     }

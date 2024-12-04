@@ -13,6 +13,7 @@ import { ToggleButtonProps, ToggleButtonGroupProps } from "@mui/material";
 export interface CustomToggleButtonProps extends ToggleButtonProps {
     icon?: React.ReactNode;
     label?: React.ReactNode;
+    padding?: number;
     highlightOnHover?: boolean;
 }
 
@@ -32,6 +33,7 @@ export function ToggleButton(props: CustomToggleButtonProps) {
 export interface ToggleButtonsProps extends ToggleButtonGroupProps {
     buttons: CustomToggleButtonProps[];
     spacing?: number;
+    padding?: number;
     highlightOnHover?: boolean;
 }
 

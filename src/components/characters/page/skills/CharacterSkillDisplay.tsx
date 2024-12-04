@@ -31,10 +31,10 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
         setTabValue(newValue);
     };
 
-    const [mode, setMode] = React.useState<"table" | "slider">("table");
+    const [mode, setMode] = React.useState<"slider" | "table">("slider");
     const handleMode = (
         _: React.BaseSyntheticEvent,
-        newView: "table" | "slider"
+        newView: "slider" | "table"
     ) => {
         if (newView !== null) {
             setMode(newView);
@@ -42,8 +42,8 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
     };
 
     const buttons: CustomToggleButtonProps[] = [
-        { value: "table", label: "Table" },
         { value: "slider", label: "Slider" },
+        { value: "table", label: "Table" },
     ];
 
     const getCharacterColor = (option: keyof CharacterColors) =>
@@ -77,6 +77,7 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
                     exclusive
                     onChange={handleMode}
                     spacing={0}
+                    padding={10}
                     highlightOnHover={false}
                 />
             }

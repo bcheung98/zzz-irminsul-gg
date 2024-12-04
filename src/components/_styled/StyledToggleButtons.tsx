@@ -11,9 +11,8 @@ export const StyledToggleButton = styled(
         <ToggleButton disableRipple {...props} />
     ),
     { shouldForwardProp: (prop) => prop !== "highlightOnHover" }
-)(({ theme, label, highlightOnHover }) => ({
+)(({ theme, highlightOnHover }) => ({
     "&.MuiToggleButton-root": {
-        padding: label ? "10px" : "4px",
         opacity: 0.4,
         color: theme.text.main,
         "&:hover": {
@@ -31,9 +30,10 @@ export const StyledToggleButton = styled(
 export const StyledToggleButtonGroup = styled(
     (props: ToggleButtonsProps) => <ToggleButtonGroup {...props} />,
     { shouldForwardProp: (prop) => prop !== "highlightOnHover" }
-)(({ theme, spacing }) => ({
+)(({ theme, spacing, padding = 4 }) => ({
     flexWrap: "wrap",
     "& .MuiToggleButtonGroup-grouped": {
+        padding: `${padding}px`,
         margin: spacing ? `${spacing}px !important` : "0px",
         border: spacing
             ? `1px solid ${theme.border.color} !important`
