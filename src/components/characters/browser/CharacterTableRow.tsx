@@ -67,7 +67,7 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
     return (
         <StyledTableRow hover>
             {columns.map((col, index) => (
-                <StyledTableCell key={index}>
+                <StyledTableCell key={index} sx={{ maxWidth: "275px" }}>
                     <FlexBox columnGap="10px">
                         {col.img && (
                             <ButtonBase

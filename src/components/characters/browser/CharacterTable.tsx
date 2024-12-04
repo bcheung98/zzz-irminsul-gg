@@ -17,6 +17,7 @@ import { Character } from "types/character";
 
 export type CharacterRow = Pick<
     Character,
+    | "id"
     | "name"
     | "fullName"
     | "rarity"
@@ -46,10 +47,11 @@ function CharacterTable({ characters }: { characters: Character[] }) {
         { id: "specialty", label: "Specialty" },
         { id: "attackType", label: "Attack Type" },
         { id: "faction", label: "Faction" },
-        { id: "releaseDate", label: "Release Date" },
+        { id: "id", label: "Release Date" },
     ];
 
     const rows = characters.map((char) => ({
+        id: char.id,
         name: char.name,
         fullName: char.fullName,
         rarity: char.rarity,
@@ -58,7 +60,7 @@ function CharacterTable({ characters }: { characters: Character[] }) {
         attackType: char.attackType,
         faction: char.faction,
         releaseDate: char.release.date,
-        version: char.release.version
+        version: char.release.version,
     }));
 
     return (
