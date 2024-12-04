@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "rtk/store";
 import { AttackType, Element, Faction, Rarity, Specialty } from "types/_common";
+import {
+    ExpertChallengeMaterial,
+    NotoriousHuntMaterial,
+} from "types/materials";
 
 export interface CharacterFilterState {
     element: Element[];
@@ -8,6 +12,8 @@ export interface CharacterFilterState {
     attackType: AttackType[];
     rarity: Rarity[];
     faction: Faction[];
+    bossMat: ExpertChallengeMaterial[];
+    weeklyBossMat: NotoriousHuntMaterial[];
 }
 
 const initialState: CharacterFilterState = {
@@ -16,6 +22,8 @@ const initialState: CharacterFilterState = {
     attackType: [],
     rarity: [],
     faction: [],
+    bossMat: [],
+    weeklyBossMat: [],
 };
 
 export const characterFilterSlice = createSlice({
@@ -37,6 +45,18 @@ export const characterFilterSlice = createSlice({
         setFaction: (state, action: PayloadAction<Faction[]>) => {
             state.faction = action.payload;
         },
+        setBossMat: (
+            state,
+            action: PayloadAction<ExpertChallengeMaterial[]>
+        ) => {
+            state.bossMat = action.payload;
+        },
+        setWeeklyBossMat: (
+            state,
+            action: PayloadAction<NotoriousHuntMaterial[]>
+        ) => {
+            state.weeklyBossMat = action.payload;
+        },
         clearFilters: (
             state,
             action: PayloadAction<keyof CharacterFilterState | undefined>
@@ -56,6 +76,8 @@ export const {
     setAttackType,
     setRarity,
     setFaction,
+    setBossMat,
+    setWeeklyBossMat,
     clearFilters,
 } = characterFilterSlice.actions;
 export const selectCharacterFilters = (state: RootState) =>

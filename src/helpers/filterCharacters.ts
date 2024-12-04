@@ -26,6 +26,16 @@ export function filterCharacters(
     if (filters.faction.length > 0) {
         chars = chars.filter((char) => filters.faction.includes(char.faction));
     }
+    if (filters.bossMat.length > 0) {
+        chars = chars.filter((char) =>
+            filters.bossMat.includes(char.materials.bossMat)
+        );
+    }
+    if (filters.weeklyBossMat.length > 0) {
+        chars = chars.filter((char) =>
+            filters.weeklyBossMat.includes(char.materials.weeklyBossMat)
+        );
+    }
     if (searchValue) {
         chars = chars.filter(
             (char) =>

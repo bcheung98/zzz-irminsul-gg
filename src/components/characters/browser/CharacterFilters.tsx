@@ -14,20 +14,32 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 // Helper imports
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
-import { attackTypes, elements, factions, specialities } from "data/common";
 import {
     activeCharacterFilters,
     clearFilters,
     selectCharacterFilters,
     setAttackType,
+    setBossMat,
     setElement,
     setFaction,
     setRarity,
     setSpecialty,
+    setWeeklyBossMat,
 } from "reducers/characterFilters";
+import { attackTypes, elements, factions, specialities } from "data/common";
+import {
+    expertChallengeMaterialNames,
+    formatExpertChallengeMaterials,
+    formatNotoriousHuntMaterials,
+    notoroiusHuntMaterialNames,
+} from "data/materials/coreSkillMaterials";
 
 // Type imports
 import { AttackType, Element, Faction, Rarity, Specialty } from "types/_common";
+import {
+    ExpertChallengeMaterial,
+    NotoriousHuntMaterial,
+} from "types/materials";
 
 function CharacterFilters({
     handleClose,
@@ -38,20 +50,6 @@ function CharacterFilters({
 
     const filters = useAppSelector(selectCharacterFilters);
     const dispatch = useAppDispatch();
-
-    const createButtons = <T,>(items: readonly T[], url: string) => {
-        return items.map((item) => ({
-            value: item,
-            icon: (
-                <Image
-                    src={`${url}/${item}`}
-                    alt={`${item}`}
-                    style={{ width: "24px" }}
-                    tooltip={`${item}`}
-                />
-            ),
-        }));
-    };
 
     const filterGroups = [
         {
@@ -91,6 +89,30 @@ function CharacterFilters({
             onChange: (_: React.BaseSyntheticEvent, newValues: Faction[]) =>
                 dispatch(setFaction(newValues)),
             buttons: createButtons<Faction>(factions, "factions"),
+        },
+        {
+            name: "Expert Challenge Material",
+            value: filters.bossMat,
+            onChange: (
+                _: React.BaseSyntheticEvent,
+                newValues: ExpertChallengeMaterial[]
+            ) => dispatch(setBossMat(newValues)),
+            buttons: createButtons<ExpertChallengeMaterial>(
+                expertChallengeMaterialNames,
+                "materials/boss"
+            ),
+        },
+        {
+            name: "Notorious Hunt Material",
+            value: filters.weeklyBossMat,
+            onChange: (
+                _: React.BaseSyntheticEvent,
+                newValues: NotoriousHuntMaterial[]
+            ) => dispatch(setWeeklyBossMat(newValues)),
+            buttons: createButtons<NotoriousHuntMaterial>(
+                notoroiusHuntMaterialNames,
+                "materials/weekly"
+            ),
         },
     ];
 
@@ -148,3 +170,35 @@ function CharacterFilters({
 }
 
 export default CharacterFilters;
+
+function createButtons<T>(items: readonly T[], url: string) {
+    const ext = url.startsWith("materials/") ? "gif" : "png";
+    return items.map((item) => ({
+        value: item,
+        icon: (
+            <Image
+                src={`${url}/${item}`}
+                ext={ext}
+                alt={`${item}`}
+                style={{ width: "24px" }}
+                tooltip={getTooltip(item, url)}
+            />
+        ),
+    }));
+}
+
+function getTooltip<T>(item: T, url: string) {
+    let tooltip;
+    if (url.startsWith("materials/boss")) {
+        tooltip = `${formatExpertChallengeMaterials(
+            item as ExpertChallengeMaterial
+        )}`;
+    } else if (url.startsWith("materials/weekly")) {
+        tooltip = `${formatNotoriousHuntMaterials(
+            item as NotoriousHuntMaterial
+        )}`;
+    } else {
+        tooltip = `${item}`;
+    }
+    return tooltip;
+}
