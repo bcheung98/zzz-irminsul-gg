@@ -14,7 +14,7 @@ import CharacterPage from "components/characters/page/_CharacterPage";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 
 // Helper imports
-import { fetchCharacters } from "rtk/fetch";
+import { fetchCharacters } from "helpers/fetchData";
 import { useAppDispatch } from "helpers/hooks";
 import theme from "themes/theme";
 

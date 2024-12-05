@@ -8,10 +8,12 @@ import { TextStyled } from "styled/StyledTypography";
 // MUI imports
 import { useTheme, SxProps, ButtonBase, Box, Card } from "@mui/material";
 
+// Helper imports
+import { getBackgroundColor, getRarityColor } from "helpers/rarityColors";
+import { zoomImageOnHover } from "helpers/utils";
+
 // Type imports
 import { Element, Rarity, Specialty } from "types/_common";
-import { getBackgroundColor, getRarityColor } from "helpers/rarityColors";
-import { zoomImageOnHover } from "helpers/zoomImageOnHover";
 
 interface DisplayCardProps {
     name: string;

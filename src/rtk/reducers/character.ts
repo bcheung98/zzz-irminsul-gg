@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCharacters, LoadingStatus } from "rtk/fetch";
+import { fetchCharacters, LoadingStatus } from "helpers/fetchData";
 import { listenerMiddleware } from "rtk/middleware";
 import { RootState } from "rtk/store";
 import { Character } from "types/character";
