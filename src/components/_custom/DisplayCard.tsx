@@ -40,7 +40,7 @@ function DisplayCard({
     type,
     rarity = "C",
     variant = "card",
-    size = variant === "card" ? "188px" : "68px",
+    size = variant === "card" ? "180px" : "64px",
     showName = variant === "card",
     info,
     disableTooltip = showName,
@@ -84,6 +84,9 @@ function DisplayCard({
     if (type === "character") {
         imgSrc = `characters/${variant}s/${name}`;
     }
+    if (type === "weapon") {
+        imgSrc = `w-engines/${name}`;
+    }
 
     let route;
     if (type === "character") {
@@ -116,6 +119,7 @@ function DisplayCard({
     const mainImageStyle: React.CSSProperties = {
         width: imgSize,
         height: variant === "card" ? "auto" : imgSize,
+        padding: type === "weapon" ? "16px" : "0px",
         aspectRatio: aspectRatio(),
         boxShadow:
             variant === "icon"
@@ -124,14 +128,14 @@ function DisplayCard({
     };
 
     const smallIconStyle: React.CSSProperties = {
-        width: `calc(${size} / 6)`,
-        height: `calc(${size} / 6)`,
+        width: `calc(${size} / 10 + 14px)`,
+        height: `calc(${size} / 10 + 14px)`,
         minWidth: "16px",
         minHeight: "16px",
         backgroundColor: theme.background(1),
         border: `2px solid ${theme.border.color}`,
         borderRadius: "16px",
-        padding: "3px",
+        padding: "4px",
     };
 
     return (
@@ -192,8 +196,8 @@ function DisplayCard({
                                 variant === "icon"
                                     ? "0px"
                                     : type === "character"
-                                    ? "-5px"
-                                    : "60px",
+                                    ? "0px"
+                                    : "25px",
                             borderBottom:
                                 variant === "icon"
                                     ? "none"
@@ -211,12 +215,12 @@ function DisplayCard({
                                 bottom: "50%",
                                 left: "50%",
                                 transform: "translate(-50%, 0%)",
-                                width: "95%",
+                                width: "90%",
                             }}
                         >
                             <TextStyled
-                                variant="h6"
                                 sx={{
+                                    fontSize: `calc(${size} / 10) !important`,
                                     textShadow:
                                         "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
                                     textAlign: "center",
