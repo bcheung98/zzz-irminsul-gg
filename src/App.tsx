@@ -10,6 +10,7 @@ import Home from "components/home/Home";
 import CharacterBrowser from "components/characters/browser/CharacterBrowser";
 import CharacterPage from "components/characters/page/_CharacterPage";
 import WeaponBrowser from "components/weapons/browser/WeaponBrowser";
+import WeaponPage from "components/weapons/page/_WeaponPage";
 
 // MUI imports
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
@@ -57,6 +58,10 @@ function App() {
                                 <Route
                                     path="/w-engines"
                                     element={<WeaponBrowser />}
+                                />
+                                <Route
+                                    path="/w-engines/:name"
+                                    element={<WeaponPage />}
                                 />
                                 <Route path="*" element={<PageNotFound />} />
                             </Routes>
