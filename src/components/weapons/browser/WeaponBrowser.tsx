@@ -2,6 +2,7 @@ import React from "react";
 
 // Component imports
 import WeaponFilters from "./WeaponFilters";
+import WeaponTable from "./WeaponTable";
 import DisplayCard from "custom/DisplayCard";
 import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
 import SearchBar from "custom/SearchBar";
@@ -95,7 +96,7 @@ function WeaponBrowser() {
                 >
                     <Grid size="auto">
                         <TextStyled variant="h5" sx={{ lineHeight: "36px" }}>
-                            Agents
+                            W-Engines
                         </TextStyled>
                     </Grid>
                     <Grid size={{ xs: 6, sm: "auto" }}>
@@ -154,6 +155,7 @@ function WeaponBrowser() {
                         ))}
                     </Grid>
                 )}
+                {view === "table" && <WeaponTable weapons={currentWeapons} />}
                 <ActionFab action={toggleDrawerState} icon={<TuneIcon />} />
             </Box>
             <Drawer
