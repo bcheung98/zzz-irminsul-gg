@@ -13,8 +13,10 @@ import SortTableHead, {
 import { Table, TableContainer, TableBody } from "@mui/material";
 
 // Helper imports
-import { baseATKScaling, subStatScaling } from "data/weaponStats";
+import { mainStats, subStats } from "data/weaponStats";
 import { RarityMap } from "data/common";
+import { useAppSelector } from "helpers/hooks";
+import { selectCharacters } from "reducers/character";
 
 // Type imports
 import { Weapon } from "types/weapon";
@@ -41,15 +43,23 @@ function WeaponTable({ weapons }: { weapons: Weapon[] }) {
         { id: "displayName", label: "Name" },
         { id: "rank", label: "Rank" },
         { id: "specialty", label: "Specialty" },
-        { id: "atk", label: "Base ATK" },
-        { id: "subStat", label: "Substat" },
+        { id: "signatureFullName", label: "Signature" },
+        { id: "mainStat", label: "Base Stat" },
+        { id: "subStat", label: "Advanced Stat" },
     ];
 
     const rows = weapons.map((wep) => {
-        const baseATK = baseATKScaling[wep.stats.atk].slice(-1)[0];
-        const subStat =
-            subStatScaling[wep.rarity][wep.stats.subStat].slice(-1)[0];
-        const subStatString = `${wep.stats.subStat} ${subStat}`;
+        const mainStat = `${wep.stats.mainStat.type}:<br />${
+            mainStats[wep.stats.mainStat.type].scaling[
+                wep.stats.mainStat.value
+            ].slice(-1)[0]
+        }`;
+        const subStat = `${wep.stats.subStat}:<br />${
+            subStats[wep.stats.subStat].scaling[wep.rarity].slice(-1)[0]
+        }`;
+        const character = useAppSelector(selectCharacters).find(
+            (char) => char.name === wep.signature
+        );
         return {
             id: wep.id,
             name: wep.name,
@@ -57,8 +67,10 @@ function WeaponTable({ weapons }: { weapons: Weapon[] }) {
             rank: RarityMap[wep.rarity],
             rarity: wep.rarity,
             specialty: wep.specialty,
-            atk: baseATK,
-            subStat: subStatString,
+            signature: wep.signature || "_",
+            signatureFullName: character?.fullName || "_",
+            mainStat: mainStat,
+            subStat: subStat,
         };
     });
 

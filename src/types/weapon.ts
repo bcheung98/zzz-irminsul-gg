@@ -1,4 +1,4 @@
-import { baseATKScaling, subStats } from "data/weaponStats";
+import { WeaponMainStat, WeaponSubStat } from "data/weaponStats";
 import { Rarity, Specialty } from "./_common";
 import { Skill } from "./skill";
 import { Version } from "./version";
@@ -16,14 +16,15 @@ export interface Weapon {
     stats: WeaponStats;
     description: string;
     shortDescription: string;
+    signature?: string;
     release: Version;
 }
 
 export interface WeaponStats {
-    atk: BaseATK;
+    mainStat: {
+        type: WeaponMainStat;
+        value: string;
+    };
     subStat: WeaponSubStat;
     passive: Required<Skill>;
 }
-
-export type BaseATK = keyof typeof baseATKScaling;
-export type WeaponSubStat = keyof typeof subStats;

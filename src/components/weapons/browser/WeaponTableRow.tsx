@@ -1,3 +1,5 @@
+import parse from "html-react-parser";
+
 // Component imports
 import Image from "custom/Image";
 import { StyledTableRow, StyledTableCell } from "styled/StyledTable";
@@ -14,7 +16,9 @@ import { combineStyles } from "helpers/utils";
 import { WeaponRow } from "./WeaponTable";
 
 interface WeaponTableRowProps extends WeaponRow {
-    atk: number;
+    signature: string;
+    signatureFullName: string;
+    mainStat: string;
     subStat: string;
 }
 
@@ -49,7 +53,31 @@ function WeaponTableRow({ row }: { row: WeaponTableRowProps }) {
             img: `specialties/${row.specialty}`,
         },
         {
-            label: row.atk,
+            label:
+                row.signatureFullName !== "_" ? row.signatureFullName : "---",
+            labelStyle:
+                row.signature !== "_"
+                    ? {
+                          cursor: "pointer",
+                          "&:hover": {
+                              color: `rgb(30, 175, 255)`,
+                              textDecoration: "underline",
+                          },
+                      }
+                    : { marginLeft: "0px" },
+            img:
+                row.signature !== "_"
+                    ? `characters/avatars/${row.signature}`
+                    : null,
+            imgStyle: {
+                width: "48px",
+                height: "auto",
+                cursor: "pointer",
+            },
+            href: `/agents/${row.signature.split(" ").join("_").toLowerCase()}`,
+        },
+        {
+            label: row.mainStat,
             labelStyle: { marginLeft: "0px" },
         },
         {
@@ -61,7 +89,7 @@ function WeaponTableRow({ row }: { row: WeaponTableRowProps }) {
     return (
         <StyledTableRow hover>
             {columns.map((col, index) => (
-                <StyledTableCell key={index} sx={{ maxWidth: "200px" }}>
+                <StyledTableCell key={index}>
                     <FlexBox columnGap="10px">
                         {col.img && (
                             <ButtonBase
@@ -107,7 +135,7 @@ function WeaponTableRow({ row }: { row: WeaponTableRowProps }) {
                                         col.labelStyle
                                     )}
                                 >
-                                    {col.label}
+                                    {parse(col.label)}
                                 </TextStyled>
                             </ButtonBase>
                         )}
