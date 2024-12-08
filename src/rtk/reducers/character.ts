@@ -26,9 +26,7 @@ export const characterSlice = createSlice({
         });
         builder.addCase(fetchCharacters.fulfilled, (state, action) => {
             if (JSON.stringify(action.payload) !== storedCharacters) {
-                state.characters = action.payload.sort((a, b) =>
-                    a.fullName.localeCompare(b.fullName)
-                );
+                state.characters = action.payload;
             }
             state.status = "success";
         });

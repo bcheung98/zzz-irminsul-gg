@@ -32,14 +32,16 @@ import { filterCharacters } from "helpers/filterCharacters";
 import { selectCharacters } from "reducers/character";
 import { selectCharacterFilters } from "reducers/characterFilters";
 
-const drawerWidth = 308; // px
+const drawerWidth = 350; // px
 
 function CharacterBrowser() {
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
     const matches_md_up = useMediaQuery(theme.breakpoints.up("md"));
 
-    const characters = useAppSelector(selectCharacters);
+    const characters = [...useAppSelector(selectCharacters)].sort((a, b) =>
+        a.fullName.localeCompare(b.fullName)
+    );
     const filters = useAppSelector(selectCharacterFilters);
 
     const [searchValue, setSearchValue] = React.useState("");
