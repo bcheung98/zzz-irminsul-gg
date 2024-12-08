@@ -1,3 +1,4 @@
+import React from "react";
 import parse from "html-react-parser";
 
 // Component imports
@@ -6,7 +7,17 @@ import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
 // MUI imports
-import { useTheme, Box, Divider } from "@mui/material";
+import {
+    useTheme,
+    Box,
+    Divider,
+    IconButton,
+    Dialog,
+    Card,
+    Toolbar,
+} from "@mui/material";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import CloseIcon from "@mui/icons-material/Close";
 
 // Type imports
 import { WeaponProps } from "types/weapon";
@@ -14,7 +25,16 @@ import { WeaponProps } from "types/weapon";
 function WeaponInfo({ weapon }: WeaponProps) {
     const theme = useTheme();
 
-    const { displayName, rarity, specialty, shortDescription } = weapon;
+    const { displayName, rarity, specialty, description, shortDescription } =
+        weapon;
+
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <Box
@@ -48,9 +68,35 @@ function WeaponInfo({ weapon }: WeaponProps) {
                 </Box>
             </FlexBox>
             <Divider sx={{ my: "15px" }} />
-            <TextStyled sx={{ fontStyle: "italic" }}>
-                {parse(shortDescription)}
-            </TextStyled>
+            <FlexBox>
+                <IconButton disableRipple onClick={handleClickOpen}>
+                    <InfoOutlinedIcon />
+                </IconButton>
+                <TextStyled sx={{ fontStyle: "italic" }}>
+                    {parse(shortDescription)}
+                </TextStyled>
+            </FlexBox>
+            <Dialog open={open} onClose={handleClose} maxWidth={false}>
+                <Card
+                    sx={{
+                        p: "0 15px 15px 15px",
+                        width: { xs: "100%", md: "40vw" },
+                        border: theme.mainContentBox.border,
+                        borderRadius: theme.mainContentBox.borderRadius,
+                        backgroundColor: theme.background(3),
+                    }}
+                >
+                    <Toolbar
+                        disableGutters
+                        sx={{ justifyContent: "right", p: 0 }}
+                    >
+                        <IconButton disableRipple onClick={handleClose}>
+                            <CloseIcon fontSize="large" />
+                        </IconButton>
+                    </Toolbar>
+                    <TextStyled>{parse(description)}</TextStyled>
+                </Card>
+            </Dialog>
         </Box>
     );
 }
