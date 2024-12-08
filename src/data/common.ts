@@ -5,6 +5,7 @@ export const elements = [
     "Electric",
     "Ether",
 ] as const;
+
 export const specialities = [
     "Attack",
     "Stun",
@@ -12,8 +13,17 @@ export const specialities = [
     "Defense",
     "Support",
 ] as const;
+
 export const attackTypes = ["Strike", "Slash", "Pierce"] as const;
+
 export const rarities = ["S", "A", "B", "C"] as const;
+export enum RarityMap {
+    C = 2,
+    B,
+    A,
+    S,
+}
+
 export const factions = [
     "Cunning Hares",
     "Belobog Heavy Industries",
