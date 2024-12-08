@@ -1,3 +1,4 @@
+import { baseATKScaling, subStats } from "data/weaponStats";
 import { Rarity, Specialty } from "./_common";
 import { Skill } from "./skill";
 import { Version } from "./version";
@@ -10,7 +11,7 @@ export interface Weapon {
     id: number;
     name: string;
     displayName: string;
-    rarity: Rarity;
+    rarity: Exclude<Rarity, "C">;
     specialty: Specialty;
     stats: WeaponStats;
     description: string;
@@ -19,7 +20,10 @@ export interface Weapon {
 }
 
 export interface WeaponStats {
-    atk: number;
-    subStat: string;
+    atk: BaseATK;
+    subStat: WeaponSubStat;
     passive: Required<Skill>;
 }
+
+export type BaseATK = keyof typeof baseATKScaling;
+export type WeaponSubStat = keyof typeof subStats;

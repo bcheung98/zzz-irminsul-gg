@@ -11,7 +11,7 @@ export interface Character {
     id: number;
     name: string;
     fullName: string;
-    rarity: Rarity;
+    rarity: Exclude<Rarity, "B" | "C">;
     element: Element;
     specialty: Specialty;
     attackType: AttackType;
