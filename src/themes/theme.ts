@@ -34,6 +34,13 @@ theme = createTheme(theme, {
                 },
             },
         },
+        MuiDialog: {
+            styleOverrides: {
+                paper: {
+                    backgroundColor: theme.background(0),
+                },
+            },
+        },
         MuiDivider: {
             styleOverrides: {
                 root: {
