@@ -155,6 +155,7 @@ function CharacterFilters({
                                 ? `rgb(30, 175, 255)`
                                 : theme.text.main
                         }
+                        contentPadding="5px 0px 5px 25px"
                     >
                         <ToggleButtons
                             buttons={filter.buttons}
