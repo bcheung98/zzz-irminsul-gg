@@ -60,7 +60,7 @@ const navItems: NavItem[] = [
     {
         icon: "icons/W-Engine",
         text: "W-Engines",
-        link: "",
+        link: "/w-engines/",
     },
     {
         icon: "icons/Drive_Disc",
