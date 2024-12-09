@@ -3,80 +3,74 @@ import {
     NotoriousHuntMaterial,
 } from "types/materials";
 
-export const expertChallengeMaterials = <const>[
-    {
-        name: "Murderous Obituary",
+export const expertChallengeMaterials = <const>{
+    "Murderous Obituary": {
+        displayName: "Murderous Obituary",
         source: "Notorious - Dullahan",
     },
-    {
-        name: "Crimson Awe",
+    "Crimson Awe": {
+        displayName: "Crimson Awe",
         source: "Troublemaker - Wanted Enforcer",
     },
-    {
-        name: "Ethereal Pursuit",
+    "Ethereal Pursuit": {
+        displayName: "Ethereal Pursuit",
         source: "Notorious - Armored Hati",
     },
-    {
-        name: "Steel Malice",
+    "Steel Malice": {
+        displayName: "Steel Malice",
         source: "Hans - Energized",
     },
-    {
-        name: "Destructive Advance",
+    "Destructive Advance": {
+        displayName: "Destructive Advance",
         source: "Typhon Slugger",
     },
-    {
-        name: "Falling Fist",
+    "Falling Fist": {
+        displayName: "Falling Fist",
         source: "Rampant Brute",
     },
-    {
-        name: "Stealth Phantom",
+    "Stealth Phantom": {
+        displayName: "Stealth Phantom",
         source: "Doppelganger - Jane",
     },
-];
+};
 
-export const expertChallengeMaterialNames = expertChallengeMaterials.map(
-    (material) => material.name
-);
+export const expertChallengeMaterialNames = Object.keys(
+    expertChallengeMaterials
+) as ExpertChallengeMaterial[];
 
 export const formatExpertChallengeMaterials = (
     material: ExpertChallengeMaterial
 ) => {
-    const target =
-        expertChallengeMaterials[
-            expertChallengeMaterials.findIndex((mat) => mat.name === material)
-        ];
-    return `${target.name} (${target.source})`;
+    const mat = expertChallengeMaterials[material];
+    return `${mat.displayName} (${mat.source})`;
 };
 
-export const notoroiusHuntMaterials = <const>[
-    {
-        name: "Ferocious Grip",
+export const notoroiusHuntMaterials = <const>{
+    "Ferocious Grip": {
+        displayName: "Ferocious Grip",
         source: "Newborn Dead End Butcher",
     },
-    {
-        name: "Living Drive",
+    "Living Drive": {
+        displayName: "Living Drive",
         source: "Unknown Corruption Complex",
     },
-    {
-        name: "Finale Dance Shoes",
+    "Finale Dance Shoes": {
+        displayName: "Finale Dance Shoes",
         source: "Twin Marionettes",
     },
-    {
-        name: "Scarlet Engine",
+    "Scarlet Engine": {
+        displayName: "Scarlet Engine",
         source: "Corrupted Overlord - Pompey",
     },
-];
+};
 
-export const notoroiusHuntMaterialNames = notoroiusHuntMaterials.map(
-    (material) => material.name
-);
+export const notoroiusHuntMaterialNames = Object.keys(
+    notoroiusHuntMaterials
+) as NotoriousHuntMaterial[];
 
 export const formatNotoriousHuntMaterials = (
     material: NotoriousHuntMaterial
 ) => {
-    const target =
-        notoroiusHuntMaterials[
-            notoroiusHuntMaterials.findIndex((mat) => mat.name === material)
-        ];
-    return `${target.name} (${target.source})`;
+    const mat = notoroiusHuntMaterials[material];
+    return `${mat.displayName} (${mat.source})`;
 };

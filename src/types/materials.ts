@@ -1,14 +1,12 @@
 import {
-    expertChallengeMaterialNames,
-    notoroiusHuntMaterialNames,
+    expertChallengeMaterials,
+    notoroiusHuntMaterials,
 } from "data/materials/coreSkillMaterials";
 
-export interface Materials {
+export type ExpertChallengeMaterial = keyof typeof expertChallengeMaterials;
+export type NotoriousHuntMaterial = keyof typeof notoroiusHuntMaterials;
+
+export interface CharacterMaterials {
     bossMat: ExpertChallengeMaterial;
     weeklyBossMat: NotoriousHuntMaterial;
 }
-
-export type ExpertChallengeMaterial =
-    (typeof expertChallengeMaterialNames)[number];
-
-export type NotoriousHuntMaterial = (typeof notoroiusHuntMaterialNames)[number];

@@ -1,5 +1,5 @@
 import { AttackType, Element, Faction, Rarity, Specialty } from "./_common";
-import { Materials } from "./materials";
+import { CharacterMaterials } from "./materials";
 import { Skill, SkillWithSplash } from "./skill";
 import { VersionWithDate } from "./version";
 
@@ -18,7 +18,7 @@ export interface Character {
     skills: CharacterSkills;
     cinema: CharacterCinema;
     stats: CharacterStats;
-    materials: Materials;
+    materials: CharacterMaterials;
     birthday: string;
     gender: "Male" | "Female";
     faction: Faction;
