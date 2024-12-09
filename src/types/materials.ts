@@ -1,7 +1,7 @@
 import {
     expertChallengeMaterials,
     notoroiusHuntMaterials,
-} from "data/materials/coreSkillMaterials";
+} from "data/materials/characterCoreSkillMaterials";
 
 export type ExpertChallengeMaterial = keyof typeof expertChallengeMaterials;
 export type NotoriousHuntMaterial = keyof typeof notoroiusHuntMaterials;

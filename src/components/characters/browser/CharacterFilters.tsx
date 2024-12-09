@@ -30,9 +30,9 @@ import { attackTypes, elements, factions, specialities } from "data/common";
 import {
     expertChallengeMaterialNames,
     formatExpertChallengeMaterials,
-    formatNotoriousHuntMaterials,
     notoroiusHuntMaterialNames,
-} from "data/materials/coreSkillMaterials";
+    formatNotoriousHuntMaterials,
+} from "data/materials/characterCoreSkillMaterials";
 
 // Type imports
 import { AttackType, Element, Faction, Rarity, Specialty } from "types/_common";
