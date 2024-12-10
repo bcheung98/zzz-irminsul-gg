@@ -11,7 +11,7 @@ import CharacterBrowser from "components/characters/browser/CharacterBrowser";
 import CharacterPage from "components/characters/page/_CharacterPage";
 import WeaponBrowser from "components/weapons/browser/WeaponBrowser";
 import WeaponPage from "components/weapons/page/_WeaponPage";
-import AscensionPlanner from "components/planner/AscensionPlanner";
+import Planner from "components/planner/Planner";
 
 // MUI imports
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
@@ -64,10 +64,7 @@ function App() {
                                     path="/w-engines/:name"
                                     element={<WeaponPage />}
                                 />
-                                <Route
-                                    path="/planner"
-                                    element={<AscensionPlanner />}
-                                />
+                                <Route path="/planner" element={<Planner />} />
                                 <Route path="*" element={<PageNotFound />} />
                             </Routes>
                         </Box>

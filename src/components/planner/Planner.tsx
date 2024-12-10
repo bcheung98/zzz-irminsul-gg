@@ -8,7 +8,7 @@ import { TextStyled } from "styled/StyledTypography";
 // MUI imports
 import Grid from "@mui/material/Grid2";
 
-function AscensionPlanner() {
+function Planner() {
     document.title = `Ascension Planner ${import.meta.env.VITE_DOCUMENT_TITLE}`;
 
     return (
@@ -28,4 +28,4 @@ function AscensionPlanner() {
     );
 }
 
-export default AscensionPlanner;
+export default Planner;
