@@ -77,6 +77,11 @@ const navItems: NavItem[] = [
         text: "Banner Archive",
         link: "",
     },
+    {
+        icon: "icons/Check",
+        text: "Ascension Planner",
+        link: "/planner/",
+    },
 ];
 
 const linkItems: NavItem[] = [
