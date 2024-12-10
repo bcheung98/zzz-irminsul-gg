@@ -13,6 +13,16 @@ theme = createTheme(theme, {
         borderRadius: "5px",
     },
     components: {
+        MuiAutocomplete: {
+            styleOverrides: {
+                noOptions: {
+                    color: theme.text.main,
+                    fontFamily: theme.font.styled.family,
+                    fontWeight: theme.font.styled.weight,
+                    backgroundColor: theme.menu.default,
+                },
+            },
+        },
         MuiAppBar: {
             styleOverrides: {
                 root: {
