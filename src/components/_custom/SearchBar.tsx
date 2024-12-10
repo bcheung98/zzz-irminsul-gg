@@ -49,18 +49,22 @@ function SearchBar({
             onChange={onChange}
             fullWidth
             autoComplete="off"
-            slotProps={{
-                input: {
-                    startAdornment: (
-                        <InputAdornment
-                            position="start"
-                            sx={{ color: theme.text.main }}
-                        >
-                            {inputIcon || <SearchIcon />}
-                        </InputAdornment>
-                    ),
-                },
-            }}
+            slotProps={
+                !params
+                    ? {
+                          input: {
+                              startAdornment: (
+                                  <InputAdornment
+                                      position="start"
+                                      sx={{ color: theme.text.main }}
+                                  >
+                                      {inputIcon || <SearchIcon />}
+                                  </InputAdornment>
+                              ),
+                          },
+                      }
+                    : {}
+            }
             {...params}
         />
     );
