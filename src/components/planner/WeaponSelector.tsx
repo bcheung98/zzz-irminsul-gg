@@ -63,7 +63,17 @@ function WeaponSelector() {
                 dispatch(setPlannerWeapons(newValue as WeaponCostObject[]))
             }
             renderInput={(params) => (
-                <SearchBar params={params} placeholder="W-Engines" />
+                <SearchBar
+                    params={params}
+                    placeholder="W-Engines"
+                    inputIcon={
+                        <Image
+                            src="icons/W-Engine"
+                            alt="W-Engines"
+                            style={{ width: "24px", marginLeft: "5px" }}
+                        />
+                    }
+                />
             )}
             renderOption={(props, option) => (
                 <StyledMenuItem

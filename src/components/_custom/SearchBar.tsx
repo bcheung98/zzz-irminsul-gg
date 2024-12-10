@@ -13,7 +13,7 @@ interface SearchBarProps {
         width?: string;
         height?: string;
     };
-    params?: any;
+    params?: any | undefined;
 }
 
 function SearchBar({
@@ -31,6 +31,12 @@ function SearchBar({
 
     return (
         <TextField
+            {...params}
+            value={value}
+            placeholder={placeholder}
+            onChange={onChange}
+            fullWidth
+            autoComplete="off"
             sx={{
                 "& .MuiOutlinedInput-root": {
                     width: size.width,
@@ -44,28 +50,22 @@ function SearchBar({
                         { border: 0 },
                 },
             }}
-            value={value}
-            placeholder={placeholder}
-            onChange={onChange}
-            fullWidth
-            autoComplete="off"
-            slotProps={
-                !params
-                    ? {
-                          input: {
-                              startAdornment: (
-                                  <InputAdornment
-                                      position="start"
-                                      sx={{ color: theme.text.main }}
-                                  >
-                                      {inputIcon || <SearchIcon />}
-                                  </InputAdornment>
-                              ),
-                          },
-                      }
-                    : {}
-            }
-            {...params}
+            slotProps={{
+                input: {
+                    ...params?.InputProps,
+                    startAdornment: (
+                        <React.Fragment>
+                            <InputAdornment
+                                position="start"
+                                sx={{ color: theme.text.main }}
+                            >
+                                {inputIcon || <SearchIcon />}
+                            </InputAdornment>
+                            {params?.InputProps?.startAdornment}
+                        </React.Fragment>
+                    ),
+                },
+            }}
         />
     );
 }

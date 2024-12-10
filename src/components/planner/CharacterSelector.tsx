@@ -62,7 +62,17 @@ function CharacterSelector() {
                 )
             }
             renderInput={(params) => (
-                <SearchBar params={params} placeholder="Agents" />
+                <SearchBar
+                    params={params}
+                    placeholder="Agents"
+                    inputIcon={
+                        <Image
+                            src="icons/Characters"
+                            alt="Agents"
+                            style={{ width: "32px", marginLeft: "5px" }}
+                        />
+                    }
+                />
             )}
             renderOption={(props, option) => (
                 <StyledMenuItem
