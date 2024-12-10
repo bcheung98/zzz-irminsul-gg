@@ -7,11 +7,11 @@ import Nav from "components/nav/Nav";
 import NavBottom from "components/nav/NavBottom";
 import PageNotFound from "components/PageNotFound";
 import Home from "components/home/Home";
-import CharacterBrowser from "components/characters/browser/CharacterBrowser";
+import CharacterBrowser from "components/characters/browser/_CharacterBrowser";
 import CharacterPage from "components/characters/page/_CharacterPage";
-import WeaponBrowser from "components/weapons/browser/WeaponBrowser";
+import WeaponBrowser from "components/weapons/browser/_WeaponBrowser";
 import WeaponPage from "components/weapons/page/_WeaponPage";
-import Planner from "components/planner/Planner";
+import Planner from "components/planner/_Planner";
 
 // MUI imports
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
