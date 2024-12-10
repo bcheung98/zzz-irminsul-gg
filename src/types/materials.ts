@@ -8,24 +8,28 @@ import {
     expertChallengeMaterials,
     notoroiusHuntMaterials,
 } from "data/materials/characterCoreSkillMaterials";
+import { weaponAscensionMaterials } from "data/materials/weaponAscensionMaterials";
 
 export type CharacterXPMaterial = keyof typeof characterXPMaterials;
 export type WeaponXPMaterial = keyof typeof weaponXPMaterials;
 
-export type CharacterSkillMaterial = keyof typeof characterSkillMaterials;
-// export type PhysicalMats = keyof (typeof characterSkillMaterials)["Physical"];
-// export type FireMats = keyof (typeof characterSkillMaterials)["Fire"];
-// export type IceMats = keyof (typeof characterSkillMaterials)["Ice"];
-// export type ElectricMats = keyof (typeof characterSkillMaterials)["Electric"];
-// export type EtherMats = keyof (typeof characterSkillMaterials)["Ether"];
+type CharacterSkillMaterialType = typeof characterSkillMaterials;
+export type CharacterSkillMaterial =
+    | keyof CharacterSkillMaterialType
+    | keyof CharacterSkillMaterialType["Physical"]
+    | keyof CharacterSkillMaterialType["Fire"]
+    | keyof CharacterSkillMaterialType["Ice"]
+    | keyof CharacterSkillMaterialType["Electric"]
+    | keyof CharacterSkillMaterialType["Ether"];
 
+type CharacterAscensionMaterialType = typeof characterAscensionMaterials;
 export type CharacterAscensionMaterial =
-    keyof typeof characterAscensionMaterials;
-// export type AttackMats = keyof (typeof characterAscensionMaterials)["Attack"];
-// export type StunMats = keyof (typeof characterAscensionMaterials)["Stun"];
-// export type AnomalyMats = keyof (typeof characterAscensionMaterials)["Anomaly"];
-// export type DefenseMats = keyof (typeof characterAscensionMaterials)["Defense"];
-// export type SupportMats = keyof (typeof characterAscensionMaterials)["Support"];
+    | keyof CharacterAscensionMaterialType
+    | keyof CharacterAscensionMaterialType["Attack"]
+    | keyof CharacterAscensionMaterialType["Stun"]
+    | keyof CharacterAscensionMaterialType["Anomaly"]
+    | keyof CharacterAscensionMaterialType["Defense"]
+    | keyof CharacterAscensionMaterialType["Support"];
 
 export type ExpertChallengeMaterial = keyof typeof expertChallengeMaterials;
 export type NotoriousHuntMaterial = keyof typeof notoroiusHuntMaterials;
@@ -34,3 +38,12 @@ export interface CharacterMaterials {
     bossMat: ExpertChallengeMaterial;
     weeklyBossMat: NotoriousHuntMaterial;
 }
+
+type WeaponAscensionMaterialType = typeof weaponAscensionMaterials;
+export type WeaponAscensionMaterial =
+    | keyof WeaponAscensionMaterialType
+    | keyof WeaponAscensionMaterialType["Attack"]
+    | keyof WeaponAscensionMaterialType["Stun"]
+    | keyof WeaponAscensionMaterialType["Anomaly"]
+    | keyof WeaponAscensionMaterialType["Defense"]
+    | keyof WeaponAscensionMaterialType["Support"];
