@@ -5,6 +5,7 @@ import characterReducer from "reducers/character";
 import characterFilterReducer from "reducers/characterFilters";
 import weaponReducer from "reducers/weapon";
 import weaponFilterReducer from "reducers/weaponFilters";
+import plannerReducer from "reducers/planner";
 
 const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
         characterFilters: characterFilterReducer,
         weapons: weaponReducer,
         weaponFilters: weaponFilterReducer,
+        planner: plannerReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().prepend(listenerMiddleware.middleware),
