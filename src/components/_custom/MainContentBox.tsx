@@ -11,6 +11,7 @@ interface MainContentBoxProps {
     children?: React.ReactNode;
     title?: React.ReactNode;
     actions?: React.ReactNode;
+    titleLineHeight?: string | number;
     contentPadding?: string | number;
     component?: React.ElementType;
 }
@@ -19,6 +20,7 @@ function MainContentBox({
     children,
     title,
     actions,
+    titleLineHeight = "45px",
     contentPadding = "25px",
     component = "div",
 }: MainContentBoxProps) {
@@ -40,7 +42,10 @@ function MainContentBox({
                 }}
             >
                 <FlexBox flexWrap="wrap" justifyContent="space-between">
-                    <TextStyled variant="h6" sx={{ lineHeight: "45px" }}>
+                    <TextStyled
+                        variant="h6"
+                        sx={{ lineHeight: titleLineHeight }}
+                    >
                         {title && title}
                     </TextStyled>
                     {actions && actions}
