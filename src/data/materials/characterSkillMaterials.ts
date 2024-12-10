@@ -25,5 +25,3 @@ export const characterSkillMaterials = {
         Ether3: "Specialized Ether Chip",
     },
 };
-
-export const materialRarity = [2, 4];

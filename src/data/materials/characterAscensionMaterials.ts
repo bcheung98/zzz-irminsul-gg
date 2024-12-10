@@ -25,5 +25,3 @@ export const characterAscensionMaterials = {
         Support3: "Ruler Certification Seal",
     },
 };
-
-export const materialRarity = [2, 4];

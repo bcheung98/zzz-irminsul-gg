@@ -25,5 +25,3 @@ export const weaponAscensionMaterials = {
         Support3: "Specialized Support Component",
     },
 };
-
-export const materialRarity = [2, 4];
