@@ -42,7 +42,7 @@ function MaterialImage({
     const imgStyle: React.CSSProperties = {
         width: `calc(${size} - 6px)`,
         height: "auto",
-        padding: "4px",
+        padding: !imgSrc.endsWith(".gif") ? "4px" : "0px",
         backgroundColor: theme.background(8),
         borderRadius: "10px",
     };

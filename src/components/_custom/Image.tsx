@@ -5,7 +5,7 @@ import { StyledTooltip } from "styled/StyledTooltip";
 
 // MUI imports
 import { TooltipProps } from "@mui/material";
-import { zoomImageOnHover } from "helpers/utils";
+import { combineStyles, zoomImageOnHover } from "helpers/utils";
 
 interface ImageProps {
     src: string;
@@ -39,13 +39,16 @@ function Image({
         height: "auto",
     };
 
+    // If the src doesn't have a specified file extension (ex: `.gif`), append `.png` to the src
+    ext = src.match(/\.[0-9a-z]+$/i) ? "" : ".png";
+
     if (!src.startsWith("https")) {
         src = `https://assets.irminsul.gg/zzz/${src
             .split(" ")
-            .join("_")}.${ext}`;
+            .join("_")}${ext}`;
     }
 
-    const imgStyle = Object.assign({ ...defaultImageStyle }, style);
+    const imgStyle = combineStyles(defaultImageStyle, style);
 
     const handleHover = (direction: "enter" | "leave") => {
         zoomOnHover && zoomImageOnHover(direction, id);
