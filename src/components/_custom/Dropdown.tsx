@@ -13,6 +13,7 @@ interface DropdownProps {
     titleColor?: string;
     iconColor?: string;
     contentPadding?: string | number;
+    unmountOnExit?: boolean;
 }
 
 function Dropdown({
@@ -21,6 +22,7 @@ function Dropdown({
     titleColor,
     iconColor,
     contentPadding = "5px 25px",
+    unmountOnExit = false,
 }: DropdownProps) {
     const theme = useTheme();
 
@@ -49,7 +51,7 @@ function Dropdown({
                     {title}
                 </TextStyled>
             </IconButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
+            <Collapse in={open} timeout="auto" unmountOnExit={unmountOnExit}>
                 <Box sx={{ p: { xs: "5px 0", md: contentPadding } }}>
                     {children}
                 </Box>
