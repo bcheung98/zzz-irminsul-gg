@@ -33,7 +33,7 @@ function MaterialImage({
     const theme = useTheme();
 
     const cardStyle: React.CSSProperties = {
-        padding: "3px",
+        padding: "3px 3px 1.5px",
         marginBottom: "5px",
         backgroundColor: getRarityColor(rarity),
         borderRadius: "10px",
@@ -42,7 +42,7 @@ function MaterialImage({
     const imgStyle: React.CSSProperties = {
         width: `calc(${size} - 6px)`,
         height: "auto",
-        padding: !imgSrc.endsWith(".gif") ? "4px" : "0px",
+        padding: !imgSrc.endsWith(".gif") ? "6px" : "0px",
         backgroundColor: theme.background(8),
         borderRadius: "10px",
     };
@@ -52,9 +52,9 @@ function MaterialImage({
             cost.toLocaleString().length < 10
                 ? `calc(${size} / 6) !important`
                 : `calc(${size} / 7) !important`,
-        width: "95%",
+        width: "100%",
         margin: "auto",
-        backgroundColor: labelColor || theme.background(3),
+        backgroundColor: labelColor || theme.background(8),
         borderRadius: "10px",
         padding: "2.5px",
         textAlign: "center",
