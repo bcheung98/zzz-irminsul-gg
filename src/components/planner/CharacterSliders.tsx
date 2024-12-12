@@ -1,6 +1,9 @@
 // Component imports
 import LevelSlider from "components/planner/LevelSlider";
 
+// MUI imports
+import Grid from "@mui/material/Grid2";
+
 // Helper imports
 import { characterColors } from "helpers/characterColors";
 
@@ -75,24 +78,38 @@ function CharacterSliders({ character }: { character: CharacterCostObject }) {
         },
     ];
 
+    const [Level, Basic, Dodge, Assist, Special, Chain, Core] = sliders.map(
+        (slider) => (
+            <LevelSlider
+                key={slider.type}
+                name={character.name}
+                variant="character"
+                title={slider.title}
+                icon={slider.icon}
+                levels={slider.levels}
+                color={getCharacterColor("accent")}
+                dispatchProps={{
+                    type: slider.type,
+                    getCost: slider.fn,
+                }}
+            />
+        )
+    );
+
     return (
-        <>
-            {sliders.map((slider) => (
-                <LevelSlider
-                    key={slider.type}
-                    name={character.name}
-                    variant="character"
-                    title={slider.title}
-                    icon={slider.icon}
-                    levels={slider.levels}
-                    color={getCharacterColor("accent")}
-                    dispatchProps={{
-                        type: slider.type,
-                        getCost: slider.fn,
-                    }}
-                />
-            ))}
-        </>
+        <Grid container columnSpacing={2} rowSpacing={1}>
+            <Grid size={12}>{Level}</Grid>
+            <Grid size={{ xs: 12, lg: 6 }}>
+                {Basic}
+                {Dodge}
+                {Assist}
+            </Grid>
+            <Grid size={{ xs: 12, lg: 6 }}>
+                {Special}
+                {Chain}
+                {Core}
+            </Grid>
+        </Grid>
     );
 }
 
