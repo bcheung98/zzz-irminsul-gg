@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { objectKeys } from "helpers/utils";
 import { RootState } from "rtk/store";
 import {
     CharacterCostObject,
     TotalCostObject,
+    UpdateCostsPayload,
     WeaponCostObject,
 } from "types/costs";
 
@@ -14,20 +16,24 @@ interface PlannerState {
 
 const initialState: PlannerState = {
     totalCost: {
-        credits: 0,
+        credits: {
+            Credit: 0,
+        },
         characterXP: {
-            characterXP1: 0,
-            characterXP2: 0,
-            characterXP3: 0,
+            CharacterXP1: 0,
+            CharacterXP2: 0,
+            CharacterXP3: 0,
         },
         weaponXP: {
-            weaponXP1: 0,
-            weaponXP2: 0,
-            weaponXP3: 0,
+            WeaponXP1: 0,
+            WeaponXP2: 0,
+            WeaponXP3: 0,
         },
         bossMat: {},
         weeklyBossMat: {},
-        hamsterCagePass: 0,
+        hamsterCagePass: {
+            "Hamster Cage Pass": 0,
+        },
         characterAscension: {},
         characterSkill: {},
         weaponAscension: {},
@@ -52,13 +58,78 @@ export const plannerSlice = createSlice({
         ) => {
             state.weapons = action.payload;
         },
+        updateCharacterCosts: (
+            state,
+            action: PayloadAction<UpdateCostsPayload>
+        ) => {
+            const charIndex = state.characters.findIndex(
+                ({ name }) => name === action.payload.name
+            );
+            if (charIndex !== -1) {
+                const characterCosts = state.characters[charIndex].costs;
+                const payloadCosts = action.payload.costs;
+                const index = CostObjectSourceIndex[action.payload.type];
+                objectKeys(characterCosts).forEach((material) => {
+                    if (payloadCosts[material] !== undefined) {
+                        const characterSubCosts = characterCosts[material];
+                        objectKeys(characterSubCosts).forEach((mat, idx) => {
+                            const values = Object.values(
+                                payloadCosts[material]
+                            );
+                            (characterCosts[material][mat][index] as number) =
+                                values[idx];
+                        });
+                    }
+                });
+            }
+        },
+        updateWeaponCosts: (
+            state,
+            action: PayloadAction<UpdateCostsPayload>
+        ) => {
+            const wepIndex = state.weapons.findIndex(
+                ({ name }) => name === action.payload.name
+            );
+            if (wepIndex !== -1) {
+                const weaponCosts = state.weapons[wepIndex].costs;
+                const payloadCosts = action.payload.costs;
+                objectKeys(weaponCosts).forEach((material) => {
+                    if (payloadCosts[material] !== undefined) {
+                        objectKeys(weaponCosts[material]).forEach(
+                            (mat, idx) => {
+                                const values = Object.values(
+                                    payloadCosts[material]
+                                );
+                                (weaponCosts[material][mat] as number) =
+                                    values[idx];
+                            }
+                        );
+                    }
+                });
+            }
+        },
     },
 });
 
-export const { setPlannerCharacters, setPlannerWeapons } = plannerSlice.actions;
+export const {
+    setPlannerCharacters,
+    setPlannerWeapons,
+    updateCharacterCosts,
+    updateWeaponCosts,
+} = plannerSlice.actions;
 
 export const getSelectedCharacters = (state: RootState) =>
     state.planner.characters;
 export const getSelectedWeapons = (state: RootState) => state.planner.weapons;
 
 export default plannerSlice.reducer;
+
+export enum CostObjectSourceIndex {
+    level,
+    basic,
+    dodge,
+    assist,
+    special,
+    chain,
+    core,
+}

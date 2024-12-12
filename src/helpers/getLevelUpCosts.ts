@@ -42,7 +42,9 @@ export function getCharacterLevelCost(
         ] = calculateCosts(costs, start, stop);
     }
     return {
-        credits: credits,
+        credits: {
+            credits: credits,
+        },
         characterXP: {
             characterXP1: characterXP1,
             characterXP2: characterXP2,
@@ -78,13 +80,15 @@ export function getCharacterSkillCost(
         ] = calculateCosts(costs, start, stop);
     }
     return {
-        credits: credits,
+        credits: {
+            credits: credits,
+        },
         characterSkill: {
             characterSkill1: characterSkill1,
             characterSkill2: characterSkill2,
             characterSkill3: characterSkill3,
         },
-        hamsterCagePass: hamsterCagePass,
+        hamsterCagePass: { hamsterCagePass: hamsterCagePass },
     } as PayloadCostObject;
 }
 
@@ -102,9 +106,15 @@ export function getCharacterCoreSkillCost(
         [credits, bossMat, weeklyBossMat] = calculateCosts(costs, start, stop);
     }
     return {
-        credits: credits,
-        bossMat: bossMat,
-        weeklyBossMat: weeklyBossMat,
+        credits: {
+            credits: credits,
+        },
+        bossMat: {
+            bossMat: bossMat,
+        },
+        weeklyBossMat: {
+            weeklyBossMat: weeklyBossMat,
+        },
     } as PayloadCostObject;
 }
 
@@ -143,7 +153,9 @@ export function getWeaponLevelCost(
         ] = calculateCosts(costs, start, stop);
     }
     return {
-        credits: credits,
+        credits: {
+            credits: credits,
+        },
         weaponXP: {
             weaponXP1: weaponXP1,
             weaponXP2: weaponXP2,

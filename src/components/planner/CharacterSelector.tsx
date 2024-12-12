@@ -19,6 +19,12 @@ import { getRarityColor } from "helpers/rarityColors";
 // Type imports
 import { Character } from "types/character";
 import { CharacterCostObject } from "types/costs";
+import {
+    CharacterAscensionMaterial,
+    CharacterSkillMaterial,
+    ExpertChallengeMaterial,
+    NotoriousHuntMaterial,
+} from "types/materials";
 
 function CharacterSelector() {
     const theme = useTheme();
@@ -178,30 +184,46 @@ function createOptions(characters: Character[]) {
                 costs: {
                     // Source of each material is mapped to a specific index in the array:
                     // [Level, Basic, Dodge, Assist, Special, Chain, Core]
-                    credits: [0, 0, 0, 0, 0, 0, 0],
+                    credits: {
+                        Credit: [0, 0, 0, 0, 0, 0, 0],
+                    },
                     characterXP: {
-                        characterXP1: [0, 0, 0, 0, 0, 0, 0],
-                        characterXP2: [0, 0, 0, 0, 0, 0, 0],
-                        characterXP3: [0, 0, 0, 0, 0, 0, 0],
+                        CharacterXP1: [0, 0, 0, 0, 0, 0, 0],
+                        CharacterXP2: [0, 0, 0, 0, 0, 0, 0],
+                        CharacterXP3: [0, 0, 0, 0, 0, 0, 0],
                     },
                     bossMat: {
-                        [`${char.materials.bossMat}`]: [0, 0, 0, 0, 0, 0, 0],
+                        [`${char.materials.bossMat}` as ExpertChallengeMaterial]:
+                            [0, 0, 0, 0, 0, 0, 0],
                     },
                     weeklyBossMat: {
-                        [`${char.materials.weeklyBossMat}`]: [
+                        [`${char.materials.weeklyBossMat}` as NotoriousHuntMaterial]:
+                            [0, 0, 0, 0, 0, 0, 0],
+                    },
+                    hamsterCagePass: {
+                        "Hamster Cage Pass": [0, 0, 0, 0, 0, 0, 0],
+                    },
+                    characterAscension: {
+                        [`${char.specialty}1` as CharacterAscensionMaterial]: [
+                            0, 0, 0, 0, 0, 0, 0,
+                        ],
+                        [`${char.specialty}2` as CharacterAscensionMaterial]: [
+                            0, 0, 0, 0, 0, 0, 0,
+                        ],
+                        [`${char.specialty}3` as CharacterAscensionMaterial]: [
                             0, 0, 0, 0, 0, 0, 0,
                         ],
                     },
-                    hamsterCagePass: [0, 0, 0, 0, 0, 0, 0],
-                    characterAscension: {
-                        [`${char.specialty}1`]: [0, 0, 0, 0, 0, 0, 0],
-                        [`${char.specialty}2`]: [0, 0, 0, 0, 0, 0, 0],
-                        [`${char.specialty}3`]: [0, 0, 0, 0, 0, 0, 0],
-                    },
                     characterSkill: {
-                        [`${char.element}1`]: [0, 0, 0, 0, 0, 0, 0],
-                        [`${char.element}2`]: [0, 0, 0, 0, 0, 0, 0],
-                        [`${char.element}3`]: [0, 0, 0, 0, 0, 0, 0],
+                        [`${char.element}1` as CharacterSkillMaterial]: [
+                            0, 0, 0, 0, 0, 0, 0,
+                        ],
+                        [`${char.element}2` as CharacterSkillMaterial]: [
+                            0, 0, 0, 0, 0, 0, 0,
+                        ],
+                        [`${char.element}3` as CharacterSkillMaterial]: [
+                            0, 0, 0, 0, 0, 0, 0,
+                        ],
                     },
                 },
             } as CharacterCostObject)

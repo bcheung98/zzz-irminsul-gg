@@ -10,9 +10,13 @@ import {
 } from "./materials";
 import { Character } from "./character";
 import { Weapon } from "./weapon";
+import { CostObjectSourceIndex } from "reducers/planner";
 
 export type CostObjectKeys =
     | TotalCostObjectKeys
+    | CharacterXPMaterial
+    | ExpertChallengeMaterial
+    | NotoriousHuntMaterial
     | CharacterSkillMaterial
     | CharacterAscensionMaterial
     | keyof typeof characterLevel
@@ -22,12 +26,12 @@ export type CostObjectKeys =
 export type TotalCostObjectKeys = keyof TotalCostObject;
 
 export interface TotalCostObject {
-    credits: number;
+    credits: Record<"Credit", number>;
     characterXP: Record<CharacterXPMaterial, number>;
     weaponXP: Record<WeaponXPMaterial, number>;
     bossMat: Record<ExpertChallengeMaterial, number>;
     weeklyBossMat: Record<NotoriousHuntMaterial, number>;
-    hamsterCagePass: number;
+    hamsterCagePass: Record<"Hamster Cage Pass", number>;
     characterAscension: Record<CharacterAscensionMaterial, number>;
     characterSkill: Record<CharacterSkillMaterial, number>;
     weaponAscension: Record<WeaponAscensionMaterial, number>;
@@ -35,15 +39,21 @@ export interface TotalCostObject {
 
 export type PayloadCostObject = Record<
     TotalCostObjectKeys,
-    number | Record<CostObjectKeys, number>
+    Record<CostObjectKeys, number>
 >;
 
+export interface UpdateCostsPayload {
+    name: string;
+    type: keyof typeof CostObjectSourceIndex;
+    costs: PayloadCostObject;
+}
+
 export interface CharacterCost {
-    credits: number[];
+    credits: Record<"Credit", number[]>;
     characterXP: Record<CharacterXPMaterial, number[]>;
     bossMat: Record<ExpertChallengeMaterial, number[]>;
     weeklyBossMat: Record<NotoriousHuntMaterial, number[]>;
-    hamsterCagePass: number[];
+    hamsterCagePass: Record<"Hamster Cage Pass", number[]>;
     characterAscension: Record<CharacterAscensionMaterial, number[]>;
     characterSkill: Record<CharacterSkillMaterial, number[]>;
 }
@@ -57,7 +67,7 @@ export interface CharacterCostObject
 }
 
 export interface WeaponCost {
-    credits: number;
+    credits: Record<"Credit", number>;
     weaponXP: Record<WeaponXPMaterial, number>;
     weaponAscension: Record<WeaponAscensionMaterial, number>;
 }

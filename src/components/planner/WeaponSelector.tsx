@@ -20,6 +20,7 @@ import { RarityMap } from "data/common";
 // Type imports
 import { Weapon } from "types/weapon";
 import { WeaponCostObject } from "types/costs";
+import { WeaponAscensionMaterial } from "types/materials";
 
 function WeaponSelector() {
     const theme = useTheme();
@@ -161,16 +162,18 @@ function createOptions(weapons: Weapon[]) {
                 rarity: wep.rarity,
                 specialty: wep.specialty,
                 costs: {
-                    credits: 0,
+                    credits: {
+                        Credit: 0,
+                    },
                     weaponXP: {
-                        weaponXP1: 0,
-                        weaponXP2: 0,
-                        weaponXP3: 0,
+                        WeaponXP1: 0,
+                        WeaponXP2: 0,
+                        WeaponXP3: 0,
                     },
                     weaponAscension: {
-                        [`${wep.specialty}1`]: 0,
-                        [`${wep.specialty}2`]: 0,
-                        [`${wep.specialty}3`]: 0,
+                        [`${wep.specialty}1` as WeaponAscensionMaterial]: 0,
+                        [`${wep.specialty}2` as WeaponAscensionMaterial]: 0,
+                        [`${wep.specialty}3` as WeaponAscensionMaterial]: 0,
                     },
                 },
             } as WeaponCostObject)
