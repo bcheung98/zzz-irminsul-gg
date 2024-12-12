@@ -36,6 +36,7 @@ function WeaponSelector() {
         () => createOptions(weapons),
         [JSON.stringify(weapons)]
     );
+    const values = useAppSelector(getSelectedWeapons);
 
     const smallIconStyle = { width: "20px", height: "20px" };
 
@@ -43,7 +44,6 @@ function WeaponSelector() {
         <Autocomplete
             multiple
             autoComplete
-            disableCloseOnSelect
             filterSelectedOptions
             options={options}
             getOptionLabel={(option) => option.displayName}
@@ -59,7 +59,8 @@ function WeaponSelector() {
                 )
             }
             noOptionsText="No W-Engines"
-            value={useAppSelector(getSelectedWeapons)}
+            value={values}
+            isOptionEqualToValue={(option, value) => option.name === value.name}
             onChange={(_: any, newValue: WeaponCostObject[] | null) =>
                 dispatch(setPlannerWeapons(newValue as WeaponCostObject[]))
             }

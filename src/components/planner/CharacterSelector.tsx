@@ -38,6 +38,7 @@ function CharacterSelector() {
         () => createOptions(characters),
         [JSON.stringify(characters)]
     );
+    const values = useAppSelector(getSelectedCharacters);
 
     const smallIconStyle = { width: "20px", height: "20px" };
 
@@ -45,7 +46,6 @@ function CharacterSelector() {
         <Autocomplete
             multiple
             autoComplete
-            disableCloseOnSelect
             filterSelectedOptions
             options={options}
             getOptionLabel={(option) => option.fullName}
@@ -61,7 +61,8 @@ function CharacterSelector() {
                 )
             }
             noOptionsText="No Agents"
-            value={useAppSelector(getSelectedCharacters)}
+            value={values}
+            isOptionEqualToValue={(option, value) => option.name === value.name}
             onChange={(_: any, newValue: CharacterCostObject[] | null) =>
                 dispatch(
                     setPlannerCharacters(newValue as CharacterCostObject[])
