@@ -112,7 +112,7 @@ export const plannerSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addMatcher<UnknownAction>(
-            (action) => action.type.startsWith("planner2/"),
+            (action) => action.type.startsWith("planner/"),
             (state) => {
                 const totalCostDraft = {
                     credits: {
