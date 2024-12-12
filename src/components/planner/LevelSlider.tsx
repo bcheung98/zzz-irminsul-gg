@@ -8,7 +8,7 @@ import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
 import { useTheme, useMediaQuery, Box, Stack } from "@mui/material";
-import { UpdateCostsPayload } from "types/costs";
+import Grid from "@mui/material/Grid2";
 
 // Helper imports
 import { useAppDispatch } from "helpers/hooks";
@@ -16,6 +16,7 @@ import { updateCharacterCosts, updateWeaponCosts } from "reducers/planner";
 
 // Type imports
 import { Weapon } from "types/weapon";
+import { UpdateCostsPayload } from "types/costs";
 
 interface LevelSliderProps {
     name: string;
@@ -31,6 +32,8 @@ interface LevelSliderProps {
     color?: string;
 }
 
+const threshold = "@250";
+
 function LevelSlider({
     name,
     variant,
@@ -42,7 +45,7 @@ function LevelSlider({
     color,
 }: LevelSliderProps) {
     const theme = useTheme();
-    const matches_md_sm = useMediaQuery(theme.breakpoints.down("sm"));
+    const matches_sm_dn = useMediaQuery(theme.breakpoints.down("sm"));
 
     const dispatch = useAppDispatch();
 
@@ -83,8 +86,8 @@ function LevelSlider({
                 sx={{
                     userSelect: "none",
                     opacity: sliderValue.includes(index + 1)
-                        ? 1
-                        : { "@": 0, "@325": 0.25 },
+                        ? { "@": 0, [threshold]: 1 }
+                        : { "@": 0, [threshold]: 0.25 },
                 }}
             >
                 {level}
@@ -113,8 +116,19 @@ function LevelSlider({
     }, [sliderValue, selected]);
 
     return (
-        <Box sx={{ containerType: "inline-size" }}>
-            <Stack direction="row" spacing={1} alignItems="center">
+        <Box
+            sx={{
+                containerName: "level-slider",
+                containerType: "inline-size",
+                mb: "10px",
+            }}
+        >
+            <Stack
+                direction="row"
+                spacing={1}
+                alignItems="center"
+                sx={{ mb: "5px" }}
+            >
                 {variant === "character" && (
                     <StyledSwitch
                         checked={selected}
@@ -129,10 +143,11 @@ function LevelSlider({
                         alt={title}
                         style={{
                             opacity: selected ? 1 : 0.35,
-                            width: matches_md_sm ? "32px" : "40px",
-                            height: matches_md_sm ? "32px" : "40px",
+                            width: matches_sm_dn ? "32px" : "40px",
+                            height: matches_sm_dn ? "32px" : "40px",
+                            borderRadius: "64px",
+                            border: "1px solid black",
                             // border: `3px solid ${color}`,
-                            // borderRadius: "64px",
                         }}
                     />
                 )}
@@ -140,25 +155,50 @@ function LevelSlider({
                     {title}
                 </TextStyled>
             </Stack>
-            <Box
+            <Grid
+                container
+                spacing={3.5}
                 sx={{
-                    px: "25px",
-                    mt: "10px",
                     opacity: selected ? 1 : 0.35,
+                    px: {
+                        "@": matches_sm_dn ? "15px" : "0px",
+                        [threshold]: "15px",
+                    },
+                    alignItems: "center",
                 }}
             >
-                <StyledSlider
-                    disabled={!selected}
-                    value={sliderValue}
-                    marks={marks}
-                    min={1}
-                    max={maxValue}
-                    onChange={handleSliderChange}
-                    disableSwap
-                    size={matches_md_sm ? "small" : "medium"}
-                    sx={{ color: color }}
-                />
-            </Box>
+                <Grid
+                    size={1}
+                    sx={{
+                        display: { "@": "flex", [threshold]: "none" },
+                        mb: "25px",
+                    }}
+                >
+                    <TextStyled>{levels[sliderValue[0] - 1]}</TextStyled>
+                </Grid>
+                <Grid size="grow">
+                    <StyledSlider
+                        disabled={!selected}
+                        value={sliderValue}
+                        marks={marks}
+                        min={1}
+                        max={maxValue}
+                        onChange={handleSliderChange}
+                        disableSwap
+                        size={matches_sm_dn ? "small" : "medium"}
+                        sx={{ color: color }}
+                    />
+                </Grid>
+                <Grid
+                    size={1}
+                    sx={{
+                        display: { "@": "flex", [threshold]: "none" },
+                        mb: "25px",
+                    }}
+                >
+                    <TextStyled>{levels[sliderValue[1] - 1]}</TextStyled>
+                </Grid>
+            </Grid>
         </Box>
     );
 }

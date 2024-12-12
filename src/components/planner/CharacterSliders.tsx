@@ -5,17 +5,17 @@ import LevelSlider from "components/planner/LevelSlider";
 import Grid from "@mui/material/Grid2";
 
 // Helper imports
-import { characterColors } from "helpers/characterColors";
-
-// Type imports
-import { CharacterCostObject, UpdateCostsPayload } from "types/costs";
-import { CharacterColors } from "types/character";
+import { range } from "helpers/utils";
 import {
     getCharacterCoreSkillCost,
     getCharacterLevelCost,
     getCharacterSkillCost,
 } from "helpers/getLevelUpCosts";
-import { range } from "helpers/utils";
+import { characterColors } from "helpers/characterColors";
+
+// Type imports
+import { CharacterCostObject, UpdateCostsPayload } from "types/costs";
+import { CharacterColors } from "types/character";
 
 function CharacterSliders({ character }: { character: CharacterCostObject }) {
     const getCharacterColor = (option: keyof CharacterColors) =>
@@ -97,14 +97,14 @@ function CharacterSliders({ character }: { character: CharacterCostObject }) {
     );
 
     return (
-        <Grid container columnSpacing={2} rowSpacing={1}>
+        <Grid container rowSpacing={1} columnSpacing={6}>
             <Grid size={12}>{Level}</Grid>
-            <Grid size={{ xs: 12, lg: 6 }}>
+            <Grid size={{ xs: 12, md: 6 }}>
                 {Basic}
                 {Dodge}
                 {Assist}
             </Grid>
-            <Grid size={{ xs: 12, lg: 6 }}>
+            <Grid size={{ xs: 12, md: 6 }}>
                 {Special}
                 {Chain}
                 {Core}

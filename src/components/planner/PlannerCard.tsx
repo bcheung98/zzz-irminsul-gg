@@ -29,7 +29,10 @@ import {
     setPlannerWeapons,
 } from "reducers/planner";
 import { getBackgroundColor, getRarityColor } from "helpers/rarityColors";
-import { createMaterialCostData, reduceMaterialCosts } from "helpers/createMaterialCostData";
+import {
+    createMaterialCostData,
+    reduceMaterialCosts,
+} from "helpers/createMaterialCostData";
 
 // Type imports
 import {
@@ -129,6 +132,13 @@ function PlannerCard({ data }: PlannerCardProps) {
                                 .join("_")
                                 .toLowerCase()}`}
                             target="_blank"
+                            sx={{
+                                cursor: "pointer",
+                                "&:hover": {
+                                    color: `rgb(30, 175, 255)`,
+                                    textDecoration: "underline",
+                                },
+                            }}
                         >
                             {title}
                         </ButtonBase>
@@ -177,7 +187,7 @@ function PlannerCard({ data }: PlannerCardProps) {
                 )}
             </Grid>
             <Divider sx={{ my: "15px" }} />
-            <Dropdown title="Edit">
+            <Dropdown title="Edit" contentPadding="5px 25px 25px">
                 {"element" in data ? (
                     <CharacterSliders character={data} />
                 ) : (
