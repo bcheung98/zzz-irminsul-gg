@@ -174,14 +174,14 @@ function CharacterFilters({
 export default CharacterFilters;
 
 function createButtons<T>(items: readonly T[], url: string) {
-    const ext = url.startsWith("materials/") ? "gif" : "png";
     const padding = url.startsWith("materials/") ? "0px" : "4px";
     return items.map((item) => ({
         value: item,
         icon: (
             <Image
-                src={`${url}/${item}`}
-                ext={ext}
+                src={`${url}/${item}${
+                    url.startsWith("materials/") ? ".gif" : ""
+                }`}
                 alt={`${item}`}
                 style={{ width: "32px", padding: padding, borderRadius: "5px" }}
                 tooltip={getTooltip(item, url)}
