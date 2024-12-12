@@ -37,8 +37,10 @@ export const weaponFilterSlice = createSlice({
 
 export const { setSpecialty, setRarity, clearFilters } =
     weaponFilterSlice.actions;
-export const selectWeaponFilters = (state: RootState) => state.weaponFilters;
-export const activeWeaponFilters = (state: RootState) =>
+
+export const selectWeaponFilters = (state: RootState): WeaponFilterState =>
+    state.weaponFilters;
+export const activeWeaponFilters = (state: RootState): boolean =>
     Object.keys(state.weaponFilters).filter(
         (filter) =>
             state.weaponFilters[filter as keyof WeaponFilterState].length

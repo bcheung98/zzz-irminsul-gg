@@ -80,9 +80,11 @@ export const {
     setWeeklyBossMat,
     clearFilters,
 } = characterFilterSlice.actions;
-export const selectCharacterFilters = (state: RootState) =>
-    state.characterFilters;
-export const activeCharacterFilters = (state: RootState) =>
+
+export const selectCharacterFilters = (
+    state: RootState
+): CharacterFilterState => state.characterFilters;
+export const activeCharacterFilters = (state: RootState): boolean =>
     Object.keys(state.characterFilters).filter(
         (filter) =>
             state.characterFilters[filter as keyof CharacterFilterState].length

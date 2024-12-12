@@ -36,8 +36,9 @@ export const characterSlice = createSlice({
     },
 });
 
-export const selectCharacters = (state: RootState) =>
+export const selectCharacters = (state: RootState): Character[] =>
     state.characters.characters;
+
 export default characterSlice.reducer;
 
 listenerMiddleware.startListening({

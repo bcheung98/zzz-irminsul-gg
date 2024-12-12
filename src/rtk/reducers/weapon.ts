@@ -36,7 +36,9 @@ export const weaponSlice = createSlice({
     },
 });
 
-export const selectWeapons = (state: RootState) => state.weapons.weapons;
+export const selectWeapons = (state: RootState): Weapon[] =>
+    state.weapons.weapons;
+
 export default weaponSlice.reducer;
 
 listenerMiddleware.startListening({
