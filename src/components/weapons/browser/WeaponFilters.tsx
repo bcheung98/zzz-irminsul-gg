@@ -50,7 +50,7 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
     ];
 
     return (
-        <React.Fragment>
+        <>
             <Toolbar>
                 <FlexBox sx={{ flexGrow: 1 }}>
                     <Button
@@ -89,6 +89,7 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
                                 : theme.text.main
                         }
                         contentPadding="5px 0px 5px 25px"
+                        unmountOnExit
                     >
                         <ToggleButtons
                             buttons={filter.buttons}
@@ -100,7 +101,7 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
                     </Dropdown>
                 ))}
             </List>
-        </React.Fragment>
+        </>
     );
 }
 

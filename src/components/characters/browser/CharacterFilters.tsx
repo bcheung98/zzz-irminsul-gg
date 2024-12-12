@@ -117,7 +117,7 @@ function CharacterFilters({
     ];
 
     return (
-        <React.Fragment>
+        <>
             <Toolbar>
                 <FlexBox sx={{ flexGrow: 1 }}>
                     <Button
@@ -156,6 +156,7 @@ function CharacterFilters({
                                 : theme.text.main
                         }
                         contentPadding="5px 0px 5px 25px"
+                        unmountOnExit
                     >
                         <ToggleButtons
                             buttons={filter.buttons}
@@ -167,7 +168,7 @@ function CharacterFilters({
                     </Dropdown>
                 ))}
             </List>
-        </React.Fragment>
+        </>
     );
 }
 

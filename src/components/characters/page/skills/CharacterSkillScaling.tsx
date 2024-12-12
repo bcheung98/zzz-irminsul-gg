@@ -48,7 +48,7 @@ function CharacterSkillScaling({
     const tableTextStyle: SxProps = { textAlign: { xs: "left", md: "center" } };
 
     return (
-        <Dropdown title="Skill Scaling" iconColor={getCharacterColor("accent")}>
+        <Dropdown title="Skill Scaling" iconColor={getCharacterColor("accent")} unmountOnExit>
             <FlexBox
                 sx={{
                     display: mode === "slider" ? "flex" : "none",
