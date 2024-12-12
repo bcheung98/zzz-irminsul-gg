@@ -1,6 +1,7 @@
 // Component imports
 import CharacterSelector from "./CharacterSelector";
 import WeaponSelector from "./WeaponSelector";
+import TotalCost from "./TotalCost";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
@@ -22,7 +23,7 @@ function Planner() {
             <TextStyled variant="h5" sx={{ mb: "20px", lineHeight: "36px" }}>
                 Ascension Planner
             </TextStyled>
-            <Grid container spacing={5} sx={{ mb: "15px" }}>
+            <Grid container spacing={5}>
                 <Grid size={{ xs: 12, md: 6, xl: 5 }}>
                     <CharacterSelector />
                 </Grid>
@@ -30,7 +31,12 @@ function Planner() {
                     <WeaponSelector />
                 </Grid>
             </Grid>
-            <Grid container spacing={5} sx={{ mt: "15px" }}>
+            <Grid container spacing={5} sx={{ my: "25px" }}>
+                <Grid size={{ xs: 12, xl: 10 }}>
+                    <TotalCost />
+                </Grid>
+            </Grid>
+            <Grid container spacing={5}>
                 {[...characters, ...weapons].map((item) => (
                     <Grid key={item.name} size={{ xs: 12, md: 6, xl: 5 }}>
                         <PlannerCard data={item} />

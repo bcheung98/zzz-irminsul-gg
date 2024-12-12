@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, UnknownAction } from "@reduxjs/toolkit";
+import { reduceMaterialCosts } from "helpers/createMaterialCostData";
 import { objectKeys } from "helpers/utils";
 import { RootState } from "rtk/store";
 import {
@@ -109,6 +110,69 @@ export const plannerSlice = createSlice({
             }
         },
     },
+    extraReducers: (builder) => {
+        builder.addMatcher<UnknownAction>(
+            (action) => action.type.startsWith("planner2/"),
+            (state) => {
+                const totalCostDraft = {
+                    credits: {
+                        Credit: 0,
+                    },
+                    characterXP: {
+                        CharacterXP1: 0,
+                        CharacterXP2: 0,
+                        CharacterXP3: 0,
+                    },
+                    weaponXP: {
+                        WeaponXP1: 0,
+                        WeaponXP2: 0,
+                        WeaponXP3: 0,
+                    },
+                    bossMat: {},
+                    weeklyBossMat: {},
+                    hamsterCagePass: {
+                        "Hamster Cage Pass": 0,
+                    },
+                    characterAscension: {},
+                    characterSkill: {},
+                    weaponAscension: {},
+                } as TotalCostObject;
+                state.characters.forEach((character) => {
+                    const costs = reduceMaterialCosts({ ...character.costs });
+                    objectKeys(costs).forEach((material) => {
+                        objectKeys(costs[material]).forEach((mat) => {
+                            if (
+                                !objectKeys(totalCostDraft[material]).includes(
+                                    mat
+                                )
+                            ) {
+                                (totalCostDraft[material][mat] as number) = 0;
+                            }
+                            (totalCostDraft[material][mat] as number) +=
+                                costs[material][mat];
+                        });
+                    });
+                });
+                state.weapons.forEach((weapon) => {
+                    const costs = { ...weapon.costs };
+                    objectKeys(costs).forEach((material) => {
+                        objectKeys(costs[material]).forEach((mat) => {
+                            if (
+                                !objectKeys(totalCostDraft[material]).includes(
+                                    mat
+                                )
+                            ) {
+                                (totalCostDraft[material][mat] as number) = 0;
+                            }
+                            (totalCostDraft[material][mat] as number) +=
+                                costs[material][mat];
+                        });
+                    });
+                });
+                state.totalCost = totalCostDraft;
+            }
+        );
+    },
 });
 
 export const {
@@ -118,9 +182,13 @@ export const {
     updateWeaponCosts,
 } = plannerSlice.actions;
 
-export const getSelectedCharacters = (state: RootState) =>
-    state.planner.characters;
-export const getSelectedWeapons = (state: RootState) => state.planner.weapons;
+export const getSelectedCharacters = (
+    state: RootState
+): CharacterCostObject[] => state.planner.characters;
+export const getSelectedWeapons = (state: RootState): WeaponCostObject[] =>
+    state.planner.weapons;
+export const getTotalCost = (state: RootState): TotalCostObject =>
+    state.planner.totalCost;
 
 export default plannerSlice.reducer;
 
