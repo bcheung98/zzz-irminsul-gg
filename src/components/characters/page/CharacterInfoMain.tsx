@@ -4,7 +4,7 @@ import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
 // MUI imports
-import { useTheme, useMediaQuery, Box } from "@mui/material";
+import { useTheme, Box } from "@mui/material";
 
 // Type imports
 import { CharacterProps } from "types/character";
