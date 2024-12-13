@@ -17,8 +17,10 @@ import { updateCharacterCosts, updateWeaponCosts } from "reducers/planner";
 // Type imports
 import { Weapon } from "types/weapon";
 import { UpdateCostsPayload } from "types/costs";
+import { CardMode } from "./PlannerCard";
 
 interface LevelSliderProps {
+    mode: CardMode;
     name: string;
     variant: "character" | "weapon";
     title: string;
@@ -35,6 +37,7 @@ interface LevelSliderProps {
 const threshold = "@250";
 
 function LevelSlider({
+    mode,
     name,
     variant,
     title,
@@ -120,7 +123,6 @@ function LevelSlider({
             sx={{
                 containerName: "level-slider",
                 containerType: "inline-size",
-                mb: "10px",
             }}
         >
             <Stack
@@ -135,6 +137,7 @@ function LevelSlider({
                         onChange={handleSelect}
                         size="small"
                         switchColor={color}
+                        sx={{ display: mode === "edit" ? "flex" : "none" }}
                     />
                 )}
                 {icon && (
@@ -149,16 +152,38 @@ function LevelSlider({
                             border: "1px solid black",
                             // border: `3px solid ${color}`,
                         }}
+                        tooltip={mode === "view" ? title : ""}
                     />
                 )}
-                <TextStyled sx={{ opacity: selected ? 1 : 0.35 }}>
-                    {title}
-                </TextStyled>
+                {mode === "edit" ? (
+                    <TextStyled sx={{ opacity: selected ? 1 : 0.35 }}>
+                        {title}
+                    </TextStyled>
+                ) : (
+                    <TextStyled
+                        sx={{
+                            opacity: selected ? 1 : 0.35,
+                            textTransform: "capitalize",
+                        }}
+                    >
+                        {dispatchProps.type === "level"
+                            ? `${
+                                  variant === "character" ? "Agent" : "W-Engine"
+                              } Level: `
+                            : "Lv. "}
+                        {selected
+                            ? `${levels[sliderValue[0] - 1]} → ${
+                                  levels[sliderValue[1] - 1]
+                              }`
+                            : "---"}
+                    </TextStyled>
+                )}
             </Stack>
             <Grid
                 container
                 spacing={3.5}
                 sx={{
+                    display: mode === "edit" ? "flex" : "none",
                     opacity: selected ? 1 : 0.35,
                     px: {
                         "@": matches_sm_dn ? "15px" : "0px",

@@ -6,10 +6,18 @@ import { getWeaponLevelCost } from "helpers/getLevelUpCosts";
 
 // Type imports
 import { WeaponCostObject } from "types/costs";
+import { CardMode } from "./PlannerCard";
 
-function WeaponSliders({ weapon }: { weapon: WeaponCostObject }) {
+function WeaponSliders({
+    weapon,
+    mode,
+}: {
+    weapon: WeaponCostObject;
+    mode: CardMode;
+}) {
     return (
         <LevelSlider
+            mode={mode}
             name={weapon.name}
             variant="weapon"
             title="Level"

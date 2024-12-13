@@ -1,10 +1,11 @@
+import React from "react";
+
 // Component imports
 import CharacterSliders from "./CharacterSliders";
 import WeaponSliders from "./WeaponSliders";
 import MainContentBox from "custom/MainContentBox";
 import Image from "custom/Image";
 import MaterialImage from "custom/MaterialImage";
-import Dropdown from "custom/Dropdown";
 import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
 import { StyledTooltip } from "styled/StyledTooltip";
@@ -16,8 +17,11 @@ import {
     IconButton,
     Stack,
     ButtonBase,
+    Button,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import DoneIcon from "@mui/icons-material/Done";
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 // Helper imports
@@ -43,6 +47,8 @@ import {
 } from "types/costs";
 import { Element } from "types/_common";
 
+export type CardMode = "view" | "edit";
+
 interface PlannerCardProps {
     data: CharacterCostObject | WeaponCostObject;
 }
@@ -54,6 +60,15 @@ function PlannerCard({ data }: PlannerCardProps) {
 
     const characters = useAppSelector(getSelectedCharacters);
     const weapons = useAppSelector(getSelectedWeapons);
+
+    const [mode, setMode] = React.useState<CardMode>("view");
+    const handleModeChange = () => {
+        if (mode === "view") {
+            setMode("edit");
+        } else {
+            setMode("view");
+        }
+    };
 
     const { name, rarity, specialty } = data;
 
@@ -187,13 +202,24 @@ function PlannerCard({ data }: PlannerCardProps) {
                 )}
             </Grid>
             <Divider sx={{ my: "15px" }} />
-            <Dropdown title="Edit" contentPadding="5px 25px 25px">
-                {"element" in data ? (
-                    <CharacterSliders character={data} />
-                ) : (
-                    <WeaponSliders weapon={data} />
-                )}
-            </Dropdown>
+            <Button
+                onClick={handleModeChange}
+                variant="outlined"
+                disableRipple
+                startIcon={mode !== "edit" ? <EditIcon /> : <DoneIcon />}
+                sx={{
+                    border: 0,
+                    backgroundColor: theme.background(8),
+                    mb: "15px",
+                }}
+            >
+                {mode !== "edit" ? "Edit" : "Done"}
+            </Button>
+            {"element" in data ? (
+                <CharacterSliders character={data} mode={mode} />
+            ) : (
+                <WeaponSliders weapon={data} mode={mode} />
+            )}
         </MainContentBox>
     );
 }

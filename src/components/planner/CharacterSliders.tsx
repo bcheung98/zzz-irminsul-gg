@@ -16,8 +16,15 @@ import { characterColors } from "helpers/characterColors";
 // Type imports
 import { CharacterCostObject, UpdateCostsPayload } from "types/costs";
 import { CharacterColors } from "types/character";
+import { CardMode } from "./PlannerCard";
 
-function CharacterSliders({ character }: { character: CharacterCostObject }) {
+function CharacterSliders({
+    character,
+    mode,
+}: {
+    character: CharacterCostObject;
+    mode: CardMode;
+}) {
     const getCharacterColor = (option: keyof CharacterColors) =>
         characterColors(character.colors, option, character.element);
 
@@ -81,6 +88,7 @@ function CharacterSliders({ character }: { character: CharacterCostObject }) {
     const [Level, Basic, Dodge, Assist, Special, Chain, Core] = sliders.map(
         (slider) => (
             <LevelSlider
+                mode={mode}
                 key={slider.type}
                 name={character.name}
                 variant="character"
@@ -99,16 +107,20 @@ function CharacterSliders({ character }: { character: CharacterCostObject }) {
     return (
         <Grid container rowSpacing={1} columnSpacing={6}>
             <Grid size={12}>{Level}</Grid>
-            <Grid size={{ xs: 12, md: 6 }}>
-                {Basic}
-                {Dodge}
-                {Assist}
-            </Grid>
-            <Grid size={{ xs: 12, md: 6 }}>
-                {Special}
-                {Chain}
-                {Core}
-            </Grid>
+            {[Basic, Dodge, Assist, Special, Chain, Core].map(
+                (slider, index) => (
+                    <Grid
+                        key={index}
+                        size={
+                            mode === "view"
+                                ? { xs: 12, sm: 4 }
+                                : { xs: 12, md: 6 }
+                        }
+                    >
+                        {slider}
+                    </Grid>
+                )
+            )}
         </Grid>
     );
 }
