@@ -32,6 +32,10 @@ export const expertChallengeMaterials = <const>{
         displayName: "Stealth Phantom",
         source: "Doppelganger - Jane",
     },
+    "": {
+        displayName: "",
+        source: "?",
+    },
 };
 
 export const expertChallengeMaterialNames = Object.keys(
@@ -61,6 +65,10 @@ export const notoroiusHuntMaterials = <const>{
     "Scarlet Engine": {
         displayName: "Scarlet Engine",
         source: "Corrupted Overlord - Pompey",
+    },
+    "Sycophant's Refinement": {
+        displayName: "Sycophant's Refinement",
+        source: "?",
     },
 };
 
