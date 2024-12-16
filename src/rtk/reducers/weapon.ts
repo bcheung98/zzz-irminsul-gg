@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchWeapons, LoadingStatus } from "helpers/fetchData";
+import { fetchWeapons, LoadingStatus } from "rtk/fetchData";
 import { listenerMiddleware } from "rtk/middleware";
 import { RootState } from "rtk/store";
 import { Weapon } from "types/weapon";

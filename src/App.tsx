@@ -17,7 +17,7 @@ import Planner from "components/planner/_Planner";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 
 // Helper imports
-import { fetchCharacters, fetchWeapons } from "helpers/fetchData";
+import { fetchCharacters, fetchWeapons } from "rtk/fetchData";
 import { useAppDispatch } from "helpers/hooks";
 import theme from "themes/theme";
 
