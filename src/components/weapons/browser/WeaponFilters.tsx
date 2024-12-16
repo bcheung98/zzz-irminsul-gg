@@ -89,7 +89,6 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
                                 : theme.text.main
                         }
                         contentPadding="5px 0px 5px 25px"
-                        unmountOnExit
                     >
                         <ToggleButtons
                             buttons={filter.buttons}
