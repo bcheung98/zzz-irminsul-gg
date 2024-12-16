@@ -121,12 +121,12 @@ function parseSkillDescription(description: string) {
     };
 
     const text = description
-        .replace(`Icon_Basic`, `<span class="icon basic"></span>`)
-        .replace(`Icon_Dodge`, `<span class="icon dodge"></span>`)
-        .replace(`Icon_Assist`, `<span class="icon assist"></span>`)
-        .replace(`Icon_Special`, `<span class="icon special"></span>`)
-        .replace(`Icon_EXSpecial`, `<span class="icon ex-special"></span>`)
-        .replace(`Icon_Ultimate`, `<span class="icon ultimate"></span>`)
-        .replace(`Icon_Core`, `<span class="icon core"></span>`);
+        .replaceAll(`Icon_Basic`, `<span class="icon basic"></span>`)
+        .replaceAll(`Icon_Dodge`, `<span class="icon dodge"></span>`)
+        .replaceAll(`Icon_Assist`, `<span class="icon assist"></span>`)
+        .replaceAll(`Icon_Special`, `<span class="icon special"></span>`)
+        .replaceAll(`Icon_EXSpecial`, `<span class="icon ex-special"></span>`)
+        .replaceAll(`Icon_Ultimate`, `<span class="icon ultimate"></span>`)
+        .replaceAll(`Icon_Core`, `<span class="icon core"></span>`);
     return parse(text, options);
 }
