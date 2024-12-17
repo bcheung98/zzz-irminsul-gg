@@ -15,7 +15,13 @@ const months = [
 
 const offset = ["-5", "+1", "+8"]; // NA, EU, Asia
 
-export function createDateObject(date: string) {
+export interface DateObject {
+    obj: Date;
+    date: string;
+    time: string;
+}
+
+export function createDateObject(date: string): DateObject {
     let dateObj, dateString, timestamp;
     if (date) {
         const formatDate = (date: string, offset: string) =>
