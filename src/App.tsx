@@ -11,6 +11,8 @@ import CharacterBrowser from "components/characters/browser/_CharacterBrowser";
 import CharacterPage from "components/characters/page/_CharacterPage";
 import WeaponBrowser from "components/weapons/browser/_WeaponBrowser";
 import WeaponPage from "components/weapons/page/_WeaponPage";
+import DriveDiscBrowser from "components/drivediscs/browser/_DriveDiscBrowser";
+import DriveDiscPage from "components/drivediscs/page/_DriveDiscPage";
 import Planner from "components/planner/_Planner";
 import BannerArchive from "components/banners/_BannerArchive";
 
@@ -21,6 +23,7 @@ import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import {
     fetchCharacters,
     fetchWeapons,
+    fetchDriveDiscs,
     fetchCharacterBanners,
     fetchWeaponBanners,
 } from "rtk/fetchData";
@@ -33,6 +36,7 @@ function App() {
     React.useEffect(() => {
         dispatch(fetchCharacters());
         dispatch(fetchWeapons());
+        dispatch(fetchDriveDiscs());
         dispatch(fetchCharacterBanners());
         dispatch(fetchWeaponBanners());
     });
@@ -71,6 +75,14 @@ function App() {
                                 <Route
                                     path="/w-engines/:name"
                                     element={<WeaponPage />}
+                                />
+                                <Route
+                                    path="/drive-discs"
+                                    element={<DriveDiscBrowser />}
+                                />
+                                <Route
+                                    path="/drive-discs/:name"
+                                    element={<DriveDiscPage />}
                                 />
                                 <Route path="/planner" element={<Planner />} />
                                 <Route

@@ -65,7 +65,7 @@ const navItems: NavItem[] = [
     {
         icon: "icons/Drive_Disc",
         text: "Drive Discs",
-        link: "",
+        link: "/drive-discs/",
     },
     {
         icon: "icons/Bangboo",

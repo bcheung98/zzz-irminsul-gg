@@ -87,6 +87,9 @@ function DisplayCard({
     if (type === "weapon") {
         imgSrc = `w-engines/${name}`;
     }
+    if (type === "drivedisc") {
+        imgSrc = `drive-discs/${name}`;
+    }
 
     let route;
     if (type === "character") {

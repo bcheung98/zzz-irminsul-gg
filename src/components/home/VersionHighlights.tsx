@@ -23,11 +23,12 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 // Helper imports
+import { RarityMap } from "data/common";
 import { updates } from "data/versions";
 import { useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
 import { selectWeapons } from "reducers/weapon";
-import { RarityMap } from "data/common";
+import { selectDriveDiscs } from "reducers/driveDiscs";
 
 function VersionHighlights() {
     const theme = useTheme();
@@ -55,6 +56,7 @@ function VersionHighlights() {
 
     const characters = useAppSelector(selectCharacters);
     const weapons = useAppSelector(selectWeapons);
+    const driveDiscs = useAppSelector(selectDriveDiscs);
 
     const currentCharacters = characters
         .filter((char) => char.release.version === version)
@@ -66,6 +68,9 @@ function VersionHighlights() {
         .sort(
             (a, b) => RarityMap[b.rarity] - RarityMap[a.rarity] || a.id - b.id
         );
+    const currentDriveDiscs = driveDiscs
+        .filter((disc) => disc.release.version === version)
+        .sort((a, b) => a.displayName.localeCompare(b.displayName));
 
     return (
         <MainContentBox
@@ -112,57 +117,87 @@ function VersionHighlights() {
                 {updates[index].version} - <i>{updates[index].name}</i>
             </TextStyled>
             <Grid container spacing={5}>
-                <Grid size={{ xs: 12, md: 6 }}>
-                    <FlexBox sx={{ mb: "20px" }}>
-                        <Image
-                            src="icons/Characters"
-                            alt="New Agents"
-                            style={{ width: "32px", marginRight: "10px" }}
-                        />
-                        <TextStyled variant="h6">New Agents</TextStyled>
-                    </FlexBox>
-                    <Grid container spacing={2}>
-                        {currentCharacters.map((char, index) => (
-                            <DisplayCard
-                                key={index}
-                                id={`${char.name}-versionHighlights`}
-                                name={char.name}
-                                displayName={char.fullName}
-                                type="character"
-                                rarity={char.rarity}
-                                info={{
-                                    element: char.element,
-                                    specialty: char.specialty,
-                                }}
+                {currentCharacters.length > 0 && (
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <FlexBox sx={{ mb: "20px" }}>
+                            <Image
+                                src="icons/Characters"
+                                alt="New Agents"
+                                style={{ width: "32px", marginRight: "10px" }}
                             />
-                        ))}
+                            <TextStyled variant="h6">New Agents</TextStyled>
+                        </FlexBox>
+                        <Grid container spacing={2}>
+                            {currentCharacters.map((char, index) => (
+                                <DisplayCard
+                                    key={index}
+                                    id={`${char.name}-versionHighlights`}
+                                    name={char.name}
+                                    displayName={char.fullName}
+                                    type="character"
+                                    rarity={char.rarity}
+                                    info={{
+                                        element: char.element,
+                                        specialty: char.specialty,
+                                    }}
+                                />
+                            ))}
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Grid size={{ xs: 12, md: 6 }}>
-                    <FlexBox sx={{ mb: "20px" }}>
-                        <Image
-                            src="icons/W-Engine"
-                            alt="New W-Engines"
-                            style={{ width: "32px", marginRight: "10px" }}
-                        />
-                        <TextStyled variant="h6">New W-Engines</TextStyled>
-                    </FlexBox>
-                    <Grid container spacing={2}>
-                        {currentWeapons.map((weapon, index) => (
-                            <DisplayCard
-                                key={index}
-                                id={`${weapon.name}-versionHighlights`}
-                                name={weapon.name}
-                                displayName={weapon.displayName}
-                                type="weapon"
-                                rarity={weapon.rarity}
-                                info={{
-                                    specialty: weapon.specialty,
-                                }}
+                )}
+                {currentWeapons.length > 0 && (
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <FlexBox sx={{ mb: "20px" }}>
+                            <Image
+                                src="icons/W-Engine"
+                                alt="New W-Engines"
+                                style={{ width: "32px", marginRight: "10px" }}
                             />
-                        ))}
+                            <TextStyled variant="h6">New W-Engines</TextStyled>
+                        </FlexBox>
+                        <Grid container spacing={2}>
+                            {currentWeapons.map((weapon, index) => (
+                                <DisplayCard
+                                    key={index}
+                                    id={`${weapon.name}-versionHighlights`}
+                                    name={weapon.name}
+                                    displayName={weapon.displayName}
+                                    type="weapon"
+                                    rarity={weapon.rarity}
+                                    info={{
+                                        specialty: weapon.specialty,
+                                    }}
+                                />
+                            ))}
+                        </Grid>
                     </Grid>
-                </Grid>
+                )}
+                {currentDriveDiscs.length > 0 && (
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <FlexBox sx={{ mb: "20px" }}>
+                            <Image
+                                src="icons/Drive_Disc"
+                                alt="New Drive Discs"
+                                style={{ width: "32px", marginRight: "10px" }}
+                            />
+                            <TextStyled variant="h6">
+                                New Drive Discs
+                            </TextStyled>
+                        </FlexBox>
+                        <Grid container spacing={2}>
+                            {currentDriveDiscs.map((disc, index) => (
+                                <DisplayCard
+                                    key={index}
+                                    id={`${disc.name}-versionHighlights`}
+                                    name={disc.name}
+                                    displayName={disc.displayName}
+                                    type="drivedisc"
+                                    rarity={disc.rarity}
+                                />
+                            ))}
+                        </Grid>
+                    </Grid>
+                )}
             </Grid>
         </MainContentBox>
     );
