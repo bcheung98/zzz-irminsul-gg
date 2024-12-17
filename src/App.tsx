@@ -12,12 +12,18 @@ import CharacterPage from "components/characters/page/_CharacterPage";
 import WeaponBrowser from "components/weapons/browser/_WeaponBrowser";
 import WeaponPage from "components/weapons/page/_WeaponPage";
 import Planner from "components/planner/_Planner";
+import BannerArchive from "components/banners/_BannerArchive";
 
 // MUI imports
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 
 // Helper imports
-import { fetchCharacters, fetchWeapons } from "rtk/fetchData";
+import {
+    fetchCharacters,
+    fetchWeapons,
+    fetchCharacterBanners,
+    fetchWeaponBanners,
+} from "rtk/fetchData";
 import { useAppDispatch } from "helpers/hooks";
 import theme from "themes/theme";
 
@@ -27,6 +33,8 @@ function App() {
     React.useEffect(() => {
         dispatch(fetchCharacters());
         dispatch(fetchWeapons());
+        dispatch(fetchCharacterBanners());
+        dispatch(fetchWeaponBanners());
     });
 
     return (
@@ -65,6 +73,10 @@ function App() {
                                     element={<WeaponPage />}
                                 />
                                 <Route path="/planner" element={<Planner />} />
+                                <Route
+                                    path="/banners"
+                                    element={<BannerArchive />}
+                                />
                                 <Route path="*" element={<PageNotFound />} />
                             </Routes>
                         </Box>

@@ -1,6 +1,7 @@
+import CurrentBanners from "components/banners/CurrentBanners";
 import VersionHighlights from "./VersionHighlights";
 import { TextStyled } from "styled/StyledTypography";
-import { Card } from "@mui/material";
+import { Box, Card } from "@mui/material";
 
 function Home() {
     document.title = `Zenless Zone Zero ${import.meta.env.VITE_DOCUMENT_TITLE}`;
@@ -19,6 +20,8 @@ function Home() {
                     or broken.
                 </TextStyled>
             </Card>
+            <CurrentBanners />
+            <Box sx={{ my: "20px" }} />
             <VersionHighlights />
         </>
     );

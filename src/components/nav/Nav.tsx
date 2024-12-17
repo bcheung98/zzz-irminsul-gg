@@ -73,14 +73,14 @@ const navItems: NavItem[] = [
         link: "",
     },
     {
-        icon: "icons/Signal_Search",
-        text: "Banner Archive",
-        link: "",
-    },
-    {
         icon: "icons/Check",
         text: "Ascension Planner",
         link: "/planner/",
+    },
+    {
+        icon: "icons/Signal_Search",
+        text: "Banner Archive",
+        link: "/banners/",
     },
 ];
 
