@@ -74,7 +74,13 @@ function WeaponTableRow({ row }: { row: WeaponTableRowProps }) {
                 height: "auto",
                 cursor: "pointer",
             },
-            href: `/agents/${row.signature.split(" ").join("_").toLowerCase()}`,
+            href:
+                row.signature !== "_"
+                    ? `/agents/${row.signature
+                          .split(" ")
+                          .join("_")
+                          .toLowerCase()}`
+                    : "",
         },
         {
             label: row.mainStat,
