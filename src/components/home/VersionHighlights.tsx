@@ -38,10 +38,14 @@ function VersionHighlights() {
         setIndex(Number(event.target.value));
     };
     const handleIndexChangeLeft = () => {
-        if (index + 1 < updates.length) setIndex(index + 1);
+        if (index + 1 < updates.length) {
+            setIndex(index + 1);
+        }
     };
     const handleIndexChangeRight = () => {
-        if (index - 1 >= 0) setIndex(index - 1);
+        if (index - 1 >= 0) {
+            setIndex(index - 1);
+        }
     };
 
     const buttonStyle: SxProps = {
@@ -54,21 +58,21 @@ function VersionHighlights() {
 
     const version = updates[index].version;
 
-    const characters = useAppSelector(selectCharacters);
-    const weapons = useAppSelector(selectWeapons);
-    const driveDiscs = useAppSelector(selectDriveDiscs);
-
-    const currentCharacters = characters
+    const characters = useAppSelector(selectCharacters)
         .filter((char) => char.release.version === version)
         .sort(
-            (a, b) => RarityMap[b.rarity] - RarityMap[a.rarity] || a.id - b.id
+            (a, b) =>
+                RarityMap[b.rarity] - RarityMap[a.rarity] ||
+                a.fullName.localeCompare(b.fullName)
         );
-    const currentWeapons = weapons
+    const weapons = useAppSelector(selectWeapons)
         .filter((wep) => wep.release.version === version)
         .sort(
-            (a, b) => RarityMap[b.rarity] - RarityMap[a.rarity] || a.id - b.id
+            (a, b) =>
+                RarityMap[b.rarity] - RarityMap[a.rarity] ||
+                a.displayName.localeCompare(b.displayName)
         );
-    const currentDriveDiscs = driveDiscs
+    const driveDiscs = useAppSelector(selectDriveDiscs)
         .filter((disc) => disc.release.version === version)
         .sort((a, b) => a.displayName.localeCompare(b.displayName));
 
@@ -116,9 +120,17 @@ function VersionHighlights() {
             <TextStyled variant="h5" sx={{ mb: "20px" }}>
                 {updates[index].version} - <i>{updates[index].name}</i>
             </TextStyled>
-            <Grid container spacing={5}>
-                {currentCharacters.length > 0 && (
-                    <Grid size={{ xs: 12, md: 6 }}>
+            <Box
+                sx={{
+                    display: "grid",
+                    gridTemplateRows: "repeat(2, auto)",
+                    gap: "25px",
+                    gridAutoFlow: { xs: "row dense", md: "column dense" },
+                    gridAutoColumns: "minmax(180px, 1fr)",
+                }}
+            >
+                {characters.length > 0 && (
+                    <Box>
                         <FlexBox sx={{ mb: "20px" }}>
                             <Image
                                 src="icons/Characters"
@@ -128,7 +140,7 @@ function VersionHighlights() {
                             <TextStyled variant="h6">New Agents</TextStyled>
                         </FlexBox>
                         <Grid container spacing={2}>
-                            {currentCharacters.map((char, index) => (
+                            {characters.map((char, index) => (
                                 <DisplayCard
                                     key={index}
                                     id={`${char.name}-versionHighlights`}
@@ -143,10 +155,10 @@ function VersionHighlights() {
                                 />
                             ))}
                         </Grid>
-                    </Grid>
+                    </Box>
                 )}
-                {currentWeapons.length > 0 && (
-                    <Grid size={{ xs: 12, md: 6 }}>
+                {weapons.length > 0 && (
+                    <Box sx={{ gridRowEnd: "span 3" }}>
                         <FlexBox sx={{ mb: "20px" }}>
                             <Image
                                 src="icons/W-Engine"
@@ -156,7 +168,7 @@ function VersionHighlights() {
                             <TextStyled variant="h6">New W-Engines</TextStyled>
                         </FlexBox>
                         <Grid container spacing={2}>
-                            {currentWeapons.map((weapon, index) => (
+                            {weapons.map((weapon, index) => (
                                 <DisplayCard
                                     key={index}
                                     id={`${weapon.name}-versionHighlights`}
@@ -170,10 +182,10 @@ function VersionHighlights() {
                                 />
                             ))}
                         </Grid>
-                    </Grid>
+                    </Box>
                 )}
-                {currentDriveDiscs.length > 0 && (
-                    <Grid size={{ xs: 12, md: 6 }}>
+                {driveDiscs.length > 0 && (
+                    <Box>
                         <FlexBox sx={{ mb: "20px" }}>
                             <Image
                                 src="icons/Drive_Disc"
@@ -185,7 +197,7 @@ function VersionHighlights() {
                             </TextStyled>
                         </FlexBox>
                         <Grid container spacing={2}>
-                            {currentDriveDiscs.map((disc, index) => (
+                            {driveDiscs.map((disc, index) => (
                                 <DisplayCard
                                     key={index}
                                     id={`${disc.name}-versionHighlights`}
@@ -196,9 +208,9 @@ function VersionHighlights() {
                                 />
                             ))}
                         </Grid>
-                    </Grid>
+                    </Box>
                 )}
-            </Grid>
+            </Box>
         </MainContentBox>
     );
 }
