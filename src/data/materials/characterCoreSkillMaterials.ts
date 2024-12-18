@@ -32,9 +32,9 @@ export const expertChallengeMaterials = <const>{
         displayName: "Stealth Phantom",
         source: "Doppelganger - Jane",
     },
-    "": {
-        displayName: "",
-        source: "?",
+    "Thunderous Dragon": {
+        displayName: "Thunderous Dragon",
+        source: "Thracian",
     },
 };
 
@@ -45,7 +45,10 @@ export const expertChallengeMaterialNames = Object.keys(
 export const formatExpertChallengeMaterials = (
     material: ExpertChallengeMaterial
 ) => {
-    const mat = expertChallengeMaterials[material];
+    const mat = expertChallengeMaterials[material] || {
+        displayName: "",
+        source: "?",
+    };
     return `${mat.displayName} (${mat.source})`;
 };
 
@@ -68,7 +71,7 @@ export const notoroiusHuntMaterials = <const>{
     },
     "Sycophant's Refinement": {
         displayName: "Sycophant's Refinement",
-        source: "?",
+        source: "Sacrifice - Bringer",
     },
 };
 
@@ -79,6 +82,9 @@ export const notoroiusHuntMaterialNames = Object.keys(
 export const formatNotoriousHuntMaterials = (
     material: NotoriousHuntMaterial
 ) => {
-    const mat = notoroiusHuntMaterials[material];
+    const mat = notoroiusHuntMaterials[material] || {
+        displayName: "",
+        source: "?",
+    };
     return `${mat.displayName} (${mat.source})`;
 };
