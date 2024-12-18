@@ -122,7 +122,7 @@ function DisplayCard({
     const mainImageStyle: React.CSSProperties = {
         width: imgSize,
         height: variant === "card" ? "auto" : imgSize,
-        padding: variant === "card" && type === "weapon" ? "16px" : "0px",
+        padding: variant === "card" && type !== "character" ? "16px" : "0px",
         aspectRatio: aspectRatio(),
         boxShadow:
             variant === "icon"
