@@ -29,6 +29,7 @@ import { useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
 import { selectWeapons } from "reducers/weapon";
 import { selectDriveDiscs } from "reducers/driveDiscs";
+import { selectBangboos } from "reducers/bangboo";
 
 function VersionHighlights() {
     const theme = useTheme();
@@ -74,6 +75,9 @@ function VersionHighlights() {
         );
     const driveDiscs = useAppSelector(selectDriveDiscs)
         .filter((disc) => disc.release.version === version)
+        .sort((a, b) => a.displayName.localeCompare(b.displayName));
+    const bangboos = useAppSelector(selectBangboos)
+        .filter((bangboo) => bangboo.release.version === version)
         .sort((a, b) => a.displayName.localeCompare(b.displayName));
 
     return (
@@ -205,6 +209,33 @@ function VersionHighlights() {
                                     displayName={disc.displayName}
                                     type="drivedisc"
                                     rarity={disc.rarity}
+                                />
+                            ))}
+                        </Grid>
+                    </Box>
+                )}
+                {bangboos.length > 0 && (
+                    <Box>
+                        <FlexBox sx={{ mb: "20px" }}>
+                            <Image
+                                src="icons/Bangboo"
+                                alt="New Bangboos"
+                                style={{ width: "32px", marginRight: "10px" }}
+                            />
+                            <TextStyled variant="h6">New Bangboos</TextStyled>
+                        </FlexBox>
+                        <Grid container spacing={2}>
+                            {bangboos.map((bangboo, index) => (
+                                <DisplayCard
+                                    key={index}
+                                    id={`${bangboo.name}-bangbooBrowser`}
+                                    name={bangboo.name}
+                                    displayName={bangboo.displayName}
+                                    info={{
+                                        element: bangboo.element || undefined,
+                                    }}
+                                    type="bangboo"
+                                    rarity={bangboo.rarity}
                                 />
                             ))}
                         </Grid>
