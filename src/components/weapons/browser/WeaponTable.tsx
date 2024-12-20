@@ -79,7 +79,7 @@ function WeaponTable({ weapons }: { weapons: Weapon[] }) {
             title={`${weapons.length} ${
                 weapons.length === 1 ? "W-Engine" : "W-Engines"
             }`}
-            contentPadding={0}
+            contentProps={{ padding: 0 }}
         >
             <TableContainer>
                 <Table>

@@ -139,7 +139,7 @@ function PlannerCard({ data }: PlannerCardProps) {
                             }}
                         />
                     </ButtonBase>
-                    <Stack spacing={1}>
+                    <Stack spacing={0.25} sx={{ minHeight: "56px" }}>
                         <ButtonBase
                             disableRipple
                             href={`/${route}/${name
@@ -147,15 +147,19 @@ function PlannerCard({ data }: PlannerCardProps) {
                                 .join("_")
                                 .toLowerCase()}`}
                             target="_blank"
-                            sx={{
-                                cursor: "pointer",
-                                "&:hover": {
-                                    color: `rgb(30, 175, 255)`,
-                                    textDecoration: "underline",
-                                },
-                            }}
                         >
-                            {title}
+                            <TextStyled
+                                variant="h6"
+                                sx={{
+                                    cursor: "pointer",
+                                    "&:hover": {
+                                        color: `rgb(30, 175, 255)`,
+                                        textDecoration: "underline",
+                                    },
+                                }}
+                            >
+                                {title}
+                            </TextStyled>
                         </ButtonBase>
                         <Stack direction="row" spacing={0.5}>
                             {element && (
@@ -183,8 +187,7 @@ function PlannerCard({ data }: PlannerCardProps) {
                     </StyledTooltip>
                 </IconButton>
             }
-            titleLineHeight="100%"
-            contentPadding="20px"
+            contentProps={{ padding: "20px" }}
         >
             <TextStyled>Materials Required</TextStyled>
             <Grid container spacing={2} sx={{ mt: "15px" }}>

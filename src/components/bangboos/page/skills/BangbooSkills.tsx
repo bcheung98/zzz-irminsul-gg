@@ -59,7 +59,6 @@ function BangbooSkills({ bangboo }: BangbooProps) {
 
     return (
         <MainContentBox
-            contentPadding={0}
             title="Skills"
             actions={
                 <ToggleButtons
@@ -72,6 +71,7 @@ function BangbooSkills({ bangboo }: BangbooProps) {
                     highlightOnHover={false}
                 />
             }
+            contentProps={{ padding: 0 }}
         >
             <StyledTabs
                 variant="scrollable"

@@ -68,7 +68,6 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
 
     return (
         <MainContentBox
-            contentPadding={0}
             title="Skills"
             actions={
                 <ToggleButtons
@@ -81,6 +80,7 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
                     highlightOnHover={false}
                 />
             }
+            contentProps={{ padding: 0 }}
         >
             <StyledTabs
                 variant="scrollable"

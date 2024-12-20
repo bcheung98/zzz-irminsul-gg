@@ -54,7 +54,7 @@ function CurrentBanners() {
     }, [activeBanners, setLoading]);
 
     return (
-        <MainContentBox title="Current Banners" contentPadding="15px">
+        <MainContentBox title="Current Banners" contentProps={{ padding: "15px" }}>
             {activeBanners ? (
                 <>
                     <Grid container rowSpacing={2} columnSpacing={9}>

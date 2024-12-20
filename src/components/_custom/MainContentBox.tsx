@@ -1,28 +1,39 @@
 import React from "react";
 
 // Component imports
-import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, Card, AppBar, Box } from "@mui/material";
+import { useTheme, Card, AppBar, Toolbar, Box } from "@mui/material";
+
+interface HeaderProps {
+    padding?: string | number;
+}
+
+interface ContentProps {
+    padding?: string | number;
+}
 
 interface MainContentBoxProps {
-    children?: React.ReactNode;
-    title?: React.ReactNode;
-    actions?: React.ReactNode;
-    titleLineHeight?: string | number;
-    contentPadding?: string | number;
     component?: React.ElementType;
+    children?: React.ReactNode;
+    title?: string | React.ReactNode;
+    actions?: React.ReactNode;
+    headerProps?: HeaderProps;
+    contentProps?: ContentProps;
 }
 
 function MainContentBox({
+    component = "div",
     children,
     title,
     actions,
-    titleLineHeight = "45px",
-    contentPadding = "25px",
-    component = "div",
+    headerProps = {
+        padding: "10px 20px",
+    },
+    contentProps = {
+        padding: "25px",
+    },
 }: MainContentBoxProps) {
     const theme = useTheme();
 
@@ -34,24 +45,24 @@ function MainContentBox({
                 borderRadius: theme.mainContentBox.borderRadius,
             }}
         >
-            <AppBar
-                position="static"
-                sx={{
-                    minHeight: "70px",
-                    p: "10px 20px",
-                }}
-            >
-                <FlexBox flexWrap="wrap" justifyContent="space-between">
-                    <TextStyled
-                        variant="h6"
-                        sx={{ lineHeight: titleLineHeight }}
-                    >
-                        {title && title}
-                    </TextStyled>
+            <AppBar position="static">
+                <Toolbar
+                    disableGutters
+                    sx={{
+                        p: headerProps.padding,
+                        flexGrow: 1,
+                        justifyContent: "space-between",
+                    }}
+                >
+                    {typeof title === "string" ? (
+                        <TextStyled variant="h6">{title && title}</TextStyled>
+                    ) : (
+                        <>{title}</>
+                    )}
                     {actions && actions}
-                </FlexBox>
+                </Toolbar>
             </AppBar>
-            <Box sx={{ p: contentPadding }} component={component}>
+            <Box sx={{ p: contentProps.padding }} component={component}>
                 {children && children}
             </Box>
         </Card>

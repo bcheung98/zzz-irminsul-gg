@@ -68,7 +68,7 @@ function CharacterTable({ characters }: { characters: Character[] }) {
             title={`${characters.length} ${
                 characters.length === 1 ? "Agent" : "Agents"
             }`}
-            contentPadding={0}
+            contentProps={{ padding: 0 }}
         >
             <TableContainer>
                 <Table>
