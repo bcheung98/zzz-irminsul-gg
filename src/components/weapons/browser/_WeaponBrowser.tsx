@@ -36,6 +36,8 @@ import { RarityMap } from "data/common";
 const drawerWidth = 350; // px
 
 function WeaponBrowser() {
+    document.title = `W-Engines ${import.meta.env.VITE_DOCUMENT_TITLE}`;
+
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
     const matches_md_up = useMediaQuery(theme.breakpoints.up("md"));
@@ -82,8 +84,6 @@ function WeaponBrowser() {
             icon: <TableRowsIcon />,
         },
     ];
-
-    document.title = `W-Engines ${import.meta.env.VITE_DOCUMENT_TITLE}`;
 
     return (
         <Box sx={{ display: { xs: "block", md: "flex" } }}>
@@ -168,7 +168,8 @@ function WeaponBrowser() {
                                   width: drawerWidth,
                                   borderLeft: `1px solid ${theme.border.color}`,
                                   backgroundColor: theme.background(3),
-                                  pt: 2.5,
+                                  py: 2.5,
+                                  scrollbarWidth: "none",
                               },
                           }
                         : {
@@ -186,11 +187,12 @@ function WeaponBrowser() {
                 onClose={handleDrawerClose}
             >
                 {/* 
-                Empty toolbar necessary for desktop for content to be below the app bar
+                Empty toolbars necessary for desktop for content to be below the app bar
                 Not needed for mobile because drawer will be above the app bar
                 */}
                 {matches_md_up && <Toolbar />}
                 <WeaponFilters handleClose={handleDrawerClose} />
+                {matches_md_up && <Toolbar />}
             </Drawer>
         </Box>
     );

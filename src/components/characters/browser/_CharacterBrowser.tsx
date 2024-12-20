@@ -35,6 +35,8 @@ import { selectCharacterFilters } from "reducers/characterFilters";
 const drawerWidth = 350; // px
 
 function CharacterBrowser() {
+    document.title = `Agents ${import.meta.env.VITE_DOCUMENT_TITLE}`;
+
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
     const matches_md_up = useMediaQuery(theme.breakpoints.up("md"));
@@ -79,8 +81,6 @@ function CharacterBrowser() {
             icon: <TableRowsIcon />,
         },
     ];
-
-    document.title = `Agents ${import.meta.env.VITE_DOCUMENT_TITLE}`;
 
     return (
         <Box sx={{ display: { xs: "block", md: "flex" } }}>
@@ -168,7 +168,8 @@ function CharacterBrowser() {
                                   width: drawerWidth,
                                   borderLeft: `1px solid ${theme.border.color}`,
                                   backgroundColor: theme.background(3),
-                                  pt: 2.5,
+                                  py: 2.5,
+                                  scrollbarWidth: "none",
                               },
                           }
                         : {
@@ -186,11 +187,12 @@ function CharacterBrowser() {
                 onClose={handleDrawerClose}
             >
                 {/* 
-                Empty toolbar necessary for desktop for content to be below the app bar
+                Empty toolbars necessary for desktop for content to be below the app bar
                 Not needed for mobile because drawer will be above the app bar
                 */}
                 {matches_md_up && <Toolbar />}
                 <CharacterFilters handleClose={handleDrawerClose} />
+                {matches_md_up && <Toolbar />}
             </Drawer>
         </Box>
     );
