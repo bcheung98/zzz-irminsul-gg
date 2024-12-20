@@ -70,7 +70,7 @@ const navItems: NavItem[] = [
     {
         icon: "icons/Bangboo",
         text: "Bangboos",
-        link: "",
+        link: "/bangboos/",
     },
     {
         icon: "icons/Check",

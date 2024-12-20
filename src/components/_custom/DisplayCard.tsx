@@ -19,7 +19,7 @@ interface DisplayCardProps {
     name: string;
     displayName?: string;
     id?: string;
-    type: "character" | "weapon" | "drivedisc";
+    type: "character" | "weapon" | "drivedisc" | "bangboo";
     rarity?: Rarity;
     variant?: "icon" | "card";
     size?: string;
@@ -90,14 +90,24 @@ function DisplayCard({
     if (type === "drivedisc") {
         imgSrc = `drive-discs/${name}`;
     }
+    if (type === "bangboo") {
+        imgSrc = `bangboos/${name}`;
+    }
 
     let route;
-    if (type === "character") {
-        route = "agents";
-    } else if (type === "weapon") {
-        route = "w-engines";
-    } else {
-        route = "drive-discs";
+    switch (type) {
+        case "character":
+            route = "agents";
+            break;
+        case "weapon":
+            route = "w-engines";
+            break;
+        case "drivedisc":
+            route = "drive-discs";
+            break;
+        case "bangboo":
+            route = "bangboos";
+            break;
     }
     const href = !disableLink
         ? `/${route}/${name.split(" ").join("_").toLowerCase()}`

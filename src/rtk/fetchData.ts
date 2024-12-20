@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Character } from "types/character";
 import { Weapon } from "types/weapon";
+import { Bangboo } from "types/bangboo";
 import { DriveDisc } from "types/driveDisc";
 import { Banner } from "types/banner";
 
@@ -11,6 +12,9 @@ const charactersURL = "https://api.irminsul.gg/zzz/characters.json";
 
 // https://api.irminsul.gg/zzz/weapons.json
 const weaponsURL = "https://api.irminsul.gg/zzz/weapons.json";
+
+// https://api.irminsul.gg/zzz/bangboos.json
+const bangboosURL = "https://api.irminsul.gg/zzz/bangboos.json";
 
 const driveDiscsURL = "https://api.irminsul.gg/zzz/drive-discs.json";
 
@@ -30,6 +34,14 @@ export const fetchWeapons = createAsyncThunk(
     "GET/weapons",
     async (): Promise<Weapon[]> => {
         const response = await fetch(weaponsURL);
+        return await response.json();
+    }
+);
+
+export const fetchBangboos = createAsyncThunk(
+    "GET/bangboos",
+    async (): Promise<Bangboo[]> => {
+        const response = await fetch(bangboosURL);
         return await response.json();
     }
 );

@@ -11,6 +11,8 @@ import CharacterBrowser from "components/characters/browser/_CharacterBrowser";
 import CharacterPage from "components/characters/page/_CharacterPage";
 import WeaponBrowser from "components/weapons/browser/_WeaponBrowser";
 import WeaponPage from "components/weapons/page/_WeaponPage";
+import BangbooBrowser from "components/bangboos/browser/_BangbooBrowser";
+import BangbooPage from "components/bangboos/page/_BangbooPage";
 import DriveDiscBrowser from "components/drivediscs/browser/_DriveDiscBrowser";
 import DriveDiscPage from "components/drivediscs/page/_DriveDiscPage";
 import Planner from "components/planner/_Planner";
@@ -23,6 +25,7 @@ import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import {
     fetchCharacters,
     fetchWeapons,
+    fetchBangboos,
     fetchDriveDiscs,
     fetchCharacterBanners,
     fetchWeaponBanners,
@@ -36,6 +39,7 @@ function App() {
     React.useEffect(() => {
         dispatch(fetchCharacters());
         dispatch(fetchWeapons());
+        dispatch(fetchBangboos());
         dispatch(fetchDriveDiscs());
         dispatch(fetchCharacterBanners());
         dispatch(fetchWeaponBanners());
@@ -75,6 +79,14 @@ function App() {
                                 <Route
                                     path="/w-engines/:name"
                                     element={<WeaponPage />}
+                                />
+                                <Route
+                                    path="/bangboos"
+                                    element={<BangbooBrowser />}
+                                />
+                                <Route
+                                    path="/bangboos/:name"
+                                    element={<BangbooPage />}
                                 />
                                 <Route
                                     path="/drive-discs"
