@@ -3,19 +3,12 @@ import parse from "html-react-parser";
 
 // Component imports
 import Image from "custom/Image";
+import MainContentBox from "custom/MainContentBox";
 import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
 // MUI imports
-import {
-    useTheme,
-    Box,
-    Divider,
-    IconButton,
-    Dialog,
-    Card,
-    Toolbar,
-} from "@mui/material";
+import { useTheme, Box, Divider, IconButton, Dialog } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -76,26 +69,20 @@ function WeaponInfo({ weapon }: WeaponProps) {
                     {parse(shortDescription)}
                 </TextStyled>
             </FlexBox>
-            <Dialog open={open} onClose={handleClose} maxWidth={false}>
-                <Card
-                    sx={{
-                        p: "0 15px 15px 15px",
-                        width: { xs: "100%", md: "40vw" },
-                        border: theme.mainContentBox.border,
-                        borderRadius: theme.mainContentBox.borderRadius,
-                        backgroundColor: theme.background(3),
-                    }}
-                >
-                    <Toolbar
-                        disableGutters
-                        sx={{ justifyContent: "right", p: 0 }}
+            <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+                <Box sx={{ overflowY: "auto", scrollbarWidth: "thin" }}>
+                    <MainContentBox
+                        title=""
+                        actions={
+                            <IconButton disableRipple onClick={handleClose}>
+                                <CloseIcon />
+                            </IconButton>
+                        }
+                        headerProps={{ padding: "0px 20px" }}
                     >
-                        <IconButton disableRipple onClick={handleClose}>
-                            <CloseIcon fontSize="large" />
-                        </IconButton>
-                    </Toolbar>
-                    <TextStyled>{parse(description)}</TextStyled>
-                </Card>
+                        <TextStyled>{parse(description)}</TextStyled>
+                    </MainContentBox>
+                </Box>
             </Dialog>
         </Box>
     );
