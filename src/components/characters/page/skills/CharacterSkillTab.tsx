@@ -122,7 +122,11 @@ function parseSkillDescription(description: string) {
                     return (
                         <Text
                             component="span"
-                            className={className}
+                            className={
+                                className === "text-value"
+                                    ? "character-skill-value"
+                                    : className
+                            }
                             sx={{
                                 color: theme.text[
                                     tag as keyof typeof theme.text

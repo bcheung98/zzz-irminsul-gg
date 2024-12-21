@@ -40,7 +40,7 @@ function BangbooSkillTab({ mode, skillKey, skillData }: BangbooSkillTabProps) {
                     return (
                         <Text
                             component="span"
-                            className={className}
+                            className={className === "text-value" ? "bangboo-skill-value" : className}
                             sx={{
                                 color: theme.text[
                                     tag as keyof typeof theme.text

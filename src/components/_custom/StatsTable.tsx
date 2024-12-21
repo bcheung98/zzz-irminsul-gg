@@ -32,6 +32,7 @@ interface StatsTableProps {
     tableProps?: {
         width?: string | number;
     };
+    textID?: string;
 }
 
 function StatsTable({
@@ -42,6 +43,7 @@ function StatsTable({
     orientation = "row",
     sliderProps,
     tableProps,
+    textID = "text-value"
 }: StatsTableProps) {
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
@@ -53,7 +55,7 @@ function StatsTable({
         setSliderValue(newValue as number);
     };
 
-    const targets = document.getElementsByClassName("text-value");
+    const targets = document.getElementsByClassName(textID);
     React.useEffect(() => {
         data.forEach((subScaling: (string | number)[], index: number) => {
             const target = targets[index];

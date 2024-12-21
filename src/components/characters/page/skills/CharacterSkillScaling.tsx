@@ -22,11 +22,7 @@ function CharacterSkillScaling({
     const levels = 16;
 
     return (
-        <Dropdown
-            title="Skill Scaling"
-            iconColor={getCharacterColor("accent")}
-            unmountOnExit
-        >
+        <Dropdown title="Skill Scaling" iconColor={getCharacterColor("accent")}>
             <StatsTable
                 mode={mode}
                 levels={range(1, levels)}
@@ -42,6 +38,7 @@ function CharacterSkillScaling({
                     },
                 }}
                 tableProps={{ width: mode === "table" ? "100%" : "400px" }}
+                textID="character-skill-value"
             />
         </Dropdown>
     );

@@ -28,7 +28,7 @@ function WeaponPassive({ weapon }: WeaponProps) {
         setSliderValue(newValue as number);
     };
 
-    const targets = document.getElementsByClassName("text-value");
+    const targets = document.getElementsByClassName("weapon-passive-value");
     stats.passive.scaling.forEach((subScaling: string[], index: number) => {
         let target = targets[index];
         if (target) {
@@ -101,7 +101,11 @@ function parseSkillDescription(description: string) {
                     return (
                         <Text
                             component="span"
-                            className={className}
+                            className={
+                                className === "text-value"
+                                    ? "weapon-passive-value"
+                                    : className
+                            }
                             sx={{
                                 color: theme.text[
                                     tag as keyof typeof theme.text
