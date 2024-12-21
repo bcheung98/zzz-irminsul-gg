@@ -1,5 +1,9 @@
+import React from "react";
+
 // Component imports
+import MainContentBox from "custom/MainContentBox";
 import StatsTable from "custom/StatsTable";
+import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
 
 // Helper imports
 import { mainStats, subStats } from "data/weaponStats";
@@ -9,6 +13,21 @@ import { WeaponProps } from "types/weapon";
 
 function WeaponStatsTable({ weapon }: WeaponProps) {
     const { rarity, stats } = weapon;
+
+    const [mode, setMode] = React.useState<"slider" | "table">("slider");
+    const handleMode = (
+        _: React.BaseSyntheticEvent,
+        newView: "slider" | "table"
+    ) => {
+        if (newView !== null) {
+            setMode(newView);
+        }
+    };
+
+    const buttons: CustomToggleButtonProps[] = [
+        { value: "slider", label: "Slider" },
+        { value: "table", label: "Table" },
+    ];
 
     const levels = [
         "1",
@@ -25,18 +44,55 @@ function WeaponStatsTable({ weapon }: WeaponProps) {
         "60",
     ];
 
-    return (
-        <StatsTable
-            rows={levels.map((level, index) => ({
-                level: level,
-                mainStat:
+    const data = [
+        ["Level", ...levels],
+        [
+            stats.mainStat.type,
+            ...levels.map(
+                (_, index) =>
                     mainStats[stats.mainStat.type].scaling[
                         stats.mainStat.value
-                    ][index] || 0,
-                subStat: subStats[stats.subStat].scaling[rarity][index] || 0,
-            }))}
-            columns={["Level", stats.mainStat.type, stats.subStat]}
-        />
+                    ][index] || 0
+            ),
+        ],
+        [
+            stats.subStat,
+            ...levels.map(
+                (_, index) =>
+                    subStats[stats.subStat].scaling[rarity][index] || 0
+            ),
+        ],
+    ];
+
+    return (
+        <MainContentBox
+            title="Stats"
+            actions={
+                <ToggleButtons
+                    buttons={buttons}
+                    value={mode}
+                    exclusive
+                    onChange={handleMode}
+                    spacing={0}
+                    padding={10}
+                    highlightOnHover={false}
+                />
+            }
+        >
+            <StatsTable
+                mode={mode}
+                levels={levels}
+                data={data}
+                orientation="column"
+                sliderProps={{
+                    sx: {
+                        minWidth: "100px",
+                        maxWidth: "90%",
+                        ml: "10px",
+                    },
+                }}
+            />
+        </MainContentBox>
     );
 }
 

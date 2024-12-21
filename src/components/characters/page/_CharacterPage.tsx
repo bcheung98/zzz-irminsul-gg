@@ -1,17 +1,16 @@
-import React from "react";
 import { useParams } from "react-router";
 
 // Component imports
 import CharacterImage from "./CharacterImage";
 import CharacterInfoMain from "./CharacterInfoMain";
 import CharacterInfoMisc from "./CharacterInfoMisc";
-import CharacterTable from "./CharacterTable";
+import CharacterStatsTable from "./table/CharacterStatsTable";
 import CharacterSkillDisplay from "./skills/CharacterSkillDisplay";
 import CharacterCinemaDisplay from "./cinema/CharacterCinemaDisplay";
 import PageNotFound from "components/PageNotFound";
 
 // MUI imports
-import { useTheme, useMediaQuery, Box } from "@mui/material";
+import { useTheme, useMediaQuery, Stack } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 // Helper imports
@@ -28,43 +27,43 @@ function CharacterPage() {
     );
 
     if (character) {
-        const charSplash = <CharacterImage character={character} />;
-        const infoMain = <CharacterInfoMain character={character} />;
-        const infoMisc = <CharacterInfoMisc character={character} />;
-        const stats = <CharacterTable character={character} />;
-
         document.title = `${character.fullName} ${
             import.meta.env.VITE_DOCUMENT_TITLE
         }`;
 
+        const charSplash = <CharacterImage character={character} />;
+        const infoMain = <CharacterInfoMain character={character} />;
+        const infoMisc = <CharacterInfoMisc character={character} />;
+        const stats = <CharacterStatsTable character={character} />;
+
         return (
-            <React.Fragment>
-                <Box sx={{ mb: "15px" }}>
-                    {matches_md_up ? (
-                        <Grid container spacing={3}>
-                            <Grid size={{ md: 4, xl: "auto" }}>
+            <Stack spacing={2}>
+                {matches_md_up ? (
+                    <Grid container spacing={3}>
+                        <Grid size={{ md: 4, xl: "auto" }}>
+                            <Stack spacing={2}>
                                 {charSplash}
-                                <br />
                                 {infoMisc}
-                            </Grid>
-                            <Grid size="grow">
+                            </Stack>
+                        </Grid>
+                        <Grid size="grow">
+                            <Stack spacing={2}>
                                 {infoMain}
                                 {stats}
-                            </Grid>
+                            </Stack>
                         </Grid>
-                    ) : (
-                        <Grid container spacing={2} columns={1}>
-                            {infoMain}
-                            {charSplash}
-                            {stats}
-                            {infoMisc}
-                        </Grid>
-                    )}
-                </Box>
+                    </Grid>
+                ) : (
+                    <>
+                        {infoMain}
+                        {charSplash}
+                        {stats}
+                        {infoMisc}
+                    </>
+                )}
                 <CharacterSkillDisplay character={character} />
-                <br />
                 <CharacterCinemaDisplay character={character} />
-            </React.Fragment>
+            </Stack>
         );
     } else {
         return <PageNotFound />;

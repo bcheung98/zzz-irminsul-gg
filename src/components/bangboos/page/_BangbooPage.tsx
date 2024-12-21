@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 // Component imports
 import BangbooImage from "./BangbooImage";
 import BangbooInfo from "./BangbooInfo";
-import BangbooAscension from "./ascension/BangbooAscension";
+import BangbooStatsTable from "./ascension/BangbooStatsTable";
 import BangbooSkills from "./skills/BangbooSkills";
 import PageNotFound from "components/PageNotFound";
 
@@ -33,7 +33,7 @@ function BangbooPage() {
                     </Grid>
                     <Grid size="grow">
                         <BangbooInfo bangboo={bangboo} />
-                        <BangbooAscension bangboo={bangboo} />
+                        <BangbooStatsTable bangboo={bangboo} />
                     </Grid>
                 </Grid>
                 <BangbooSkills bangboo={bangboo} />

@@ -4,10 +4,11 @@ import { useParams } from "react-router";
 import WeaponImage from "./WeaponImage";
 import WeaponInfo from "./WeaponInfo";
 import WeaponPassive from "./WeaponPassive";
-import WeaponTable from "./WeaponTable";
+import WeaponStatsTable from "./table/WeaponStatsTable";
 import PageNotFound from "components/PageNotFound";
 
 // MUI Imports
+import { Stack } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 // Helper imports
@@ -31,9 +32,17 @@ function WeaponPage() {
                     <WeaponImage weapon={weapon} />
                 </Grid>
                 <Grid size="grow">
-                    <WeaponInfo weapon={weapon} />
-                    <WeaponPassive weapon={weapon} />
-                    <WeaponTable weapon={weapon} />
+                    <Stack spacing={2}>
+                        <WeaponInfo weapon={weapon} />
+                        <Grid container columnSpacing={3}>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                                <WeaponPassive weapon={weapon} />
+                            </Grid>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                                <WeaponStatsTable weapon={weapon} />
+                            </Grid>
+                        </Grid>
+                    </Stack>
                 </Grid>
             </Grid>
         );
