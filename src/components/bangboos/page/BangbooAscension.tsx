@@ -1,10 +1,7 @@
 // Component imports
 import MainContentBox from "custom/MainContentBox";
 
-// Type imports
-import { BangbooProps } from "types/bangboo";
-
-function BangbooAscension({ bangboo }: BangbooProps) {
+function BangbooAscension() {
     return <MainContentBox title="Ascension"></MainContentBox>;
 }
 
