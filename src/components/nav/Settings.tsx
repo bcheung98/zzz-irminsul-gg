@@ -2,18 +2,30 @@ import React from "react";
 
 // Component imports
 import MainContentBox from "custom/MainContentBox";
-import ToggleButtons from "custom/ToggleButtons";
+import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
 import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
 // MUI imports
-import { useTheme, useMediaQuery, IconButton, Dialog } from "@mui/material";
+import {
+    useTheme,
+    useMediaQuery,
+    IconButton,
+    Dialog,
+    Stack,
+} from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
 
 // Helper imports
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
-import { selectTheme, setTheme } from "reducers/settings";
+import {
+    selectSkillDisplay,
+    selectTheme,
+    setSkillDisplay,
+    setTheme,
+    SkillDisplay,
+} from "reducers/settings";
 import { navStyles } from "./Nav";
 import { themeNames } from "themes/theme";
 
@@ -28,6 +40,7 @@ function Settings() {
     const dispatch = useAppDispatch();
 
     const currentTheme = useAppSelector(selectTheme).name;
+    const currentSkillDisplay = useAppSelector(selectSkillDisplay).mode;
 
     const [settingsOpen, setSettingsOpen] = React.useState(false);
     const handleSettingsOpen = () => {
@@ -51,6 +64,30 @@ function Settings() {
                     ) => {
                         if (newTheme !== null) {
                             dispatch(setTheme(newTheme));
+                        }
+                    }}
+                    spacing={0}
+                    padding={10}
+                    highlightOnHover={false}
+                />
+            ),
+        },
+        {
+            label: "Skill Display",
+            options: (
+                <ToggleButtons
+                    buttons={[
+                        { value: "slider", label: "Slider" },
+                        { value: "table", label: "Table" },
+                    ]}
+                    value={currentSkillDisplay}
+                    exclusive
+                    onChange={(
+                        _: React.BaseSyntheticEvent,
+                        newMode: SkillDisplay
+                    ) => {
+                        if (newMode !== null) {
+                            dispatch(setSkillDisplay(newMode));
                         }
                     }}
                     spacing={0}
@@ -106,15 +143,17 @@ function Settings() {
                         </IconButton>
                     }
                 >
-                    {settings.map((setting, index) => (
-                        <FlexBox
-                            key={index}
-                            sx={{ justifyContent: "space-between" }}
-                        >
-                            <TextStyled>{setting.label}</TextStyled>
-                            {setting.options}
-                        </FlexBox>
-                    ))}
+                    <Stack spacing={2}>
+                        {settings.slice(1).map((setting, index) => (
+                            <FlexBox
+                                key={index}
+                                sx={{ justifyContent: "space-between" }}
+                            >
+                                <TextStyled>{setting.label}</TextStyled>
+                                {setting.options}
+                            </FlexBox>
+                        ))}
+                    </Stack>
                 </MainContentBox>
             </Dialog>
         </>
@@ -123,9 +162,14 @@ function Settings() {
 
 export default Settings;
 
-function createThemeButtons() {
+function createThemeButtons(): CustomToggleButtonProps[] {
     return themeNames.map((theme) => ({
         value: theme,
         label: theme,
     }));
 }
+
+export const skillDisplayButtons: CustomToggleButtonProps[] = [
+    { value: "slider", label: "Slider" },
+    { value: "table", label: "Table" },
+];

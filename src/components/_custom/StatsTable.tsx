@@ -19,8 +19,11 @@ import {
     TableRow,
 } from "@mui/material";
 
+// Type imports
+import { SkillDisplay } from "reducers/settings";
+
 interface StatsTableProps {
-    mode?: "slider" | "table";
+    mode?: SkillDisplay;
     levels: (string | number)[];
     data: (string | number)[][];
     headColumns?: (string | number)[];

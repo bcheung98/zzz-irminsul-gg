@@ -4,7 +4,7 @@ import React from "react";
 import CharacterSkillTab from "./CharacterSkillTab";
 import MainContentBox from "custom/MainContentBox";
 import Image from "custom/Image";
-import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
+import ToggleButtons from "custom/ToggleButtons";
 import { StyledTab, StyledTabs, TabPanel } from "styled/StyledTabs";
 
 // MUI imports
@@ -12,6 +12,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 
 // Helper imports
 import { characterColors } from "helpers/characterColors";
+import { skillDisplayButtons } from "components/nav/Settings";
 
 // Type imports
 import {
@@ -19,6 +20,8 @@ import {
     CharacterProps,
     CharacterSkillKey,
 } from "types/character";
+import { selectSkillDisplay, SkillDisplay } from "reducers/settings";
+import { useAppSelector } from "helpers/hooks";
 
 function CharacterSkills({ character }: CharacterProps) {
     const theme = useTheme();
@@ -31,20 +34,13 @@ function CharacterSkills({ character }: CharacterProps) {
         setTabValue(newValue);
     };
 
-    const [mode, setMode] = React.useState<"slider" | "table">("slider");
-    const handleMode = (
-        _: React.BaseSyntheticEvent,
-        newView: "slider" | "table"
-    ) => {
+    const currentSkillDisplay = useAppSelector(selectSkillDisplay).mode;
+    const [mode, setMode] = React.useState<SkillDisplay>(currentSkillDisplay);
+    const handleMode = (_: React.BaseSyntheticEvent, newView: SkillDisplay) => {
         if (newView !== null) {
             setMode(newView);
         }
     };
-
-    const buttons: CustomToggleButtonProps[] = [
-        { value: "slider", label: "Slider" },
-        { value: "table", label: "Table" },
-    ];
 
     const getCharacterColor = (option: keyof CharacterColors) =>
         characterColors(colors, option, element);
@@ -66,12 +62,16 @@ function CharacterSkills({ character }: CharacterProps) {
         };
     };
 
+    React.useEffect(() => {
+        setMode(currentSkillDisplay);
+    }, [currentSkillDisplay]);
+
     return (
         <MainContentBox
             title="Skills"
             actions={
                 <ToggleButtons
-                    buttons={buttons}
+                    buttons={skillDisplayButtons}
                     value={mode}
                     exclusive
                     onChange={handleMode}

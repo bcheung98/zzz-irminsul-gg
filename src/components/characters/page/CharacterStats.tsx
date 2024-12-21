@@ -3,14 +3,17 @@ import React from "react";
 // Component imports
 import MainContentBox from "custom/MainContentBox";
 import StatsTable from "custom/StatsTable";
-import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
+import ToggleButtons from "custom/ToggleButtons";
 
 // Helper imports
 import { characterColors } from "helpers/characterColors";
+import { skillDisplayButtons } from "components/nav/Settings";
 
 // Type imports
 import { CharacterProps } from "types/character";
 import { CharacterColors } from "types/character";
+import { selectSkillDisplay, SkillDisplay } from "reducers/settings";
+import { useAppSelector } from "helpers/hooks";
 
 function CharacterStats({ character }: CharacterProps) {
     const { stats, colors, element } = character;
@@ -18,20 +21,13 @@ function CharacterStats({ character }: CharacterProps) {
     const getCharacterColor = (option: keyof CharacterColors) =>
         characterColors(colors, option, element);
 
-    const [mode, setMode] = React.useState<"slider" | "table">("slider");
-    const handleMode = (
-        _: React.BaseSyntheticEvent,
-        newView: "slider" | "table"
-    ) => {
+    const currentSkillDisplay = useAppSelector(selectSkillDisplay).mode;
+    const [mode, setMode] = React.useState<SkillDisplay>(currentSkillDisplay);
+    const handleMode = (_: React.BaseSyntheticEvent, newView: SkillDisplay) => {
         if (newView !== null) {
             setMode(newView);
         }
     };
-
-    const buttons: CustomToggleButtonProps[] = [
-        { value: "slider", label: "Slider" },
-        { value: "table", label: "Table" },
-    ];
 
     const levels = [
         "1",
@@ -64,12 +60,16 @@ function CharacterStats({ character }: CharacterProps) {
         ],
     ];
 
+    React.useEffect(() => {
+        setMode(currentSkillDisplay);
+    }, [currentSkillDisplay]);
+
     return (
         <MainContentBox
             title="Stats"
             actions={
                 <ToggleButtons
-                    buttons={buttons}
+                    buttons={skillDisplayButtons}
                     value={mode}
                     exclusive
                     onChange={handleMode}

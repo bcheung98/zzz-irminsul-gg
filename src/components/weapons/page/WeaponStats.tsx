@@ -3,31 +3,27 @@ import React from "react";
 // Component imports
 import MainContentBox from "custom/MainContentBox";
 import StatsTable from "custom/StatsTable";
-import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
+import ToggleButtons from "custom/ToggleButtons";
 
 // Helper imports
 import { mainStats, subStats } from "data/weaponStats";
+import { skillDisplayButtons } from "components/nav/Settings";
 
 // Type imports
 import { WeaponProps } from "types/weapon";
+import { selectSkillDisplay, SkillDisplay } from "reducers/settings";
+import { useAppSelector } from "helpers/hooks";
 
 function WeaponStats({ weapon }: WeaponProps) {
     const { rarity, stats } = weapon;
 
-    const [mode, setMode] = React.useState<"slider" | "table">("slider");
-    const handleMode = (
-        _: React.BaseSyntheticEvent,
-        newView: "slider" | "table"
-    ) => {
+    const currentSkillDisplay = useAppSelector(selectSkillDisplay).mode;
+    const [mode, setMode] = React.useState<SkillDisplay>(currentSkillDisplay);
+    const handleMode = (_: React.BaseSyntheticEvent, newView: SkillDisplay) => {
         if (newView !== null) {
             setMode(newView);
         }
     };
-
-    const buttons: CustomToggleButtonProps[] = [
-        { value: "slider", label: "Slider" },
-        { value: "table", label: "Table" },
-    ];
 
     const levels = [
         "1",
@@ -64,12 +60,16 @@ function WeaponStats({ weapon }: WeaponProps) {
         ],
     ];
 
+    React.useEffect(() => {
+        setMode(currentSkillDisplay);
+    }, [currentSkillDisplay]);
+
     return (
         <MainContentBox
             title="Stats"
             actions={
                 <ToggleButtons
-                    buttons={buttons}
+                    buttons={skillDisplayButtons}
                     value={mode}
                     exclusive
                     onChange={handleMode}
