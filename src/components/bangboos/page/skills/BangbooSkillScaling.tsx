@@ -31,7 +31,15 @@ function BangbooSkillScaling({
                         ml: "10px",
                     },
                 }}
-                tableProps={{ width: mode === "table" ? "100%" : "400px" }}
+                tableProps={{
+                    sx: {
+                        width:
+                            mode === "slider"
+                                ? { xs: "100%", sm: "30%" }
+                                : { xs: "100%", lg: "75%" },
+                        mt: "10px",
+                    },
+                }}
                 textID="bangboo-skill-value"
             />
         </>

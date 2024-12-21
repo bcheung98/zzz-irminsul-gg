@@ -35,12 +35,12 @@ function WeaponPage() {
                 <Grid size="grow">
                     <Stack spacing={2}>
                         <WeaponInfo weapon={weapon} />
-                        <Grid container columnSpacing={3}>
-                            <Grid size={{ xs: 12, md: 6 }}>
+                        <Grid container columnSpacing={3} rowSpacing={2}>
+                            <Grid size={{ xs: 12, md: 7 }}>
                                 <WeaponPassive weapon={weapon} />
                                 <WeaponAscension weapon={weapon} />
                             </Grid>
-                            <Grid size={{ xs: 12, md: 6 }}>
+                            <Grid size={{ xs: 12, md: 5 }}>
                                 <WeaponStats weapon={weapon} />
                             </Grid>
                         </Grid>
