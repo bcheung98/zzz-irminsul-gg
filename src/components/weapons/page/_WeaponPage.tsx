@@ -5,6 +5,7 @@ import WeaponImage from "./WeaponImage";
 import WeaponInfo from "./WeaponInfo";
 import WeaponPassive from "./WeaponPassive";
 import WeaponStats from "./WeaponStats";
+import WeaponAscension from "./WeaponAscension";
 import PageNotFound from "components/PageNotFound";
 
 // MUI Imports
@@ -37,6 +38,7 @@ function WeaponPage() {
                         <Grid container columnSpacing={3}>
                             <Grid size={{ xs: 12, md: 6 }}>
                                 <WeaponPassive weapon={weapon} />
+                                <WeaponAscension weapon={weapon} />
                             </Grid>
                             <Grid size={{ xs: 12, md: 6 }}>
                                 <WeaponStats weapon={weapon} />

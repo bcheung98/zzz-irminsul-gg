@@ -5,6 +5,7 @@ import CharacterImage from "./CharacterImage";
 import CharacterInfoMain from "./CharacterInfoMain";
 import CharacterInfoMisc from "./CharacterInfoMisc";
 import CharacterStats from "./CharacterStats";
+import CharacterAscension from "./CharacterAscension";
 import CharacterSkills from "./skills/CharacterSkills";
 import CharacterCinema from "./CharacterCinema";
 import PageNotFound from "components/PageNotFound";
@@ -34,6 +35,7 @@ function CharacterPage() {
         const charSplash = <CharacterImage character={character} />;
         const infoMain = <CharacterInfoMain character={character} />;
         const infoMisc = <CharacterInfoMisc character={character} />;
+        const ascension = <CharacterAscension character={character} />;
         const stats = <CharacterStats character={character} />;
 
         return (
@@ -50,6 +52,7 @@ function CharacterPage() {
                             <Stack spacing={2}>
                                 {infoMain}
                                 {stats}
+                                {ascension}
                             </Stack>
                         </Grid>
                     </Grid>
@@ -58,6 +61,7 @@ function CharacterPage() {
                         {infoMain}
                         {charSplash}
                         {stats}
+                        {ascension}
                         {infoMisc}
                     </>
                 )}
