@@ -56,7 +56,7 @@ function BangbooStatsTable({ bangboo }: BangbooProps) {
             ...levels.map((_, index) => stats.def[index].toLocaleString() || 0),
         ],
         [
-            "Crit RATE",
+            "Crit Rate",
             ...levels.map((_, index) => `${stats.critRate[index]}%` || 0),
         ],
         [
@@ -92,8 +92,16 @@ function BangbooStatsTable({ bangboo }: BangbooProps) {
                 sliderProps={{
                     sx: {
                         minWidth: "100px",
-                        maxWidth: "90%",
+                        maxWidth: "50%",
                         ml: "10px",
+                    },
+                }}
+                tableProps={{
+                    sx: {
+                        width:
+                            mode === "slider"
+                                ? { xs: "100%", sm: "50%" }
+                                : "100%",
                     },
                 }}
             />

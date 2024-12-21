@@ -37,7 +37,15 @@ function CharacterSkillScaling({
                         color: getCharacterColor("accent"),
                     },
                 }}
-                tableProps={{ width: mode === "table" ? "100%" : "400px" }}
+                tableProps={{
+                    sx: {
+                        width:
+                            mode === "slider"
+                                ? { xs: "100%", sm: "30%" }
+                                : "100%",
+                        mt: "10px",
+                    },
+                }}
                 textID="character-skill-value"
             />
         </Dropdown>

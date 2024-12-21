@@ -87,8 +87,16 @@ function WeaponStats({ weapon }: WeaponProps) {
                 sliderProps={{
                     sx: {
                         minWidth: "100px",
-                        maxWidth: "90%",
+                        maxWidth: "50%",
                         ml: "10px",
+                    },
+                }}
+                tableProps={{
+                    sx: {
+                        width:
+                            mode === "slider"
+                                ? { xs: "100%", sm: "50%" }
+                                : "100%",
                     },
                 }}
             />

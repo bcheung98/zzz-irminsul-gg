@@ -87,9 +87,17 @@ function CharacterStats({ character }: CharacterProps) {
                 sliderProps={{
                     sx: {
                         minWidth: "100px",
-                        maxWidth: "90%",
+                        maxWidth: "50%",
                         ml: "10px",
                         color: getCharacterColor("accent"),
+                    },
+                }}
+                tableProps={{
+                    sx: {
+                        width:
+                            mode === "slider"
+                                ? { xs: "100%", sm: "50%" }
+                                : "100%",
                     },
                 }}
             />

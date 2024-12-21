@@ -31,6 +31,7 @@ interface StatsTableProps {
     };
     tableProps?: {
         width?: string | number;
+        sx?: SxProps;
     };
     textID?: string;
 }
@@ -43,7 +44,7 @@ function StatsTable({
     orientation = "row",
     sliderProps,
     tableProps,
-    textID = "text-value"
+    textID = "text-value",
 }: StatsTableProps) {
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
@@ -100,7 +101,10 @@ function StatsTable({
             </FlexBox>
             <TableContainer
                 component={Card}
-                sx={{ width: tableProps?.width, mt: "10px" }}
+                sx={Object.assign(
+                    { width: mode === "slider" ? "30%" : "100%" },
+                    tableProps?.sx
+                )}
             >
                 <Table>
                     {mode === "table" && (
