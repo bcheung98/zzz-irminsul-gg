@@ -14,6 +14,8 @@ import Grid from "@mui/material/Grid2";
 
 // Helper imports
 import { useAppSelector } from "helpers/hooks";
+import { selectCharacters } from "reducers/character";
+import { selectWeapons } from "reducers/weapon";
 import { selectCharacterBanners, selectWeaponBanners } from "reducers/banner";
 import { createDateObject, isCurrentBanner } from "helpers/dates";
 import { isTBA } from "helpers/utils";
@@ -21,6 +23,9 @@ import { createBannerItems } from "./BannerListRow";
 
 function CurrentBanners() {
     const theme = useTheme();
+
+    const characters = useAppSelector(selectCharacters);
+    const weapons = useAppSelector(selectWeapons);
 
     const characterBanners = useAppSelector(selectCharacterBanners);
     const weaponBanners = useAppSelector(selectWeaponBanners);
@@ -54,7 +59,10 @@ function CurrentBanners() {
     }, [activeBanners, setLoading]);
 
     return (
-        <MainContentBox title="Current Banners" contentProps={{ padding: "15px" }}>
+        <MainContentBox
+            title="Current Banners"
+            contentProps={{ padding: "15px" }}
+        >
             {activeBanners ? (
                 <>
                     <Grid container rowSpacing={2} columnSpacing={9}>
@@ -79,7 +87,9 @@ function CurrentBanners() {
                                             <Grid container spacing={0.75}>
                                                 {createBannerItems(
                                                     banner.fiveStars,
-                                                    "character"
+                                                    "character",
+                                                    characters,
+                                                    weapons
                                                 ).map((item, index) => (
                                                     <DisplayCard
                                                         key={index}
@@ -105,7 +115,9 @@ function CurrentBanners() {
                                                 ))}
                                                 {createBannerItems(
                                                     banner.fourStars,
-                                                    "character"
+                                                    "character",
+                                                    characters,
+                                                    weapons
                                                 ).map((item, index) => (
                                                     <DisplayCard
                                                         key={index}
@@ -159,7 +171,9 @@ function CurrentBanners() {
                                         <Grid container spacing={0.75}>
                                             {createBannerItems(
                                                 banner.fiveStars,
-                                                "weapon"
+                                                "weapon",
+                                                characters,
+                                                weapons
                                             ).map((item, index) => (
                                                 <DisplayCard
                                                     key={index}
@@ -185,7 +199,9 @@ function CurrentBanners() {
                                             ))}
                                             {createBannerItems(
                                                 banner.fourStars,
-                                                "weapon"
+                                                "weapon",
+                                                characters,
+                                                weapons
                                             ).map((item, index) => (
                                                 <DisplayCard
                                                     key={index}
