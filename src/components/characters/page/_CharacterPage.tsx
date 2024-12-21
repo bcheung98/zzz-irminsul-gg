@@ -4,9 +4,9 @@ import { useParams } from "react-router";
 import CharacterImage from "./CharacterImage";
 import CharacterInfoMain from "./CharacterInfoMain";
 import CharacterInfoMisc from "./CharacterInfoMisc";
-import CharacterStatsTable from "./table/CharacterStatsTable";
-import CharacterSkillDisplay from "./skills/CharacterSkillDisplay";
-import CharacterCinemaDisplay from "./cinema/CharacterCinemaDisplay";
+import CharacterStats from "./CharacterStats";
+import CharacterSkills from "./skills/CharacterSkills";
+import CharacterCinema from "./CharacterCinema";
 import PageNotFound from "components/PageNotFound";
 
 // MUI imports
@@ -34,7 +34,7 @@ function CharacterPage() {
         const charSplash = <CharacterImage character={character} />;
         const infoMain = <CharacterInfoMain character={character} />;
         const infoMisc = <CharacterInfoMisc character={character} />;
-        const stats = <CharacterStatsTable character={character} />;
+        const stats = <CharacterStats character={character} />;
 
         return (
             <Stack spacing={2}>
@@ -61,8 +61,8 @@ function CharacterPage() {
                         {infoMisc}
                     </>
                 )}
-                <CharacterSkillDisplay character={character} />
-                <CharacterCinemaDisplay character={character} />
+                <CharacterSkills character={character} />
+                <CharacterCinema character={character} />
             </Stack>
         );
     } else {

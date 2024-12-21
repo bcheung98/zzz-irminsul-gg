@@ -6,13 +6,17 @@ import StatsTable from "custom/StatsTable";
 import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
 
 // Helper imports
-import { mainStats, subStats } from "data/weaponStats";
+import { characterColors } from "helpers/characterColors";
 
 // Type imports
-import { WeaponProps } from "types/weapon";
+import { CharacterProps } from "types/character";
+import { CharacterColors } from "types/character";
 
-function WeaponStatsTable({ weapon }: WeaponProps) {
-    const { rarity, stats } = weapon;
+function CharacterStats({ character }: CharacterProps) {
+    const { stats, colors, element } = character;
+
+    const getCharacterColor = (option: keyof CharacterColors) =>
+        characterColors(colors, option, element);
 
     const [mode, setMode] = React.useState<"slider" | "table">("slider");
     const handleMode = (
@@ -47,20 +51,16 @@ function WeaponStatsTable({ weapon }: WeaponProps) {
     const data = [
         ["Level", ...levels],
         [
-            stats.mainStat.type,
-            ...levels.map(
-                (_, index) =>
-                    mainStats[stats.mainStat.type].scaling[
-                        stats.mainStat.value
-                    ][index] || 0
-            ),
+            "Base HP",
+            ...levels.map((_, index) => stats.hp[index].toLocaleString() || 0),
         ],
         [
-            stats.subStat,
-            ...levels.map(
-                (_, index) =>
-                    subStats[stats.subStat].scaling[rarity][index] || 0
-            ),
+            "Base ATK",
+            ...levels.map((_, index) => stats.atk[index].toLocaleString() || 0),
+        ],
+        [
+            "Base DEF",
+            ...levels.map((_, index) => stats.def[index].toLocaleString() || 0),
         ],
     ];
 
@@ -89,6 +89,7 @@ function WeaponStatsTable({ weapon }: WeaponProps) {
                         minWidth: "100px",
                         maxWidth: "90%",
                         ml: "10px",
+                        color: getCharacterColor("accent"),
                     },
                 }}
             />
@@ -96,4 +97,4 @@ function WeaponStatsTable({ weapon }: WeaponProps) {
     );
 }
 
-export default WeaponStatsTable;
+export default CharacterStats;

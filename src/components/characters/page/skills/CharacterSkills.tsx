@@ -20,7 +20,7 @@ import {
     CharacterSkillKey,
 } from "types/character";
 
-function CharacterSkillDisplay({ character }: CharacterProps) {
+function CharacterSkills({ character }: CharacterProps) {
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -137,7 +137,7 @@ function CharacterSkillDisplay({ character }: CharacterProps) {
     );
 }
 
-export default CharacterSkillDisplay;
+export default CharacterSkills;
 
 function getSkillImage(skill: CharacterSkillKey) {
     switch (skill) {

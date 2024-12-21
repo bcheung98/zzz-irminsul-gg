@@ -16,7 +16,7 @@ import Grid from "@mui/material/Grid2";
 // Type imports
 import { CharacterCinemaKey, CharacterProps } from "types/character";
 
-function CharacterCinemaDisplay({ character }: CharacterProps) {
+function CharacterCinema({ character }: CharacterProps) {
     const theme = useTheme();
     const { cinema } = character;
 
@@ -79,4 +79,4 @@ function CharacterCinemaDisplay({ character }: CharacterProps) {
     );
 }
 
-export default CharacterCinemaDisplay;
+export default CharacterCinema;
