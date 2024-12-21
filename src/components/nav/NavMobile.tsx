@@ -1,6 +1,7 @@
 import React from "react";
 
 // Component imports
+import Settings from "./Settings";
 import Image from "custom/Image";
 import { TextStyled } from "styled/StyledTypography";
 import Logo from "./Logo";
@@ -42,7 +43,7 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
         };
 
     return (
-        <React.Fragment>
+        <>
             <AppBar position="fixed">
                 <Toolbar disableGutters>
                     <IconButton onClick={toggleDrawer(true)} sx={{ mx: "8px" }}>
@@ -76,6 +77,12 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
                         <Logo onHomePage={onHomePage} />
                     </Toolbar>
                 </AppBar>
+                <List>
+                    <Box sx={styles.listItem("_")}>
+                        <Settings />
+                    </Box>
+                </List>
+                <Divider variant="middle" />
                 <List>
                     {navItems.map((item, index) => (
                         <Box key={index} sx={styles.listItem(item.link)}>
@@ -119,7 +126,7 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
                     ))}
                 </List>
             </SwipeableDrawer>
-        </React.Fragment>
+        </>
     );
 }
 

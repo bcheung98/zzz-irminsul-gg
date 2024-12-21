@@ -30,13 +30,17 @@ import {
     fetchCharacterBanners,
     fetchWeaponBanners,
 } from "rtk/fetchData";
-import { useAppDispatch } from "helpers/hooks";
-import theme from "themes/theme";
+import { useAppDispatch, useAppSelector } from "helpers/hooks";
+import { selectTheme, setTheme } from "reducers/settings";
+import { getTheme } from "themes/theme";
 
 function App() {
     const dispatch = useAppDispatch();
 
+    const theme = useAppSelector(selectTheme).name;
+
     React.useEffect(() => {
+        dispatch(setTheme(theme));
         dispatch(fetchCharacters());
         dispatch(fetchWeapons());
         dispatch(fetchBangboos());
@@ -46,7 +50,7 @@ function App() {
     });
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={getTheme(theme)}>
             <CssBaseline />
             <Router>
                 <Box id="back-to-top-anchor" />

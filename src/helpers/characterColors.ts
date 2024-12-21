@@ -1,4 +1,4 @@
-import theme from "themes/theme";
+import { useTheme } from "@mui/material";
 import { Element } from "types/_common";
 import { CharacterColors } from "types/character";
 
@@ -7,6 +7,7 @@ export function characterColors(
     option: keyof CharacterColors,
     element: Element
 ) {
+    const theme = useTheme();
     return (
         colors[option] ||
         theme.text[element.toLowerCase() as keyof typeof theme.text] ||

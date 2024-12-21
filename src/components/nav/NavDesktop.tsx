@@ -1,10 +1,12 @@
 import React from "react";
 
 // Component imports
+import Logo from "./Logo";
+import Settings from "./Settings";
 import Image from "custom/Image";
+import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
 import { StyledTooltip } from "styled/StyledTooltip";
-import Logo from "./Logo";
 
 // MUI imports
 import {
@@ -66,20 +68,29 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
     };
 
     return (
-        <React.Fragment>
+        <>
             <AppBar position="fixed">
-                <Toolbar disableGutters>
-                    <Box sx={{ width: "64px", px: "14px" }}>
-                        <IconButton
-                            onClick={toggleDrawerState}
-                            disableRipple
-                            disableTouchRipple
-                            sx={menuButtonStyle}
-                        >
-                            <MenuOpenIcon sx={menuIconStyle} />
-                        </IconButton>
-                    </Box>
-                    <Logo onHomePage={onHomePage} />
+                <Toolbar
+                    disableGutters
+                    sx={{
+                        pr: "32px",
+                        justifyContent: "space-between",
+                    }}
+                >
+                    <FlexBox>
+                        <Box sx={{ width: "64px", px: "14px" }}>
+                            <IconButton
+                                onClick={toggleDrawerState}
+                                disableRipple
+                                disableTouchRipple
+                                sx={menuButtonStyle}
+                            >
+                                <MenuOpenIcon sx={menuIconStyle} />
+                            </IconButton>
+                        </Box>
+                        <Logo onHomePage={onHomePage} />
+                    </FlexBox>
+                    <Settings />
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -170,8 +181,9 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
                         ))}
                     </Collapse>
                 </List>
+                <Toolbar />
             </Drawer>
-        </React.Fragment>
+        </>
     );
 }
 

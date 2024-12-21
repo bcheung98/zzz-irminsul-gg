@@ -1,12 +1,20 @@
 import { darkThemeData } from "themes/darkTheme";
+import { lightThemeData } from "themes/lightTheme";
+import { themeNames } from "themes/theme";
+
+export type ThemeNames = (typeof themeNames)[number];
+
+type DarkTheme = typeof darkThemeData;
+type LightTheme = typeof lightThemeData;
+type ThemeData = DarkTheme & LightTheme;
 
 export type CustomTheme = {
-    [Key in keyof typeof darkThemeData]: (typeof darkThemeData)[Key];
+    [Key in keyof ThemeData]: ThemeData[Key];
 };
 
 declare module "@mui/material/styles" {
     interface Theme extends CustomTheme {}
-    interface ThemeOptions extends CustomTheme {}
+    interface ThemeOptions extends Partial<CustomTheme> {}
     interface TypographyVariants {
         sitename: React.CSSProperties;
     }

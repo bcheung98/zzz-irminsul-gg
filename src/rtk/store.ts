@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { listenerMiddleware } from "./middleware";
 
+import settingsReducer from "reducers/settings";
 import characterReducer from "reducers/character";
 import characterFilterReducer from "reducers/characterFilters";
 import weaponReducer from "reducers/weapon";
@@ -12,6 +13,7 @@ import bannerReducer from "reducers/banner";
 
 const store = configureStore({
     reducer: {
+        settings: settingsReducer,
         characters: characterReducer,
         characterFilters: characterFilterReducer,
         weapons: weaponReducer,
