@@ -21,7 +21,9 @@ export type CostObjectKeys =
     | CharacterAscensionMaterial
     | keyof typeof characterLevel
     | keyof typeof characterSkill
-    | keyof ReturnType<typeof weaponLevel>;
+    | keyof ReturnType<typeof weaponLevel>
+    | "Credit"
+    | "Hamster Cage Pass";
 
 export type TotalCostObjectKeys = keyof TotalCostObject;
 

@@ -43,7 +43,7 @@ export function getCharacterLevelCost(
     }
     return {
         credits: {
-            credits: credits,
+            Credit: credits,
         },
         characterXP: {
             characterXP1: characterXP1,
@@ -81,14 +81,14 @@ export function getCharacterSkillCost(
     }
     return {
         credits: {
-            credits: credits,
+            Credit: credits,
         },
         characterSkill: {
             characterSkill1: characterSkill1,
             characterSkill2: characterSkill2,
             characterSkill3: characterSkill3,
         },
-        hamsterCagePass: { hamsterCagePass: hamsterCagePass },
+        hamsterCagePass: { "Hamster Cage Pass": hamsterCagePass },
     } as PayloadCostObject;
 }
 
@@ -107,7 +107,7 @@ export function getCharacterCoreSkillCost(
     }
     return {
         credits: {
-            credits: credits,
+            Credit: credits,
         },
         bossMat: {
             bossMat: bossMat,
@@ -154,7 +154,7 @@ export function getWeaponLevelCost(
     }
     return {
         credits: {
-            credits: credits,
+            Credit: credits,
         },
         weaponXP: {
             weaponXP1: weaponXP1,
