@@ -1,7 +1,7 @@
 import React from "react";
 
 // Component imports
-import Settings from "./Settings";
+import Settings from "components/Settings";
 import Image from "custom/Image";
 import { TextStyled } from "styled/StyledTypography";
 import Logo from "./Logo";

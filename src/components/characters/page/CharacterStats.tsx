@@ -7,7 +7,7 @@ import ToggleButtons from "custom/ToggleButtons";
 
 // Helper imports
 import { characterColors } from "helpers/characterColors";
-import { skillDisplayButtons } from "components/nav/Settings";
+import { skillDisplayButtons } from "components/Settings";
 
 // Type imports
 import { CharacterProps } from "types/character";

@@ -7,7 +7,7 @@ import ToggleButtons from "custom/ToggleButtons";
 
 // Helper imports
 import { mainStats, subStats } from "data/weaponStats";
-import { skillDisplayButtons } from "components/nav/Settings";
+import { skillDisplayButtons } from "components/Settings";
 
 // Type imports
 import { WeaponProps } from "types/weapon";

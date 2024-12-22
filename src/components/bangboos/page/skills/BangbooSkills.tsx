@@ -12,7 +12,7 @@ import { useTheme, useMediaQuery } from "@mui/material";
 
 // Helper imports
 import { objectKeys } from "helpers/utils";
-import { skillDisplayButtons } from "components/nav/Settings";
+import { skillDisplayButtons } from "components/Settings";
 
 // Type imports
 import {

@@ -2,7 +2,7 @@ import React from "react";
 
 // Component imports
 import Logo from "./Logo";
-import Settings from "./Settings";
+import Settings from "components/Settings";
 import Image from "custom/Image";
 import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";

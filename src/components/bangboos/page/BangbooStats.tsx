@@ -4,7 +4,7 @@ import React from "react";
 import MainContentBox from "custom/MainContentBox";
 import StatsTable from "custom/StatsTable";
 import ToggleButtons from "custom/ToggleButtons";
-import { skillDisplayButtons } from "components/nav/Settings";
+import { skillDisplayButtons } from "components/Settings";
 
 // Type imports
 import { BangbooProps } from "types/bangboo";

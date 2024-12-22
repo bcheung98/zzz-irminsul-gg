@@ -29,7 +29,7 @@ import {
     setTheme,
     SkillDisplay,
 } from "reducers/settings";
-import { navStyles } from "./Nav";
+import { navStyles } from "./nav/Nav";
 import { themeNames } from "themes/theme";
 import { Region, regions } from "helpers/dates";
 
