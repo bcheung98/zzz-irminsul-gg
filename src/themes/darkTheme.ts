@@ -52,6 +52,10 @@ export const darkThemeData = {
         color: border.color,
         highlight: border.highlight,
     },
+    button: {
+        primary: "rgb(25, 118, 210)",
+        hover: "rgb(45, 138, 230)",
+    },
     displayCard: {
         borderWidth: 0,
         border: `0px solid ${border.color}`,
