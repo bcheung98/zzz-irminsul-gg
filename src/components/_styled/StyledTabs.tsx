@@ -38,7 +38,7 @@ export const StyledTabs = styled((props: TabsProps) => (
 export const StyledTab = styled((props: TabProps) => (
     <Tab disableRipple {...props} />
 ))(({ theme }) => ({
-    color: theme.text.main,
+    color: theme.text.primary,
     "&.Mui-selected": {
         color: theme.text.selected,
     },

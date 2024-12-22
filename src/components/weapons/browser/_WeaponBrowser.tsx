@@ -166,7 +166,7 @@ function WeaponBrowser() {
                               flexShrink: 0,
                               "& .MuiDrawer-paper": {
                                   width: drawerWidth,
-                                  borderLeft: `1px solid ${theme.border.color}`,
+                                  borderLeft: `1px solid ${theme.border.color.primary}`,
                                   backgroundColor: theme.background(3),
                                   py: 2.5,
                                   scrollbarWidth: "none",
@@ -174,7 +174,7 @@ function WeaponBrowser() {
                           }
                         : {
                               "& .MuiDrawer-paper": {
-                                  borderTop: `1px solid ${theme.border.color}`,
+                                  borderTop: `1px solid ${theme.border.color.primary}`,
                                   backgroundColor: theme.background(3),
                                   height: "auto",
                                   maxHeight: "88%",

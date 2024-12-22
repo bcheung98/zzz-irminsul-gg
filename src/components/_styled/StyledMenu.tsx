@@ -3,8 +3,8 @@ import { MenuItem } from "@mui/material";
 
 export const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
     "&.MuiMenuItem-root": {
-        backgroundColor: theme.menu.default,
-        color: theme.text.main,
+        backgroundColor: theme.menu.primary,
+        color: theme.text.primary,
         "&:hover": {
             backgroundColor: theme.menu.hover,
         },

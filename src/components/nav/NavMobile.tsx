@@ -60,7 +60,7 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
                 sx={{
                     [`& .MuiDrawer-paper`]: {
                         backgroundColor: theme.background(0),
-                        borderBottom: `1px solid ${theme.border.color}`,
+                        borderBottom: `1px solid ${theme.border.color.primary}`,
                         height: "100%",
                         overflowX: "hidden",
                     },

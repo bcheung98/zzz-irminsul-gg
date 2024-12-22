@@ -60,7 +60,7 @@ function ActionFab({
                             borderRadius: "5px",
                             backgroundColor:
                                 color?.primary || theme.menu.selectedHover,
-                            color: theme.text.main,
+                            color: theme.text.primary,
                             "&:hover": {
                                 backgroundColor:
                                     color?.hover || theme.menu.hover,

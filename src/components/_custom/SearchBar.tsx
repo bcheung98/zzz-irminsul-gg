@@ -42,7 +42,7 @@ function SearchBar({
                     width: size.width,
                     height: size.height,
                     backgroundColor: theme.menu.selectedHover,
-                    color: theme.text.main,
+                    color: theme.text.primary,
                     fontFamily: theme.font.styled.family,
                     fontWeight: theme.font.styled.weight,
                     borderRadius: "5px",
@@ -57,7 +57,7 @@ function SearchBar({
                         <React.Fragment>
                             <InputAdornment
                                 position="start"
-                                sx={{ color: theme.text.main }}
+                                sx={{ color: theme.text.primary }}
                             >
                                 {inputIcon || <SearchIcon />}
                             </InputAdornment>

@@ -127,12 +127,12 @@ function CharacterFilters({
                         startIcon={<RestartAltIcon />}
                         sx={{
                             backgroundColor: theme.menu.selected,
-                            color: theme.text.main,
+                            color: theme.text.primary,
                             height: "32px",
                             "&.Mui-disabled": {
-                                backgroundColor: theme.menu.default,
+                                backgroundColor: theme.menu.primary,
                                 opacity: 0.35,
-                                color: theme.text.main,
+                                color: theme.text.primary,
                             },
                         }}
                     >
@@ -153,7 +153,7 @@ function CharacterFilters({
                         titleColor={
                             filter.value.length > 0
                                 ? `rgb(30, 175, 255)`
-                                : theme.text.main
+                                : theme.text.primary
                         }
                         contentPadding="5px 0px 5px 25px"
                     >

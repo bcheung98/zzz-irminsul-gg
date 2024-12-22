@@ -14,14 +14,14 @@ export const StyledToggleButton = styled(
 )(({ theme, highlightOnHover }) => ({
     "&.MuiToggleButton-root": {
         opacity: 0.4,
-        color: theme.text.main,
+        color: theme.text.primary,
         "&:hover": {
             backgroundColor: theme.menu.hover,
             borderColor: highlightOnHover
-                ? theme.border.highlight
-                : theme.border.color,
+                ? theme.border.color.highlight
+                : theme.border.color.primary,
             boxShadow: highlightOnHover
-                ? `0 0 4px 1px ${theme.border.highlight}`
+                ? `0 0 4px 1px ${theme.border.color.highlight}`
                 : "none",
         },
     },
@@ -36,10 +36,10 @@ export const StyledToggleButtonGroup = styled(
         padding: getPadding(padding),
         margin: spacing ? `${spacing}px !important` : "0px",
         border: spacing
-            ? `1px solid ${theme.border.color} !important`
-            : `1px solid ${theme.border.color}`,
+            ? `1px solid ${theme.border.color.primary} !important`
+            : `1px solid ${theme.border.color.primary}`,
         borderRadius: spacing ? "5px" : "none",
-        backgroundColor: theme.menu.default,
+        backgroundColor: theme.menu.primary,
         "&.Mui-selected": {
             backgroundColor: theme.menu.selected,
             opacity: 1,

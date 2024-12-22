@@ -86,7 +86,7 @@ function WeaponSelector() {
                             backgroundColor: theme.menu.selectedHover,
                         },
                         "&:not(:last-child)": {
-                            borderBottom: `1px solid ${theme.border.color}`,
+                            borderBottom: `1px solid ${theme.border.color.primary}`,
                         },
                     }}
                 >
@@ -125,10 +125,10 @@ function WeaponSelector() {
                 chip: {
                     sx: {
                         backgroundColor: theme.background(8),
-                        color: theme.text.main,
+                        color: theme.text.primary,
                         fontFamily: theme.font.styled.family,
                         "& .MuiChip-deleteIcon": {
-                            color: theme.text.main,
+                            color: theme.text.primary,
                             ":hover": {
                                 color: theme.text.description,
                             },
@@ -140,7 +140,7 @@ function WeaponSelector() {
                 },
                 paper: {
                     sx: {
-                        backgroundColor: theme.menu.default,
+                        backgroundColor: theme.menu.primary,
                         borderRadius: "5px",
                     },
                 },

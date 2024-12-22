@@ -53,7 +53,7 @@ function VersionHighlights() {
         px: 0,
         "&.Mui-disabled": {
             opacity: 0.35,
-            color: theme.text.main,
+            color: theme.text.primary,
         },
     };
 

@@ -91,7 +91,7 @@ function CharacterSkills({ character }: CharacterProps) {
                 sx={{
                     height: "100%",
                     "& .MuiTabScrollButton-root": {
-                        color: theme.text.main,
+                        color: theme.text.primary,
                         backgroundColor: theme.background(7),
                     },
                     ".MuiTabs-scrollButtons.Mui-disabled": {

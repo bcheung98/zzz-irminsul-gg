@@ -99,7 +99,7 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
                 sx={{
                     boxSizing: "content-box",
                     [`& .MuiDrawer-paper`]: {
-                        borderRight: `1px solid ${theme.border.color}`,
+                        borderRight: `1px solid ${theme.border.color.primary}`,
                         backgroundColor: theme.appbar.backgroundColor,
                         pt: 2.5,
                     },

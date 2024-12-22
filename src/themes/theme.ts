@@ -25,10 +25,10 @@ export function getTheme(name: string) {
             MuiAutocomplete: {
                 styleOverrides: {
                     noOptions: {
-                        color: theme.text.main,
+                        color: theme.text.primary,
                         fontFamily: theme.font.styled.family,
                         fontWeight: theme.font.styled.weight,
-                        backgroundColor: theme.menu.default,
+                        backgroundColor: theme.menu.primary,
                     },
                 },
             },
@@ -38,15 +38,15 @@ export function getTheme(name: string) {
                         backgroundColor: theme.appbar.backgroundColor,
                         borderWidth: "0 0 1px 0",
                         borderStyle: "solid",
-                        borderColor: theme.border.color,
+                        borderColor: theme.border.color.primary,
                     },
                 },
             },
             MuiButton: {
                 styleOverrides: {
                     root: {
-                        borderColor: theme.border.color,
-                        color: theme.text.main,
+                        borderColor: theme.border.color.primary,
+                        color: theme.text.primary,
                         fontFamily: theme.font.styled.family,
                         fontWeight: theme.font.styled.weight,
                         textTransform: "none",
@@ -63,14 +63,14 @@ export function getTheme(name: string) {
             MuiDivider: {
                 styleOverrides: {
                     root: {
-                        borderColor: theme.border.color,
+                        borderColor: theme.border.color.primary,
                     },
                 },
             },
             MuiIconButton: {
                 styleOverrides: {
                     root: {
-                        color: theme.text.main,
+                        color: theme.text.primary,
                     },
                 },
             },
@@ -81,14 +81,14 @@ export function getTheme(name: string) {
                     },
                     list: {
                         backgroundColor: theme.background(1),
-                        color: theme.text.main,
+                        color: theme.text.primary,
                     },
                 },
             },
             MuiSelect: {
                 styleOverrides: {
                     icon: {
-                        color: theme.text.main,
+                        color: theme.text.primary,
                     },
                 },
             },

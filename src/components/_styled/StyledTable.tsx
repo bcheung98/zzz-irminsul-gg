@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 
 export const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    backgroundColor: theme.menu.default,
+    backgroundColor: theme.menu.primary,
     [`&.${tableRowClasses.hover}`]: {
         "&:hover": {
             backgroundColor: theme.menu.hover,
@@ -19,7 +19,7 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    borderColor: theme.border.color,
+    borderColor: theme.border.color.primary,
     padding: "8px 16px",
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.background(8),

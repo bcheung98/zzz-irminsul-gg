@@ -42,12 +42,12 @@ function Dropdown({
                 <ExpandMore
                     sx={{
                         mr: "5px",
-                        color: iconColor || theme.border.color,
+                        color: iconColor || theme.border.color.primary,
                         transform: open ? "rotateZ(0deg)" : "rotateZ(-90deg)",
                         transition: "transform 0.25s",
                     }}
                 />
-                <TextStyled sx={{ color: titleColor || theme.text.main }}>
+                <TextStyled sx={{ color: titleColor || theme.text.primary }}>
                     {title}
                 </TextStyled>
             </IconButton>

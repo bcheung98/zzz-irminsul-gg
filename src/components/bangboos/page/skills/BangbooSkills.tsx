@@ -82,7 +82,7 @@ function BangbooSkills({ bangboo }: BangbooProps) {
                 sx={{
                     height: "100%",
                     "& .MuiTabScrollButton-root": {
-                        color: theme.text.main,
+                        color: theme.text.primary,
                         backgroundColor: theme.background(7),
                     },
                     ".MuiTabs-scrollButtons.Mui-disabled": {
@@ -90,7 +90,7 @@ function BangbooSkills({ bangboo }: BangbooProps) {
                     },
                     "& .MuiTabs-indicatorSpan": {
                         width: "100%",
-                        backgroundColor: theme.border.highlight,
+                        backgroundColor: theme.border.color.highlight,
                     },
                 }}
             >

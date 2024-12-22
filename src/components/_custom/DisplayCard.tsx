@@ -125,7 +125,7 @@ function DisplayCard({
         border: "solid",
         borderWidth: borderWidth,
         borderColor:
-            variant === "card" ? theme.border.color : getRarityColor(rarity),
+            variant === "card" ? theme.border.color.primary : getRarityColor(rarity),
         borderRadius: "5px",
     };
 
@@ -146,7 +146,7 @@ function DisplayCard({
         minWidth: "16px",
         minHeight: "16px",
         backgroundColor: theme.background(1),
-        border: `2px solid ${theme.border.color}`,
+        border: `2px solid ${theme.border.color.primary}`,
         borderRadius: "16px",
         padding: "4px",
     };

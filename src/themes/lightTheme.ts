@@ -40,7 +40,7 @@ export const lightThemeData = {
         },
     },
     text: {
-        main: "white",
+        primary: "white",
         selected: "rgb(25, 118, 210)",
         description: "rgb(205, 205, 205)",
         highlight: "white",
@@ -49,8 +49,10 @@ export const lightThemeData = {
         backgroundColor: backgroundColors[8],
     },
     border: {
-        color: border.color,
-        highlight: border.highlight,
+        color: {
+            primary: border.color,
+            highlight: border.highlight,
+        },
     },
     button: {
         primary: "rgb(25, 118, 210)",
@@ -67,7 +69,7 @@ export const lightThemeData = {
         borderRadius: "5px",
     },
     menu: {
-        default: backgroundColors[1],
+        primary: backgroundColors[1],
         hover: backgroundColors[2],
         selected: backgroundColors[4],
         selectedHover: backgroundColors[3],

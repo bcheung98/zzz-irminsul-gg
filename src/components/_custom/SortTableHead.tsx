@@ -49,7 +49,7 @@ function SortTableHead({
                                 "& .MuiTableSortLabel-icon": {
                                     fill:
                                         orderBy === column.id
-                                            ? theme.border.highlight
+                                            ? theme.border.color.highlight
                                             : "grey",
                                     opacity: 0,
                                 },
