@@ -132,7 +132,7 @@ export const navStyles = (paramTheme: Theme) => ({
         width: "100%",
         height: `${size * 1.5}px`,
         "&:hover": {
-            backgroundColor: theme.table.body.hover,
+            backgroundColor: theme.background(3),
         },
     }),
     listItemText: (open = true): SxProps => ({

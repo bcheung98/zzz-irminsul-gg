@@ -135,7 +135,7 @@ function Settings() {
                               width: "36px",
                               height: "36px",
                               "&:hover": {
-                                  backgroundColor: theme.table.body.hover,
+                                  backgroundColor: theme.background(3),
                               },
                           }
                         : styles.listItemButton()

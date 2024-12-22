@@ -128,7 +128,7 @@ function CharacterBrowser() {
                             sx={{
                                 height: "36px",
                                 border: 0,
-                                backgroundColor: theme.menu.selectedHover,
+                                backgroundColor: theme.background(3),
                             }}
                         >
                             Filters

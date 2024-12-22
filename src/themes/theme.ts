@@ -96,7 +96,7 @@ export function getTheme(name: string) {
                 styleOverrides: {
                     root: {
                         borderRadius: "5px",
-                        backgroundColor: theme.background(1),
+                        backgroundColor: theme.background(3),
                     },
                 },
             },

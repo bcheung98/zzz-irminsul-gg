@@ -12,7 +12,7 @@ import store from "rtk/store";
 import { useAppSelector } from "helpers/hooks";
 import { selectServer } from "reducers/settings";
 import { createDateObject, isCurrentBanner } from "helpers/dates";
-import { isTBA } from "helpers/utils";
+import { getHoverColor, isTBA } from "helpers/utils";
 
 // Type imports
 import { BannerRow } from "./BannerList";
@@ -38,8 +38,8 @@ function BannerListRow({
         <StyledTableRow
             sx={{
                 backgroundColor: isCurrentBanner(start.obj, end.obj)
-                    ? theme.menu.selected
-                    : theme.menu.hover,
+                    ? getHoverColor(theme.button.primary, -25)
+                    : theme.background(3),
             }}
         >
             <StyledTableCell>

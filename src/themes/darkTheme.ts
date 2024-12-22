@@ -1,20 +1,17 @@
 import { createTheme } from "@mui/material";
+import { getHoverColor } from "helpers/utils";
 
-let [r, g, b] = [32, 56, 96];
-const max = (b - 32) / 8;
-const backgroundColors: string[] = [];
-for (let i = 0; i <= max; i++) {
-    backgroundColors.push(`rgb(${r}, ${g}, ${b})`);
-    if (r > 0) {
-        r -= 8;
-    }
-    if (g > 16) {
-        g -= 8;
-    }
-    if (b > 32) {
-        b -= 8;
-    }
-}
+const backgroundColors: string[] = [
+    "rgb(32, 56, 96)",
+    "rgb(24, 48, 88)",
+    "rgb(16, 40, 80)",
+    "rgb(8, 32, 72)",
+    "rgb(0, 24, 64)",
+    "rgb(0, 24, 60)",
+    "rgb(0, 20, 50)",
+    "rgb(0, 20, 40)",
+    "rgb(0, 16, 32)",
+];
 
 const border = {
     color: "rgb(168, 147, 105)",
@@ -41,12 +38,12 @@ export const darkThemeData = {
     },
     text: {
         primary: "white",
-        selected: "rgb(25, 118, 210)",
+        selected: "rgb(30, 175, 255)",
         description: "rgb(205, 205, 205)",
         highlight: "white",
     },
     appbar: {
-        backgroundColor: backgroundColors[8],
+        backgroundColor: "rgb(0, 16, 32)",
     },
     border: {
         color: {
@@ -70,13 +67,14 @@ export const darkThemeData = {
     },
     menu: {
         primary: backgroundColors[1],
-        hover: backgroundColors[2],
-        selected: backgroundColors[4],
-        selectedHover: backgroundColors[3],
+        hover: getHoverColor(backgroundColors[1]),
+        selected: backgroundColors[3],
+        selectedHover: backgroundColors[4],
     },
     table: {
         body: {
-            hover: backgroundColors[2],
+            primary: backgroundColors[1],
+            hover: getHoverColor(backgroundColors[1]),
         },
     },
 };

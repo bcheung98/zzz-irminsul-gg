@@ -7,10 +7,10 @@ import {
 } from "@mui/material";
 
 export const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    backgroundColor: theme.menu.primary,
+    backgroundColor: theme.table.body.primary,
     [`&.${tableRowClasses.hover}`]: {
         "&:hover": {
-            backgroundColor: theme.menu.hover,
+            backgroundColor: theme.table.body.hover,
         },
     },
     "&:last-child td, &:last-child th": {

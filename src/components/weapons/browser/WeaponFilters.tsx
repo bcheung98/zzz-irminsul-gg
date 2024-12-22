@@ -59,11 +59,11 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
                         variant="outlined"
                         startIcon={<RestartAltIcon />}
                         sx={{
-                            backgroundColor: theme.menu.selected,
+                            backgroundColor: theme.background(5),
                             color: theme.text.primary,
                             height: "32px",
                             "&.Mui-disabled": {
-                                backgroundColor: theme.menu.primary,
+                                backgroundColor: theme.background(0),
                                 opacity: 0.35,
                                 color: theme.text.primary,
                             },
@@ -85,7 +85,7 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
                         title={filter.name}
                         titleColor={
                             filter.value.length > 0
-                                ? `rgb(30, 175, 255)`
+                                ? theme.text.selected
                                 : theme.text.primary
                         }
                         contentPadding="5px 0px 5px 25px"
