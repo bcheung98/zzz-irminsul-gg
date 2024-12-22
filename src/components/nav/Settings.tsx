@@ -171,8 +171,10 @@ function Settings() {
                             <FlexBox
                                 key={index}
                                 sx={{
+                                    flexGrow: 1,
                                     flexWrap: "wrap",
                                     justifyContent: "space-between",
+                                    gap: "8px",
                                 }}
                             >
                                 <TextStyled>{setting.label}</TextStyled>
