@@ -8,16 +8,14 @@ import { useTheme } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 // Helper imports
+import store from "rtk/store";
+import { useAppSelector } from "helpers/hooks";
+import { selectServer } from "reducers/settings";
 import { createDateObject, isCurrentBanner } from "helpers/dates";
 import { isTBA } from "helpers/utils";
-import { useAppSelector } from "helpers/hooks";
-import { selectCharacters } from "reducers/character";
-import { selectWeapons } from "reducers/weapon";
 
 // Type imports
 import { BannerRow } from "./BannerList";
-import { Character } from "types/character";
-import { Weapon } from "types/weapon";
 
 function BannerListRow({
     type,
@@ -28,24 +26,13 @@ function BannerListRow({
 }) {
     const theme = useTheme();
 
-    const characters = useAppSelector(selectCharacters);
-    const weapons = useAppSelector(selectWeapons);
+    const region = useAppSelector(selectServer).region;
 
     const { version, subVersion } = row;
-    const fiveStars = createBannerItems(
-        JSON.parse(row.fiveStars),
-        type,
-        characters,
-        weapons
-    );
-    const fourStars = createBannerItems(
-        JSON.parse(row.fourStars),
-        type,
-        characters,
-        weapons
-    );
-    const start = createDateObject(row.start);
-    const end = createDateObject(row.end);
+    const fiveStars = createBannerItems(JSON.parse(row.fiveStars), type);
+    const fourStars = createBannerItems(JSON.parse(row.fourStars), type);
+    const start = createDateObject({ date: row.start, region: region });
+    const end = createDateObject({ date: row.end, region: region });
 
     return (
         <StyledTableRow
@@ -103,10 +90,10 @@ interface BannerItem {
 
 export function createBannerItems(
     items: string[],
-    type: "character" | "weapon",
-    characters: Character[],
-    weapons: Weapon[]
+    type: "character" | "weapon"
 ): BannerItem[] {
+    const characters = store.getState().characters.characters;
+    const weapons = store.getState().weapons.weapons;
     return items.map((item: string) => {
         if (isTBA(item)) {
             return {

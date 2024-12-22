@@ -1,3 +1,6 @@
+// Components
+import { Text, TextStyled } from "styled/StyledTypography";
+
 // MUI imports
 import {
     useTheme,
@@ -10,8 +13,9 @@ import {
 } from "@mui/material";
 
 // Helper imports
+import { useAppSelector } from "helpers/hooks";
+import { selectServer } from "reducers/settings";
 import { createDateObject } from "helpers/dates";
-import { Text, TextStyled } from "styled/StyledTypography";
 
 // Type imports
 import { CharacterProps } from "types/character";
@@ -19,9 +23,13 @@ import { CharacterProps } from "types/character";
 function CharacterInfoMisc({ character }: CharacterProps) {
     const theme = useTheme();
 
+    const region = useAppSelector(selectServer).region;
+
     const { birthday, faction, voiceActors, release } = { ...character };
     const releaseDate =
-        release.date !== "" ? createDateObject(release.date).date : "";
+        release.date !== ""
+            ? createDateObject({ date: release.date, region: region }).date
+            : "";
     const releaseVersion = release.version;
 
     const rows = [
@@ -59,9 +67,7 @@ function CharacterInfoMisc({ character }: CharacterProps) {
                                 align="right"
                                 sx={{ border: "none", py: "1.5px" }}
                             >
-                                <Text variant="body2">
-                                    {row.value}
-                                </Text>
+                                <Text variant="body2">{row.value}</Text>
                             </TableCell>
                         </TableRow>
                     ))}

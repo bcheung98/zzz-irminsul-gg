@@ -13,7 +13,12 @@ const months = [
     "December",
 ];
 
-const offset = ["-5", "+1", "+8"]; // NA, EU, Asia
+export const regions = {
+    NA: "-5",
+    EU: "+1",
+    Asia: "+8",
+};
+export type Region = keyof typeof regions;
 
 export interface DateObject {
     obj: Date;
@@ -21,7 +26,13 @@ export interface DateObject {
     time: string;
 }
 
-export function createDateObject(date: string): DateObject {
+export function createDateObject({
+    date,
+    region = "NA",
+}: {
+    date: string;
+    region?: Region;
+}): DateObject {
     let dateObj, dateString, timestamp;
     if (date) {
         const formatDate = (date: string, offset: string) =>
@@ -30,11 +41,10 @@ export function createDateObject(date: string): DateObject {
                 .slice(0, 2)
                 .join(" ")
                 .replace(/-/g, "/")}${offset}`;
-
         if (date.endsWith("UTC+8")) {
             dateObj = new Date(formatDate(date, "+8"));
         } else {
-            dateObj = new Date(formatDate(date, offset[0]));
+            dateObj = new Date(formatDate(date, regions[region]));
         }
     } else {
         dateObj = new Date();

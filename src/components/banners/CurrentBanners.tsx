@@ -14,9 +14,8 @@ import Grid from "@mui/material/Grid2";
 
 // Helper imports
 import { useAppSelector } from "helpers/hooks";
-import { selectCharacters } from "reducers/character";
-import { selectWeapons } from "reducers/weapon";
 import { selectCharacterBanners, selectWeaponBanners } from "reducers/banner";
+import { selectServer } from "reducers/settings";
 import { createDateObject, isCurrentBanner } from "helpers/dates";
 import { isTBA } from "helpers/utils";
 import { createBannerItems } from "./BannerListRow";
@@ -24,22 +23,21 @@ import { createBannerItems } from "./BannerListRow";
 function CurrentBanners() {
     const theme = useTheme();
 
-    const characters = useAppSelector(selectCharacters);
-    const weapons = useAppSelector(selectWeapons);
+    const region = useAppSelector(selectServer).region;
 
     const characterBanners = useAppSelector(selectCharacterBanners);
     const weaponBanners = useAppSelector(selectWeaponBanners);
 
     const currentCharacterBanners = characterBanners.filter((banner) =>
         isCurrentBanner(
-            createDateObject(banner.start).obj,
-            createDateObject(banner.end).obj
+            createDateObject({ date: banner.start, region: region }).obj,
+            createDateObject({ date: banner.end, region: region }).obj
         )
     );
     const currentWeaponBanners = weaponBanners.filter((banner) =>
         isCurrentBanner(
-            createDateObject(banner.start).obj,
-            createDateObject(banner.end).obj
+            createDateObject({ date: banner.start, region: region }).obj,
+            createDateObject({ date: banner.end, region: region }).obj
         )
     );
 
@@ -87,9 +85,7 @@ function CurrentBanners() {
                                             <Grid container spacing={0.75}>
                                                 {createBannerItems(
                                                     banner.fiveStars,
-                                                    "character",
-                                                    characters,
-                                                    weapons
+                                                    "character"
                                                 ).map((item, index) => (
                                                     <DisplayCard
                                                         key={index}
@@ -115,9 +111,7 @@ function CurrentBanners() {
                                                 ))}
                                                 {createBannerItems(
                                                     banner.fourStars,
-                                                    "character",
-                                                    characters,
-                                                    weapons
+                                                    "character"
                                                 ).map((item, index) => (
                                                     <DisplayCard
                                                         key={index}
@@ -143,9 +137,10 @@ function CurrentBanners() {
                                                 ))}
                                             </Grid>
                                             <Countdown
-                                                date={createDateObject(
-                                                    banner.end
-                                                )}
+                                                date={createDateObject({
+                                                    date: banner.end,
+                                                    region: region,
+                                                })}
                                             />
                                         </Box>
                                     )
@@ -171,9 +166,7 @@ function CurrentBanners() {
                                         <Grid container spacing={0.75}>
                                             {createBannerItems(
                                                 banner.fiveStars,
-                                                "weapon",
-                                                characters,
-                                                weapons
+                                                "weapon"
                                             ).map((item, index) => (
                                                 <DisplayCard
                                                     key={index}
@@ -199,9 +192,7 @@ function CurrentBanners() {
                                             ))}
                                             {createBannerItems(
                                                 banner.fourStars,
-                                                "weapon",
-                                                characters,
-                                                weapons
+                                                "weapon"
                                             ).map((item, index) => (
                                                 <DisplayCard
                                                     key={index}
@@ -227,7 +218,10 @@ function CurrentBanners() {
                                             ))}
                                         </Grid>
                                         <Countdown
-                                            date={createDateObject(banner.end)}
+                                            date={createDateObject({
+                                                date: banner.end,
+                                                region: region,
+                                            })}
                                         />
                                     </Box>
                                 ))}

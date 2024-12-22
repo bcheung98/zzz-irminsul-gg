@@ -3,8 +3,8 @@ import React from "react";
 // Component imports
 import MainContentBox from "custom/MainContentBox";
 import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
-import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
+import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
 import {
@@ -18,16 +18,20 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
 
 // Helper imports
+import { objectKeys } from "helpers/utils";
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import {
+    selectServer,
     selectSkillDisplay,
     selectTheme,
+    setServer,
     setSkillDisplay,
     setTheme,
     SkillDisplay,
 } from "reducers/settings";
 import { navStyles } from "./Nav";
 import { themeNames } from "themes/theme";
+import { Region, regions } from "helpers/dates";
 
 // Type imports
 import { ThemeNames } from "types/theme";
@@ -41,6 +45,7 @@ function Settings() {
 
     const currentTheme = useAppSelector(selectTheme).name;
     const currentSkillDisplay = useAppSelector(selectSkillDisplay).mode;
+    const currentServer = useAppSelector(selectServer).region;
 
     const [settingsOpen, setSettingsOpen] = React.useState(false);
     const handleSettingsOpen = () => {
@@ -55,7 +60,7 @@ function Settings() {
             label: "Theme",
             options: (
                 <ToggleButtons
-                    buttons={createThemeButtons()}
+                    buttons={themeButtons}
                     value={currentTheme}
                     exclusive
                     onChange={(
@@ -76,10 +81,7 @@ function Settings() {
             label: "Skill Display",
             options: (
                 <ToggleButtons
-                    buttons={[
-                        { value: "slider", label: "Slider" },
-                        { value: "table", label: "Table" },
-                    ]}
+                    buttons={skillDisplayButtons}
                     value={currentSkillDisplay}
                     exclusive
                     onChange={(
@@ -88,6 +90,27 @@ function Settings() {
                     ) => {
                         if (newMode !== null) {
                             dispatch(setSkillDisplay(newMode));
+                        }
+                    }}
+                    spacing={0}
+                    padding={10}
+                    highlightOnHover={false}
+                />
+            ),
+        },
+        {
+            label: "Server",
+            options: (
+                <ToggleButtons
+                    buttons={regionButtons}
+                    value={currentServer}
+                    exclusive
+                    onChange={(
+                        _: React.BaseSyntheticEvent,
+                        newRegion: Region
+                    ) => {
+                        if (newRegion !== null) {
+                            dispatch(setServer(newRegion));
                         }
                     }}
                     spacing={0}
@@ -147,7 +170,10 @@ function Settings() {
                         {settings.slice(1).map((setting, index) => (
                             <FlexBox
                                 key={index}
-                                sx={{ justifyContent: "space-between" }}
+                                sx={{
+                                    flexWrap: "wrap",
+                                    justifyContent: "space-between",
+                                }}
                             >
                                 <TextStyled>{setting.label}</TextStyled>
                                 {setting.options}
@@ -162,14 +188,19 @@ function Settings() {
 
 export default Settings;
 
-function createThemeButtons(): CustomToggleButtonProps[] {
-    return themeNames.map((theme) => ({
-        value: theme,
-        label: theme,
-    }));
-}
+const themeButtons: CustomToggleButtonProps[] = themeNames.map((theme) => ({
+    value: theme,
+    label: theme,
+}));
 
 export const skillDisplayButtons: CustomToggleButtonProps[] = [
     { value: "slider", label: "Slider" },
     { value: "table", label: "Table" },
 ];
+
+const regionButtons: CustomToggleButtonProps[] = objectKeys(regions).map(
+    (region) => ({
+        value: region,
+        label: region,
+    })
+);

@@ -8,6 +8,8 @@ import { FlexBox } from "styled/StyledBox";
 import { ButtonBase } from "@mui/material";
 
 // Helper imports
+import { useAppSelector } from "helpers/hooks";
+import { selectServer } from "reducers/settings";
 import { createDateObject } from "helpers/dates";
 import { combineStyles } from "helpers/utils";
 
@@ -20,6 +22,8 @@ interface CharacterTableRowProps extends CharacterRow {
 }
 
 function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
+    const region = useAppSelector(selectServer).region;
+
     const columns = [
         {
             label: row.fullName,
@@ -59,7 +63,9 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
             imgStyle: { width: "48px", height: "48px" },
         },
         {
-            label: `${createDateObject(row.releaseDate).date} (${row.version})`,
+            label: `${
+                createDateObject({ date: row.releaseDate, region: region }).date
+            } (${row.version})`,
             labelStyle: { marginLeft: "0px" },
         },
     ];
