@@ -72,7 +72,7 @@ function Settings() {
                         }
                     }}
                     spacing={0}
-                    padding={10}
+                    padding="4px 12px"
                     highlightOnHover={false}
                 />
             ),
@@ -93,7 +93,7 @@ function Settings() {
                         }
                     }}
                     spacing={0}
-                    padding={10}
+                    padding="4px 12px"
                     highlightOnHover={false}
                 />
             ),
@@ -114,7 +114,7 @@ function Settings() {
                         }
                     }}
                     spacing={0}
-                    padding={10}
+                    padding="4px 12px"
                     highlightOnHover={false}
                 />
             ),

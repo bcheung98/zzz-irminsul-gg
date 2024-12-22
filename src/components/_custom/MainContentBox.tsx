@@ -7,6 +7,7 @@ import { TextStyled } from "styled/StyledTypography";
 import { useTheme, Card, AppBar, Toolbar, Box } from "@mui/material";
 
 interface HeaderProps {
+    dense?: boolean;
     padding?: string | number;
 }
 
@@ -29,6 +30,7 @@ function MainContentBox({
     title,
     actions,
     headerProps = {
+        dense: true,
         padding: "10px 20px",
     },
     contentProps = {
@@ -47,11 +49,14 @@ function MainContentBox({
         >
             <AppBar position="static">
                 <Toolbar
+                    variant={headerProps.dense ? "dense" : "regular"}
                     disableGutters
                     sx={{
                         p: headerProps.padding,
                         flexGrow: 1,
+                        flexWrap: "wrap",
                         justifyContent: "space-between",
+                        rowGap: "8px",
                     }}
                 >
                     {typeof title === "string" ? (

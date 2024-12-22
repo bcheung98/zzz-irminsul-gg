@@ -33,7 +33,7 @@ export const StyledToggleButtonGroup = styled(
 )(({ theme, spacing, padding = 4 }) => ({
     flexWrap: "wrap",
     "& .MuiToggleButtonGroup-grouped": {
-        padding: `${padding}px`,
+        padding: getPadding(padding),
         margin: spacing ? `${spacing}px !important` : "0px",
         border: spacing
             ? `1px solid ${theme.border.color} !important`
@@ -49,3 +49,11 @@ export const StyledToggleButtonGroup = styled(
         },
     },
 }));
+
+function getPadding(padding: string | number) {
+    if (typeof padding === "number") {
+        return `${padding}px`;
+    } else {
+        return padding;
+    }
+}
