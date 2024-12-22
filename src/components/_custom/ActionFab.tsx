@@ -6,6 +6,7 @@ import { TextStyled } from "styled/StyledTypography";
 // MUI imports
 import { useTheme, useScrollTrigger, Fab, Fade, Box } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import { StyledTooltip } from "styled/StyledTooltip";
 
 interface ActionFabProps {
     action?: (args: any) => void;
@@ -13,6 +14,11 @@ interface ActionFabProps {
     threshold?: number;
     icon?: React.ReactNode;
     label?: React.ReactNode;
+    tooltip?: string;
+    color?: {
+        primary?: string;
+        hover?: string;
+    };
     position?: {
         top?: string | number;
         right?: string | number;
@@ -27,6 +33,8 @@ function ActionFab({
     threshold = 100,
     icon,
     label,
+    tooltip = "",
+    color,
     position = {
         top: 90,
         right: 20,
@@ -42,27 +50,31 @@ function ActionFab({
     return (
         <Fade in={trigger}>
             <Box onClick={action} sx={[{ position: "fixed" }, { ...position }]}>
-                <Fab
-                    size="small"
-                    disableRipple
-                    sx={{
-                        width: "100%",
-                        p: 1,
-                        borderRadius: "5px",
-                        backgroundColor: theme.menu.selectedHover,
-                        color: theme.text.main,
-                        "&:hover": {
-                            backgroundColor: theme.menu.hover,
-                        },
-                    }}
-                >
-                    {icon || <KeyboardArrowLeftIcon />}
-                    {label && (
-                        <TextStyled variant="body2" sx={{ ml: "5px" }}>
-                            {label}
-                        </TextStyled>
-                    )}
-                </Fab>
+                <StyledTooltip title={tooltip}>
+                    <Fab
+                        size="small"
+                        disableRipple
+                        sx={{
+                            width: "100%",
+                            p: 1,
+                            borderRadius: "5px",
+                            backgroundColor:
+                                color?.primary || theme.menu.selectedHover,
+                            color: theme.text.main,
+                            "&:hover": {
+                                backgroundColor:
+                                    color?.hover || theme.menu.hover,
+                            },
+                        }}
+                    >
+                        {icon || <KeyboardArrowLeftIcon />}
+                        {label && (
+                            <TextStyled variant="body2" sx={{ ml: "5px" }}>
+                                {label}
+                            </TextStyled>
+                        )}
+                    </Fab>
+                </StyledTooltip>
             </Box>
         </Fade>
     );
