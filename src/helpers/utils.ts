@@ -45,3 +45,11 @@ export function zoomImageOnHover(
 export function isTBA(str: string) {
     return str === "TBA" || str === "To be announced";
 }
+
+export function getHoverColor(color: string, contrast = 20) {
+    const [r, g, b] = color
+        .replace(/[^\d,]/g, "")
+        .split(",")
+        .map((color) => Number(color));
+    return `rgb(${r + contrast}, ${g + contrast}, ${b + contrast})`;
+}
