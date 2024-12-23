@@ -122,13 +122,13 @@ function BannerList({ type }: BannerListProps) {
                                 <Image
                                     src="icons/Characters"
                                     alt="Agents"
-                                    style={{ width: "32px", marginLeft: "5px" }}
+                                    style={{ width: "32px", marginLeft: "4px" }}
                                 />
                             ) : (
                                 <Image
                                     src="icons/W-Engine"
                                     alt="W-Engines"
-                                    style={{ width: "24px", marginLeft: "5px" }}
+                                    style={{ width: "24px", marginLeft: "4px" }}
                                 />
                             )
                         }
@@ -140,7 +140,7 @@ function BannerList({ type }: BannerListProps) {
                         key={option.displayName}
                         sx={{
                             "&:hover": {
-                                backgroundColor: theme.menu.selectedHover,
+                                backgroundColor: theme.menu.hover,
                             },
                             "&:not(:last-child)": {
                                 borderBottom: `1px solid ${theme.border.color.primary}`,
@@ -186,9 +186,9 @@ function BannerList({ type }: BannerListProps) {
                                         border: `2px solid ${getRarityColor(
                                             option.rarity
                                         )}`,
-                                        borderRadius: "5px",
-                                        backgroundColor: theme.background(8),
-                                        mr: "20px",
+                                        borderRadius: "4px",
+                                        backgroundColor: theme.background(2),
+                                        mr: "16px",
                                         transform:
                                             "skewX(15deg) translate(7px)",
                                     }}
@@ -211,13 +211,13 @@ function BannerList({ type }: BannerListProps) {
                                         width: "48px",
                                         height: "48px",
                                         padding: "4px",
-                                        marginRight: "10px",
+                                        marginRight: "12px",
                                         border: `2px solid ${getRarityColor(
                                             option.rarity
                                         )}`,
                                         borderRadius:
                                             theme.mainContentBox.borderRadius,
-                                        backgroundColor: theme.background(8),
+                                        backgroundColor: theme.background(2),
                                         boxShadow: `inset 0 0 25px 15px ${getBackgroundColor(
                                             option.rarity
                                         )}`,
@@ -231,7 +231,7 @@ function BannerList({ type }: BannerListProps) {
                 slotProps={{
                     chip: {
                         sx: {
-                            backgroundColor: theme.background(8),
+                            backgroundColor: theme.button.primary,
                             color: theme.text.primary,
                             fontFamily: theme.font.styled.family,
                             "& .MuiChip-deleteIcon": {

@@ -39,7 +39,7 @@ function BannerListRow({
             sx={{
                 backgroundColor: isCurrentBanner(start.obj, end.obj)
                     ? getHoverColor(theme.button.primary, -25)
-                    : theme.background(3),
+                    : theme.background(1),
             }}
         >
             <StyledTableCell>

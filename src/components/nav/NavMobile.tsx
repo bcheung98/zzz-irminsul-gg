@@ -46,7 +46,10 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
         <>
             <AppBar position="fixed">
                 <Toolbar disableGutters>
-                    <IconButton onClick={toggleDrawer(true)} sx={{ mx: "8px" }}>
+                    <IconButton
+                        onClick={toggleDrawer(true)}
+                        sx={{ mx: "8px", color: theme.appbar.color }}
+                    >
                         <MenuIcon />
                     </IconButton>
                     <Logo onHomePage={onHomePage} />
@@ -59,7 +62,7 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
                 onOpen={toggleDrawer(true)}
                 sx={{
                     [`& .MuiDrawer-paper`]: {
-                        backgroundColor: theme.background(0),
+                        backgroundColor: theme.appbar.backgroundColor,
                         borderBottom: `1px solid ${theme.border.color.primary}`,
                         height: "100%",
                         overflowX: "hidden",
@@ -70,7 +73,7 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
                     <Toolbar disableGutters>
                         <IconButton
                             onClick={toggleDrawer(false)}
-                            sx={{ mx: "8px" }}
+                            sx={{ color: theme.appbar.color, mx: "8px" }}
                         >
                             <CloseIcon />
                         </IconButton>
@@ -104,7 +107,7 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
                 </List>
                 <Divider variant="middle" />
                 <List>
-                    <TextStyled sx={{ ml: "20px", my: "10px" }}>
+                    <TextStyled sx={{ color: "white", ml: "20px", my: "10px" }}>
                         Other Games
                     </TextStyled>
                     {linkItems.map((item, index) => (

@@ -6,17 +6,25 @@ import {
 // MUI imports
 import { styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
 
+// Helper imports
+import { getHoverColor } from "helpers/utils";
+
 export const StyledToggleButton = styled(
     (props: CustomToggleButtonProps) => (
         <ToggleButton disableRipple {...props} />
     ),
-    { shouldForwardProp: (prop) => prop !== "highlightOnHover" }
-)(({ theme, highlightOnHover }) => ({
+    {
+        shouldForwardProp: (prop) =>
+            !["highlightOnHover", "backgroundColor"].includes(prop.toString()),
+    }
+)(({ theme, highlightOnHover, backgroundColor }) => ({
     "&.MuiToggleButton-root": {
         opacity: 0.4,
         color: theme.text.primary,
         "&:hover": {
-            backgroundColor: theme.menu.hover,
+            backgroundColor: backgroundColor
+                ? getHoverColor(backgroundColor, -10)
+                : theme.menu.hover,
             borderColor: highlightOnHover
                 ? theme.border.color.highlight
                 : theme.border.color.primary,
@@ -29,8 +37,11 @@ export const StyledToggleButton = styled(
 
 export const StyledToggleButtonGroup = styled(
     (props: ToggleButtonsProps) => <ToggleButtonGroup {...props} />,
-    { shouldForwardProp: (prop) => prop !== "highlightOnHover" }
-)(({ theme, spacing, padding = 4 }) => ({
+    {
+        shouldForwardProp: (prop) =>
+            !["highlightOnHover", "backgroundColor"].includes(prop.toString()),
+    }
+)(({ theme, spacing, padding = 4, backgroundColor }) => ({
     flexWrap: "wrap",
     "& .MuiToggleButtonGroup-grouped": {
         padding: getPadding(padding),
@@ -38,13 +49,15 @@ export const StyledToggleButtonGroup = styled(
         border: spacing
             ? `1px solid ${theme.border.color.primary} !important`
             : `1px solid ${theme.border.color.primary}`,
-        borderRadius: spacing ? "5px" : "none",
-        backgroundColor: theme.menu.primary,
+        borderRadius: spacing ? "4px" : "none",
+        backgroundColor: backgroundColor || theme.menu.primary,
         "&.Mui-selected": {
-            backgroundColor: theme.menu.selected,
+            backgroundColor: backgroundColor || theme.menu.selected,
             opacity: 1,
             "&:hover": {
-                backgroundColor: theme.menu.selectedHover,
+                backgroundColor: backgroundColor
+                    ? getHoverColor(backgroundColor, -10)
+                    : theme.menu.selectedHover,
             },
         },
     },

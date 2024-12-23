@@ -53,6 +53,7 @@ function Settings() {
     };
     const handleSettingsClose = () => {
         setSettingsOpen(false);
+        window.location.reload();
     };
 
     const settings = [
@@ -134,8 +135,9 @@ function Settings() {
                               px: "2px",
                               width: "36px",
                               height: "36px",
+                              color: "white",
                               "&:hover": {
-                                  backgroundColor: theme.background(3),
+                                  backgroundColor: theme.appbar.hover,
                               },
                           }
                         : styles.listItemButton()
@@ -161,7 +163,11 @@ function Settings() {
                 <MainContentBox
                     title="Settings"
                     actions={
-                        <IconButton disableRipple onClick={handleSettingsClose}>
+                        <IconButton
+                            disableRipple
+                            onClick={handleSettingsClose}
+                            sx={{ color: theme.appbar.color }}
+                        >
                             <CloseIcon />
                         </IconButton>
                     }

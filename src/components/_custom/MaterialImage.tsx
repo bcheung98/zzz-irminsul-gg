@@ -43,7 +43,7 @@ function MaterialImage({
         width: `calc(${size} - 6px)`,
         height: "auto",
         padding: !imgSrc.endsWith(".gif") ? "6px" : "0px",
-        backgroundColor: theme.background(8),
+        backgroundColor: theme.appbar.backgroundColor,
         borderRadius: "10px",
     };
 
@@ -54,10 +54,11 @@ function MaterialImage({
                 : `calc(${size} / 7) !important`,
         width: "100%",
         margin: "auto",
-        backgroundColor: labelColor || theme.background(8),
         borderRadius: "10px",
         padding: "2.5px",
         textAlign: "center",
+        backgroundColor: labelColor || theme.appbar.backgroundColor,
+        color: theme.appbar.color,
     };
 
     return (

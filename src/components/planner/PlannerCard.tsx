@@ -128,8 +128,8 @@ function PlannerCard({ data }: PlannerCardProps) {
                                     variant === "character" ? "0px" : "4px",
                                 backgroundColor:
                                     variant === "character"
-                                        ? theme.background(3)
-                                        : theme.background(8),
+                                        ? theme.background(2)
+                                        : theme.background(2),
                                 boxShadow:
                                     variant === "character"
                                         ? "none"
@@ -152,8 +152,9 @@ function PlannerCard({ data }: PlannerCardProps) {
                                 variant="h6"
                                 sx={{
                                     cursor: "pointer",
+                                    color: "white",
                                     "&:hover": {
-                                        color: `rgb(30, 175, 255)`,
+                                        color: theme.text.selected,
                                         textDecoration: "underline",
                                     },
                                 }}
@@ -181,7 +182,7 @@ function PlannerCard({ data }: PlannerCardProps) {
                 </FlexBox>
             }
             actions={
-                <IconButton onClick={handleDelete}>
+                <IconButton onClick={handleDelete} sx={{ color: "white" }}>
                     <StyledTooltip title="Delete" arrow placement="top">
                         <DeleteIcon />
                     </StyledTooltip>
@@ -212,7 +213,7 @@ function PlannerCard({ data }: PlannerCardProps) {
                 startIcon={mode !== "edit" ? <EditIcon /> : <DoneIcon />}
                 sx={{
                     border: 0,
-                    backgroundColor: theme.background(8),
+                    backgroundColor: theme.background(2),
                     mb: "15px",
                 }}
             >

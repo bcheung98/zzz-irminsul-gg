@@ -53,8 +53,9 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
         px: "2px",
         width: "36px",
         height: "36px",
+        color: "white",
         "&:hover": {
-            backgroundColor: theme.background(3)
+            backgroundColor: theme.appbar.hover,
         },
     };
 

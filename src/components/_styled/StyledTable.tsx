@@ -22,6 +22,6 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     borderColor: theme.border.color.primary,
     padding: "8px 16px",
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.background(8),
+        backgroundColor: theme.appbar.backgroundColor,
     },
 }));

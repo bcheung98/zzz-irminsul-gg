@@ -22,7 +22,7 @@ function CharacterImage({ character }: CharacterProps) {
                 overflowClipMargin: "unset", // removes "crispy" effect from `object-fit: cover`
                 border: theme.mainContentBox.border,
                 borderRadius: theme.mainContentBox.borderRadius,
-                backgroundColor: theme.background(8),
+                backgroundColor: theme.background(2),
             }}
         />
     );

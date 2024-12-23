@@ -64,7 +64,7 @@ function DisplayCard({
     };
 
     const backgroundColor = () => {
-        const baseBG = theme.background(8);
+        const baseBG = theme.displayCard.backgroundColor;
         if (variant === "icon") {
             return baseBG;
         } else {
@@ -121,11 +121,13 @@ function DisplayCard({
         position: "relative",
         width: size,
         height: variant === "card" ? "auto" : size,
-        background: theme.background(8),
+        background: theme.displayCard.backgroundColor,
         border: "solid",
         borderWidth: borderWidth,
         borderColor:
-            variant === "card" ? theme.border.color.primary : getRarityColor(rarity),
+            variant === "card"
+                ? theme.border.color.primary
+                : getRarityColor(rarity),
         borderRadius: "5px",
     };
 
@@ -141,11 +143,12 @@ function DisplayCard({
     };
 
     const smallIconStyle: React.CSSProperties = {
+        boxSizing: "border-box",
         width: `calc(${size} / 10 + 14px)`,
         height: `calc(${size} / 10 + 14px)`,
         minWidth: "16px",
         minHeight: "16px",
-        backgroundColor: theme.background(1),
+        backgroundColor: theme.icon.backgroundColor,
         border: `2px solid ${theme.border.color.primary}`,
         borderRadius: "16px",
         padding: "4px",
@@ -238,6 +241,7 @@ function DisplayCard({
                                         "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
                                     textAlign: "center",
                                     mb: "5px",
+                                    color: "white",
                                 }}
                             >
                                 {showName && displayName}

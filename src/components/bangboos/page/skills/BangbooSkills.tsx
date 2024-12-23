@@ -83,7 +83,7 @@ function BangbooSkills({ bangboo }: BangbooProps) {
                     height: "100%",
                     "& .MuiTabScrollButton-root": {
                         color: theme.text.primary,
-                        backgroundColor: theme.background(7),
+                        backgroundColor: theme.background(2),
                     },
                     ".MuiTabs-scrollButtons.Mui-disabled": {
                         opacity: 0.3,

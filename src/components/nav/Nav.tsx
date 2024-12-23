@@ -107,6 +107,7 @@ export const navStyles = (paramTheme: Theme) => ({
         width: size,
         height: size,
         padding: "2px",
+        color: "white",
     }),
     linkItem: (size = 32): React.CSSProperties => ({
         width: size,
@@ -116,6 +117,7 @@ export const navStyles = (paramTheme: Theme) => ({
     listItem: (link: string, size = 32): SxProps => ({
         display: link !== "" ? "block" : "none",
         px: `${(size * 2) / 8}px`,
+        color: "white",
     }),
     listIcon: (open: boolean, size = 32): SxProps => ({
         minWidth: size,
@@ -131,12 +133,14 @@ export const navStyles = (paramTheme: Theme) => ({
         px: `${(size * 2) / 8}px`,
         width: "100%",
         height: `${size * 1.5}px`,
+        color: "white",
         "&:hover": {
-            backgroundColor: theme.background(3),
+            backgroundColor: theme.appbar.hover,
         },
     }),
     listItemText: (open = true): SxProps => ({
         display: open ? "block" : "none",
         ml: "20px",
+        color: "white",
     }),
 });

@@ -8,9 +8,13 @@ export function characterColors(
     element: Element
 ) {
     const theme = useTheme();
-    return (
-        colors[option] ||
-        theme.text[element.toLowerCase() as keyof typeof theme.text] ||
-        "white"
-    );
+    if (theme.name === "Light") {
+        return theme.button.primary;
+    } else {
+        return (
+            colors[option] ||
+            theme.text[element.toLowerCase() as keyof typeof theme.text] ||
+            "white"
+        );
+    }
 }

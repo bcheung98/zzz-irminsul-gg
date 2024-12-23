@@ -18,9 +18,6 @@ export function getTheme(name: string) {
                 default: theme.background(0),
             },
         },
-        shape: {
-            borderRadius: "5px",
-        },
         components: {
             MuiAutocomplete: {
                 styleOverrides: {
@@ -45,11 +42,32 @@ export function getTheme(name: string) {
             MuiButton: {
                 styleOverrides: {
                     root: {
-                        borderColor: theme.border.color.primary,
                         color: theme.text.primary,
                         fontFamily: theme.font.styled.family,
                         fontWeight: theme.font.styled.weight,
                         textTransform: "none",
+                        variants: [
+                            {
+                                props: { variant: "contained" },
+                                style: {
+                                    backgroundColor: theme.button.primary,
+                                },
+                            },
+                            {
+                                props: { variant: "outlined" },
+                                style: {
+                                    backgroundColor: theme.button.secondary,
+                                    borderColor: theme.border.color.primary,
+                                },
+                            },
+                        ],
+                    },
+                },
+            },
+            MuiCard: {
+                styleOverrides: {
+                    root: {
+                        backgroundColor: theme.background(1),
                     },
                 },
             },
@@ -77,10 +95,10 @@ export function getTheme(name: string) {
             MuiMenu: {
                 styleOverrides: {
                     paper: {
-                        backgroundColor: theme.background(1),
+                        backgroundColor: theme.menu.primary,
                     },
                     list: {
-                        backgroundColor: theme.background(1),
+                        backgroundColor: theme.menu.primary,
                         color: theme.text.primary,
                     },
                 },
@@ -96,7 +114,7 @@ export function getTheme(name: string) {
                 styleOverrides: {
                     root: {
                         borderRadius: "5px",
-                        backgroundColor: theme.background(3),
+                        backgroundColor: theme.table.body.primary,
                     },
                 },
             },
@@ -148,15 +166,6 @@ export function getTheme(name: string) {
                     fontSize: theme.typography.pxToRem(14),
                 },
             },
-        },
-        text: {
-            physical: "#F0D12B",
-            ice: "#98EFF0",
-            fire: "#FF5521",
-            electric: "#2EB6FF",
-            ether: "#FE437E",
-            wind: "#48EEA7",
-            value: "#2BAD00",
         },
     };
 

@@ -59,11 +59,11 @@ function ActionFab({
                             p: 1,
                             borderRadius: "5px",
                             backgroundColor:
-                                color?.primary || theme.menu.selectedHover,
-                            color: theme.text.primary,
+                                color?.primary || theme.button.primary,
+                            color: "white",
                             "&:hover": {
                                 backgroundColor:
-                                    color?.hover || theme.menu.hover,
+                                    color?.hover || theme.button.hover,
                             },
                         }}
                     >

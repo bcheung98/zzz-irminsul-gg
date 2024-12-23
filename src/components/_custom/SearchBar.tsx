@@ -41,7 +41,7 @@ function SearchBar({
                 "& .MuiOutlinedInput-root": {
                     width: size.width,
                     height: size.height,
-                    backgroundColor: theme.background(3),
+                    backgroundColor: theme.background(2),
                     color: theme.text.primary,
                     fontFamily: theme.font.styled.family,
                     fontWeight: theme.font.styled.weight,

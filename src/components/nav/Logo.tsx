@@ -11,7 +11,7 @@ function Logo({ onHomePage }: { onHomePage: boolean }) {
         <ButtonBase disableRipple href={onHomePage ? "https://irminsul.gg/" : "/"}>
             <CardHeader
                 avatar={<Image src="https://assets.irminsul.gg/main/icons/Irminsul.png" alt="IRMINSUL.GG" style={{ width: "48px", height: "48px" }} />}
-                title={<TextStyled variant="sitename">IRMINSUL.GG</TextStyled>}
+                title={<TextStyled variant="sitename" sx={{color: "white !important"}}>IRMINSUL.GG</TextStyled>}
                 sx={{ px: 0 }}
             />
         </ButtonBase>

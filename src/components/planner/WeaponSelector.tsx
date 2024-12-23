@@ -72,7 +72,7 @@ function WeaponSelector() {
                         <Image
                             src="icons/W-Engine"
                             alt="W-Engines"
-                            style={{ width: "24px", marginLeft: "5px" }}
+                            style={{ width: "24px", marginLeft: "4px" }}
                         />
                     }
                 />
@@ -106,12 +106,12 @@ function WeaponSelector() {
                                 width: "48px",
                                 height: "48px",
                                 padding: "4px",
-                                marginRight: "10px",
+                                marginRight: "8px",
                                 border: `2px solid ${getRarityColor(
                                     option.rarity
                                 )}`,
                                 borderRadius: theme.mainContentBox.borderRadius,
-                                backgroundColor: theme.background(8),
+                                backgroundColor: theme.background(2),
                                 boxShadow: `inset 0 0 25px 15px ${getBackgroundColor(
                                     option.rarity
                                 )}`,
@@ -124,7 +124,7 @@ function WeaponSelector() {
             slotProps={{
                 chip: {
                     sx: {
-                        backgroundColor: theme.background(8),
+                        backgroundColor: theme.button.primary,
                         color: theme.text.primary,
                         fontFamily: theme.font.styled.family,
                         "& .MuiChip-deleteIcon": {

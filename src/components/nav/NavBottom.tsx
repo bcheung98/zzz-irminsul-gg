@@ -49,7 +49,7 @@ function NavBottom() {
                     py: "10px",
                 }}
             >
-                <TextStyled variant="body2">
+                <TextStyled variant="body2" sx={{ color: theme.appbar.color }}>
                     IRMINSUL.GG is not affiliated with HoYoverse.
                     <br />
                     Game contents are trademarks and copyrights of HoYoverse.
@@ -72,7 +72,10 @@ function NavBottom() {
                             <TextStyled
                                 variant="body2"
                                 align="center"
-                                sx={{ mr: { xs: "8px", md: 0 } }}
+                                sx={{
+                                    mr: { xs: "8px", md: 0 },
+                                    color: theme.appbar.color,
+                                }}
                             >
                                 GitHub:
                             </TextStyled>
@@ -81,7 +84,12 @@ function NavBottom() {
                                 href="https://github.com/bcheung98/project-phaethon"
                                 target="_blank"
                                 color="inherit"
-                                sx={{ display: "flex", mx: "auto", px: "4px" }}
+                                sx={{
+                                    display: "flex",
+                                    mx: "auto",
+                                    px: "4px",
+                                    color: theme.appbar.color,
+                                }}
                                 className="logo github"
                             >
                                 <GitHubIcon sx={svgStyle} />
@@ -101,7 +109,10 @@ function NavBottom() {
                             <TextStyled
                                 variant="body2"
                                 align="center"
-                                sx={{ mr: { xs: "8px", md: 0 } }}
+                                sx={{
+                                    mr: { xs: "8px", md: 0 },
+                                    color: theme.appbar.color,
+                                }}
                             >
                                 Made with:
                             </TextStyled>

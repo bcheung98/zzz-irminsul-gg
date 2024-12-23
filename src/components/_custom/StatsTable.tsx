@@ -76,10 +76,6 @@ function StatsTable({
             : levels.map((_, level) => data.map((row) => row[level + 1]));
     const sliderRows = data.filter((row) => row[0] !== "Level");
 
-    const tableTextStyle: SxProps = {
-        textAlign: { xs: "left", md: "center" },
-    };
-
     return (
         <>
             <FlexBox
@@ -117,7 +113,13 @@ function StatsTable({
                                     <StyledTableCell key={col}>
                                         <TextStyled
                                             variant="body1"
-                                            sx={tableTextStyle}
+                                            sx={{
+                                                color: "white",
+                                                textAlign: {
+                                                    xs: "left",
+                                                    md: "center",
+                                                },
+                                            }}
                                         >
                                             {col}
                                         </TextStyled>
@@ -148,7 +150,12 @@ function StatsTable({
                                           >
                                               <Text
                                                   variant="body2"
-                                                  sx={tableTextStyle}
+                                                  sx={{
+                                                      textAlign: {
+                                                          xs: "left",
+                                                          md: "center",
+                                                      },
+                                                  }}
                                               >
                                                   {level}
                                               </Text>

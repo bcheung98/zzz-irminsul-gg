@@ -76,7 +76,7 @@ function CharacterSelector() {
                         <Image
                             src="icons/Characters"
                             alt="Agents"
-                            style={{ width: "32px", marginLeft: "5px" }}
+                            style={{ width: "32px", marginLeft: "4px" }}
                         />
                     }
                 />
@@ -120,9 +120,9 @@ function CharacterSelector() {
                                 border: `2px solid ${getRarityColor(
                                     option.rarity
                                 )}`,
-                                borderRadius: "5px",
-                                backgroundColor: theme.background(8),
-                                mr: "20px",
+                                borderRadius: "4px",
+                                backgroundColor: theme.background(2),
+                                mr: "16px",
                                 transform: "skewX(15deg) translate(7px)",
                             }}
                         >
@@ -142,7 +142,7 @@ function CharacterSelector() {
             slotProps={{
                 chip: {
                     sx: {
-                        backgroundColor: theme.background(8),
+                        backgroundColor: theme.button.primary,
                         color: theme.text.primary,
                         fontFamily: theme.font.styled.family,
                         "& .MuiChip-deleteIcon": {

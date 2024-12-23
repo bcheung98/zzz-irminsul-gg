@@ -10,12 +10,12 @@ function Home() {
         <>
             <Card
                 sx={(theme) => ({
-                    backgroundColor: theme.background(3),
+                    backgroundColor: theme.background(1),
                     mb: "20px",
                     p: "25px",
                 })}
             >
-                <TextStyled>
+                <TextStyled variant="h6">
                     Hello! This site is currently WIP. Features may be missing
                     or broken.
                 </TextStyled>

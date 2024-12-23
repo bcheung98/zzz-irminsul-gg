@@ -13,6 +13,7 @@ interface HeaderProps {
 
 interface ContentProps {
     padding?: string | number;
+    backgroundColor?: string;
 }
 
 interface MainContentBoxProps {
@@ -42,7 +43,9 @@ function MainContentBox({
     return (
         <Card
             sx={{
-                backgroundColor: theme.background(3),
+                backgroundColor:
+                    contentProps.backgroundColor ||
+                    theme.mainContentBox.backgroundColor,
                 border: theme.mainContentBox.border,
                 borderRadius: theme.mainContentBox.borderRadius,
             }}
@@ -60,7 +63,12 @@ function MainContentBox({
                     }}
                 >
                     {typeof title === "string" ? (
-                        <TextStyled variant="h6">{title && title}</TextStyled>
+                        <TextStyled
+                            variant="h6"
+                            sx={{ color: theme.appbar.color }}
+                        >
+                            {title && title}
+                        </TextStyled>
                     ) : (
                         <>{title}</>
                     )}

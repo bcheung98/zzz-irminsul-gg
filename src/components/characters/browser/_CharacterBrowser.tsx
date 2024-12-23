@@ -128,7 +128,6 @@ function CharacterBrowser() {
                             sx={{
                                 height: "36px",
                                 border: 0,
-                                backgroundColor: theme.background(3),
                             }}
                         >
                             Filters
@@ -167,7 +166,7 @@ function CharacterBrowser() {
                               "& .MuiDrawer-paper": {
                                   width: drawerWidth,
                                   borderLeft: `1px solid ${theme.border.color.primary}`,
-                                  backgroundColor: theme.background(3),
+                                  backgroundColor: theme.appbar.backgroundColor,
                                   py: 2.5,
                                   scrollbarWidth: "none",
                               },
@@ -175,7 +174,7 @@ function CharacterBrowser() {
                         : {
                               "& .MuiDrawer-paper": {
                                   borderTop: `1px solid ${theme.border.color.primary}`,
-                                  backgroundColor: theme.background(3),
+                                  backgroundColor: theme.appbar.backgroundColor,
                                   height: "auto",
                                   maxHeight: "88%",
                               },

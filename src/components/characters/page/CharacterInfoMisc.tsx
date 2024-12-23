@@ -46,7 +46,7 @@ function CharacterInfoMisc({ character }: CharacterProps) {
             sx={{
                 width: "100%",
                 py: "10px",
-                backgroundColor: theme.background(8),
+                backgroundColor: theme.background(2),
                 border: theme.mainContentBox.border,
                 borderRadius: theme.mainContentBox.borderRadius,
             }}

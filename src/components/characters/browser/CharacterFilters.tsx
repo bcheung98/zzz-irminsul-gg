@@ -126,26 +126,34 @@ function CharacterFilters({
                         variant="outlined"
                         startIcon={<RestartAltIcon />}
                         sx={{
-                            backgroundColor: theme.background(5),
-                            color: theme.text.primary,
+                            backgroundColor: theme.icon.backgroundColor,
+                            color: theme.appbar.color,
                             height: "32px",
                             "&.Mui-disabled": {
-                                backgroundColor: theme.background(0),
+                                backgroundColor: theme.icon.backgroundColor,
                                 opacity: 0.35,
-                                color: theme.text.primary,
+                                color: theme.appbar.color,
                             },
                         }}
                     >
-                        <TextStyled sx={{ textTransform: "none" }}>
+                        <TextStyled
+                            sx={{
+                                textTransform: "none",
+                                color: theme.appbar.color,
+                            }}
+                        >
                             Reset
                         </TextStyled>
                     </Button>
                 </FlexBox>
-                <IconButton onClick={handleClose}>
+                <IconButton
+                    onClick={handleClose}
+                    sx={{ color: theme.appbar.color }}
+                >
                     <CloseIcon />
                 </IconButton>
             </Toolbar>
-            <List sx={{ px: "15px" }}>
+            <List sx={{ px: "16px" }}>
                 {filterGroups.map((filter, index) => (
                     <Dropdown
                         key={index}
@@ -153,9 +161,9 @@ function CharacterFilters({
                         titleColor={
                             filter.value.length > 0
                                 ? theme.text.selected
-                                : theme.text.primary
+                                : theme.appbar.color
                         }
-                        contentPadding="5px 0px 5px 25px"
+                        contentPadding="4px 0px 4px 24px"
                     >
                         <ToggleButtons
                             buttons={filter.buttons}
@@ -163,6 +171,7 @@ function CharacterFilters({
                             onChange={filter.onChange}
                             spacing={4}
                             padding={0}
+                            backgroundColor={theme.icon.backgroundColor}
                         />
                     </Dropdown>
                 ))}

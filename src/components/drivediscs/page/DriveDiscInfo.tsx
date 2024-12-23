@@ -20,7 +20,7 @@ function DriveDiscInfo({ disc }: DriveDiscProps) {
                 width: "100%",
                 border: theme.mainContentBox.border,
                 borderRadius: theme.mainContentBox.borderRadius,
-                backgroundColor: theme.background(8),
+                backgroundColor: theme.background(2),
             }}
         >
             <TextStyled variant="h4" sx={{ mb: "5px" }}>

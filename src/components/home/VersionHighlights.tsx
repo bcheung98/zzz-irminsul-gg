@@ -50,10 +50,11 @@ function VersionHighlights() {
     };
 
     const buttonStyle: SxProps = {
+        color: theme.appbar.color,
         px: 0,
         "&.Mui-disabled": {
             opacity: 0.35,
-            color: theme.text.primary,
+            color: theme.appbar.color,
         },
     };
 

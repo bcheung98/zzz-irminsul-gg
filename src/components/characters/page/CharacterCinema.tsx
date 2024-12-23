@@ -56,7 +56,7 @@ function CharacterCinema({ character }: CharacterProps) {
                         size={{ xs: 12, sm: 6, md: 4 }}
                         sx={{
                             p: 2,
-                            backgroundColor: theme.background(7),
+                            backgroundColor: theme.background(2),
                             border: theme.mainContentBox.border,
                             borderRadius: theme.mainContentBox.borderRadius,
                         }}

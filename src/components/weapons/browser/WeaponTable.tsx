@@ -27,6 +27,8 @@ export type WeaponRow = Pick<
 >;
 
 function WeaponTable({ weapons }: { weapons: Weapon[] }) {
+    const characters = useAppSelector(selectCharacters);
+
     const [order, setOrder] = React.useState<Order>("desc");
     const [orderBy, setOrderBy] = React.useState("rank");
 
@@ -57,7 +59,7 @@ function WeaponTable({ weapons }: { weapons: Weapon[] }) {
         const subStat = `${wep.stats.subStat}:<br />${
             subStats[wep.stats.subStat].scaling[wep.rarity].slice(-1)[0]
         }`;
-        const character = useAppSelector(selectCharacters).find(
+        const character = characters.find(
             (char) => char.name === wep.signature
         );
         return {
