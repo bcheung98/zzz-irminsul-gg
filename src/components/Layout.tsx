@@ -1,23 +1,21 @@
 // Component imports
-import ActionFab from "custom/ActionFab";
+// import ActionFab from "custom/ActionFab";
 
 // MUI imports
-import { useTheme, Box } from "@mui/material";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Box } from "@mui/material";
+// import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 function Layout({ children }: { children: React.ReactNode }) {
-    const theme = useTheme();
-
-    const handleScrollTop = (event: React.BaseSyntheticEvent) => {
-        const anchor = (event.target.ownerDocument || document).querySelector(
-            "#back-to-top-anchor"
-        );
-        if (anchor) {
-            anchor.scrollIntoView({
-                block: "center",
-            });
-        }
-    };
+    // const handleScrollTop = (event: React.BaseSyntheticEvent) => {
+    //     const anchor = (event.target.ownerDocument || document).querySelector(
+    //         "#back-to-top-anchor"
+    //     );
+    //     if (anchor) {
+    //         anchor.scrollIntoView({
+    //             block: "center",
+    //         });
+    //     }
+    // };
 
     return (
         <>
@@ -34,7 +32,7 @@ function Layout({ children }: { children: React.ReactNode }) {
             >
                 {children}
             </Box>
-            <ActionFab
+            {/* <ActionFab
                 action={handleScrollTop}
                 hysteresis
                 icon={<KeyboardArrowUpIcon />}
@@ -44,7 +42,7 @@ function Layout({ children }: { children: React.ReactNode }) {
                     hover: theme.button.hover,
                 }}
                 position={{ top: 90, left: "50%" }}
-            />
+            /> */}
         </>
     );
 }
