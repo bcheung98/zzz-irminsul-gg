@@ -3,12 +3,11 @@ import { styled, InputBase } from "@mui/material";
 export const StyledInput = styled(InputBase)(({ theme }) => ({
     "& .MuiInputBase-input": {
         backgroundColor: theme.menu.primary,
-        borderRadius: 5,
+        borderRadius: "4px",
         border: `1px solid ${theme.border.color.primary}`,
-        padding: "10px 10px 10px 15px",
+        padding: "8px 8px 8px 16px",
         "&:focus": {
-            borderRadius: 4,
-            borderColor: theme.border.color.highlight,
+            borderRadius: "4px",
             backgroundColor: theme.menu.primary,
         },
     },
