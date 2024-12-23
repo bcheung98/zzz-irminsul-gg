@@ -21,10 +21,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import { objectKeys } from "helpers/utils";
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import {
-    selectServer,
-    selectSkillDisplay,
-    selectTheme,
+    selectSettings,
     setServer,
+    setSettings,
     setSkillDisplay,
     setTheme,
     SkillDisplay,
@@ -43,26 +42,27 @@ function Settings() {
 
     const dispatch = useAppDispatch();
 
-    const currentTheme = useAppSelector(selectTheme).name;
-    const currentSkillDisplay = useAppSelector(selectSkillDisplay).mode;
-    const currentServer = useAppSelector(selectServer).region;
+    const settings = useAppSelector(selectSettings);
+    const themeName = settings.theme.name;
+    const skillDisplay = settings.skillDisplay.mode;
+    const server = settings.server.region;
 
     const [settingsOpen, setSettingsOpen] = React.useState(false);
     const handleSettingsOpen = () => {
         setSettingsOpen(true);
     };
     const handleSettingsClose = () => {
+        dispatch(setSettings(settings));
         setSettingsOpen(false);
-        window.location.reload();
     };
 
-    const settings = [
+    const settingsList = [
         {
             label: "Theme",
             options: (
                 <ToggleButtons
                     buttons={themeButtons}
-                    value={currentTheme}
+                    value={themeName}
                     exclusive
                     onChange={(
                         _: React.BaseSyntheticEvent,
@@ -83,7 +83,7 @@ function Settings() {
             options: (
                 <ToggleButtons
                     buttons={skillDisplayButtons}
-                    value={currentSkillDisplay}
+                    value={skillDisplay}
                     exclusive
                     onChange={(
                         _: React.BaseSyntheticEvent,
@@ -104,7 +104,7 @@ function Settings() {
             options: (
                 <ToggleButtons
                     buttons={regionButtons}
-                    value={currentServer}
+                    value={server}
                     exclusive
                     onChange={(
                         _: React.BaseSyntheticEvent,
@@ -173,7 +173,7 @@ function Settings() {
                     }
                 >
                     <Stack spacing={2}>
-                        {settings.slice(1).map((setting, index) => (
+                        {settingsList.slice(1).map((setting, index) => (
                             <FlexBox
                                 key={index}
                                 sx={{

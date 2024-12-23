@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Region } from "helpers/dates";
-import { listenerMiddleware } from "rtk/middleware";
+import { startAppListening } from "helpers/hooks";
 import { RootState } from "rtk/store";
 import { ThemeNames } from "types/theme";
 
@@ -23,32 +23,33 @@ export interface SettingsState {
     server: ServerSettings;
 }
 
-const storedThemeName = localStorage.getItem("theme") || "null";
-const storedSkillDisplay = localStorage.getItem("skillDisplay") || "null";
-const storedServer = localStorage.getItem("server") || "null";
+const storedSettings = localStorage.getItem("settings") || "null";
+localStorage.removeItem("theme");
+localStorage.removeItem("skillDisplay");
+localStorage.removeItem("server");
 
-const initialState: SettingsState = {
-    theme: {
-        name:
-            storedThemeName !== "null"
-                ? (storedThemeName as ThemeNames)
-                : "Dark",
-    },
-    skillDisplay: {
-        mode:
-            storedSkillDisplay !== "null"
-                ? (storedSkillDisplay as SkillDisplay)
-                : "slider",
-    },
-    server: {
-        region: storedServer !== "null" ? (storedServer as Region) : "NA",
-    },
-};
+const initialState: SettingsState =
+    storedSettings !== "null"
+        ? JSON.parse(storedSettings)
+        : {
+              theme: {
+                  name: "Dark",
+              },
+              skillDisplay: {
+                  mode: "slider",
+              },
+              server: {
+                  region: "NA",
+              },
+          };
 
 export const settingsSlice = createSlice({
     name: "settings",
     initialState,
     reducers: {
+        setSettings: (state, action: PayloadAction<SettingsState>) => {
+            state = action.payload;
+        },
         setTheme: (state, action: PayloadAction<ThemeNames>) => {
             state.theme.name = action.payload;
         },
@@ -61,7 +62,8 @@ export const settingsSlice = createSlice({
     },
 });
 
-export const { setTheme, setSkillDisplay, setServer } = settingsSlice.actions;
+export const { setSettings, setTheme, setSkillDisplay, setServer } =
+    settingsSlice.actions;
 
 export const selectSettings = (state: RootState): SettingsState =>
     state.settings;
@@ -74,29 +76,16 @@ export const selectServer = (state: RootState): ServerSettings =>
 
 export default settingsSlice.reducer;
 
-listenerMiddleware.startListening({
-    actionCreator: setTheme,
+startAppListening({
+    actionCreator: setSettings,
     effect: (action) => {
-        if (action.payload !== storedThemeName) {
-            localStorage.setItem("theme", action.payload || "Dark");
-        }
+        localStorage.setItem("settings", JSON.stringify(action.payload));
+        window.dispatchEvent(new Event("storage"));
     },
 });
 
-listenerMiddleware.startListening({
-    actionCreator: setSkillDisplay,
-    effect: (action) => {
-        if (action.payload !== storedSkillDisplay) {
-            localStorage.setItem("skillDisplay", action.payload || "slider");
-        }
-    },
-});
-
-listenerMiddleware.startListening({
-    actionCreator: setServer,
-    effect: (action) => {
-        if (action.payload !== storedServer) {
-            localStorage.setItem("server", action.payload || "NA");
-        }
-    },
+window.addEventListener("storage", (event) => {
+    if (event.key === "settings") {
+        window.location.reload();
+    }
 });
