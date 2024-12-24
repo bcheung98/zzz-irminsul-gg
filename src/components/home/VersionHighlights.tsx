@@ -143,7 +143,7 @@ function VersionHighlights() {
                                 style={{
                                     width: "32px",
                                     marginRight: "10px",
-                                    backgroundColor: theme.appbar.hover,
+                                    backgroundColor: theme.icon.backgroundColor,
                                     borderRadius: "64px",
                                 }}
                             />
@@ -176,7 +176,7 @@ function VersionHighlights() {
                                 style={{
                                     width: "32px",
                                     marginRight: "10px",
-                                    backgroundColor: theme.appbar.hover,
+                                    backgroundColor: theme.icon.backgroundColor,
                                     borderRadius: "64px",
                                 }}
                             />
@@ -208,7 +208,7 @@ function VersionHighlights() {
                                 style={{
                                     width: "32px",
                                     marginRight: "10px",
-                                    backgroundColor: theme.appbar.hover,
+                                    backgroundColor: theme.icon.backgroundColor,
                                     borderRadius: "64px",
                                 }}
                             />
@@ -239,7 +239,7 @@ function VersionHighlights() {
                                 style={{
                                     width: "32px",
                                     marginRight: "10px",
-                                    backgroundColor: theme.appbar.hover,
+                                    backgroundColor: theme.icon.backgroundColor,
                                     borderRadius: "64px",
                                 }}
                             />

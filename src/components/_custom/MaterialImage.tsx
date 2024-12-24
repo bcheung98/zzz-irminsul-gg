@@ -48,6 +48,7 @@ function MaterialImage({
     };
 
     const labelStyle: React.CSSProperties = {
+        display: "block",
         fontSize:
             cost.toLocaleString().length < 10
                 ? `calc(${size} / 6) !important`

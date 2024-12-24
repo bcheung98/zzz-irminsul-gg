@@ -4,7 +4,7 @@ import { StyledTableCell, StyledTableRow } from "styled/StyledTable";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme } from "@mui/material";
+import { getContrastRatio, useTheme } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 // Helper imports
@@ -34,21 +34,23 @@ function BannerListRow({
     const start = createDateObject({ date: row.start, region: region });
     const end = createDateObject({ date: row.end, region: region });
 
-    const isCurr = isCurrentBanner(start.obj, end.obj);
+    const backgroundColor = isCurrentBanner(start.obj, end.obj)
+        ? theme.palette.info.light
+        : theme.palette.background.paper;
 
     return (
-        <StyledTableRow
-            sx={{
-                backgroundColor: isCurr
-                    ? theme.palette.info.light
-                    : theme.palette.background.paper,
-            }}
-        >
+        <StyledTableRow sx={{ backgroundColor: backgroundColor }}>
             <StyledTableCell>
                 <TextStyled
                     sx={{
                         mb: "10px",
-                        color: isCurr ? `white` : theme.text.primary,
+                        color:
+                            getContrastRatio(
+                                backgroundColor,
+                                theme.text.primary
+                            ) > 4.5
+                                ? theme.text.primary
+                                : theme.text.contrast,
                     }}
                 >
                     {`${version} Phase ${subVersion.split(".")[2]}: ${

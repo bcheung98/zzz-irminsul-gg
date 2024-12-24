@@ -7,7 +7,7 @@ import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
 // MUI imports
-import { ButtonBase } from "@mui/material";
+import { useTheme, ButtonBase } from "@mui/material";
 
 // Helper imports
 import { combineStyles } from "helpers/utils";
@@ -23,13 +23,15 @@ interface WeaponTableRowProps extends WeaponRow {
 }
 
 function WeaponTableRow({ row }: { row: WeaponTableRowProps }) {
+    const theme = useTheme();
+
     const columns = [
         {
             label: row.displayName,
             labelStyle: {
                 cursor: "pointer",
                 "&:hover": {
-                    color: `rgb(30, 175, 255)`,
+                    color: theme.text.selected,
                     textDecoration: "underline",
                 },
             },

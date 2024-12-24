@@ -49,7 +49,9 @@ function WeaponPassive({ weapon }: WeaponProps) {
         >
             <TextStyled sx={{ mb: "20px" }}>
                 {"For characters with the "}
-                <span style={{ color: `rgb(224, 187, 0)` }}>{specialty}</span>
+                <span style={{ color: theme.text.highlight2 }}>
+                    {specialty}
+                </span>
                 {" Specialty, the following effects can be triggered:"}
             </TextStyled>
             <TextStyled variant="h6" sx={{ mb: "10px" }}>

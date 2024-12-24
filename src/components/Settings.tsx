@@ -3,7 +3,6 @@ import React from "react";
 // Component imports
 import MainContentBox from "custom/MainContentBox";
 import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
-import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
@@ -13,6 +12,7 @@ import {
     IconButton,
     Dialog,
     Stack,
+    Box,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
@@ -29,7 +29,7 @@ import {
     SkillDisplay,
 } from "reducers/settings";
 import { navStyles } from "./nav/Nav";
-import { themeNames } from "themes/theme";
+import { themeList } from "themes/theme";
 import { Region, regions } from "helpers/dates";
 
 // Type imports
@@ -171,21 +171,30 @@ function Settings() {
                             <CloseIcon />
                         </IconButton>
                     }
+                    contentProps={{ padding: "16px" }}
                 >
                     <Stack spacing={2}>
                         {settingsList.map((setting, index) => (
-                            <FlexBox
+                            <Box
                                 key={index}
                                 sx={{
+                                    display: { xs: "block", sm: "flex" },
                                     flexGrow: 1,
                                     flexWrap: "wrap",
                                     justifyContent: "space-between",
                                     gap: "8px",
                                 }}
                             >
-                                <TextStyled>{setting.label}</TextStyled>
+                                <TextStyled
+                                    sx={{
+                                        display: { xs: "block", sm: "flex" },
+                                        mb: { xs: "8px", sm: "0px" },
+                                    }}
+                                >
+                                    {setting.label}
+                                </TextStyled>
                                 {setting.options}
-                            </FlexBox>
+                            </Box>
                         ))}
                     </Stack>
                 </MainContentBox>
@@ -196,9 +205,9 @@ function Settings() {
 
 export default Settings;
 
-const themeButtons: CustomToggleButtonProps[] = themeNames.map((theme) => ({
-    value: theme,
-    label: theme,
+const themeButtons: CustomToggleButtonProps[] = themeList.map((theme) => ({
+    value: theme.name,
+    label: theme.label,
 }));
 
 export const skillDisplayButtons: CustomToggleButtonProps[] = [
