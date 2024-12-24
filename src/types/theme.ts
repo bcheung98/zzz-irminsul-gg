@@ -23,18 +23,29 @@ declare module "@mui/material/styles" {
         default?: PaletteOptions["primary"];
         tertiary?: PaletteOptions["primary"];
     }
-    interface TypographyVariants {
-        sitename: React.CSSProperties;
-    }
-    interface TypographyVariantsOptions {
-        sitename?: React.CSSProperties;
-    }
+    interface TypographyVariants extends TypographyVariantsType {}
+    interface TypographyVariantsOptions extends TypographyVariantsOptionsType {}
 }
 
+type TypographyOverrides = {
+    sitename: true;
+    "h4-styled": true;
+    "h5-styled": true;
+    "h6-styled": true;
+    "body1-styled": true;
+    "body2-styled": true;
+};
+
+type TypographyVariantsType = {
+    [Property in keyof TypographyOverrides]: React.CSSProperties;
+};
+
+type TypographyVariantsOptionsType = {
+    [Property in keyof TypographyOverrides]?: React.CSSProperties;
+};
+
 declare module "@mui/material/Typography" {
-    interface TypographyPropsVariantOverrides {
-        sitename: true;
-    }
+    interface TypographyPropsVariantOverrides extends TypographyOverrides {}
 }
 
 declare module "@mui/material/Chip" {

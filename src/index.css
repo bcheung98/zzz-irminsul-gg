@@ -7,6 +7,11 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+    font-family: "Zenless";
+    src: url("./fonts/ZZZ.ttf");
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;

@@ -2,49 +2,49 @@ import { createTheme } from "@mui/material";
 import { getThemeBackgroundColors } from "helpers/utils";
 import { Shade } from "types/theme";
 
-const appbarColors = ["rgb(0, 16, 32)", "rgb(8, 32, 72)", "rgb(32, 56, 96)"];
+const appbarColors = ["rgb(4, 4, 4)", "rgb(16, 16, 16)", "rgb(32, 32, 32)"];
 
 const border = {
-    color: "rgb(168, 147, 105)",
-    highlight: `rgb(233, 194, 39)`,
+    color: "rgb(174, 206, 50)",
+    highlight: "rgb(190, 255, 0)",
 };
 
 const backgroundColors = [
     {
-        main: "rgb(200, 200, 200)",
-        light: "rgb(210, 210, 210)",
-        dark: "rgb(190, 190, 190)",
+        main: "rgb(32, 32, 32)",
+        light: "rgb(52, 52, 52)",
+        dark: "rgb(22, 22, 22)",
     },
     {
-        main: "rgb(225, 225, 225)",
-        light: "rgb(235, 235, 235)",
-        dark: "rgb(215, 215, 215)",
+        main: "rgb(16, 16, 16)",
+        light: "rgb(26, 26, 26)",
+        dark: "rgb(6, 6, 6)",
     },
     {
-        main: "rgb(250, 250, 250)",
-        light: "rgb(255, 255, 255)",
-        dark: "rgb(240, 240, 240)",
+        main: "rgb(12, 12, 12)",
+        light: "rgb(0, 21, 42)",
+        dark: "rgb(0, 11, 22)",
     },
 ];
 
-export const lightThemeData = {
-    name: "Light",
+export const zzzThemeData = {
+    name: "Zenless",
     background: (index: number, shade?: Shade) =>
         getThemeBackgroundColors({ colors: backgroundColors, index, shade }),
     palette: {
         primary: {
-            main: "rgb(0, 16, 32)",
+            main: "rgb(12, 12, 12)",
         },
         secondary: {
-            main: "rgb(8, 32, 72)",
+            main: "rgb(16, 16, 16)",
         },
         tertiary: {
-            main: "rgb(32, 56, 96)",
-            light: "rgb(52, 76, 116)",
-            dark: "rgb(22, 46, 86)",
+            main: "rgb(32, 32, 32)",
+            light: "rgb(52, 52, 52)",
+            dark: "rgb(22, 22, 22)",
         },
         info: {
-            main: "rgb(25, 118, 210)",
+            main: "rgb(190, 255, 0)",
         },
         divider: border.color,
     },
@@ -54,7 +54,7 @@ export const lightThemeData = {
             weight: 300,
         },
         styled: {
-            family: "Rowdies, Roboto, sans-serif",
+            family: "Zenless, Roboto, sans-serif",
             weight: 300,
         },
         element: {
@@ -65,24 +65,24 @@ export const lightThemeData = {
         },
         sizes: {
             "h4-styled": {
-                xs: 26,
-                sm: 28,
+                xs: 24,
+                sm: 26,
             },
             "h5-styled": {
-                xs: 22,
-                sm: 24,
+                xs: 20,
+                sm: 22,
             },
             "h6-styled": {
-                xs: 18,
-                sm: 20,
+                xs: 16,
+                sm: 18,
             },
             "body1-styled": {
-                xs: 14,
-                sm: 16,
-            },
-            "body2-styled": {
                 xs: 12,
                 sm: 14,
+            },
+            "body2-styled": {
+                xs: 10,
+                sm: 12,
             },
             h4: {
                 xs: 26,
@@ -107,23 +107,23 @@ export const lightThemeData = {
         },
     },
     text: {
-        primary: "rgb(0, 0, 0)",
-        contrast: "rgb(255, 255, 255)",
-        selected: "rgb(30, 175, 255)",
-        description: "rgb(16, 16, 16)",
-        highlight: "rgb(0, 0, 0)",
-        highlight2: "#CA9C00",
-        physical: "#CA9C00",
-        ice: "#1DAFAD",
-        fire: "#FF5623",
-        electric: "#33B6FE",
-        ether: "#FE427E",
-        wind: "#0AC272",
+        primary: "rgb(255, 255, 255)",
+        contrast: "rgb(0, 0, 0)",
+        selected: "rgb(190, 255, 0)",
+        description: "rgb(205, 205, 205)",
+        highlight: "rgb(255, 255, 255)",
+        highlight2: "#E0BB00",
+        physical: "#F0D12B",
+        ice: "#98EFF0",
+        fire: "#FF5521",
+        electric: "#2EB6FF",
+        ether: "#FE437E",
+        wind: "#48EEA7",
         value: "#2BAD00",
     },
     appbar: {
         backgroundColor: appbarColors[0],
-        hover: appbarColors[1],
+        hover: appbarColors[2],
         color: "rgb(255, 255, 255)",
     },
     border: {
@@ -139,7 +139,7 @@ export const lightThemeData = {
         backgroundColor: backgroundColors[2].main,
     },
     icon: {
-        backgroundColor: appbarColors[2],
+        backgroundColor: appbarColors[1],
     },
     mainContentBox: {
         borderWidth: 0,
@@ -148,10 +148,10 @@ export const lightThemeData = {
         backgroundColor: backgroundColors[1].main,
     },
     menu: {
-        primary: backgroundColors[2].dark,
-        hover: backgroundColors[2].light,
-        selected: backgroundColors[0].dark,
-        selectedHover: backgroundColors[0].light,
+        primary: backgroundColors[0].dark,
+        hover: backgroundColors[0].light,
+        selected: backgroundColors[1].dark,
+        selectedHover: backgroundColors[1].light,
     },
     table: {
         body: {
@@ -161,4 +161,4 @@ export const lightThemeData = {
     },
 };
 
-export const lightTheme = createTheme(lightThemeData);
+export const zzzTheme = createTheme(zzzThemeData);

@@ -63,12 +63,56 @@ export const darkThemeData = {
         highlight: {
             weight: 300,
         },
+        sizes: {
+            "h4-styled": {
+                xs: 26,
+                sm: 28,
+            },
+            "h5-styled": {
+                xs: 22,
+                sm: 24,
+            },
+            "h6-styled": {
+                xs: 18,
+                sm: 20,
+            },
+            "body1-styled": {
+                xs: 14,
+                sm: 16,
+            },
+            "body2-styled": {
+                xs: 12,
+                sm: 14,
+            },
+            h4: {
+                xs: 26,
+                sm: 28,
+            },
+            h5: {
+                xs: 22,
+                sm: 24,
+            },
+            h6: {
+                xs: 18,
+                sm: 20,
+            },
+            body1: {
+                xs: 14,
+                sm: 16,
+            },
+            body2: {
+                xs: 12,
+                sm: 14,
+            },
+        },
     },
     text: {
-        primary: "white",
+        primary: "rgb(255, 255, 255)",
+        contrast: "rgb(0, 0, 0)",
         selected: "rgb(30, 175, 255)",
         description: "rgb(205, 205, 205)",
-        highlight: "white",
+        highlight: "rgb(255, 255, 255)",
+        highlight2: "#E0BB00",
         physical: "#F0D12B",
         ice: "#98EFF0",
         fire: "#FF5521",
@@ -80,7 +124,7 @@ export const darkThemeData = {
     appbar: {
         backgroundColor: appbarColors[0],
         hover: appbarColors[1],
-        color: "white",
+        color: "rgb(255, 255, 255)",
     },
     border: {
         color: {
@@ -95,7 +139,7 @@ export const darkThemeData = {
         backgroundColor: backgroundColors[2].main,
     },
     icon: {
-        backgroundColor: appbarColors[2],
+        backgroundColor: appbarColors[1],
     },
     mainContentBox: {
         borderWidth: 0,

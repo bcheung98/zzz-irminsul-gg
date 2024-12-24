@@ -1,10 +1,12 @@
 import { createTheme } from "@mui/material";
 import { darkTheme } from "./darkTheme";
 import { lightTheme } from "./lightTheme";
+import { zzzTheme } from "./zzzTheme";
 
 export const themeList = [
-    { name: "Dark", data: darkTheme },
-    { name: "Light", data: lightTheme },
+    { name: "Dark", label: "Classic", data: darkTheme },
+    { name: "Light", label: "Light", data: lightTheme },
+    { name: "Styled", label: "Zenless", data: zzzTheme },
 ] as const;
 
 export const themeNames = themeList.map((t) => t.name);
@@ -144,42 +146,116 @@ export function getTheme(name: string) {
             },
             h4: {
                 [theme.breakpoints.up("xs")]: {
-                    fontSize: theme.typography.pxToRem(26),
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h4.xs),
                 },
                 [theme.breakpoints.up("sm")]: {
-                    fontSize: theme.typography.pxToRem(28),
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h4.sm),
                 },
             },
-            h5: {
+            "h4-styled": {
+                ...theme.typography.h4,
                 [theme.breakpoints.up("xs")]: {
-                    fontSize: theme.typography.pxToRem(22),
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["h4-styled"].xs
+                    ),
                 },
                 [theme.breakpoints.up("sm")]: {
-                    fontSize: theme.typography.pxToRem(24),
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["h4-styled"].sm
+                    ),
+                },
+            },
+
+            h5: {
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h5.xs),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h5.sm),
+                },
+            },
+            "h5-styled": {
+                ...theme.typography.h5,
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["h5-styled"].xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["h5-styled"].sm
+                    ),
                 },
             },
             h6: {
                 [theme.breakpoints.up("xs")]: {
-                    fontSize: theme.typography.pxToRem(18),
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h6.xs),
                 },
                 [theme.breakpoints.up("sm")]: {
-                    fontSize: theme.typography.pxToRem(20),
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h6.sm),
+                },
+            },
+            "h6-styled": {
+                ...theme.typography.h6,
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["h6-styled"].xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["h6-styled"].sm
+                    ),
                 },
             },
             body1: {
                 [theme.breakpoints.up("xs")]: {
-                    fontSize: theme.typography.pxToRem(14),
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.body1.xs
+                    ),
                 },
                 [theme.breakpoints.up("sm")]: {
-                    fontSize: theme.typography.pxToRem(16),
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.body1.sm
+                    ),
+                },
+            },
+            "body1-styled": {
+                ...theme.typography.body1,
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["body1-styled"].xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["body1-styled"].sm
+                    ),
                 },
             },
             body2: {
                 [theme.breakpoints.up("xs")]: {
-                    fontSize: theme.typography.pxToRem(12),
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.body2.xs
+                    ),
                 },
                 [theme.breakpoints.up("sm")]: {
-                    fontSize: theme.typography.pxToRem(14),
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.body2.sm
+                    ),
+                },
+            },
+            "body2-styled": {
+                ...theme.typography.body2,
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["body2-styled"].xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["body2-styled"].sm
+                    ),
                 },
             },
         },
