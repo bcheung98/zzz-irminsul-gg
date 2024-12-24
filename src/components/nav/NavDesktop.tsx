@@ -35,7 +35,7 @@ import { NavProps, navStyles } from "./Nav";
 const drawerWidth = 240; // px
 const iconSize = 32; // px
 
-function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
+function NavDesktop({ navItems, linkItems }: NavProps) {
     const theme = useTheme();
     const matches_lg_up = useMediaQuery(theme.breakpoints.up("lg"));
     const styles = navStyles(theme);
@@ -91,7 +91,7 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
                                 <MenuOpenIcon sx={menuIconStyle} />
                             </IconButton>
                         </Box>
-                        <Logo onHomePage={onHomePage} />
+                        <Logo href="https://irminsul.gg/" />
                     </FlexBox>
                     <Settings />
                 </Toolbar>

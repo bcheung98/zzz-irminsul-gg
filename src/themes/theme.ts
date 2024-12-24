@@ -139,9 +139,10 @@ export function getTheme(name: string) {
         },
         typography: {
             sitename: {
-                fontFamily: "Rowdies, Roboto !important",
-                fontSize: "1.333rem",
+                fontFamily: "Rowdies, Inter !important",
+                fontSize: "1.25rem",
                 fontWeight: "400 !important",
+                color: "rgb(255, 255, 255) !important",
                 letterSpacing: ".1rem",
             },
             h4: {

@@ -3,32 +3,21 @@ import Image from "custom/Image";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { ButtonBase, CardHeader } from "@mui/material";
+import { ButtonBase, Stack } from "@mui/material";
 
-function Logo({ onHomePage }: { onHomePage: boolean }) {
+function Logo({ href = "/" }: { href?: string }) {
     return (
-        <ButtonBase
-            disableRipple
-            href={onHomePage ? "https://irminsul.gg/" : "https://irminsul.gg/"}
-        >
-            <CardHeader
-                avatar={
-                    <Image
-                        src="https://assets.irminsul.gg/main/icons/Irminsul.png"
-                        alt="IRMINSUL.GG"
-                        style={{ width: "48px", height: "48px" }}
-                    />
-                }
-                title={
-                    <TextStyled
-                        variant="sitename"
-                        sx={{ color: "white !important" }}
-                    >
-                        IRMINSUL.GG
-                    </TextStyled>
-                }
-                sx={{ p: 0 }}
-            />
+        <ButtonBase disableRipple href={href}>
+            <Stack direction="row" spacing={2}>
+                <Image
+                    src="https://assets.irminsul.gg/main/icons/Irminsul.png"
+                    alt="IRMINSUL.GG"
+                    style={{ width: "48px", height: "48px" }}
+                />
+                <TextStyled variant="sitename" sx={{ lineHeight: "48px" }}>
+                    IRMINSUL.GG
+                </TextStyled>
+            </Stack>
         </ButtonBase>
     );
 }

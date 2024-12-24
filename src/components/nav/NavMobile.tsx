@@ -24,7 +24,7 @@ import CloseIcon from "@mui/icons-material/Close";
 // Helper imports
 import { NavProps, navStyles } from "./Nav";
 
-function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
+function NavMobile({ navItems, linkItems }: NavProps) {
     const theme = useTheme();
     const styles = navStyles(theme);
 
@@ -52,7 +52,7 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Logo onHomePage={onHomePage} />
+                    <Logo href="/" />
                 </Toolbar>
             </AppBar>
             <SwipeableDrawer
@@ -77,7 +77,7 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
                         >
                             <CloseIcon />
                         </IconButton>
-                        <Logo onHomePage={onHomePage} />
+                        <Logo href="https://irminsul.gg/" />
                     </Toolbar>
                 </AppBar>
                 <List>
@@ -106,10 +106,13 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
                     ))}
                 </List>
                 <Divider variant="middle" />
+                <TextStyled
+                    variant="h6"
+                    sx={{ color: "white", ml: "20px", mt: "16px" }}
+                >
+                    Other Games
+                </TextStyled>
                 <List>
-                    <TextStyled sx={{ color: "white", ml: "20px", my: "8px" }}>
-                        Other Games
-                    </TextStyled>
                     {linkItems.map((item, index) => (
                         <Box key={index} sx={styles.listItem(item.link)}>
                             <ButtonBase
