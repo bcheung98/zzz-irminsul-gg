@@ -91,7 +91,7 @@ function BangbooSkills({ bangboo }: BangbooProps) {
                     },
                     "& .MuiTabs-indicatorSpan": {
                         width: "100%",
-                        backgroundColor: theme.border.color.highlight,
+                        backgroundColor: theme.palette.info.main,
                     },
                 }}
             >
