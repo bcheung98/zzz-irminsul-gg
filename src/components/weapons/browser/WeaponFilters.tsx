@@ -4,7 +4,6 @@ import React from "react";
 import Dropdown from "custom/Dropdown";
 import Image from "custom/Image";
 import ToggleButtons from "custom/ToggleButtons";
-import { FlexBox } from "styled/StyledBox";
 
 // MUI imports
 import { useTheme, List, IconButton, Toolbar, Button } from "@mui/material";
@@ -50,26 +49,24 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
 
     return (
         <>
-            <Toolbar>
-                <FlexBox sx={{ flexGrow: 1 }}>
-                    <Button
-                        onClick={() => dispatch(clearFilters())}
-                        disabled={!useAppSelector(activeWeaponFilters)}
-                        variant="contained"
-                        color="secondary"
-                        disableElevation
-                        startIcon={<RestartAltIcon />}
-                        sx={{
-                            height: "32px",
-                            "&.Mui-disabled": {
-                                opacity: 0.35,
-                                color: theme.appbar.color,
-                            },
-                        }}
-                    >
-                        Reset
-                    </Button>
-                </FlexBox>
+            <Toolbar sx={{ justifyContent: "space-between" }}>
+                <Button
+                    onClick={() => dispatch(clearFilters())}
+                    disabled={!useAppSelector(activeWeaponFilters)}
+                    variant="contained"
+                    color="secondary"
+                    disableElevation
+                    startIcon={<RestartAltIcon />}
+                    sx={{
+                        height: "32px",
+                        "&.Mui-disabled": {
+                            opacity: 0.35,
+                            color: theme.appbar.color,
+                        },
+                    }}
+                >
+                    Reset
+                </Button>
                 <IconButton
                     onClick={handleClose}
                     sx={{ color: theme.appbar.color }}
@@ -96,7 +93,6 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
                             onChange={filter.onChange}
                             spacing={4}
                             padding={0}
-                            backgroundColor={theme.icon.backgroundColor}
                         />
                     </Dropdown>
                 ))}

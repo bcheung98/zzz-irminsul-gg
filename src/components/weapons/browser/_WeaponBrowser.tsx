@@ -172,7 +172,7 @@ function WeaponBrowser() {
                                   width: drawerWidth,
                                   borderLeft: `1px solid ${theme.border.color.primary}`,
                                   backgroundColor: theme.appbar.backgroundColor,
-                                  py: 2.5,
+                                  pb: 2.5,
                                   scrollbarWidth: "none",
                               },
                           }

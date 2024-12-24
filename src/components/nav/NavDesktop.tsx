@@ -104,7 +104,6 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
                     [`& .MuiDrawer-paper`]: {
                         borderRight: `1px solid ${theme.border.color.primary}`,
                         backgroundColor: theme.appbar.backgroundColor,
-                        pt: 2.5,
                     },
                 }}
             >
