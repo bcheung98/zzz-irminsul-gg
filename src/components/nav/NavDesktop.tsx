@@ -12,6 +12,7 @@ import { StyledTooltip } from "styled/StyledTooltip";
 import {
     styled,
     useTheme,
+    useMediaQuery,
     Theme,
     CSSObject,
     SxProps,
@@ -36,9 +37,10 @@ const iconSize = 32; // px
 
 function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
     const theme = useTheme();
+    const matches_lg_up = useMediaQuery(theme.breakpoints.up("lg"));
     const styles = navStyles(theme);
 
-    const [drawerOpen, setDrawerOpen] = React.useState(onHomePage);
+    const [drawerOpen, setDrawerOpen] = React.useState(matches_lg_up);
     const toggleDrawerState = () => {
         setDrawerOpen(!drawerOpen);
     };

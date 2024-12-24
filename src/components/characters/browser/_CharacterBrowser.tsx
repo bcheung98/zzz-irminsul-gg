@@ -56,7 +56,7 @@ function CharacterBrowser() {
         [characters, filters, searchValue]
     );
 
-    const [drawerOpen, setDrawerOpen] = React.useState(matches_md_up);
+    const [drawerOpen, setDrawerOpen] = React.useState(false);
     const toggleDrawerState = () => {
         setDrawerOpen(!drawerOpen);
     };
