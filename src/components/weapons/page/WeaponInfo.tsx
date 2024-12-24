@@ -72,7 +72,11 @@ function WeaponInfo({ weapon }: WeaponProps) {
                     <MainContentBox
                         title=""
                         actions={
-                            <IconButton disableRipple onClick={handleClose}>
+                            <IconButton
+                                disableRipple
+                                onClick={handleClose}
+                                sx={{ color: theme.appbar.color }}
+                            >
                                 <CloseIcon />
                             </IconButton>
                         }
