@@ -33,18 +33,18 @@ function MaterialImage({
     const theme = useTheme();
 
     const cardStyle: React.CSSProperties = {
-        padding: "3px 3px 1.5px",
-        marginBottom: "5px",
+        padding: "4px 4px 2px",
+        marginBottom: "4px",
         backgroundColor: getRarityColor(rarity),
-        borderRadius: "10px",
+        borderRadius: "12px",
     };
 
     const imgStyle: React.CSSProperties = {
-        width: `calc(${size} - 6px)`,
+        width: `calc(${size} - 8px)`,
         height: "auto",
-        padding: !imgSrc.endsWith(".gif") ? "6px" : "0px",
+        padding: !imgSrc.endsWith(".gif") ? "4px" : "0px",
         backgroundColor: theme.appbar.backgroundColor,
-        borderRadius: "10px",
+        borderRadius: "12px",
     };
 
     const labelStyle: React.CSSProperties = {
@@ -55,8 +55,8 @@ function MaterialImage({
                 : `calc(${size} / 7) !important`,
         width: "100%",
         margin: "auto",
-        borderRadius: "10px",
-        padding: "2.5px",
+        borderRadius: "12px",
+        padding: "2px",
         textAlign: "center",
         backgroundColor: labelColor || theme.appbar.backgroundColor,
         color: theme.appbar.color,

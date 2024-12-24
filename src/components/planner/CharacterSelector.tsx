@@ -100,7 +100,7 @@ function CharacterSelector() {
                     }}
                 >
                     <FlexBox>
-                        <Box sx={{ mr: "5px", mt: "6px" }}>
+                        <Box sx={{ mr: "4px", mt: "8px" }}>
                             <Box>
                                 <Image
                                     src={`elements/${option.element}`}

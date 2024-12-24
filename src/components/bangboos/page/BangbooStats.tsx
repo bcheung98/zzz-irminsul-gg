@@ -94,7 +94,7 @@ function BangbooStatsTable({ bangboo }: BangbooProps) {
                     sx: {
                         minWidth: "100px",
                         maxWidth: "50%",
-                        ml: "10px",
+                        ml: "8px",
                     },
                 }}
                 tableProps={{

@@ -59,7 +59,7 @@ function CharacterCoreSkillScaling({
         .reverse();
 
     return (
-        <Box sx={{ pb: "15px" }}>
+        <Box sx={{ pb: "16px" }}>
             <Box sx={{ width: { xs: "90%", md: "50vw" } }}>
                 <StyledSlider
                     value={sliderValue}
@@ -72,13 +72,13 @@ function CharacterCoreSkillScaling({
                     sx={{
                         minWidth: "100px",
                         maxWidth: "500px",
-                        ml: "10px",
+                        ml: "8px",
                         color: getCharacterColor("accent"),
                     }}
                 />
             </Box>
             {sliderValue > 0 && (
-                <Text sx={{ color: theme.text.description, mt: "15px" }}>
+                <Text sx={{ color: theme.text.description, mt: "16px" }}>
                     {bonusStats[sliderValue % 2].stat} increases by{" "}
                     <span style={{ color: theme.text.highlight }}>
                         {bonusStats[sliderValue % 2].value}

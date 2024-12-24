@@ -39,8 +39,8 @@ function WeaponPassive({ weapon }: WeaponProps) {
     return (
         <Box
             sx={{
-                p: "15px",
-                mb: "15px",
+                p: "16px",
+                mb: "16px",
                 width: "100%",
                 border: theme.mainContentBox.border,
                 borderRadius: theme.mainContentBox.borderRadius,
@@ -54,7 +54,7 @@ function WeaponPassive({ weapon }: WeaponProps) {
                 </span>
                 {" Specialty, the following effects can be triggered:"}
             </TextStyled>
-            <TextStyled variant="h6" sx={{ mb: "10px" }}>
+            <TextStyled variant="h6" sx={{ mb: "8px" }}>
                 {stats.passive.name}
             </TextStyled>
             <Text sx={{ color: theme.text.description }}>
@@ -71,7 +71,7 @@ function WeaponPassive({ weapon }: WeaponProps) {
                     sx={{
                         minWidth: "100px",
                         maxWidth: "200px",
-                        ml: "10px",
+                        ml: "8px",
                     }}
                 />
             </Box>

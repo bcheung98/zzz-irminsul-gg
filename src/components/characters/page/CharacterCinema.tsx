@@ -61,7 +61,7 @@ function CharacterCinema({ character }: CharacterProps) {
                             borderRadius: theme.mainContentBox.borderRadius,
                         }}
                     >
-                        <TextStyled variant="h6" sx={{ mb: "5px" }}>
+                        <TextStyled variant="h6" sx={{ mb: "4px" }}>
                             {`${index + 1}. ${
                                 cinema[key as CharacterCinemaKey].name
                             }`}

@@ -43,7 +43,7 @@ function BannerListRow({
             <StyledTableCell>
                 <TextStyled
                     sx={{
-                        mb: "10px",
+                        mb: "8px",
                         color:
                             getContrastRatio(
                                 backgroundColor,

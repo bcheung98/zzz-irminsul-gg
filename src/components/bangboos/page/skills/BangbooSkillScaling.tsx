@@ -17,7 +17,7 @@ function BangbooSkillScaling({
 
     return (
         <>
-            <TextStyled sx={{ mb: "15px" }}>Skill Scaling</TextStyled>
+            <TextStyled sx={{ mb: "16px" }}>Skill Scaling</TextStyled>
             <StatsTable
                 mode={mode}
                 levels={range(1, levels)}
@@ -28,7 +28,7 @@ function BangbooSkillScaling({
                     sx: {
                         minWidth: "100px",
                         maxWidth: "500px",
-                        ml: "10px",
+                        ml: "8px",
                     },
                 }}
                 tableProps={{
@@ -37,7 +37,7 @@ function BangbooSkillScaling({
                             mode === "slider"
                                 ? { xs: "100%", sm: "30%" }
                                 : { xs: "100%", lg: "75%" },
-                        mt: "10px",
+                        mt: "8px",
                     },
                 }}
                 textID="bangboo-skill-value"

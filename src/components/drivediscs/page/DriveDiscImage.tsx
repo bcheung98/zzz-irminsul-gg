@@ -25,7 +25,7 @@ function DriveDiscImage({ disc }: DriveDiscProps) {
                 border: `2px solid ${getRarityColor(disc.rarity)}`,
                 borderRadius: theme.mainContentBox.borderRadius,
                 backgroundColor: theme.background(2),
-                boxShadow: `inset 0 0 25px 15px ${getBackgroundColor(
+                boxShadow: `inset 0 0 24px 16px ${getBackgroundColor(
                     disc.rarity
                 )}`,
             }}

@@ -31,7 +31,7 @@ function Planner() {
                     <WeaponSelector />
                 </Grid>
             </Grid>
-            <Grid container spacing={5} sx={{ my: "25px" }}>
+            <Grid container spacing={5} sx={{ my: "24px" }}>
                 <Grid size={{ xs: 12, xl: 10 }}>
                     <TotalCost />
                 </Grid>

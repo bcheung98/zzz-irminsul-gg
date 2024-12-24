@@ -129,7 +129,7 @@ function LevelSlider({
                 direction="row"
                 spacing={1}
                 alignItems="center"
-                sx={{ mb: "5px" }}
+                sx={{ mb: "4px" }}
             >
                 {variant === "character" && (
                     <StyledSwitch
@@ -186,8 +186,8 @@ function LevelSlider({
                     display: mode === "edit" ? "flex" : "none",
                     opacity: selected ? 1 : 0.35,
                     px: {
-                        "@": matches_sm_dn ? "15px" : "0px",
-                        [threshold]: "15px",
+                        "@": matches_sm_dn ? "16px" : "0px",
+                        [threshold]: "16px",
                     },
                     alignItems: "center",
                 }}
@@ -196,7 +196,7 @@ function LevelSlider({
                     size={1}
                     sx={{
                         display: { "@": "flex", [threshold]: "none" },
-                        mb: "25px",
+                        mb: "24px",
                     }}
                 >
                     <TextStyled>{levels[sliderValue[0] - 1]}</TextStyled>
@@ -218,7 +218,7 @@ function LevelSlider({
                     size={1}
                     sx={{
                         display: { "@": "flex", [threshold]: "none" },
-                        mb: "25px",
+                        mb: "24px",
                     }}
                 >
                     <TextStyled>{levels[sliderValue[1] - 1]}</TextStyled>

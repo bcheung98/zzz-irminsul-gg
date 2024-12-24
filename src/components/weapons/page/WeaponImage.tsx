@@ -25,7 +25,7 @@ function WeaponImage({ weapon }: WeaponProps) {
                 border: `2px solid ${getRarityColor(weapon.rarity)}`,
                 borderRadius: theme.mainContentBox.borderRadius,
                 backgroundColor: theme.background(2),
-                boxShadow: `inset 0 0 25px 15px ${getBackgroundColor(
+                boxShadow: `inset 0 0 24px 16px ${getBackgroundColor(
                     weapon.rarity
                 )}`,
             }}

@@ -93,7 +93,7 @@ function WeaponAscension({ weapon }: WeaponProps) {
                     containerType: "inline-size",
                 }}
             >
-                <Grid container spacing={2} sx={{ mb: "15px" }}>
+                <Grid container spacing={2} sx={{ mb: "16px" }}>
                     {createMaterialCostData(costs).map((material, index) => (
                         <MaterialImage
                             key={index}
@@ -110,8 +110,8 @@ function WeaponAscension({ weapon }: WeaponProps) {
                     spacing={3.5}
                     sx={{
                         px: {
-                            "@": matches_sm_dn ? "15px" : "0px",
-                            [threshold]: "15px",
+                            "@": matches_sm_dn ? "16px" : "0px",
+                            [threshold]: "16px",
                         },
                         alignItems: "center",
                         width: { sm: "100%", md: "40%" },
@@ -121,7 +121,7 @@ function WeaponAscension({ weapon }: WeaponProps) {
                         size={1}
                         sx={{
                             display: { "@": "flex", [threshold]: "none" },
-                            mb: "25px",
+                            mb: "24px",
                         }}
                     >
                         <TextStyled>{levels[sliderValue[0] - 1]}</TextStyled>
@@ -141,7 +141,7 @@ function WeaponAscension({ weapon }: WeaponProps) {
                         size={1}
                         sx={{
                             display: { "@": "flex", [threshold]: "none" },
-                            mb: "25px",
+                            mb: "24px",
                         }}
                     >
                         <TextStyled>{levels[sliderValue[1] - 1]}</TextStyled>

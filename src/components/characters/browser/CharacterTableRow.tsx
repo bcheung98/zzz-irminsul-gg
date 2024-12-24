@@ -76,7 +76,7 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
         <StyledTableRow color="secondary" hover>
             {columns.map((col, index) => (
                 <StyledTableCell key={index} sx={{ maxWidth: "275px" }}>
-                    <FlexBox columnGap="10px">
+                    <FlexBox columnGap="8px">
                         {col.img && (
                             <ButtonBase
                                 disableRipple
@@ -115,7 +115,7 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
                                 <TextStyled
                                     sx={combineStyles(
                                         {
-                                            marginLeft: "10px",
+                                            marginLeft: "8px",
                                             textAlign: "left",
                                         },
                                         col.labelStyle

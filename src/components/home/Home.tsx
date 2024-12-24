@@ -12,7 +12,7 @@ function Home() {
                 sx={(theme) => ({
                     backgroundColor: theme.background(1),
                     mb: "20px",
-                    p: "25px",
+                    p: "24px",
                 })}
             >
                 <TextStyled variant="h6">

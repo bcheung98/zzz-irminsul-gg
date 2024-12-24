@@ -17,8 +17,8 @@ function BangbooInfo({ bangboo }: BangbooProps) {
     return (
         <Box
             sx={{
-                p: "15px",
-                mb: "15px",
+                p: "16px",
+                mb: "16px",
                 width: "100%",
                 border: theme.mainContentBox.border,
                 borderRadius: theme.mainContentBox.borderRadius,
@@ -31,11 +31,11 @@ function BangbooInfo({ bangboo }: BangbooProps) {
                     alt={rarity}
                     style={{ width: "48px" }}
                 />
-                <TextStyled variant="h4" sx={{ ml: "5px" }}>
+                <TextStyled variant="h4" sx={{ ml: "4px" }}>
                     {displayName}
                 </TextStyled>
             </FlexBox>
-            <Divider sx={{ my: "15px" }} />
+            <Divider sx={{ my: "16px" }} />
             <TextStyled sx={{ fontStyle: "italic" }}>{description}</TextStyled>
         </Box>
     );

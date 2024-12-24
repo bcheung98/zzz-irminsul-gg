@@ -162,7 +162,7 @@ function BannerList({ type }: BannerListProps) {
                         <FlexBox>
                             <Box
                                 sx={{
-                                    mr: type === "character" ? "5px" : "10px",
+                                    mr: type === "character" ? "4px" : "8px",
                                     mt: "6px",
                                 }}
                             >
@@ -230,7 +230,7 @@ function BannerList({ type }: BannerListProps) {
                                         borderRadius:
                                             theme.mainContentBox.borderRadius,
                                         backgroundColor: theme.background(2),
-                                        boxShadow: `inset 0 0 25px 15px ${getBackgroundColor(
+                                        boxShadow: `inset 0 0 24px 16px ${getBackgroundColor(
                                             option.rarity
                                         )}`,
                                     }}
@@ -241,7 +241,7 @@ function BannerList({ type }: BannerListProps) {
                     </StyledMenuItem>
                 )}
             />
-            <FlexBox sx={{ my: "10px", height: "30px" }}>
+            <FlexBox sx={{ my: "8px", height: "30px" }}>
                 <StyledSwitch
                     checked={selected}
                     onChange={handleSelect}

@@ -107,7 +107,7 @@ function NavMobile({ onHomePage, navItems, linkItems }: NavProps) {
                 </List>
                 <Divider variant="middle" />
                 <List>
-                    <TextStyled sx={{ color: "white", ml: "20px", my: "10px" }}>
+                    <TextStyled sx={{ color: "white", ml: "20px", my: "8px" }}>
                         Other Games
                     </TextStyled>
                     {linkItems.map((item, index) => (

@@ -82,7 +82,7 @@ function StatsTable({
                 sx={{
                     display: mode === "slider" ? "flex" : "none",
                     flexWrap: { xs: "wrap", md: "nowrap" },
-                    mb: "15px",
+                    mb: "16px",
                 }}
             >
                 <TextStyled sx={{ minWidth: "60px" }}>

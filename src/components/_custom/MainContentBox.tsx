@@ -32,10 +32,10 @@ function MainContentBox({
     actions,
     headerProps = {
         dense: true,
-        padding: "10px 20px",
+        padding: "8px 16px",
     },
     contentProps = {
-        padding: "25px",
+        padding: "24px",
     },
 }: MainContentBoxProps) {
     const theme = useTheme();

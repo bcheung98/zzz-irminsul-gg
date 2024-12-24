@@ -98,7 +98,7 @@ function WeaponTableRow({ row }: { row: WeaponTableRowProps }) {
         <StyledTableRow color="secondary" hover>
             {columns.map((col, index) => (
                 <StyledTableCell key={index}>
-                    <FlexBox columnGap="10px">
+                    <FlexBox columnGap="8px">
                         {col.img && (
                             <ButtonBase
                                 disableRipple
@@ -137,7 +137,7 @@ function WeaponTableRow({ row }: { row: WeaponTableRowProps }) {
                                 <TextStyled
                                     sx={combineStyles(
                                         {
-                                            marginLeft: "10px",
+                                            marginLeft: "8px",
                                             textAlign: "left",
                                         },
                                         col.labelStyle

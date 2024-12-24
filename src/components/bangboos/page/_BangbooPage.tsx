@@ -27,7 +27,7 @@ function BangbooPage() {
 
         return (
             <>
-                <Grid container spacing={3} sx={{ mb: "15px" }}>
+                <Grid container spacing={3} sx={{ mb: "16px" }}>
                     <Grid size={{ xs: 12, sm: "auto" }}>
                         <BangbooImage bangboo={bangboo} />
                     </Grid>

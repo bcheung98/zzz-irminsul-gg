@@ -25,7 +25,7 @@ function BangbooImage({ bangboo }: BangbooProps) {
                 border: `2px solid ${getRarityColor(bangboo.rarity)}`,
                 borderRadius: theme.mainContentBox.borderRadius,
                 backgroundColor: theme.background(2),
-                boxShadow: `inset 0 0 10px 5px ${getBackgroundColor(
+                boxShadow: `inset 0 0 12px 4px ${getBackgroundColor(
                     bangboo.rarity
                 )}`,
             }}

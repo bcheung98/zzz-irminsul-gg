@@ -89,7 +89,7 @@ function CharacterStats({ character }: CharacterProps) {
                     sx: {
                         minWidth: "100px",
                         maxWidth: "50%",
-                        ml: "10px",
+                        ml: "8px",
                         color: getCharacterColor("accent"),
                     },
                 }}

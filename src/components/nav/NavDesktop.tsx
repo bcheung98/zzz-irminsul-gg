@@ -51,7 +51,7 @@ function NavDesktop({ onHomePage, navItems, linkItems }: NavProps) {
     };
 
     const menuButtonStyle: SxProps = {
-        borderRadius: "5px",
+        borderRadius: "4px",
         px: "2px",
         width: "36px",
         height: "36px",

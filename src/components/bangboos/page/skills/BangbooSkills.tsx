@@ -48,7 +48,7 @@ function BangbooSkills({ bangboo }: BangbooProps) {
         return {
             width: "64px",
             height: "auto",
-            margin: "5px 0",
+            margin: "4px 0",
             opacity: selected ? 1 : 0.75,
         };
     };

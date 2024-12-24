@@ -45,7 +45,7 @@ function CharacterInfoMisc({ character }: CharacterProps) {
             component={Card}
             sx={{
                 width: "100%",
-                py: "10px",
+                py: "8px",
                 backgroundColor: theme.background(2),
                 border: theme.mainContentBox.border,
                 borderRadius: theme.mainContentBox.borderRadius,
@@ -57,7 +57,7 @@ function CharacterInfoMisc({ character }: CharacterProps) {
                         <TableRow key={row.key}>
                             <TableCell
                                 align="left"
-                                sx={{ border: "none", py: "1.5px" }}
+                                sx={{ border: "none", py: "2px" }}
                             >
                                 <TextStyled variant="body2">
                                     {row.key}
@@ -65,7 +65,7 @@ function CharacterInfoMisc({ character }: CharacterProps) {
                             </TableCell>
                             <TableCell
                                 align="right"
-                                sx={{ border: "none", py: "1.5px" }}
+                                sx={{ border: "none", py: "2px" }}
                             >
                                 <Text variant="body2">{row.value}</Text>
                             </TableCell>

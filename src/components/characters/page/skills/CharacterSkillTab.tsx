@@ -52,12 +52,12 @@ function CharacterSkillTab({
     const theme = useTheme();
     return (
         <Box>
-            <TextStyled sx={{ mb: "10px", fontStyle: "italic" }}>
+            <TextStyled sx={{ mb: "8px", fontStyle: "italic" }}>
                 {formatSkillKey(skillKey)}
             </TextStyled>
             {skillData.map((skill, index) => (
                 <Box key={`${skillKey}-${index}`} sx={{ pb: "16px" }}>
-                    <TextStyled variant="h5" sx={{ mb: "5px" }}>
+                    <TextStyled variant="h5" sx={{ mb: "4px" }}>
                         {skill.name}
                     </TextStyled>
                     {skill.description.split("<br />").map((line, i) => (

@@ -40,7 +40,7 @@ function DisplayCard({
     type,
     rarity = "C",
     variant = "card",
-    size = variant === "card" ? "180px" : "64px",
+    size = variant === "card" ? "160px" : "64px",
     showName = variant === "card",
     info,
     disableTooltip = showName,
@@ -128,7 +128,7 @@ function DisplayCard({
             variant === "card"
                 ? theme.border.color.primary
                 : getRarityColor(rarity),
-        borderRadius: "5px",
+        borderRadius: "4px",
     };
 
     const mainImageStyle: React.CSSProperties = {
@@ -138,7 +138,7 @@ function DisplayCard({
         aspectRatio: aspectRatio(),
         boxShadow:
             variant === "icon"
-                ? `inset 0 0 30px 5px ${getBackgroundColor(rarity)}`
+                ? `inset 0 0 32px 4px ${getBackgroundColor(rarity)}`
                 : "none",
     };
 
@@ -185,7 +185,7 @@ function DisplayCard({
                                 />
                             )}
                             {info.element && info.specialty && (
-                                <Box sx={{ my: "5px" }} />
+                                <Box sx={{ my: "4px" }} />
                             )}
                             {info.specialty !== undefined && (
                                 <Image
@@ -213,7 +213,7 @@ function DisplayCard({
                                     ? "0px"
                                     : type === "character"
                                     ? "0px"
-                                    : "25px",
+                                    : "24px",
                             borderBottom:
                                 variant === "icon"
                                     ? "none"
@@ -236,11 +236,10 @@ function DisplayCard({
                         >
                             <TextStyled
                                 sx={{
-                                    fontSize: `calc(${size} / 10) !important`,
                                     textShadow:
                                         "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
                                     textAlign: "center",
-                                    mb: "5px",
+                                    mb: "4px",
                                     color: "white",
                                 }}
                             >

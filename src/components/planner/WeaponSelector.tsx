@@ -96,7 +96,7 @@ function WeaponSelector() {
                     }}
                 >
                     <FlexBox>
-                        <Box sx={{ mr: "10px", mt: "6px" }}>
+                        <Box sx={{ mr: "8px", mt: "6px" }}>
                             <Image
                                 src={`specialties/${option.specialty}`}
                                 alt={option.specialty}
@@ -117,7 +117,7 @@ function WeaponSelector() {
                                 )}`,
                                 borderRadius: theme.mainContentBox.borderRadius,
                                 backgroundColor: theme.background(2),
-                                boxShadow: `inset 0 0 25px 15px ${getBackgroundColor(
+                                boxShadow: `inset 0 0 24px 16px ${getBackgroundColor(
                                     option.rarity
                                 )}`,
                             }}

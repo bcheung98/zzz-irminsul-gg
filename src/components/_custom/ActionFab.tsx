@@ -62,13 +62,13 @@ function ActionFab({
                         sx={{
                             width: "100%",
                             p: 1,
-                            borderRadius: "5px",
+                            borderRadius: "4px",
                             color: "white",
                         }}
                     >
                         {icon || <KeyboardArrowLeftIcon />}
                         {label && (
-                            <TextStyled variant="body2" sx={{ ml: "5px" }}>
+                            <TextStyled variant="body2" sx={{ ml: "4px" }}>
                                 {label}
                             </TextStyled>
                         )}

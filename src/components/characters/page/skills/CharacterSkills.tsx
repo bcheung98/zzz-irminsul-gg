@@ -50,7 +50,7 @@ function CharacterSkills({ character }: CharacterProps) {
         return {
             width: "48px",
             height: "48px",
-            margin: "5px 0",
+            margin: "4px 0",
             borderWidth: selected ? "thick" : "3px",
             borderStyle: selected ? "double" : "solid",
             borderColor: getCharacterColor("accent"),

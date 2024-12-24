@@ -18,8 +18,8 @@ function CharacterInfoMain({ character }: CharacterProps) {
     return (
         <Box
             sx={{
-                p: "15px",
-                mb: "15px",
+                p: "16px",
+                mb: "16px",
                 width: "100%",
                 border: theme.mainContentBox.border,
                 borderRadius: theme.mainContentBox.borderRadius,

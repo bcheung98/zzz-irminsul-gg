@@ -112,7 +112,7 @@ export const navStyles = (paramTheme: Theme) => ({
     linkItem: (size = 32): React.CSSProperties => ({
         width: size,
         height: size,
-        borderRadius: "5px",
+        borderRadius: "4px",
     }),
     listItem: (link: string, size = 32): SxProps => ({
         display: link !== "" ? "block" : "none",
@@ -128,7 +128,7 @@ export const navStyles = (paramTheme: Theme) => ({
         transition: "transform 0.25s",
     }),
     listItemButton: (theme = paramTheme, size = 32): SxProps => ({
-        borderRadius: "5px",
+        borderRadius: "4px",
         justifyContent: "left",
         px: `${(size * 2) / 8}px`,
         width: "100%",

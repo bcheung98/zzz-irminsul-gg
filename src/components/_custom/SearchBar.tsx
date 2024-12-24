@@ -45,7 +45,7 @@ function SearchBar({
                     color: theme.text.primary,
                     fontFamily: theme.font.styled.family,
                     fontWeight: theme.font.styled.weight,
-                    borderRadius: "5px",
+                    borderRadius: "4px",
                     "& fieldset, &:hover fieldset, &:focus, &.Mui-focused fieldset":
                         { border: 0 },
                 },

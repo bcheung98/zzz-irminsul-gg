@@ -122,8 +122,8 @@ function PlannerCard({ data }: PlannerCardProps) {
                             style={{
                                 width: "56px",
                                 border: `2px solid ${getRarityColor(rarity)}`,
-                                borderRadius: "10px",
-                                marginRight: "15px",
+                                borderRadius: "8px",
+                                marginRight: "16px",
                                 padding:
                                     variant === "character" ? "0px" : "4px",
                                 backgroundColor:
@@ -191,7 +191,7 @@ function PlannerCard({ data }: PlannerCardProps) {
             contentProps={{ padding: "20px" }}
         >
             <TextStyled>Materials Required</TextStyled>
-            <Grid container spacing={2} sx={{ mt: "15px" }}>
+            <Grid container spacing={2} sx={{ mt: "16px" }}>
                 {createMaterialCostData(costs as TotalCostObject).map(
                     (material, index) => (
                         <MaterialImage
@@ -205,14 +205,14 @@ function PlannerCard({ data }: PlannerCardProps) {
                     )
                 )}
             </Grid>
-            <Divider sx={{ my: "15px" }} />
+            <Divider sx={{ my: "16px" }} />
             <Button
                 onClick={handleModeChange}
                 variant="contained"
                 color="primary"
                 disableRipple
                 startIcon={mode !== "edit" ? <EditIcon /> : <DoneIcon />}
-                sx={{ mb: "15px" }}
+                sx={{ mb: "16px" }}
             >
                 {mode !== "edit" ? "Edit" : "Done"}
             </Button>

@@ -101,7 +101,7 @@ function VersionHighlights() {
                         label="Version"
                         onChange={handleIndexChange}
                         input={<StyledInput />}
-                        sx={{ width: "75px", mx: "5px" }}
+                        sx={{ mx: "4px" }}
                     >
                         {updates.map((version, index) => (
                             <StyledMenuItem key={index} value={index}>
@@ -129,7 +129,7 @@ function VersionHighlights() {
                 sx={{
                     display: "grid",
                     gridTemplateRows: "repeat(2, auto)",
-                    gap: "25px",
+                    gap: "24px",
                     gridAutoFlow: { xs: "row dense", md: "column dense" },
                     gridAutoColumns: "minmax(180px, 1fr)",
                 }}
@@ -142,7 +142,7 @@ function VersionHighlights() {
                                 alt="New Agents"
                                 style={{
                                     width: "32px",
-                                    marginRight: "10px",
+                                    marginRight: "8px",
                                     backgroundColor: theme.icon.backgroundColor,
                                     borderRadius: "64px",
                                 }}
@@ -175,7 +175,7 @@ function VersionHighlights() {
                                 alt="New W-Engines"
                                 style={{
                                     width: "32px",
-                                    marginRight: "10px",
+                                    marginRight: "8px",
                                     backgroundColor: theme.icon.backgroundColor,
                                     borderRadius: "64px",
                                 }}
@@ -207,7 +207,7 @@ function VersionHighlights() {
                                 alt="New Drive Discs"
                                 style={{
                                     width: "32px",
-                                    marginRight: "10px",
+                                    marginRight: "8px",
                                     backgroundColor: theme.icon.backgroundColor,
                                     borderRadius: "64px",
                                 }}
@@ -238,7 +238,7 @@ function VersionHighlights() {
                                 alt="New Bangboos"
                                 style={{
                                     width: "32px",
-                                    marginRight: "10px",
+                                    marginRight: "8px",
                                     backgroundColor: theme.icon.backgroundColor,
                                     borderRadius: "64px",
                                 }}

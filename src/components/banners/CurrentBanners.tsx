@@ -59,14 +59,14 @@ function CurrentBanners() {
     return (
         <MainContentBox
             title="Current Banners"
-            contentProps={{ padding: "15px" }}
+            contentProps={{ padding: "16px" }}
         >
             {activeBanners ? (
                 <>
                     <Grid container rowSpacing={2} columnSpacing={9}>
                         {currentCharacterBanners.length > 0 && (
                             <Grid size={{ xs: 12, lg: "auto" }}>
-                                <TextStyled variant="h6" sx={{ mb: "10px" }}>
+                                <TextStyled variant="h6" sx={{ mb: "8px" }}>
                                     Agent Banner
                                 </TextStyled>
                                 {currentCharacterBanners.map(
@@ -149,7 +149,7 @@ function CurrentBanners() {
                         )}
                         {currentWeaponBanners.length > 0 && (
                             <Grid size={{ xs: 12, lg: "auto" }}>
-                                <TextStyled variant="h6" sx={{ mb: "10px" }}>
+                                <TextStyled variant="h6" sx={{ mb: "8px" }}>
                                     W-Engine Banner
                                 </TextStyled>
                                 {currentWeaponBanners.map((banner, index) => (

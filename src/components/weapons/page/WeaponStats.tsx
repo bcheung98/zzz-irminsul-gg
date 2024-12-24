@@ -89,7 +89,7 @@ function WeaponStats({ weapon }: WeaponProps) {
                     sx: {
                         minWidth: "100px",
                         maxWidth: "75%",
-                        ml: "10px",
+                        ml: "8px",
                     },
                 }}
                 tableProps={{

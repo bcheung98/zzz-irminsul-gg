@@ -10,7 +10,6 @@ import { combineStyles, zoomImageOnHover } from "helpers/utils";
 interface ImageProps {
     src: string;
     fallbackSrc?: string;
-    ext?: string;
     alt?: string;
     id?: string;
     loading?: "lazy" | "eager";
@@ -24,7 +23,6 @@ interface ImageProps {
 function Image({
     src,
     fallbackSrc = "images/Unknown",
-    ext = "png",
     alt = "",
     id = src,
     loading = "lazy",
@@ -40,7 +38,7 @@ function Image({
     };
 
     // If the src doesn't have a specified file extension (ex: `.gif`), append `.png` to the src
-    ext = src.match(/\.[0-9a-z]+$/i) ? "" : ".png";
+    const ext = src.match(/\.[0-9a-z]+$/i) ? "" : ".png";
 
     if (!src.startsWith("https")) {
         src = `https://assets.irminsul.gg/zzz/${src

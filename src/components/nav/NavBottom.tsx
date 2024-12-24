@@ -46,7 +46,7 @@ function NavBottom() {
                 sx={{
                     justifyContent: "space-between",
                     display: { xs: "block", md: "flex" },
-                    py: "10px",
+                    py: "8px",
                 }}
             >
                 <TextStyled variant="body2" sx={{ color: theme.appbar.color }}>
@@ -59,7 +59,7 @@ function NavBottom() {
                         orientation="horizontal"
                         sx={{
                             display: { xs: "block", md: "none" },
-                            my: "10px",
+                            my: "8px",
                         }}
                     />
                     <Box sx={{ display: "flex" }}>
@@ -98,7 +98,7 @@ function NavBottom() {
                         <Divider
                             orientation="vertical"
                             flexItem
-                            sx={{ mx: { xs: "10px", md: "25px" } }}
+                            sx={{ mx: { xs: "8px", md: "24px" } }}
                         />
                         <Box
                             sx={{

@@ -15,18 +15,18 @@ function DriveDiscInfo({ disc }: DriveDiscProps) {
     return (
         <Box
             sx={{
-                p: "15px",
-                mb: "15px",
+                p: "16px",
+                mb: "16px",
                 width: "100%",
                 border: theme.mainContentBox.border,
                 borderRadius: theme.mainContentBox.borderRadius,
                 backgroundColor: theme.background(2),
             }}
         >
-            <TextStyled variant="h4" sx={{ mb: "5px" }}>
+            <TextStyled variant="h4" sx={{ mb: "4px" }}>
                 {displayName}
             </TextStyled>
-            <Divider sx={{ my: "15px" }} />
+            <Divider sx={{ my: "16px" }} />
             <TextStyled sx={{ fontStyle: "italic" }}>{description}</TextStyled>
         </Box>
     );

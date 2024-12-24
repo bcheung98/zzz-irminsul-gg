@@ -21,7 +21,7 @@ function Dropdown({
     title = "",
     titleColor,
     iconColor,
-    contentPadding = "5px 25px",
+    contentPadding = "4px 24px",
     unmountOnExit = false,
 }: DropdownProps) {
     const theme = useTheme();
@@ -41,7 +41,7 @@ function Dropdown({
             >
                 <ExpandMore
                     sx={{
-                        mr: "5px",
+                        mr: "4px",
                         color: iconColor || theme.border.color.primary,
                         transform: open ? "rotateZ(0deg)" : "rotateZ(-90deg)",
                         transition: "transform 0.25s",
@@ -52,7 +52,7 @@ function Dropdown({
                 </TextStyled>
             </IconButton>
             <Collapse in={open} timeout="auto" unmountOnExit={unmountOnExit}>
-                <Box sx={{ p: { xs: "5px 0", md: contentPadding } }}>
+                <Box sx={{ p: { xs: "4px 0", md: contentPadding } }}>
                     {children}
                 </Box>
             </Collapse>

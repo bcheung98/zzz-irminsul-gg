@@ -44,7 +44,7 @@ function Countdown(props: { date: DateObject }) {
     countdownArr.push(`${seconds}s`);
 
     return (
-        <TextStyled variant="body2" sx={{ my: "10px" }}>
+        <TextStyled variant="body2" sx={{ my: "8px" }}>
             {timeRemaining > 0 ? (
                 <>
                     {`Ends in `}

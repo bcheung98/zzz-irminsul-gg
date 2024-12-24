@@ -183,7 +183,7 @@ function createButtons<T>(items: readonly T[], url: string) {
                     url.startsWith("materials/") ? ".gif" : ""
                 }`}
                 alt={`${item}`}
-                style={{ width: "32px", padding: padding, borderRadius: "5px" }}
+                style={{ width: "32px", padding: padding, borderRadius: "4px" }}
                 tooltip={getTooltip(item, url)}
             />
         ),

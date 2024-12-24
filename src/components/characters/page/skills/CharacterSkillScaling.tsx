@@ -33,7 +33,7 @@ function CharacterSkillScaling({
                     sx: {
                         minWidth: "100px",
                         maxWidth: "500px",
-                        ml: "10px",
+                        ml: "8px",
                         color: getCharacterColor("accent"),
                     },
                 }}
@@ -43,7 +43,7 @@ function CharacterSkillScaling({
                             mode === "slider"
                                 ? { xs: "100%", sm: "30%" }
                                 : "100%",
-                        mt: "10px",
+                        mt: "8px",
                     },
                 }}
                 textID="character-skill-value"
