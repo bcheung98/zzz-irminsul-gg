@@ -112,54 +112,11 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
                 <List>
                     {navItems.map((item, index) => (
                         <Box key={index} sx={styles.listItem(item.link)}>
-                            <ButtonBase
-                                href={item.link}
-                                disableRipple
-                                disableTouchRipple
-                                sx={styles.listItemButton()}
-                            >
-                                <Image
-                                    src={item.icon}
-                                    alt={item.text}
-                                    style={styles.navItem()}
-                                    tooltip={!drawerOpen ? item.text : null}
-                                    tooltipArrow="right"
-                                />
-                                <TextStyled
-                                    sx={styles.listItemText(drawerOpen)}
-                                >
-                                    {item.text}
-                                </TextStyled>
-                            </ButtonBase>
-                        </Box>
-                    ))}
-                </List>
-                <Divider variant="middle" />
-                <List>
-                    <Box sx={styles.listItem("_")}>
-                        <IconButton
-                            onClick={toggleDropdownState}
-                            disableRipple
-                            disableTouchRipple
-                            sx={styles.listItemButton()}
-                        >
                             <StyledTooltip
-                                title={!drawerOpen ? "Other Games" : null}
+                                title={!drawerOpen ? item.text : null}
                                 arrow
                                 placement="right"
                             >
-                                <ExpandMore
-                                    sx={styles.listIcon(dropdownOpen)}
-                                />
-                            </StyledTooltip>
-                            <TextStyled sx={styles.listItemText(drawerOpen)}>
-                                Other Games
-                            </TextStyled>
-                        </IconButton>
-                    </Box>
-                    <Collapse in={dropdownOpen} timeout="auto" unmountOnExit>
-                        {linkItems.map((item, index) => (
-                            <Box key={index} sx={styles.listItem(item.link)}>
                                 <ButtonBase
                                     href={item.link}
                                     disableRipple
@@ -169,9 +126,7 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
                                     <Image
                                         src={item.icon}
                                         alt={item.text}
-                                        style={styles.linkItem()}
-                                        tooltip={!drawerOpen ? item.text : null}
-                                        tooltipArrow="right"
+                                        style={styles.navItem()}
                                     />
                                     <TextStyled
                                         sx={styles.listItemText(drawerOpen)}
@@ -179,6 +134,62 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
                                         {item.text}
                                     </TextStyled>
                                 </ButtonBase>
+                            </StyledTooltip>
+                        </Box>
+                    ))}
+                </List>
+                <Divider variant="middle" />
+                <List>
+                    <Box sx={styles.listItem("_")}>
+                        <StyledTooltip
+                            title={!drawerOpen ? "Other Games" : null}
+                            arrow
+                            placement="right"
+                        >
+                            <IconButton
+                                onClick={toggleDropdownState}
+                                disableRipple
+                                disableTouchRipple
+                                sx={styles.listItemButton()}
+                            >
+                                <ExpandMore
+                                    sx={styles.listIcon(dropdownOpen)}
+                                />
+
+                                <TextStyled
+                                    sx={styles.listItemText(drawerOpen)}
+                                >
+                                    Other Games
+                                </TextStyled>
+                            </IconButton>
+                        </StyledTooltip>
+                    </Box>
+                    <Collapse in={dropdownOpen} timeout="auto" unmountOnExit>
+                        {linkItems.map((item, index) => (
+                            <Box key={index} sx={styles.listItem(item.link)}>
+                                <StyledTooltip
+                                    title={!drawerOpen ? item.text : null}
+                                    arrow
+                                    placement="right"
+                                >
+                                    <ButtonBase
+                                        href={item.link}
+                                        disableRipple
+                                        disableTouchRipple
+                                        sx={styles.listItemButton()}
+                                    >
+                                        <Image
+                                            src={item.icon}
+                                            alt={item.text}
+                                            style={styles.linkItem()}
+                                        />
+                                        <TextStyled
+                                            sx={styles.listItemText(drawerOpen)}
+                                        >
+                                            {item.text}
+                                        </TextStyled>
+                                    </ButtonBase>
+                                </StyledTooltip>
                             </Box>
                         ))}
                     </Collapse>
