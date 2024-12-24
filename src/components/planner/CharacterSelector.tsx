@@ -139,33 +139,6 @@ function CharacterSelector() {
                     </FlexBox>
                 </StyledMenuItem>
             )}
-            slotProps={{
-                chip: {
-                    sx: {
-                        backgroundColor: theme.button.primary,
-                        color: theme.text.primary,
-                        fontFamily: theme.font.styled.family,
-                        "& .MuiChip-deleteIcon": {
-                            color: theme.text.primary,
-                            ":hover": {
-                                color: theme.text.description,
-                            },
-                        },
-                    },
-                },
-                listbox: {
-                    sx: { p: 0 },
-                },
-                paper: {
-                    sx: {
-                        backgroundColor: theme.menu.primary,
-                        borderRadius: "5px",
-                    },
-                },
-                popper: {
-                    sx: { zIndex: theme.zIndex.appBar - 1 },
-                },
-            }}
         />
     );
 }

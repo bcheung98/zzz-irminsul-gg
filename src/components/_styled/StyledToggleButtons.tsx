@@ -5,9 +5,7 @@ import {
 
 // MUI imports
 import { styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
-
-// Helper imports
-import { getHoverColor } from "helpers/utils";
+import { ColorVariants } from "types/theme";
 
 export const StyledToggleButton = styled(
     (props: CustomToggleButtonProps) => (
@@ -17,14 +15,12 @@ export const StyledToggleButton = styled(
         shouldForwardProp: (prop) =>
             !["highlightOnHover", "backgroundColor"].includes(prop.toString()),
     }
-)(({ theme, highlightOnHover, backgroundColor }) => ({
+)(({ theme, highlightOnHover, color = "primary" }) => ({
     "&.MuiToggleButton-root": {
         opacity: 0.4,
-        color: theme.text.primary,
+        color: "white",
         "&:hover": {
-            backgroundColor: backgroundColor
-                ? getHoverColor(backgroundColor, -10)
-                : theme.menu.hover,
+            backgroundColor: theme.palette[color as ColorVariants].light,
             borderColor: highlightOnHover
                 ? theme.border.color.highlight
                 : theme.border.color.primary,
@@ -41,7 +37,7 @@ export const StyledToggleButtonGroup = styled(
         shouldForwardProp: (prop) =>
             !["highlightOnHover", "backgroundColor"].includes(prop.toString()),
     }
-)(({ theme, spacing, padding = 4, backgroundColor }) => ({
+)(({ theme, spacing, padding = 4, color = "primary" }) => ({
     flexWrap: "wrap",
     "& .MuiToggleButtonGroup-grouped": {
         padding: getPadding(padding),
@@ -50,14 +46,12 @@ export const StyledToggleButtonGroup = styled(
             ? `1px solid ${theme.border.color.primary} !important`
             : `1px solid ${theme.border.color.primary}`,
         borderRadius: spacing ? "4px" : "none",
-        backgroundColor: backgroundColor || theme.menu.primary,
+        backgroundColor: theme.palette[color as ColorVariants].main,
         "&.Mui-selected": {
-            backgroundColor: backgroundColor || theme.menu.selected,
+            backgroundColor: theme.palette[color as ColorVariants].main,
             opacity: 1,
             "&:hover": {
-                backgroundColor: backgroundColor
-                    ? getHoverColor(backgroundColor, -10)
-                    : theme.menu.selectedHover,
+                backgroundColor: theme.palette[color as ColorVariants].light,
             },
         },
     },

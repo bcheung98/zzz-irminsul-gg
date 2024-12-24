@@ -3,7 +3,7 @@ import { StyledTableCell } from "styled/StyledTable";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { TableHead, TableRow, TableSortLabel } from "@mui/material";
+import { useTheme, TableHead, TableRow, TableSortLabel } from "@mui/material";
 import { KeyboardArrowDown } from "@mui/icons-material";
 
 export type Order = "asc" | "desc";
@@ -26,6 +26,8 @@ function SortTableHead({
     orderBy,
     onRequestSort,
 }: SortTableHeadProps) {
+    const theme = useTheme();
+
     const createSortHandler =
         (property: string) => (event: React.BaseSyntheticEvent) => {
             onRequestSort(event, property);
@@ -55,7 +57,12 @@ function SortTableHead({
                                 },
                             })}
                         >
-                            <TextStyled noWrap>{column.label}</TextStyled>
+                            <TextStyled
+                                noWrap
+                                sx={{ color: theme.appbar.color }}
+                            >
+                                {column.label}
+                            </TextStyled>
                         </TableSortLabel>
                     </StyledTableCell>
                 ))}

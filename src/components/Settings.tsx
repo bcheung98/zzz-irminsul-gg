@@ -173,7 +173,7 @@ function Settings() {
                     }
                 >
                     <Stack spacing={2}>
-                        {settingsList.slice(1).map((setting, index) => (
+                        {settingsList.map((setting, index) => (
                             <FlexBox
                                 key={index}
                                 sx={{

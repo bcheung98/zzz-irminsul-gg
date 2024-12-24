@@ -131,7 +131,7 @@ function StatsTable({
                     <TableBody>
                         {mode === "slider"
                             ? sliderRows.map((row) => (
-                                  <StyledTableRow key={row[0]}>
+                                  <StyledTableRow key={row[0]} color="primary">
                                       <StyledTableCell align="left">
                                           <Text variant="body2">{row[0]}</Text>
                                       </StyledTableCell>
@@ -143,7 +143,11 @@ function StatsTable({
                                   </StyledTableRow>
                               ))
                             : tableRows.map((row) => (
-                                  <StyledTableRow key={row[0]} hover>
+                                  <StyledTableRow
+                                      key={row[0]}
+                                      color="primary"
+                                      hover
+                                  >
                                       {row.map((level, index) => (
                                           <StyledTableCell
                                               key={`${row[0]}-${index}`}

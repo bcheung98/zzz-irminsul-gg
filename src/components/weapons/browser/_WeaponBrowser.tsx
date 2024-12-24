@@ -101,6 +101,7 @@ function WeaponBrowser() {
                     </Grid>
                     <Grid size={{ xs: 6, sm: "auto" }}>
                         <ToggleButtons
+                            color="primary"
                             buttons={buttons}
                             value={view}
                             exclusive
@@ -119,7 +120,9 @@ function WeaponBrowser() {
                     <Grid size={{ xs: 12, sm: "auto" }}>
                         <Button
                             onClick={toggleDrawerState}
-                            variant="outlined"
+                            variant="contained"
+                            color="primary"
+                            disableElevation
                             disableRipple
                             startIcon={
                                 matches_md_up && drawerOpen ? (
@@ -128,11 +131,7 @@ function WeaponBrowser() {
                                     <TuneIcon />
                                 )
                             }
-                            sx={{
-                                height: "36px",
-                                border: 0,
-                                backgroundColor: theme.background(2),
-                            }}
+                            sx={{ height: "36px" }}
                         >
                             Filters
                         </Button>
@@ -156,7 +155,12 @@ function WeaponBrowser() {
                     </Grid>
                 )}
                 {view === "table" && <WeaponTable weapons={currentWeapons} />}
-                <ActionFab action={toggleDrawerState} icon={<TuneIcon />} />
+                <ActionFab
+                    action={toggleDrawerState}
+                    icon={<TuneIcon />}
+                    tooltip="Open filters"
+                    tooltipArrow="left"
+                />
             </Box>
             <Drawer
                 sx={

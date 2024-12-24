@@ -1,9 +1,9 @@
 import React from "react";
 
 // Component imports
-import Image from "custom/Image";
 import DisplayCard from "custom/DisplayCard";
 import MainContentBox from "custom/MainContentBox";
+import InfoChip from "custom/InfoChip";
 import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
 import { StyledInput } from "styled/StyledInput";
@@ -136,15 +136,15 @@ function VersionHighlights() {
             >
                 {characters.length > 0 && (
                     <Box>
-                        <FlexBox sx={{ mb: "20px" }}>
-                            <Image
-                                src="icons/Characters"
-                                alt="New Agents"
-                                style={{ width: "32px", marginRight: "10px" }}
-                            />
-                            <TextStyled variant="h6">New Agents</TextStyled>
-                        </FlexBox>
-                        <Grid container spacing={2}>
+                        <InfoChip
+                            color="primary"
+                            src="icons/Characters"
+                            label="New Agents"
+                            imgSize="40px"
+                            textVariant="h6"
+                            padding="20px 8px"
+                        />
+                        <Grid container spacing={2} sx={{ mt: "20px" }}>
                             {characters.map((char, index) => (
                                 <DisplayCard
                                     key={index}
@@ -164,15 +164,15 @@ function VersionHighlights() {
                 )}
                 {weapons.length > 0 && (
                     <Box sx={{ gridRowEnd: "span 3" }}>
-                        <FlexBox sx={{ mb: "20px" }}>
-                            <Image
-                                src="icons/W-Engine"
-                                alt="New W-Engines"
-                                style={{ width: "32px", marginRight: "10px" }}
-                            />
-                            <TextStyled variant="h6">New W-Engines</TextStyled>
-                        </FlexBox>
-                        <Grid container spacing={2}>
+                        <InfoChip
+                            color="primary"
+                            src="icons/W-Engine"
+                            label="New W-Engines"
+                            imgSize="40px"
+                            textVariant="h6"
+                            padding="20px 8px"
+                        />
+                        <Grid container spacing={2} sx={{ mt: "20px" }}>
                             {weapons.map((weapon, index) => (
                                 <DisplayCard
                                     key={index}
@@ -191,17 +191,15 @@ function VersionHighlights() {
                 )}
                 {driveDiscs.length > 0 && (
                     <Box>
-                        <FlexBox sx={{ mb: "20px" }}>
-                            <Image
-                                src="icons/Drive_Disc"
-                                alt="New Drive Discs"
-                                style={{ width: "32px", marginRight: "10px" }}
-                            />
-                            <TextStyled variant="h6">
-                                New Drive Discs
-                            </TextStyled>
-                        </FlexBox>
-                        <Grid container spacing={2}>
+                        <InfoChip
+                            color="primary"
+                            src="icons/Drive_Disc"
+                            label="New Drive Discs"
+                            imgSize="40px"
+                            textVariant="h6"
+                            padding="20px 8px"
+                        />
+                        <Grid container spacing={2} sx={{ mt: "20px" }}>
                             {driveDiscs.map((disc, index) => (
                                 <DisplayCard
                                     key={index}
@@ -217,15 +215,15 @@ function VersionHighlights() {
                 )}
                 {bangboos.length > 0 && (
                     <Box>
-                        <FlexBox sx={{ mb: "20px" }}>
-                            <Image
-                                src="icons/Bangboo"
-                                alt="New Bangboos"
-                                style={{ width: "32px", marginRight: "10px" }}
-                            />
-                            <TextStyled variant="h6">New Bangboos</TextStyled>
-                        </FlexBox>
-                        <Grid container spacing={2}>
+                        <InfoChip
+                            color="primary"
+                            src="icons/Bangboo"
+                            label="New Bangboos"
+                            imgSize="40px"
+                            textVariant="h6"
+                            padding="20px 8px"
+                        />
+                        <Grid container spacing={2} sx={{ mt: "20px" }}>
                             {bangboos.map((bangboo, index) => (
                                 <DisplayCard
                                     key={index}

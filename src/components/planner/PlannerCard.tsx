@@ -208,14 +208,11 @@ function PlannerCard({ data }: PlannerCardProps) {
             <Divider sx={{ my: "15px" }} />
             <Button
                 onClick={handleModeChange}
-                variant="outlined"
+                variant="contained"
+                color="primary"
                 disableRipple
                 startIcon={mode !== "edit" ? <EditIcon /> : <DoneIcon />}
-                sx={{
-                    border: 0,
-                    backgroundColor: theme.background(2),
-                    mb: "15px",
-                }}
+                sx={{ mb: "15px" }}
             >
                 {mode !== "edit" ? "Edit" : "Done"}
             </Button>

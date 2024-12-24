@@ -15,6 +15,14 @@ export type CustomTheme = {
 declare module "@mui/material/styles" {
     interface Theme extends CustomTheme {}
     interface ThemeOptions extends Partial<CustomTheme> {}
+    interface Palette {
+        default: Palette["primary"];
+        tertiary: Palette["primary"];
+    }
+    interface PaletteOptions {
+        default?: PaletteOptions["primary"];
+        tertiary?: PaletteOptions["primary"];
+    }
     interface TypographyVariants {
         sitename: React.CSSProperties;
     }
@@ -28,3 +36,20 @@ declare module "@mui/material/Typography" {
         sitename: true;
     }
 }
+
+declare module "@mui/material/Chip" {
+    interface ChipPropsColorOverrides {
+        tertiary: true;
+    }
+}
+
+export type Shade = "main" | "light" | "dark";
+export type ColorVariants =
+    | "default"
+    | "primary"
+    | "secondary"
+    | "tertiary"
+    | "error"
+    | "warning"
+    | "info"
+    | "success";

@@ -4,6 +4,7 @@ import parse from "html-react-parser";
 // Component imports
 import Image from "custom/Image";
 import MainContentBox from "custom/MainContentBox";
+import InfoChip from "custom/InfoChip";
 import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
@@ -42,25 +43,22 @@ function WeaponInfo({ weapon }: WeaponProps) {
         >
             <FlexBox>
                 <Image
-                    src={`specialties/${specialty}`}
-                    alt={specialty}
-                    tooltip={specialty}
+                    src={`ranks/item/${rarity}`}
+                    alt={rarity}
                     style={{ width: "64px" }}
                 />
-                <Box sx={{ ml: "15px" }}>
-                    <TextStyled variant="h4" sx={{ mb: "5px" }}>
+                <Box sx={{ ml: "16px" }}>
+                    <TextStyled variant="h4" sx={{ mb: "8px" }}>
                         {displayName}
                     </TextStyled>
-                    <FlexBox columnGap="4px">
-                        <Image
-                            src={`ranks/item/${rarity}`}
-                            alt={rarity}
-                            style={{ width: "40px" }}
-                        />
-                    </FlexBox>
+                    <InfoChip
+                        color="tertiary"
+                        src={`specialties/${specialty}`}
+                        label={specialty}
+                    />
                 </Box>
             </FlexBox>
-            <Divider sx={{ my: "15px" }} />
+            <Divider sx={{ my: "16px" }} />
             <FlexBox>
                 <IconButton disableRipple onClick={handleClickOpen}>
                     <InfoOutlinedIcon />

@@ -12,7 +12,7 @@ import store from "rtk/store";
 import { useAppSelector } from "helpers/hooks";
 import { selectServer } from "reducers/settings";
 import { createDateObject, isCurrentBanner } from "helpers/dates";
-import { getHoverColor, isTBA } from "helpers/utils";
+import { isTBA } from "helpers/utils";
 
 // Type imports
 import { BannerRow } from "./BannerList";
@@ -34,16 +34,23 @@ function BannerListRow({
     const start = createDateObject({ date: row.start, region: region });
     const end = createDateObject({ date: row.end, region: region });
 
+    const isCurr = isCurrentBanner(start.obj, end.obj);
+
     return (
         <StyledTableRow
             sx={{
-                backgroundColor: isCurrentBanner(start.obj, end.obj)
-                    ? getHoverColor(theme.button.primary, -25)
-                    : theme.background(1),
+                backgroundColor: isCurr
+                    ? theme.palette.info.light
+                    : theme.palette.background.paper,
             }}
         >
             <StyledTableCell>
-                <TextStyled sx={{ mb: "10px" }}>
+                <TextStyled
+                    sx={{
+                        mb: "10px",
+                        color: isCurr ? `white` : theme.text.primary,
+                    }}
+                >
                     {`${version} Phase ${subVersion.split(".")[2]}: ${
                         start.date
                     } — ${end.date}`}

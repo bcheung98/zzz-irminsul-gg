@@ -1,5 +1,6 @@
 // Component imports
 import Image from "custom/Image";
+import InfoChip from "custom/InfoChip";
 import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
@@ -31,26 +32,24 @@ function CharacterInfoMain({ character }: CharacterProps) {
                     alt={rarity}
                     style={{ width: "56px" }}
                 />
-                <Box sx={{ ml: "15px" }}>
+                <Box sx={{ ml: "16px" }}>
                     <TextStyled
                         variant="h4"
                         className="page-name"
-                        sx={{ mb: "5px" }}
+                        sx={{ mb: "8px" }}
                     >
                         {fullName}
                     </TextStyled>
-                    <FlexBox columnGap="4px">
-                        <Image
+                    <FlexBox sx={{ flexWrap: "wrap", gap: "8px" }}>
+                        <InfoChip
+                            color="tertiary"
                             src={`elements/${element}`}
-                            alt={element}
-                            tooltip={element}
-                            style={{ width: "32px" }}
+                            label={element}
                         />
-                        <Image
+                        <InfoChip
+                            color="tertiary"
                             src={`specialties/${specialty}`}
-                            alt={specialty}
-                            tooltip={specialty}
-                            style={{ width: "32px" }}
+                            label={specialty}
                         />
                     </FlexBox>
                 </Box>

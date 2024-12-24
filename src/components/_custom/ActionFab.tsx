@@ -4,7 +4,14 @@ import React from "react";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, useScrollTrigger, Fab, Fade, Box } from "@mui/material";
+import {
+    useScrollTrigger,
+    Fab,
+    Fade,
+    Box,
+    FabProps,
+    TooltipProps,
+} from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { StyledTooltip } from "styled/StyledTooltip";
 
@@ -15,10 +22,8 @@ interface ActionFabProps {
     icon?: React.ReactNode;
     label?: React.ReactNode;
     tooltip?: string;
-    color?: {
-        primary?: string;
-        hover?: string;
-    };
+    tooltipArrow?: TooltipProps["placement"];
+    color?: FabProps["color"];
     position?: {
         top?: string | number;
         right?: string | number;
@@ -34,14 +39,13 @@ function ActionFab({
     icon,
     label,
     tooltip = "",
-    color,
+    tooltipArrow = "top",
+    color = "primary",
     position = {
         top: 90,
         right: 20,
     },
 }: ActionFabProps) {
-    const theme = useTheme();
-
     const trigger = useScrollTrigger({
         disableHysteresis: !hysteresis,
         threshold: threshold,
@@ -50,21 +54,16 @@ function ActionFab({
     return (
         <Fade in={trigger}>
             <Box onClick={action} sx={[{ position: "fixed" }, { ...position }]}>
-                <StyledTooltip title={tooltip}>
+                <StyledTooltip title={tooltip} arrow placement={tooltipArrow}>
                     <Fab
+                        color={color}
                         size="small"
                         disableRipple
                         sx={{
                             width: "100%",
                             p: 1,
                             borderRadius: "5px",
-                            backgroundColor:
-                                color?.primary || theme.button.primary,
                             color: "white",
-                            "&:hover": {
-                                backgroundColor:
-                                    color?.hover || theme.button.hover,
-                            },
                         }}
                     >
                         {icon || <KeyboardArrowLeftIcon />}

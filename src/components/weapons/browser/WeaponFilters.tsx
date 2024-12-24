@@ -5,7 +5,6 @@ import Dropdown from "custom/Dropdown";
 import Image from "custom/Image";
 import ToggleButtons from "custom/ToggleButtons";
 import { FlexBox } from "styled/StyledBox";
-import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
 import { useTheme, List, IconButton, Toolbar, Button } from "@mui/material";
@@ -56,27 +55,19 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
                     <Button
                         onClick={() => dispatch(clearFilters())}
                         disabled={!useAppSelector(activeWeaponFilters)}
-                        variant="outlined"
+                        variant="contained"
+                        color="secondary"
+                        disableElevation
                         startIcon={<RestartAltIcon />}
                         sx={{
-                            backgroundColor: theme.icon.backgroundColor,
-                            color: theme.appbar.color,
                             height: "32px",
                             "&.Mui-disabled": {
-                                backgroundColor: theme.icon.backgroundColor,
                                 opacity: 0.35,
                                 color: theme.appbar.color,
                             },
                         }}
                     >
-                        <TextStyled
-                            sx={{
-                                textTransform: "none",
-                                color: theme.appbar.color,
-                            }}
-                        >
-                            Reset
-                        </TextStyled>
+                        Reset
                     </Button>
                 </FlexBox>
                 <IconButton
@@ -99,6 +90,7 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
                         contentPadding="4px 0px 4px 24px"
                     >
                         <ToggleButtons
+                            color="secondary"
                             buttons={filter.buttons}
                             value={filter.value}
                             onChange={filter.onChange}

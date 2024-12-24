@@ -9,7 +9,7 @@ export function characterColors(
 ) {
     const theme = useTheme();
     if (theme.name === "Light") {
-        return theme.button.primary;
+        return theme.palette.info.main;
     } else {
         return (
             colors[option] ||

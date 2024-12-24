@@ -16,6 +16,7 @@ export function getTheme(name: string) {
         palette: {
             background: {
                 default: theme.background(0),
+                paper: theme.background(1),
             },
         },
         components: {
@@ -26,6 +27,35 @@ export function getTheme(name: string) {
                         fontFamily: theme.font.styled.family,
                         fontWeight: theme.font.styled.weight,
                         backgroundColor: theme.menu.primary,
+                    },
+                },
+                defaultProps: {
+                    slotProps: {
+                        chip: {
+                            sx: {
+                                backgroundColor: theme.palette.info.main,
+                                color: theme.appbar.color,
+                                fontFamily: theme.font.styled.family,
+                                "& .MuiChip-deleteIcon": {
+                                    color: theme.appbar.color,
+                                    ":hover": {
+                                        color: "rgb(225, 225, 225)",
+                                    },
+                                },
+                            },
+                        },
+                        listbox: {
+                            sx: { p: 0 },
+                        },
+                        paper: {
+                            sx: {
+                                backgroundColor: theme.menu.primary,
+                                borderRadius: "4px",
+                            },
+                        },
+                        popper: {
+                            sx: { zIndex: theme.zIndex.appBar - 1 },
+                        },
                     },
                 },
             },
@@ -42,46 +72,22 @@ export function getTheme(name: string) {
             MuiButton: {
                 styleOverrides: {
                     root: {
-                        color: theme.text.primary,
+                        color: theme.appbar.color,
                         fontFamily: theme.font.styled.family,
                         fontWeight: theme.font.styled.weight,
                         textTransform: "none",
-                        variants: [
-                            {
-                                props: { variant: "contained" },
-                                style: {
-                                    backgroundColor: theme.button.primary,
-                                },
-                            },
-                            {
-                                props: { variant: "outlined" },
-                                style: {
-                                    backgroundColor: theme.button.secondary,
-                                    borderColor: theme.border.color.primary,
-                                },
-                            },
-                        ],
                     },
                 },
             },
-            MuiCard: {
+            MuiChip: {
+                defaultProps: {
+                    color: "primary",
+                },
                 styleOverrides: {
                     root: {
-                        backgroundColor: theme.background(1),
-                    },
-                },
-            },
-            MuiDialog: {
-                styleOverrides: {
-                    paper: {
-                        backgroundColor: theme.background(0),
-                    },
-                },
-            },
-            MuiDivider: {
-                styleOverrides: {
-                    root: {
-                        borderColor: theme.border.color.primary,
+                        fontFamily: theme.font.styled.family,
+                        fontWeight: theme.font.styled.weight,
+                        textTransform: "none",
                     },
                 },
             },
@@ -110,10 +116,20 @@ export function getTheme(name: string) {
                     },
                 },
             },
+            MuiSlider: {
+                defaultProps: {
+                    color: "info",
+                },
+            },
+            MuiSwitch: {
+                defaultProps: {
+                    color: "info",
+                },
+            },
             MuiTableContainer: {
                 styleOverrides: {
                     root: {
-                        borderRadius: "5px",
+                        borderRadius: "4px",
                         backgroundColor: theme.table.body.primary,
                     },
                 },
@@ -172,3 +188,9 @@ export function getTheme(name: string) {
     theme = createTheme(theme, baseThemeData);
     return theme;
 }
+
+export const variantMap = {
+    primary: 0,
+    secondary: 1,
+    tertiary: 2,
+};

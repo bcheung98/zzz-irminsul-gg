@@ -69,6 +69,7 @@ function WeaponStats({ weapon }: WeaponProps) {
             title="Stats"
             actions={
                 <ToggleButtons
+                    color="secondary"
                     buttons={skillDisplayButtons}
                     value={mode}
                     exclusive

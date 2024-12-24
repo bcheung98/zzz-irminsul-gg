@@ -62,6 +62,7 @@ function BangbooSkills({ bangboo }: BangbooProps) {
             title="Skills"
             actions={
                 <ToggleButtons
+                    color="secondary"
                     buttons={skillDisplayButtons}
                     value={mode}
                     exclusive

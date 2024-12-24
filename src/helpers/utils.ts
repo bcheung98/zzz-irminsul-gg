@@ -1,3 +1,5 @@
+import { Shade } from "types/theme";
+
 export function range(len: number): number[];
 export function range(start: number, stop: number, step?: number): number[];
 export function range(a: number, b?: number, step = 1): number[] {
@@ -44,6 +46,19 @@ export function zoomImageOnHover(
 
 export function isTBA(str: string) {
     return str === "TBA" || str === "To be announced";
+}
+
+interface GetThemeBackgroundColorsProps {
+    colors: Record<Shade, string>[];
+    index: number;
+    shade?: Shade;
+}
+export function getThemeBackgroundColors({
+    colors,
+    index,
+    shade = "main",
+}: GetThemeBackgroundColorsProps) {
+    return colors[Math.min(index, colors.length - 1)][shade];
 }
 
 export function getHoverColor(color: string, contrast = 20) {

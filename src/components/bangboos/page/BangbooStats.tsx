@@ -74,6 +74,7 @@ function BangbooStatsTable({ bangboo }: BangbooProps) {
             title="Stats"
             actions={
                 <ToggleButtons
+                    color="secondary"
                     buttons={skillDisplayButtons}
                     value={mode}
                     exclusive

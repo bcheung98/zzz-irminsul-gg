@@ -1,11 +1,6 @@
 import { createTheme } from "@mui/material";
-import { getHoverColor } from "helpers/utils";
-
-const backgroundColors = [
-    "rgb(32, 56, 96)",
-    "rgb(8, 32, 72)",
-    "rgb(0, 20, 40)",
-];
+import { getThemeBackgroundColors } from "helpers/utils";
+import { Shade } from "types/theme";
 
 const appbarColors = ["rgb(0, 16, 32)", "rgb(8, 32, 72)", "rgb(32, 56, 96)"];
 
@@ -14,16 +9,45 @@ const border = {
     highlight: `rgb(233, 194, 39)`,
 };
 
-const button = {
-    primary: "rgb(25, 118, 210)",
-    secondary: backgroundColors[2],
-    hover: "rgb(45, 138, 230)",
-};
+const backgroundColors = [
+    {
+        main: "rgb(32, 56, 96)",
+        light: "rgb(42, 66, 106)",
+        dark: "rgb(22, 46, 86)",
+    },
+    {
+        main: "rgb(8, 32, 72)",
+        light: "rgb(10, 42, 82)",
+        dark: "rgb(6, 22, 62)",
+    },
+    {
+        main: "rgb(0, 16, 32)",
+        light: "rgb(0, 21, 42)",
+        dark: "rgb(0, 11, 22)",
+    },
+];
 
 export const darkThemeData = {
     name: "Dark",
-    background: (i: number) =>
-        backgroundColors[Math.min(i, backgroundColors.length - 1)],
+    background: (index: number, shade?: Shade) =>
+        getThemeBackgroundColors({ colors: backgroundColors, index, shade }),
+    palette: {
+        primary: {
+            main: "rgb(0, 16, 32)",
+        },
+        secondary: {
+            main: "rgb(8, 32, 72)",
+        },
+        tertiary: {
+            main: "rgb(32, 56, 96)",
+            light: "rgb(52, 76, 116)",
+            dark: "rgb(22, 46, 86)",
+        },
+        info: {
+            main: "rgb(25, 118, 210)",
+        },
+        divider: border.color,
+    },
     font: {
         main: {
             family: "Rowdies, Roboto, sans-serif",
@@ -64,12 +88,11 @@ export const darkThemeData = {
             highlight: border.highlight,
         },
     },
-    button: button,
     displayCard: {
         borderWidth: 0,
         border: `0px solid ${border.color}`,
         borderRadius: "4px",
-        backgroundColor: backgroundColors[2],
+        backgroundColor: backgroundColors[2].main,
     },
     icon: {
         backgroundColor: appbarColors[2],
@@ -78,18 +101,18 @@ export const darkThemeData = {
         borderWidth: 0,
         border: `0px solid ${border.color}`,
         borderRadius: "4px",
-        backgroundColor: backgroundColors[1],
+        backgroundColor: backgroundColors[1].main,
     },
     menu: {
-        primary: getHoverColor(backgroundColors[1], 10),
-        hover: getHoverColor(backgroundColors[1], 30),
-        selected: backgroundColors[2],
-        selectedHover: backgroundColors[1],
+        primary: backgroundColors[0].dark,
+        hover: backgroundColors[0].light,
+        selected: backgroundColors[1].dark,
+        selectedHover: backgroundColors[1].light,
     },
     table: {
         body: {
-            primary: backgroundColors[0],
-            hover: getHoverColor(backgroundColors[0]),
+            primary: backgroundColors[0].dark,
+            hover: backgroundColors[0].light,
         },
     },
 };

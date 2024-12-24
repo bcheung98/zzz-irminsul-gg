@@ -15,16 +15,15 @@ export interface CustomToggleButtonProps extends ToggleButtonProps {
     label?: React.ReactNode;
     padding?: number | string;
     highlightOnHover?: boolean;
-    backgroundColor?: string;
 }
 
 export function ToggleButton(props: CustomToggleButtonProps) {
-    const { icon, label } = props;
+    const { icon, label, color } = props;
 
     return (
-        <StyledToggleButton {...props}>
+        <StyledToggleButton {...props} color={color}>
             {icon}
-            <TextStyled variant="body2" sx={{ textTransform: "none" }}>
+            <TextStyled variant="body2" sx={{ color: "white", textTransform: "none" }}>
                 {label}
             </TextStyled>
         </StyledToggleButton>
@@ -36,11 +35,10 @@ export interface ToggleButtonsProps extends ToggleButtonGroupProps {
     spacing?: number;
     padding?: number | string;
     highlightOnHover?: boolean;
-    backgroundColor?: string;
 }
 
 function ToggleButtons(props: ToggleButtonsProps) {
-    const { buttons, highlightOnHover = true, backgroundColor } = props;
+    const { buttons, highlightOnHover = true, color } = props;
 
     return (
         <StyledToggleButtonGroup {...props}>
@@ -48,7 +46,7 @@ function ToggleButtons(props: ToggleButtonsProps) {
                 <ToggleButton
                     key={index}
                     highlightOnHover={highlightOnHover}
-                    backgroundColor={backgroundColor}
+                    color={color}
                     {...button}
                 />
             ))}

@@ -5,18 +5,31 @@ import {
     tableCellClasses,
     tableRowClasses,
 } from "@mui/material";
+import { variantMap } from "themes/theme";
+import { ColorVariants } from "types/theme";
 
-export const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    backgroundColor: theme.table.body.primary,
-    [`&.${tableRowClasses.hover}`]: {
-        "&:hover": {
-            backgroundColor: theme.table.body.hover,
+interface CustomTableRowProps {
+    color?: ColorVariants;
+}
+
+export const StyledTableRow = styled(TableRow)<CustomTableRowProps>(
+    ({ theme, color = "tertiary" }) => ({
+        backgroundColor: theme.background(
+            variantMap[color as keyof typeof variantMap]
+        ),
+        [`&.${tableRowClasses.hover}`]: {
+            "&:hover": {
+                backgroundColor: theme.background(
+                    variantMap[color as keyof typeof variantMap],
+                    "dark"
+                ),
+            },
         },
-    },
-    "&:last-child td, &:last-child th": {
-        border: 0,
-    },
-}));
+        "&:last-child td, &:last-child th": {
+            border: 0,
+        },
+    })
+);
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     borderColor: theme.border.color.primary,

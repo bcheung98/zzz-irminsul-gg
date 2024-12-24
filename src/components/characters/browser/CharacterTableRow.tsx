@@ -5,7 +5,7 @@ import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
 // MUI imports
-import { useTheme, ButtonBase } from "@mui/material";
+import { ButtonBase } from "@mui/material";
 
 // Helper imports
 import { useAppSelector } from "helpers/hooks";
@@ -22,8 +22,6 @@ interface CharacterTableRowProps extends CharacterRow {
 }
 
 function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
-    const theme = useTheme();
-
     const region = useAppSelector(selectServer).region;
 
     const columns = [
@@ -73,12 +71,7 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
     ];
 
     return (
-        <StyledTableRow
-            hover
-            sx={{
-                backgroundColor: theme.background(1),
-            }}
-        >
+        <StyledTableRow color="secondary" hover>
             {columns.map((col, index) => (
                 <StyledTableCell key={index} sx={{ maxWidth: "275px" }}>
                     <FlexBox columnGap="10px">

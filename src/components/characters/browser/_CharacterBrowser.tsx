@@ -98,6 +98,7 @@ function CharacterBrowser() {
                     </Grid>
                     <Grid size={{ xs: 6, sm: "auto" }}>
                         <ToggleButtons
+                            color="primary"
                             buttons={buttons}
                             value={view}
                             exclusive
@@ -116,7 +117,9 @@ function CharacterBrowser() {
                     <Grid size={{ xs: 12, sm: "auto" }}>
                         <Button
                             onClick={toggleDrawerState}
-                            variant="outlined"
+                            variant="contained"
+                            color="primary"
+                            disableElevation
                             disableRipple
                             startIcon={
                                 matches_md_up && drawerOpen ? (
@@ -125,10 +128,7 @@ function CharacterBrowser() {
                                     <TuneIcon />
                                 )
                             }
-                            sx={{
-                                height: "36px",
-                                border: 0,
-                            }}
+                            sx={{ height: "36px" }}
                         >
                             Filters
                         </Button>
@@ -155,7 +155,12 @@ function CharacterBrowser() {
                 {view === "table" && (
                     <CharacterTable characters={currentCharacters} />
                 )}
-                <ActionFab action={toggleDrawerState} icon={<TuneIcon />} />
+                <ActionFab
+                    action={toggleDrawerState}
+                    icon={<TuneIcon />}
+                    tooltip="Open filters"
+                    tooltipArrow="left"
+                />
             </Box>
             <Drawer
                 sx={

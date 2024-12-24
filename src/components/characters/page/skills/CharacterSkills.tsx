@@ -71,6 +71,7 @@ function CharacterSkills({ character }: CharacterProps) {
             title="Skills"
             actions={
                 <ToggleButtons
+                    color="secondary"
                     buttons={skillDisplayButtons}
                     value={mode}
                     exclusive
