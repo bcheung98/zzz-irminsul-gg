@@ -122,13 +122,25 @@ function BannerList({ type }: BannerListProps) {
                                 <Image
                                     src="icons/Characters"
                                     alt="Agents"
-                                    style={{ width: "32px", marginLeft: "4px" }}
+                                    style={{
+                                        width: "32px",
+                                        marginLeft: "4px",
+                                        backgroundColor:
+                                            theme.appbar.backgroundColor,
+                                        borderRadius: "64px",
+                                    }}
                                 />
                             ) : (
                                 <Image
                                     src="icons/W-Engine"
                                     alt="W-Engines"
-                                    style={{ width: "24px", marginLeft: "4px" }}
+                                    style={{
+                                        width: "32px",
+                                        marginLeft: "4px",
+                                        backgroundColor:
+                                            theme.appbar.backgroundColor,
+                                        borderRadius: "64px",
+                                    }}
                                 />
                             )
                         }

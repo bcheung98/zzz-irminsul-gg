@@ -76,7 +76,12 @@ function CharacterSelector() {
                         <Image
                             src="icons/Characters"
                             alt="Agents"
-                            style={{ width: "32px", marginLeft: "4px" }}
+                            style={{
+                                width: "32px",
+                                marginLeft: "4px",
+                                backgroundColor: theme.appbar.backgroundColor,
+                                borderRadius: "64px",
+                            }}
                         />
                     }
                 />
