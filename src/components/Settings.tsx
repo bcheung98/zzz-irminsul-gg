@@ -180,44 +180,49 @@ function Settings() {
                 maxWidth="sm"
                 fullWidth
             >
-                <MainContentBox
-                    title="Settings"
-                    actions={
-                        <IconButton
-                            disableRipple
-                            onClick={handleSettingsClose}
-                            sx={{ color: theme.appbar.color }}
-                        >
-                            <CloseIcon />
-                        </IconButton>
-                    }
-                    contentProps={{ padding: "16px" }}
-                >
-                    <Stack spacing={2}>
-                        {settingsList.map((setting, index) => (
-                            <Box
-                                key={index}
-                                sx={{
-                                    display: { xs: "block", sm: "flex" },
-                                    flexGrow: 1,
-                                    flexWrap: "wrap",
-                                    justifyContent: "space-between",
-                                    gap: "8px",
-                                }}
+                <Box sx={{ overflowY: "auto", scrollbarWidth: "thin" }}>
+                    <MainContentBox
+                        title="Settings"
+                        actions={
+                            <IconButton
+                                disableRipple
+                                onClick={handleSettingsClose}
+                                sx={{ color: theme.appbar.color }}
                             >
-                                <TextStyled
+                                <CloseIcon />
+                            </IconButton>
+                        }
+                        contentProps={{ padding: "16px" }}
+                    >
+                        <Stack spacing={2}>
+                            {settingsList.map((setting, index) => (
+                                <Box
+                                    key={index}
                                     sx={{
                                         display: { xs: "block", sm: "flex" },
-                                        mb: { xs: "8px", sm: "0px" },
+                                        flexGrow: 1,
+                                        flexWrap: "wrap",
+                                        justifyContent: "space-between",
+                                        gap: "8px",
                                     }}
                                 >
-                                    {setting.label}
-                                </TextStyled>
-                                {setting.options}
-                            </Box>
-                        ))}
-                    </Stack>
-                </MainContentBox>
+                                    <TextStyled
+                                        sx={{
+                                            display: {
+                                                xs: "block",
+                                                sm: "flex",
+                                            },
+                                            mb: { xs: "8px", sm: "0px" },
+                                        }}
+                                    >
+                                        {setting.label}
+                                    </TextStyled>
+                                    {setting.options}
+                                </Box>
+                            ))}
+                        </Stack>
+                    </MainContentBox>
+                </Box>
             </Dialog>
         </>
     );

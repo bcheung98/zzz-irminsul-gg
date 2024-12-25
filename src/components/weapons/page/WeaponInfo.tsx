@@ -80,7 +80,6 @@ function WeaponInfo({ weapon }: WeaponProps) {
                                 <CloseIcon />
                             </IconButton>
                         }
-                        headerProps={{ padding: "0px 20px" }}
                     >
                         <TextStyled>{parse(description)}</TextStyled>
                     </MainContentBox>
