@@ -33,7 +33,7 @@ export const settingsSlice = createSlice({
     initialState,
     reducers: {
         setSettings: (state, action: PayloadAction<SettingsState>) => {
-            state = action.payload;
+            Object.assign(state, action.payload);
         },
         setTheme: (state, action: PayloadAction<ThemeNames>) => {
             state.theme = action.payload;
