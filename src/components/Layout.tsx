@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 
 // Component imports
+import RightHandDrawer from "custom/RightHandDrawer";
 import Nav from "./nav/Nav";
 import NavBottom from "./nav/NavBottom";
 
@@ -28,6 +29,7 @@ function Layout() {
                     </Box>
                     <NavBottom />
                 </Box>
+                <RightHandDrawer />
             </Box>
         </>
     );

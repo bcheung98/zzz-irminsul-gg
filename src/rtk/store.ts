@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { listenerMiddleware } from "./middleware";
 
+import layoutReducer from "reducers/layout";
 import settingsReducer from "reducers/settings";
 import characterReducer from "reducers/character";
 import characterFilterReducer from "reducers/characterFilters";
@@ -13,6 +14,7 @@ import bannerReducer from "reducers/banner";
 
 const store = configureStore({
     reducer: {
+        layout: layoutReducer,
         settings: settingsReducer,
         characters: characterReducer,
         characterFilters: characterFilterReducer,
