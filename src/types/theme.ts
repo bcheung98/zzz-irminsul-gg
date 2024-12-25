@@ -1,7 +1,7 @@
 import { SxProps } from "@mui/material";
+import { themeNames } from "themes/theme";
 import { darkThemeData } from "themes/darkTheme";
 import { lightThemeData } from "themes/lightTheme";
-import { themeNames } from "themes/theme";
 import { zzzThemeData } from "themes/zzzTheme";
 
 export type ThemeNames = (typeof themeNames)[number];
@@ -18,7 +18,7 @@ export type CustomTheme = {
 declare module "@mui/material/styles" {
     interface Theme extends CustomTheme {
         styles: {
-            [key: string]: (arg: unknown) => SxProps;
+            [key: string]: (...args: unknown[]) => SxProps;
         };
     }
     interface ThemeOptions extends Partial<CustomTheme> {}
