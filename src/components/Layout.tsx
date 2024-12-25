@@ -17,9 +17,10 @@ function Layout() {
                 <Box sx={{ minWidth: "50vw", width: "100vw" }}>
                     <Box
                         sx={{
-                            px: "20px",
-                            pb: "50px",
-                            mt: "80px",
+                            px: "24px",
+                            pt: "16px",
+                            pb: "48px",
+                            mt: "64px",
                             minHeight: "100vh",
                             width: "100%",
                             mx: "auto",
