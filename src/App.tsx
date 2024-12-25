@@ -24,17 +24,20 @@ import { getTheme } from "themes/theme";
 function App() {
     const dispatch = useAppDispatch();
 
-    const theme = useAppSelector(selectTheme).name;
-
     React.useEffect(() => {
-        dispatch(setTheme(theme));
         dispatch(fetchCharacters());
         dispatch(fetchWeapons());
         dispatch(fetchBangboos());
         dispatch(fetchDriveDiscs());
         dispatch(fetchCharacterBanners());
         dispatch(fetchWeaponBanners());
-    });
+    }, []);
+
+    const theme = useAppSelector(selectTheme).name;
+
+    React.useEffect(() => {
+        dispatch(setTheme(theme));
+    }, [theme]);
 
     return (
         <BrowserRouter>
