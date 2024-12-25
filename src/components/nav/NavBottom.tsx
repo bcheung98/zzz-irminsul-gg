@@ -3,12 +3,13 @@ import reactLogo from "/react.svg";
 import muiLogo from "/mui.svg";
 
 // Component imports
+import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
 import {
     useTheme,
-    useMediaQuery,
+    getContrastRatio,
     SxProps,
     AppBar,
     Toolbar,
@@ -19,9 +20,23 @@ import {
 } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
+const bottomText = (
+    <>
+        IRMINSUL.GG is not affiliated with HoYoverse.
+        <br />
+        Game contents are trademarks and copyrights of HoYoverse.
+    </>
+);
+
+const githubURL = "project-phaethon";
+
 function NavBottom() {
     const theme = useTheme();
-    const matches_down_md = useMediaQuery(theme.breakpoints.down("md"));
+
+    const textColor =
+        getContrastRatio(theme.background(0), theme.text.primary) > 4.5
+            ? theme.text.primary
+            : theme.text.contrast;
 
     const iconButtonStyle: SxProps = {
         px: "4px",
@@ -35,85 +50,50 @@ function NavBottom() {
     return (
         <AppBar
             position="relative"
-            sx={{
-                borderWidth: matches_down_md ? "1px 0 0 0" : "1px 0 0 1px",
-                zIndex: matches_down_md
-                    ? theme.zIndex.drawer
-                    : theme.zIndex.drawer + 1,
-            }}
+            elevation={0}
+            sx={{ backgroundColor: theme.background(0), borderWidth: 0 }}
         >
             <Toolbar
                 sx={{
                     justifyContent: "space-between",
-                    display: { xs: "block", md: "flex" },
+                    flexWrap: "wrap",
+                    gap: "8px",
                     py: "8px",
                 }}
             >
-                <TextStyled variant="body2" sx={{ color: theme.appbar.color }}>
-                    IRMINSUL.GG is not affiliated with HoYoverse.
-                    <br />
-                    Game contents are trademarks and copyrights of HoYoverse.
+                <TextStyled variant="body2-styled" sx={{ color: textColor }}>
+                    {bottomText}
                 </TextStyled>
-                <Box sx={{ display: { xs: "block", md: "flex" } }}>
-                    <Divider
-                        orientation="horizontal"
-                        sx={{
-                            display: { xs: "block", md: "none" },
-                            my: "8px",
-                        }}
-                    />
-                    <Box sx={{ display: "flex" }}>
-                        <Box
-                            sx={{
-                                display: { xs: "flex", md: "block" },
-                                alignItems: "center",
-                            }}
-                        >
+                <Box>
+                    <FlexBox gap="16px">
+                        <FlexBox sx={{ flexWrap: "wrap", rowGap: "8px" }}>
                             <TextStyled
-                                variant="body2"
-                                align="center"
-                                sx={{
-                                    mr: { xs: "8px", md: 0 },
-                                    color: theme.appbar.color,
-                                }}
+                                variant="body2-styled"
+                                sx={{ color: textColor }}
                             >
                                 GitHub:
                             </TextStyled>
                             <IconButton
                                 disableRipple
-                                href="https://github.com/bcheung98/project-phaethon"
+                                href={`https://github.com/bcheung98/${githubURL}`}
                                 target="_blank"
                                 rel="noopener"
                                 color="inherit"
-                                sx={{
-                                    display: "flex",
-                                    mx: "auto",
-                                    px: "4px",
-                                    color: theme.appbar.color,
-                                }}
+                                sx={{ color: textColor }}
                                 className="logo github"
                             >
                                 <GitHubIcon sx={svgStyle} />
                             </IconButton>
-                        </Box>
+                        </FlexBox>
                         <Divider
                             orientation="vertical"
                             flexItem
-                            sx={{ mx: { xs: "8px", md: "24px" } }}
+                            sx={{ my: "4px" }}
                         />
-                        <Box
-                            sx={{
-                                display: { xs: "flex", md: "block" },
-                                alignItems: "center",
-                            }}
-                        >
+                        <FlexBox sx={{ flexWrap: "wrap", rowGap: "8px" }}>
                             <TextStyled
-                                variant="body2"
-                                align="center"
-                                sx={{
-                                    mr: { xs: "8px", md: 0 },
-                                    color: theme.appbar.color,
-                                }}
+                                variant="body2-styled"
+                                sx={{ color: textColor }}
                             >
                                 Made with:
                             </TextStyled>
@@ -167,8 +147,8 @@ function NavBottom() {
                                     />
                                 </IconButton>
                             </Box>
-                        </Box>
-                    </Box>
+                        </FlexBox>
+                    </FlexBox>
                 </Box>
             </Toolbar>
         </AppBar>
