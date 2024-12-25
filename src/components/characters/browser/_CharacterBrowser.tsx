@@ -175,14 +175,7 @@ function CharacterBrowser() {
             />
             {!matches_md_up && (
                 <Drawer
-                    sx={{
-                        "& .MuiDrawer-paper": {
-                            borderTop: `1px solid ${theme.border.color.primary}`,
-                            backgroundColor: theme.appbar.backgroundColor,
-                            height: "auto",
-                            maxHeight: "88%",
-                        },
-                    }}
+                    sx={theme.styles.drawer(matches_sm_up)}
                     variant="temporary"
                     anchor={matches_sm_up ? "right" : "bottom"}
                     open={mobileDrawerOpen}

@@ -1,4 +1,4 @@
-import { createTheme, getContrastRatio } from "@mui/material";
+import { createTheme, getContrastRatio, SxProps } from "@mui/material";
 import { darkTheme } from "./darkTheme";
 import { lightTheme } from "./lightTheme";
 import { zzzTheme } from "./zzzTheme";
@@ -276,6 +276,29 @@ export function getTheme(name: string) {
                         theme.font.sizes["body2-styled"].sm
                     ),
                 },
+            },
+        },
+        styles: {
+            drawer: (matches: boolean, width = 320): SxProps => {
+                return matches
+                    ? {
+                          flexShrink: 0,
+                          "& .MuiDrawer-paper": {
+                              width: width,
+                              borderLeft: `1px solid ${theme.border.color.primary}`,
+                              backgroundColor: theme.appbar.backgroundColor,
+                              py: 2.5,
+                              scrollbarWidth: "none",
+                          },
+                      }
+                    : {
+                          "& .MuiDrawer-paper": {
+                              borderTop: `1px solid ${theme.border.color.primary}`,
+                              backgroundColor: theme.appbar.backgroundColor,
+                              height: "auto",
+                              maxHeight: "88%",
+                          },
+                      };
             },
         },
     };
