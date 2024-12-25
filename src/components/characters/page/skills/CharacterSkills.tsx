@@ -34,7 +34,7 @@ function CharacterSkills({ character }: CharacterProps) {
         setTabValue(newValue);
     };
 
-    const currentSkillDisplay = useAppSelector(selectSkillDisplay).mode;
+    const currentSkillDisplay = useAppSelector(selectSkillDisplay);
     const [mode, setMode] = React.useState<SkillDisplay>(currentSkillDisplay);
     const handleMode = (_: React.BaseSyntheticEvent, newView: SkillDisplay) => {
         if (newView !== null) {

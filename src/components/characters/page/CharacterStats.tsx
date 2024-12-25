@@ -21,7 +21,7 @@ function CharacterStats({ character }: CharacterProps) {
     const getCharacterColor = (option: keyof CharacterColors) =>
         characterColors(colors, option, element);
 
-    const currentSkillDisplay = useAppSelector(selectSkillDisplay).mode;
+    const currentSkillDisplay = useAppSelector(selectSkillDisplay);
     const [mode, setMode] = React.useState<SkillDisplay>(currentSkillDisplay);
     const handleMode = (_: React.BaseSyntheticEvent, newView: SkillDisplay) => {
         if (newView !== null) {
