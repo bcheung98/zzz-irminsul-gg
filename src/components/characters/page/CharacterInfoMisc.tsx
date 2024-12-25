@@ -23,7 +23,7 @@ import { CharacterProps } from "types/character";
 function CharacterInfoMisc({ character }: CharacterProps) {
     const theme = useTheme();
 
-    const region = useAppSelector(selectServer).region;
+    const region = useAppSelector(selectServer);
 
     const { birthday, faction, voiceActors, release } = { ...character };
     const releaseDate =

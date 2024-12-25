@@ -26,7 +26,7 @@ function BannerListRow({
 }) {
     const theme = useTheme();
 
-    const region = useAppSelector(selectServer).region;
+    const region = useAppSelector(selectServer);
 
     const { version, subVersion } = row;
     const fiveStars = createBannerItems(JSON.parse(row.fiveStars), type);

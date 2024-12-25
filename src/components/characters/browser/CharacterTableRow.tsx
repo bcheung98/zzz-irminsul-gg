@@ -25,7 +25,7 @@ interface CharacterTableRowProps extends CharacterRow {
 function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
     const theme = useTheme();
 
-    const region = useAppSelector(selectServer).region;
+    const region = useAppSelector(selectServer);
 
     const columns = [
         {

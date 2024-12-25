@@ -23,7 +23,7 @@ import { createBannerItems } from "./BannerListRow";
 function CurrentBanners() {
     const theme = useTheme();
 
-    const region = useAppSelector(selectServer).region;
+    const region = useAppSelector(selectServer);
 
     const characterBanners = useAppSelector(selectCharacterBanners);
     const weaponBanners = useAppSelector(selectWeaponBanners);
