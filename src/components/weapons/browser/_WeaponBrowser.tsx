@@ -145,7 +145,7 @@ function WeaponBrowser() {
                 </Grid>
             </Grid>
             {view === "card" && (
-                <Grid container spacing={2.5}>
+                <Grid container spacing={2}>
                     {currentWeapons.map((wep) => (
                         <DisplayCard
                             key={wep.id}

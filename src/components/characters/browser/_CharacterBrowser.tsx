@@ -145,7 +145,7 @@ function CharacterBrowser() {
                 </Grid>
             </Grid>
             {view === "card" && (
-                <Grid container spacing={2.5}>
+                <Grid container spacing={2}>
                     {currentCharacters.map((char) => (
                         <DisplayCard
                             key={char.id}
