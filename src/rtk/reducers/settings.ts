@@ -1,47 +1,32 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Region } from "helpers/dates";
 import { startAppListening } from "helpers/hooks";
 import { RootState } from "rtk/store";
 import { ThemeNames } from "types/theme";
+import { Region } from "helpers/dates";
 
-interface ThemeSettings {
-    name: ThemeNames;
-}
-
+export type Width = "standard" | "wide";
 export type SkillDisplay = "slider" | "table";
-interface SkillDisplaySettings {
-    mode: SkillDisplay;
-}
-
-interface ServerSettings {
-    region: Region;
-}
 
 export interface SettingsState {
-    theme: ThemeSettings;
-    skillDisplay: SkillDisplaySettings;
-    server: ServerSettings;
+    theme: ThemeNames;
+    width: Width;
+    skillDisplay: SkillDisplay;
+    server: Region;
 }
 
-const storedSettings = localStorage.getItem("settings") || "null";
+const storedSettings = localStorage.getItem("settings") || "{}";
 localStorage.removeItem("theme");
 localStorage.removeItem("skillDisplay");
 localStorage.removeItem("server");
 
-const initialState: SettingsState =
-    storedSettings !== "null"
-        ? JSON.parse(storedSettings)
-        : {
-              theme: {
-                  name: "Dark",
-              },
-              skillDisplay: {
-                  mode: "slider",
-              },
-              server: {
-                  region: "NA",
-              },
-          };
+const { theme, width, skillDisplay, server } = JSON.parse(storedSettings);
+
+const initialState: SettingsState = {
+    theme: theme || "Dark",
+    width: width || "standard",
+    skillDisplay: skillDisplay || "slider",
+    server: server || "NA",
+};
 
 export const settingsSlice = createSlice({
     name: "settings",
@@ -51,28 +36,31 @@ export const settingsSlice = createSlice({
             state = action.payload;
         },
         setTheme: (state, action: PayloadAction<ThemeNames>) => {
-            state.theme.name = action.payload;
+            state.theme = action.payload;
+        },
+        setWidth: (state, action: PayloadAction<Width>) => {
+            state.width = action.payload;
         },
         setSkillDisplay: (state, action: PayloadAction<SkillDisplay>) => {
-            state.skillDisplay.mode = action.payload;
+            state.skillDisplay = action.payload;
         },
         setServer: (state, action: PayloadAction<Region>) => {
-            state.server.region = action.payload;
+            state.server = action.payload;
         },
     },
 });
 
-export const { setSettings, setTheme, setSkillDisplay, setServer } =
+export const { setSettings, setTheme, setWidth, setSkillDisplay, setServer } =
     settingsSlice.actions;
 
 export const selectSettings = (state: RootState): SettingsState =>
     state.settings;
-export const selectTheme = (state: RootState): ThemeSettings =>
+export const selectTheme = (state: RootState): ThemeNames =>
     state.settings.theme;
-export const selectSkillDisplay = (state: RootState): SkillDisplaySettings =>
+export const selectWidth = (state: RootState): Width => state.settings.width;
+export const selectSkillDisplay = (state: RootState): SkillDisplay =>
     state.settings.skillDisplay;
-export const selectServer = (state: RootState): ServerSettings =>
-    state.settings.server;
+export const selectServer = (state: RootState): Region => state.settings.server;
 
 export default settingsSlice.reducer;
 

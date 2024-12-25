@@ -26,7 +26,9 @@ import {
     setSettings,
     setSkillDisplay,
     setTheme,
+    setWidth,
     SkillDisplay,
+    Width,
 } from "reducers/settings";
 import { navStyles } from "./nav/Nav";
 import { themeList } from "themes/theme";
@@ -38,14 +40,13 @@ import { ThemeNames } from "types/theme";
 function Settings() {
     const theme = useTheme();
     const matches_up_md = useMediaQuery(theme.breakpoints.up("md"));
-    const styles = navStyles(theme);
+    const styles = navStyles("_");
 
     const dispatch = useAppDispatch();
 
     const settings = useAppSelector(selectSettings);
-    const themeName = settings.theme.name;
-    const skillDisplay = settings.skillDisplay.mode;
-    const server = settings.server.region;
+    const themeName = settings.theme;
+    const { width, skillDisplay, server } = settings;
 
     const [settingsOpen, setSettingsOpen] = React.useState(false);
     const handleSettingsOpen = () => {
@@ -54,6 +55,12 @@ function Settings() {
     const handleSettingsClose = () => {
         dispatch(setSettings(settings));
         setSettingsOpen(false);
+    };
+
+    const toggleButtonsParams = {
+        spacing: 0,
+        padding: "4px 12px",
+        highlightOnHover: false,
     };
 
     const settingsList = [
@@ -66,15 +73,32 @@ function Settings() {
                     exclusive
                     onChange={(
                         _: React.BaseSyntheticEvent,
-                        newTheme: ThemeNames
+                        newValue: ThemeNames
                     ) => {
-                        if (newTheme !== null) {
-                            dispatch(setTheme(newTheme));
+                        if (newValue !== null) {
+                            dispatch(setTheme(newValue));
                         }
                     }}
-                    spacing={0}
-                    padding="4px 12px"
-                    highlightOnHover={false}
+                    {...toggleButtonsParams}
+                />
+            ),
+        },
+        {
+            label: "Width",
+            options: (
+                <ToggleButtons
+                    buttons={widthButtons}
+                    value={width}
+                    exclusive
+                    onChange={(
+                        _: React.BaseSyntheticEvent,
+                        newValue: Width
+                    ) => {
+                        if (newValue !== null) {
+                            dispatch(setWidth(newValue));
+                        }
+                    }}
+                    {...toggleButtonsParams}
                 />
             ),
         },
@@ -87,15 +111,13 @@ function Settings() {
                     exclusive
                     onChange={(
                         _: React.BaseSyntheticEvent,
-                        newMode: SkillDisplay
+                        newValue: SkillDisplay
                     ) => {
-                        if (newMode !== null) {
-                            dispatch(setSkillDisplay(newMode));
+                        if (newValue !== null) {
+                            dispatch(setSkillDisplay(newValue));
                         }
                     }}
-                    spacing={0}
-                    padding="4px 12px"
-                    highlightOnHover={false}
+                    {...toggleButtonsParams}
                 />
             ),
         },
@@ -108,15 +130,13 @@ function Settings() {
                     exclusive
                     onChange={(
                         _: React.BaseSyntheticEvent,
-                        newRegion: Region
+                        newValue: Region
                     ) => {
-                        if (newRegion !== null) {
-                            dispatch(setServer(newRegion));
+                        if (newValue !== null) {
+                            dispatch(setServer(newValue));
                         }
                     }}
-                    spacing={0}
-                    padding="4px 12px"
-                    highlightOnHover={false}
+                    {...toggleButtonsParams}
                 />
             ),
         },
@@ -209,6 +229,11 @@ const themeButtons: CustomToggleButtonProps[] = themeList.map((theme) => ({
     value: theme.name,
     label: theme.label,
 }));
+
+const widthButtons: CustomToggleButtonProps[] = [
+    { value: "standard", label: "Standard" },
+    { value: "wide", label: "Wide" },
+];
 
 export const skillDisplayButtons: CustomToggleButtonProps[] = [
     { value: "slider", label: "Slider" },

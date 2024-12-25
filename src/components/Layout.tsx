@@ -8,13 +8,19 @@ import NavBottom from "./nav/NavBottom";
 // MUI imports
 import { Box } from "@mui/material";
 
+// Helper
+import { useAppSelector } from "helpers/hooks";
+import { selectWidth } from "reducers/settings";
+
 function Layout() {
+    const width = useAppSelector(selectWidth);
+
     return (
         <>
             <Box id="back-to-top-anchor" />
             <Box sx={{ display: "flex" }}>
                 <Nav />
-                <Box sx={{ minWidth: "50vw", width: "100vw" }}>
+                <Box sx={{ width: "100vw" }}>
                     <Box
                         sx={{
                             px: "24px",
@@ -22,7 +28,10 @@ function Layout() {
                             pb: "48px",
                             mt: "64px",
                             minHeight: "100vh",
-                            width: "100%",
+                            width: {
+                                xs: "100%",
+                                lg: width === "standard" ? "75%" : "100%",
+                            },
                             mx: "auto",
                         }}
                     >

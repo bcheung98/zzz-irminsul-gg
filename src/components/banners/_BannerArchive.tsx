@@ -9,12 +9,17 @@ import { TextStyled } from "styled/StyledTypography";
 import { useTheme, useMediaQuery } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
+// Helper imports
+import { useAppSelector } from "helpers/hooks";
+import { selectWidth } from "reducers/settings";
+
 function BannerArchive() {
     document.title = `Banner Archive ${import.meta.env.VITE_DOCUMENT_TITLE}`;
 
     const theme = useTheme();
-
     const matches_md_dn = useMediaQuery(theme.breakpoints.down("md"));
+
+    const maxWidth = useAppSelector(selectWidth) === "wide" ? 5 : 6;
 
     const CharacterBannerList = <BannerList type="character" />;
     const WeaponBannerList = <BannerList type="weapon" />;
@@ -50,14 +55,14 @@ function BannerArchive() {
                 sx={{ mb: "20px", display: { xs: "block", md: "none" } }}
             />
             {!matches_md_dn ? (
-                <Grid container spacing={5}>
-                    <Grid size={{ xs: 12, md: 6, xl: 5 }}>
+                <Grid container spacing={4}>
+                    <Grid size={{ xs: 12, lg: 6, xl: maxWidth }}>
                         <TextStyled variant="h6" sx={{ mb: "20px" }}>
                             Agent Banner
                         </TextStyled>
                         {CharacterBannerList}
                     </Grid>
-                    <Grid size={{ xs: 12, md: 6, xl: 5 }}>
+                    <Grid size={{ xs: 12, lg: 6, xl: maxWidth }}>
                         <TextStyled variant="h6" sx={{ mb: "20px" }}>
                             W-Engine Banner
                         </TextStyled>
