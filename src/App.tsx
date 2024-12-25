@@ -33,7 +33,7 @@ function App() {
         dispatch(fetchWeaponBanners());
     }, []);
 
-    const theme = useAppSelector(selectTheme).name;
+    const theme = useAppSelector(selectTheme);
 
     React.useEffect(() => {
         dispatch(setTheme(theme));
