@@ -178,7 +178,7 @@ function PlannerCard({ data }: PlannerCardProps) {
                     </StyledTooltip>
                 </IconButton>
             }
-            contentProps={{ padding: "20px" }}
+            contentProps={{ padding: "16px 24px" }}
         >
             <TextStyled>Materials Required</TextStyled>
             <Grid container spacing={2} sx={{ mt: "16px" }}>
