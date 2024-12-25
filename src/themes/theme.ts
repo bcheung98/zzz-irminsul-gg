@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme, getContrastRatio } from "@mui/material";
 import { darkTheme } from "./darkTheme";
 import { lightTheme } from "./lightTheme";
 import { zzzTheme } from "./zzzTheme";
@@ -36,12 +36,30 @@ export function getTheme(name: string) {
                         chip: {
                             sx: {
                                 backgroundColor: theme.palette.info.main,
-                                color: theme.appbar.color,
+                                color:
+                                    getContrastRatio(
+                                        theme.palette.info.main,
+                                        theme.appbar.color
+                                    ) > 4.5
+                                        ? theme.appbar.color
+                                        : theme.text.contrast,
                                 fontFamily: theme.font.styled.family,
                                 "& .MuiChip-deleteIcon": {
-                                    color: theme.appbar.color,
+                                    color:
+                                        getContrastRatio(
+                                            theme.palette.info.main,
+                                            theme.appbar.color
+                                        ) > 4.5
+                                            ? theme.appbar.color
+                                            : theme.text.contrast,
                                     ":hover": {
-                                        color: "rgb(225, 225, 225)",
+                                        color:
+                                            getContrastRatio(
+                                                theme.palette.info.main,
+                                                theme.appbar.color
+                                            ) > 4.5
+                                                ? "rgb(225, 225, 225)"
+                                                : "rgb(80, 80, 80)",
                                     },
                                 },
                             },

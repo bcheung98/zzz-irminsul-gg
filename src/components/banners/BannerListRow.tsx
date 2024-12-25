@@ -35,7 +35,7 @@ function BannerListRow({
     const end = createDateObject({ date: row.end, region: region });
 
     const backgroundColor = isCurrentBanner(start.obj, end.obj)
-        ? theme.palette.info.light
+        ? theme.palette.info.dark
         : theme.palette.background.paper;
 
     return (
