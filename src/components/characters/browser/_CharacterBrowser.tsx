@@ -27,10 +27,13 @@ import TuneIcon from "@mui/icons-material/Tune";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 // Helper imports
-import { useAppSelector } from "helpers/hooks";
+import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import { filterCharacters } from "helpers/filterCharacters";
 import { selectCharacters } from "reducers/character";
-import { selectCharacterFilters } from "reducers/characterFilters";
+import {
+    clearFilters,
+    selectCharacterFilters,
+} from "reducers/characterFilters";
 
 const drawerWidth = 350; // px
 
@@ -40,6 +43,8 @@ function CharacterBrowser() {
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
     const matches_md_up = useMediaQuery(theme.breakpoints.up("md"));
+
+    const dispatch = useAppDispatch();
 
     const characters = [...useAppSelector(selectCharacters)].sort((a, b) =>
         a.fullName.localeCompare(b.fullName)
@@ -81,6 +86,10 @@ function CharacterBrowser() {
             icon: <TableRowsIcon />,
         },
     ];
+
+    React.useEffect(() => {
+        dispatch(clearFilters());
+    }, []);
 
     return (
         <Box sx={{ display: { xs: "block", md: "flex" } }}>

@@ -27,10 +27,10 @@ import TuneIcon from "@mui/icons-material/Tune";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 // Helper imports
-import { useAppSelector } from "helpers/hooks";
+import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import { filterWeapons } from "helpers/filterWeapons";
 import { selectWeapons } from "reducers/weapon";
-import { selectWeaponFilters } from "reducers/weaponFilters";
+import { clearFilters, selectWeaponFilters } from "reducers/weaponFilters";
 import { RarityMap } from "data/common";
 
 const drawerWidth = 350; // px
@@ -41,6 +41,8 @@ function WeaponBrowser() {
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
     const matches_md_up = useMediaQuery(theme.breakpoints.up("md"));
+
+    const dispatch = useAppDispatch();
 
     const weapons = [...useAppSelector(selectWeapons)].sort(
         (a, b) =>
@@ -84,6 +86,10 @@ function WeaponBrowser() {
             icon: <TableRowsIcon />,
         },
     ];
+
+    React.useEffect(() => {
+        dispatch(clearFilters());
+    }, []);
 
     return (
         <Box sx={{ display: { xs: "block", md: "flex" } }}>
