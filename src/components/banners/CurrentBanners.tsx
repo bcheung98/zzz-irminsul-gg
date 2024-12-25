@@ -3,7 +3,7 @@ import React from "react";
 // Component imports
 import MainContentBox from "custom/MainContentBox";
 import Image from "custom/Image";
-import DisplayCard from "custom/DisplayCard";
+import InfoCard from "custom/InfoCard";
 import Countdown from "custom/Countdown";
 import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
@@ -87,7 +87,7 @@ function CurrentBanners() {
                                                     banner.fiveStars,
                                                     "character"
                                                 ).map((item, index) => (
-                                                    <DisplayCard
+                                                    <InfoCard
                                                         key={index}
                                                         id={`${item.displayName}-currentBanner`.toLowerCase()}
                                                         variant="icon"
@@ -113,7 +113,7 @@ function CurrentBanners() {
                                                     banner.fourStars,
                                                     "character"
                                                 ).map((item, index) => (
-                                                    <DisplayCard
+                                                    <InfoCard
                                                         key={index}
                                                         id={`${item.displayName}-currentBanner`.toLowerCase()}
                                                         variant="icon"
@@ -168,7 +168,7 @@ function CurrentBanners() {
                                                 banner.fiveStars,
                                                 "weapon"
                                             ).map((item, index) => (
-                                                <DisplayCard
+                                                <InfoCard
                                                     key={index}
                                                     id={`${item.displayName}-currentBanner`.toLowerCase()}
                                                     variant="icon"
@@ -194,7 +194,7 @@ function CurrentBanners() {
                                                 banner.fourStars,
                                                 "weapon"
                                             ).map((item, index) => (
-                                                <DisplayCard
+                                                <InfoCard
                                                     key={index}
                                                     id={`${item.displayName}-currentBanner`.toLowerCase()}
                                                     variant="icon"

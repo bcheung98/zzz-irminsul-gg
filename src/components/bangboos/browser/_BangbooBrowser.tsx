@@ -1,5 +1,5 @@
 // Component imports
-import DisplayCard from "custom/DisplayCard";
+import InfoCard from "custom/InfoCard";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
@@ -23,7 +23,7 @@ function BangbooBrowser() {
             </TextStyled>
             <Grid container spacing={2}>
                 {bangboos.map((bangboo, index) => (
-                    <DisplayCard
+                    <InfoCard
                         key={index}
                         id={`${bangboo.name}-bangbooBrowser`}
                         name={bangboo.name}

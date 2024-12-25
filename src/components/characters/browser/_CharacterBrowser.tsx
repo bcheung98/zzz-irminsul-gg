@@ -3,7 +3,7 @@ import React from "react";
 // Component imports
 import CharacterFilters from "./CharacterFilters";
 import CharacterTable from "./CharacterTable";
-import DisplayCard from "custom/DisplayCard";
+import InfoCard from "custom/InfoCard";
 import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
 import SearchBar from "custom/SearchBar";
 import ActionFab from "custom/ActionFab";
@@ -147,7 +147,7 @@ function CharacterBrowser() {
             {view === "card" && (
                 <Grid container spacing={2}>
                     {currentCharacters.map((char) => (
-                        <DisplayCard
+                        <InfoCard
                             key={char.id}
                             id={`${char.name}-characterBrowser`}
                             name={char.name}

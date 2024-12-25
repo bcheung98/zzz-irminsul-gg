@@ -1,5 +1,5 @@
 // Component imports
-import DisplayCard from "custom/DisplayCard";
+import InfoCard from "custom/InfoCard";
 import { StyledTableCell, StyledTableRow } from "styled/StyledTable";
 import { TextStyled } from "styled/StyledTypography";
 
@@ -59,7 +59,7 @@ function BannerListRow({
                 </TextStyled>
                 <Grid container spacing={0.75}>
                     {fiveStars.map((item, index: number) => (
-                        <DisplayCard
+                        <InfoCard
                             key={index}
                             id={`${item.displayName}-${subVersion}`.toLowerCase()}
                             variant="icon"
@@ -72,7 +72,7 @@ function BannerListRow({
                         />
                     ))}
                     {fourStars.map((item, index: number) => (
-                        <DisplayCard
+                        <InfoCard
                             key={index}
                             id={`${item.displayName}-${subVersion}`.toLowerCase()}
                             variant="icon"

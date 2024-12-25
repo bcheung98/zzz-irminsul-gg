@@ -3,7 +3,7 @@ import React from "react";
 // Component imports
 import WeaponFilters from "./WeaponFilters";
 import WeaponTable from "./WeaponTable";
-import DisplayCard from "custom/DisplayCard";
+import InfoCard from "custom/InfoCard";
 import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
 import SearchBar from "custom/SearchBar";
 import ActionFab from "custom/ActionFab";
@@ -147,7 +147,7 @@ function WeaponBrowser() {
             {view === "card" && (
                 <Grid container spacing={2}>
                     {currentWeapons.map((wep) => (
-                        <DisplayCard
+                        <InfoCard
                             key={wep.id}
                             id={`${wep.name}-weaponBrowser`}
                             name={wep.name}

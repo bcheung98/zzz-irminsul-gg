@@ -1,5 +1,5 @@
 // Component imports
-import DisplayCard from "custom/DisplayCard";
+import InfoCard from "custom/InfoCard";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
@@ -23,7 +23,7 @@ function DriveDiscBrowser() {
             </TextStyled>
             <Grid container spacing={2}>
                 {driveDiscs.map((disc, index) => (
-                    <DisplayCard
+                    <InfoCard
                         key={index}
                         id={`${disc.name}-versionHighlights`}
                         name={disc.name}

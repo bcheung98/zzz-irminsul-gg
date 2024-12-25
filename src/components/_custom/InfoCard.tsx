@@ -16,7 +16,7 @@ import { zoomImageOnHover } from "helpers/utils";
 // Type imports
 import { Element, Rarity, Specialty } from "types/_common";
 
-interface DisplayCardProps {
+interface InfoCardProps {
     name: string;
     displayName?: string;
     id?: string;
@@ -34,7 +34,7 @@ interface DisplayCardProps {
     disableZoomOnHover?: boolean;
 }
 
-function DisplayCard({
+function InfoCard({
     name,
     displayName = name,
     id = displayName,
@@ -47,7 +47,7 @@ function DisplayCard({
     disableTooltip = showName,
     disableLink = false,
     disableZoomOnHover = false,
-}: DisplayCardProps) {
+}: InfoCardProps) {
     const theme = useTheme();
 
     id = `${id.split(" ").join("")}-${variant}-displayCard`;
@@ -252,4 +252,4 @@ function DisplayCard({
     );
 }
 
-export default DisplayCard;
+export default InfoCard;

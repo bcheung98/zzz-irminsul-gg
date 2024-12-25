@@ -2,7 +2,7 @@ import React from "react";
 
 // Component imports
 import Image from "custom/Image";
-import DisplayCard from "custom/DisplayCard";
+import InfoCard from "custom/InfoCard";
 import MainContentBox from "custom/MainContentBox";
 import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
@@ -151,7 +151,7 @@ function VersionHighlights() {
                         </FlexBox>
                         <Grid container spacing={2}>
                             {characters.map((char, index) => (
-                                <DisplayCard
+                                <InfoCard
                                     key={index}
                                     id={`${char.name}-versionHighlights`}
                                     name={char.name}
@@ -184,7 +184,7 @@ function VersionHighlights() {
                         </FlexBox>
                         <Grid container spacing={2}>
                             {weapons.map((weapon, index) => (
-                                <DisplayCard
+                                <InfoCard
                                     key={index}
                                     id={`${weapon.name}-versionHighlights`}
                                     name={weapon.name}
@@ -218,7 +218,7 @@ function VersionHighlights() {
                         </FlexBox>
                         <Grid container spacing={2}>
                             {driveDiscs.map((disc, index) => (
-                                <DisplayCard
+                                <InfoCard
                                     key={index}
                                     id={`${disc.name}-versionHighlights`}
                                     name={disc.name}
@@ -247,7 +247,7 @@ function VersionHighlights() {
                         </FlexBox>
                         <Grid container spacing={2}>
                             {bangboos.map((bangboo, index) => (
-                                <DisplayCard
+                                <InfoCard
                                     key={index}
                                     id={`${bangboo.name}-bangbooBrowser`}
                                     name={bangboo.name}
