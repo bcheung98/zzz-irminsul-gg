@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as RouterLink, useLocation } from "react-router";
 
 // Component imports
 import Settings from "components/Settings";
@@ -26,7 +27,9 @@ import { NavProps, navStyles } from "./Nav";
 
 function NavMobile({ navItems, linkItems }: NavProps) {
     const theme = useTheme();
-    const styles = navStyles(theme);
+
+    const location = useLocation().pathname;
+    const styles = navStyles(location);
 
     const [drawerOpen, setDrawerOpen] = React.useState(false);
     const toggleDrawer =
@@ -90,15 +93,17 @@ function NavMobile({ navItems, linkItems }: NavProps) {
                     {navItems.map((item, index) => (
                         <Box key={index} sx={styles.listItem(item.link)}>
                             <ButtonBase
-                                href={item.link}
-                                sx={styles.listItemButton()}
+                                component={RouterLink}
+                                to={item.link}
+                                sx={styles.listItemButton(item.link)}
+                                onClick={toggleDrawer(false)}
                             >
                                 <Image
                                     src={item.icon}
                                     alt={item.text}
                                     style={styles.navItem()}
                                 />
-                                <TextStyled sx={styles.listItemText()}>
+                                <TextStyled sx={styles.listItemText(true, item.link)}>
                                     {item.text}
                                 </TextStyled>
                             </ButtonBase>

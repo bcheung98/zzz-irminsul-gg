@@ -6,19 +6,13 @@ import WeaponSliders from "./WeaponSliders";
 import MainContentBox from "custom/MainContentBox";
 import Image from "custom/Image";
 import MaterialImage from "custom/MaterialImage";
+import RouterLink from "components/nav/RouterLink";
 import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
 import { StyledTooltip } from "styled/StyledTooltip";
 
 // MUI imports
-import {
-    useTheme,
-    Divider,
-    IconButton,
-    Stack,
-    ButtonBase,
-    Button,
-} from "@mui/material";
+import { useTheme, Divider, IconButton, Stack, Button } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import DoneIcon from "@mui/icons-material/Done";
 import EditIcon from "@mui/icons-material/Edit";
@@ -108,13 +102,11 @@ function PlannerCard({ data }: PlannerCardProps) {
         <MainContentBox
             title={
                 <FlexBox>
-                    <ButtonBase
-                        disableRipple
-                        href={`/${route}/${name
+                    <RouterLink
+                        to={`/${route}/${name
                             .split(" ")
                             .join("_")
                             .toLowerCase()}`}
-                        target="_blank"
                     >
                         <Image
                             src={imgSrc}
@@ -138,15 +130,13 @@ function PlannerCard({ data }: PlannerCardProps) {
                                           )}`,
                             }}
                         />
-                    </ButtonBase>
+                    </RouterLink>
                     <Stack spacing={0.25} sx={{ minHeight: "56px" }}>
-                        <ButtonBase
-                            disableRipple
-                            href={`/${route}/${name
+                        <RouterLink
+                            to={`/${route}/${name
                                 .split(" ")
                                 .join("_")
                                 .toLowerCase()}`}
-                            target="_blank"
                         >
                             <TextStyled
                                 variant="h6"
@@ -161,7 +151,7 @@ function PlannerCard({ data }: PlannerCardProps) {
                             >
                                 {title}
                             </TextStyled>
-                        </ButtonBase>
+                        </RouterLink>
                         <Stack direction="row" spacing={0.5}>
                             {element && (
                                 <Image

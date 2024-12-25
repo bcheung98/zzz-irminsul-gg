@@ -1,13 +1,14 @@
 // Component imports
 import Image from "custom/Image";
+import RouterLink from "./RouterLink";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { ButtonBase, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 
 function Logo({ href = "/" }: { href?: string }) {
     return (
-        <ButtonBase disableRipple href={href}>
+        <RouterLink to={href}>
             <Stack direction="row" spacing={2}>
                 <Image
                     src="https://assets.irminsul.gg/main/icons/Irminsul.png"
@@ -18,7 +19,7 @@ function Logo({ href = "/" }: { href?: string }) {
                     IRMINSUL.GG
                 </TextStyled>
             </Stack>
-        </ButtonBase>
+        </RouterLink>
     );
 }
 

@@ -2,11 +2,12 @@ import React from "react";
 
 // Component imports
 import Image from "./Image";
+import RouterLink from "components/nav/RouterLink";
 import { StyledTooltip } from "styled/StyledTooltip";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, SxProps, ButtonBase, Box, Card } from "@mui/material";
+import { useTheme, SxProps, Box, Card } from "@mui/material";
 
 // Helper imports
 import { getBackgroundColor, getRarityColor } from "helpers/rarityColors";
@@ -197,14 +198,14 @@ function DisplayCard({
                             )}
                         </Box>
                     )}
-                    <ButtonBase disableRipple href={href} target="_blank">
+                    <RouterLink to={href}>
                         <Image
                             src={imgSrc}
                             alt={name}
                             id={`${id}-img`}
                             style={mainImageStyle}
                         />
-                    </ButtonBase>
+                    </RouterLink>
                     <Box
                         sx={{
                             position: "relative",
@@ -222,10 +223,8 @@ function DisplayCard({
                                       )}`,
                         }}
                     >
-                        <ButtonBase
-                            disableRipple
-                            href={href}
-                            target="_blank"
+                        <RouterLink
+                            to={href}
                             sx={{
                                 position: "absolute",
                                 bottom: "50%",
@@ -245,7 +244,7 @@ function DisplayCard({
                             >
                                 {showName && displayName}
                             </TextStyled>
-                        </ButtonBase>
+                        </RouterLink>
                     </Box>
                 </Box>
             </StyledTooltip>

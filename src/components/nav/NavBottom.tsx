@@ -83,6 +83,7 @@ function NavBottom() {
                                 disableRipple
                                 href="https://github.com/bcheung98/project-phaethon"
                                 target="_blank"
+                                rel="noopener"
                                 color="inherit"
                                 sx={{
                                     display: "flex",
@@ -121,6 +122,7 @@ function NavBottom() {
                                     disableRipple
                                     href="https://vite.dev"
                                     target="_blank"
+                                    rel="noopener"
                                     color="inherit"
                                     sx={iconButtonStyle}
                                     className="logo vite"
@@ -136,6 +138,7 @@ function NavBottom() {
                                     disableRipple
                                     href="https://react.dev"
                                     target="_blank"
+                                    rel="noopener"
                                     color="inherit"
                                     sx={iconButtonStyle}
                                     className="logo react"
@@ -151,6 +154,7 @@ function NavBottom() {
                                     disableRipple
                                     href="https://mui.com"
                                     target="_blank"
+                                    rel="noopener"
                                     color="inherit"
                                     sx={iconButtonStyle}
                                     className="logo mui"

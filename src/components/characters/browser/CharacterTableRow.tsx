@@ -1,11 +1,12 @@
 // Component imports
 import Image from "custom/Image";
+import RouterLink from "components/nav/RouterLink";
 import { StyledTableRow, StyledTableCell } from "styled/StyledTable";
 import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
 // MUI imports
-import { useTheme, ButtonBase } from "@mui/material";
+import { useTheme } from "@mui/material";
 
 // Helper imports
 import { useAppSelector } from "helpers/hooks";
@@ -78,10 +79,8 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
                 <StyledTableCell key={index} sx={{ maxWidth: "275px" }}>
                     <FlexBox columnGap="8px">
                         {col.img && (
-                            <ButtonBase
-                                disableRipple
-                                href={col.href || ""}
-                                target="_blank"
+                            <RouterLink
+                                to={col.href || ""}
                                 sx={{
                                     cursor: col.href ? "pointer" : "default",
                                     userSelect: col.href
@@ -100,13 +99,11 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
                                         col.imgStyle
                                     )}
                                 />
-                            </ButtonBase>
+                            </RouterLink>
                         )}
                         {col.label && (
-                            <ButtonBase
-                                disableRipple
-                                href={col.href || ""}
-                                target="_blank"
+                            <RouterLink
+                                to={col.href || ""}
                                 sx={{
                                     cursor: col.href ? "pointer" : "text",
                                     userSelect: col.href ? "pointer" : "text",
@@ -123,7 +120,7 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
                                 >
                                     {col.label}
                                 </TextStyled>
-                            </ButtonBase>
+                            </RouterLink>
                         )}
                     </FlexBox>
                 </StyledTableCell>

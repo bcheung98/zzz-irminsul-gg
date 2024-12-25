@@ -3,13 +3,10 @@ import { BrowserRouter } from "react-router";
 import "App.css";
 
 // Component imports
-import Nav from "components/nav/Nav";
-import NavBottom from "components/nav/NavBottom";
 import RouteConfig from "components/nav/RouteConfig";
-import Layout from "components/Layout";
 
 // MUI imports
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 
 // Helper imports
 import {
@@ -43,16 +40,7 @@ function App() {
         <BrowserRouter>
             <ThemeProvider theme={getTheme(theme)}>
                 <CssBaseline />
-                <Box id="back-to-top-anchor" />
-                <Box sx={{ display: "flex" }}>
-                    <Nav />
-                    <Box sx={{ minWidth: "50vw", width: "100vw" }}>
-                        <Layout>
-                            <RouteConfig />
-                        </Layout>
-                        <NavBottom />
-                    </Box>
-                </Box>
+                <RouteConfig />
             </ThemeProvider>
         </BrowserRouter>
     );

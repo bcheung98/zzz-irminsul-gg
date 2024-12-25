@@ -1,9 +1,11 @@
 import React from "react";
+import { useLocation } from "react-router";
 
 // Component imports
 import Logo from "./Logo";
 import Settings from "components/Settings";
 import Image from "custom/Image";
+import RouterLink from "./RouterLink";
 import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
 import { StyledTooltip } from "styled/StyledTooltip";
@@ -38,7 +40,9 @@ const iconSize = 32; // px
 function NavDesktop({ navItems, linkItems }: NavProps) {
     const theme = useTheme();
     const matches_lg_up = useMediaQuery(theme.breakpoints.up("lg"));
-    const styles = navStyles(theme);
+
+    const location = useLocation().pathname;
+    const styles = navStyles(location);
 
     const [drawerOpen, setDrawerOpen] = React.useState(matches_lg_up);
     const toggleDrawerState = () => {
@@ -91,7 +95,11 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
                                 <MenuOpenIcon sx={menuIconStyle} />
                             </IconButton>
                         </Box>
-                        <Logo href="https://irminsul.gg/" />
+                        <Logo
+                            href={
+                                location === "/" ? "https://irminsul.gg/" : "/"
+                            }
+                        />
                     </FlexBox>
                     <Settings />
                 </Toolbar>
@@ -117,11 +125,9 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
                                 arrow
                                 placement="right"
                             >
-                                <ButtonBase
-                                    href={item.link}
-                                    disableRipple
-                                    disableTouchRipple
-                                    sx={styles.listItemButton()}
+                                <RouterLink
+                                    to={item.link}
+                                    sx={styles.listItemButton(item.link)}
                                 >
                                     <Image
                                         src={item.icon}
@@ -129,11 +135,14 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
                                         style={styles.navItem()}
                                     />
                                     <TextStyled
-                                        sx={styles.listItemText(drawerOpen)}
+                                        sx={styles.listItemText(
+                                            drawerOpen,
+                                            item.link
+                                        )}
                                     >
                                         {item.text}
                                     </TextStyled>
-                                </ButtonBase>
+                                </RouterLink>
                             </StyledTooltip>
                         </Box>
                     ))}

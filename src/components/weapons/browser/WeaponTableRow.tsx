@@ -2,12 +2,13 @@ import parse from "html-react-parser";
 
 // Component imports
 import Image from "custom/Image";
+import RouterLink from "components/nav/RouterLink";
 import { StyledTableRow, StyledTableCell } from "styled/StyledTable";
 import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
 // MUI imports
-import { useTheme, ButtonBase } from "@mui/material";
+import { useTheme } from "@mui/material";
 
 // Helper imports
 import { combineStyles } from "helpers/utils";
@@ -100,10 +101,8 @@ function WeaponTableRow({ row }: { row: WeaponTableRowProps }) {
                 <StyledTableCell key={index}>
                     <FlexBox columnGap="8px">
                         {col.img && (
-                            <ButtonBase
-                                disableRipple
-                                href={col.href || ""}
-                                target="_blank"
+                            <RouterLink
+                                to={col.href || ""}
                                 sx={{
                                     cursor: col.href ? "pointer" : "default",
                                     userSelect: col.href
@@ -122,13 +121,11 @@ function WeaponTableRow({ row }: { row: WeaponTableRowProps }) {
                                         col.imgStyle
                                     )}
                                 />
-                            </ButtonBase>
+                            </RouterLink>
                         )}
                         {col.label && (
-                            <ButtonBase
-                                disableRipple
-                                href={col.href || ""}
-                                target="_blank"
+                            <RouterLink
+                                to={col.href || ""}
                                 sx={{
                                     cursor: col.href ? "pointer" : "text",
                                     userSelect: col.href ? "pointer" : "text",
@@ -145,7 +142,7 @@ function WeaponTableRow({ row }: { row: WeaponTableRowProps }) {
                                 >
                                     {parse(col.label)}
                                 </TextStyled>
-                            </ButtonBase>
+                            </RouterLink>
                         )}
                     </FlexBox>
                 </StyledTableCell>
