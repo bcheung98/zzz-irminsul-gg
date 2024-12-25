@@ -124,6 +124,7 @@ export const zzzThemeData = {
     appbar: {
         backgroundColor: appbarColors[0],
         hover: appbarColors[2],
+        selectedHover: appbarColors[2],
         color: "rgb(255, 255, 255)",
     },
     border: {

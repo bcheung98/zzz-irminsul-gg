@@ -124,6 +124,7 @@ export const darkThemeData = {
     appbar: {
         backgroundColor: appbarColors[0],
         hover: appbarColors[1],
+        selectedHover: appbarColors[2],
         color: "rgb(255, 255, 255)",
     },
     border: {
