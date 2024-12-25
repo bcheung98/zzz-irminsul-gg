@@ -1,20 +1,28 @@
+import { SxProps } from "@mui/material";
 import { darkThemeData } from "themes/darkTheme";
 import { lightThemeData } from "themes/lightTheme";
 import { themeNames } from "themes/theme";
+import { zzzThemeData } from "themes/zzzTheme";
 
 export type ThemeNames = (typeof themeNames)[number];
 
 type DarkTheme = typeof darkThemeData;
 type LightTheme = typeof lightThemeData;
-type ThemeData = DarkTheme & LightTheme;
+type StyledTheme = typeof zzzThemeData;
+type ThemeData = DarkTheme & LightTheme & StyledTheme;
 
 export type CustomTheme = {
     [Key in keyof ThemeData]: ThemeData[Key];
 };
 
 declare module "@mui/material/styles" {
-    interface Theme extends CustomTheme {}
+    interface Theme extends CustomTheme {
+        styles: {
+            [key: string]: (arg: unknown) => SxProps;
+        };
+    }
     interface ThemeOptions extends Partial<CustomTheme> {}
+
     interface Palette {
         default: Palette["primary"];
         tertiary: Palette["primary"];
@@ -23,6 +31,7 @@ declare module "@mui/material/styles" {
         default?: PaletteOptions["primary"];
         tertiary?: PaletteOptions["primary"];
     }
+
     interface TypographyVariants extends TypographyVariantsType {}
     interface TypographyVariantsOptions extends TypographyVariantsOptionsType {}
 }
