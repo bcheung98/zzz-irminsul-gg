@@ -57,7 +57,7 @@ function BannerListRow({
                         start.date
                     } — ${end.date}`}
                 </TextStyled>
-                <Grid container spacing={0.75}>
+                <Grid container spacing={1}>
                     {fiveStars.map((item, index: number) => (
                         <InfoCard
                             key={index}

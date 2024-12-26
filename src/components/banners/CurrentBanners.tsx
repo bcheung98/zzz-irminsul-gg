@@ -69,14 +69,14 @@ function CurrentBanners() {
                 <FlexBox sx={{ flexWrap: "wrap", columnGap: 8, rowGap: 2 }}>
                     {currentCharacterBanners.length > 0 && (
                         <Box>
-                            <TextStyled variant="h6" sx={{ mb: "8px" }}>
+                            <TextStyled variant="h6-styled" sx={{ mb: "8px" }}>
                                 Agent Banner
                             </TextStyled>
                             <Stack spacing={1}>
                                 {currentCharacterBanners.map(
                                     (banner, index) => (
                                         <Box key={index}>
-                                            <Grid container spacing={0.75}>
+                                            <Grid container spacing={1}>
                                                 {createBannerItems(
                                                     banner.fiveStars,
                                                     "character"
@@ -142,13 +142,13 @@ function CurrentBanners() {
                     )}
                     {currentWeaponBanners.length > 0 && (
                         <Box>
-                            <TextStyled variant="h6" sx={{ mb: "8px" }}>
+                            <TextStyled variant="h6-styled" sx={{ mb: "8px" }}>
                                 W-Engine Banner
                             </TextStyled>
                             <Stack spacing={1}>
                                 {currentWeaponBanners.map((banner, index) => (
                                     <Box key={index}>
-                                        <Grid container spacing={0.75}>
+                                        <Grid container spacing={1}>
                                             {createBannerItems(
                                                 banner.fiveStars,
                                                 "weapon"
