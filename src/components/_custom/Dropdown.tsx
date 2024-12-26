@@ -4,7 +4,7 @@ import React from "react";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, IconButton, Collapse, Box } from "@mui/material";
+import { useTheme, ButtonBase, Collapse, Box } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 
 interface DropdownProps {
@@ -32,12 +32,17 @@ function Dropdown({
     };
 
     return (
-        <Box sx={{ width: "100%" }}>
-            <IconButton
+        <Box sx={{ mb: "8px" }}>
+            <ButtonBase
                 onClick={toggleDropdownState}
                 disableRipple
                 disableTouchRipple
-                sx={{ pl: 0 }}
+                sx={{
+                    maxWidth: "100%",
+                    pl: 0,
+                    mb: "4px",
+                    justifyContent: "left",
+                }}
             >
                 <ExpandMore
                     sx={{
@@ -47,10 +52,13 @@ function Dropdown({
                         transition: "transform 0.25s",
                     }}
                 />
-                <TextStyled sx={{ color: titleColor || theme.text.primary }}>
+                <TextStyled
+                    sx={{ color: titleColor || theme.text.primary }}
+                    noWrap
+                >
                     {title}
                 </TextStyled>
-            </IconButton>
+            </ButtonBase>
             <Collapse in={open} timeout="auto" unmountOnExit={unmountOnExit}>
                 <Box sx={{ p: { xs: "4px 0", md: contentPadding } }}>
                     {children}
