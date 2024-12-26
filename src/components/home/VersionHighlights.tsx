@@ -58,6 +58,11 @@ function VersionHighlights() {
         },
     };
 
+    const gridStyle: SxProps = {
+        maxHeight: "720px", 
+        overflowY: "auto", 
+    };
+
     const version = updates[index].version;
 
     const characters = useAppSelector(selectCharacters)
@@ -125,17 +130,9 @@ function VersionHighlights() {
             <TextStyled variant="h5" sx={{ mb: "20px" }}>
                 {updates[index].version} - <i>{updates[index].name}</i>
             </TextStyled>
-            <Box
-                sx={{
-                    display: "grid",
-                    gridTemplateRows: "repeat(2, auto)",
-                    gap: "24px",
-                    gridAutoFlow: { xs: "row dense", md: "column dense" },
-                    gridAutoColumns: "minmax(180px, 1fr)",
-                }}
-            >
+            <Grid container spacing={4}>
                 {characters.length > 0 && (
-                    <Box>
+                    <Grid size={{ xs: 12, lg: 6 }} sx={gridStyle}>
                         <FlexBox sx={{ mb: "20px" }}>
                             <Image
                                 src="icons/Characters"
@@ -165,10 +162,10 @@ function VersionHighlights() {
                                 />
                             ))}
                         </Grid>
-                    </Box>
+                    </Grid>
                 )}
                 {weapons.length > 0 && (
-                    <Box sx={{ gridRowEnd: "span 3" }}>
+                    <Grid size={{ xs: 12, lg: 6 }} sx={gridStyle}>
                         <FlexBox sx={{ mb: "20px" }}>
                             <Image
                                 src="icons/W-Engine"
@@ -197,10 +194,10 @@ function VersionHighlights() {
                                 />
                             ))}
                         </Grid>
-                    </Box>
+                    </Grid>
                 )}
                 {driveDiscs.length > 0 && (
-                    <Box>
+                    <Grid size={{ xs: 12, lg: 6 }} sx={gridStyle}>
                         <FlexBox sx={{ mb: "20px" }}>
                             <Image
                                 src="icons/Drive_Disc"
@@ -228,10 +225,10 @@ function VersionHighlights() {
                                 />
                             ))}
                         </Grid>
-                    </Box>
+                    </Grid>
                 )}
                 {bangboos.length > 0 && (
-                    <Box>
+                    <Grid size={{ xs: 12, lg: 6 }} sx={gridStyle}>
                         <FlexBox sx={{ mb: "20px" }}>
                             <Image
                                 src="icons/Bangboo"
@@ -260,9 +257,9 @@ function VersionHighlights() {
                                 />
                             ))}
                         </Grid>
-                    </Box>
+                    </Grid>
                 )}
-            </Box>
+            </Grid>
         </MainContentBox>
     );
 }
