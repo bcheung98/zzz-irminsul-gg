@@ -9,7 +9,7 @@ import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, Box, LinearProgress } from "@mui/material";
+import { useTheme, Box, Stack, LinearProgress } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 // Helper imports
@@ -20,6 +20,10 @@ import { createDateObject, isCurrentBanner } from "helpers/dates";
 import { isTBA } from "helpers/utils";
 import { createBannerItems } from "./BannerListRow";
 
+// Type imports
+import { Rarity } from "types/_common";
+import { Banner } from "types/banner";
+
 function CurrentBanners() {
     const theme = useTheme();
 
@@ -28,22 +32,21 @@ function CurrentBanners() {
     const characterBanners = useAppSelector(selectCharacterBanners);
     const weaponBanners = useAppSelector(selectWeaponBanners);
 
-    const currentCharacterBanners = characterBanners.filter((banner) =>
+    const filterCurrentBanner = (banner: Banner) =>
         isCurrentBanner(
             createDateObject({ date: banner.start, region: region }).obj,
             createDateObject({ date: banner.end, region: region }).obj
         )
-    );
-    const currentWeaponBanners = weaponBanners.filter((banner) =>
-        isCurrentBanner(
-            createDateObject({ date: banner.start, region: region }).obj,
-            createDateObject({ date: banner.end, region: region }).obj
-        )
-    );
+
+    const currentCharacterBanners = characterBanners.filter(filterCurrentBanner);
+    const currentWeaponBanners = weaponBanners.filter(filterCurrentBanner);
 
     const activeBanners =
         [...currentCharacterBanners, ...currentWeaponBanners].length > 0;
     const [loading, setLoading] = React.useState(true);
+
+    const getRarity = (name: string, rarity: Rarity) =>
+        !isTBA(name) ? rarity : "C";
 
     React.useEffect(() => {
         if (!activeBanners) {
@@ -62,33 +65,23 @@ function CurrentBanners() {
             contentProps={{ padding: "16px" }}
         >
             {activeBanners ? (
-                <>
-                    <Grid container rowSpacing={2} columnSpacing={9}>
-                        {currentCharacterBanners.length > 0 && (
-                            <Grid size={{ xs: 12, lg: "auto" }}>
-                                <TextStyled variant="h6" sx={{ mb: "8px" }}>
-                                    Agent Banner
-                                </TextStyled>
+                <FlexBox sx={{ flexWrap: "wrap", columnGap: 8, rowGap: 2 }}>
+                    {currentCharacterBanners.length > 0 && (
+                        <Box>
+                            <TextStyled variant="h6" sx={{ mb: "8px" }}>
+                                Agent Banner
+                            </TextStyled>
+                            <Stack spacing={1}>
                                 {currentCharacterBanners.map(
                                     (banner, index) => (
-                                        <Box
-                                            key={index}
-                                            sx={{
-                                                mb:
-                                                    index !==
-                                                    currentCharacterBanners.length -
-                                                        1
-                                                        ? "20px"
-                                                        : 0,
-                                            }}
-                                        >
+                                        <Box key={index}>
                                             <Grid container spacing={0.75}>
                                                 {createBannerItems(
                                                     banner.fiveStars,
                                                     "character"
-                                                ).map((item, index) => (
+                                                ).map((item) => (
                                                     <InfoCard
-                                                        key={index}
+                                                        key={item.name}
                                                         id={`${item.displayName}-currentBanner`.toLowerCase()}
                                                         variant="icon"
                                                         type="character"
@@ -96,11 +89,7 @@ function CurrentBanners() {
                                                         displayName={
                                                             item.displayName
                                                         }
-                                                        rarity={
-                                                            !isTBA(item.name)
-                                                                ? "S"
-                                                                : "B"
-                                                        }
+                                                        rarity={getRarity(item.name, "S")}
                                                         disableLink={isTBA(
                                                             item.name
                                                         )}
@@ -112,9 +101,9 @@ function CurrentBanners() {
                                                 {createBannerItems(
                                                     banner.fourStars,
                                                     "character"
-                                                ).map((item, index) => (
+                                                ).map((item) => (
                                                     <InfoCard
-                                                        key={index}
+                                                        key={item.name}
                                                         id={`${item.displayName}-currentBanner`.toLowerCase()}
                                                         variant="icon"
                                                         type="character"
@@ -122,11 +111,7 @@ function CurrentBanners() {
                                                         displayName={
                                                             item.displayName
                                                         }
-                                                        rarity={
-                                                            !isTBA(item.name)
-                                                                ? "A"
-                                                                : "B"
-                                                        }
+                                                        rarity={getRarity(item.name, "A")}
                                                         disableLink={isTBA(
                                                             item.name
                                                         )}
@@ -145,31 +130,24 @@ function CurrentBanners() {
                                         </Box>
                                     )
                                 )}
-                            </Grid>
-                        )}
-                        {currentWeaponBanners.length > 0 && (
-                            <Grid size={{ xs: 12, lg: "auto" }}>
-                                <TextStyled variant="h6" sx={{ mb: "8px" }}>
-                                    W-Engine Banner
-                                </TextStyled>
+                            </Stack>
+                        </Box>
+                    )}
+                    {currentWeaponBanners.length > 0 && (
+                        <Box>
+                            <TextStyled variant="h6" sx={{ mb: "8px" }}>
+                                W-Engine Banner
+                            </TextStyled>
+                            <Stack spacing={1}>
                                 {currentWeaponBanners.map((banner, index) => (
-                                    <Box
-                                        key={index}
-                                        sx={{
-                                            mb:
-                                                index !==
-                                                currentWeaponBanners.length - 1
-                                                    ? "20px"
-                                                    : 0,
-                                        }}
-                                    >
+                                    <Box key={index}>
                                         <Grid container spacing={0.75}>
                                             {createBannerItems(
                                                 banner.fiveStars,
                                                 "weapon"
-                                            ).map((item, index) => (
+                                            ).map((item) => (
                                                 <InfoCard
-                                                    key={index}
+                                                    key={item.name}
                                                     id={`${item.displayName}-currentBanner`.toLowerCase()}
                                                     variant="icon"
                                                     type="weapon"
@@ -177,11 +155,7 @@ function CurrentBanners() {
                                                     displayName={
                                                         item.displayName
                                                     }
-                                                    rarity={
-                                                        !isTBA(item.name)
-                                                            ? "S"
-                                                            : "B"
-                                                    }
+                                                    rarity={getRarity(item.name, "S")}
                                                     disableLink={isTBA(
                                                         item.name
                                                     )}
@@ -193,9 +167,9 @@ function CurrentBanners() {
                                             {createBannerItems(
                                                 banner.fourStars,
                                                 "weapon"
-                                            ).map((item, index) => (
+                                            ).map((item) => (
                                                 <InfoCard
-                                                    key={index}
+                                                    key={item.name}
                                                     id={`${item.displayName}-currentBanner`.toLowerCase()}
                                                     variant="icon"
                                                     type="weapon"
@@ -203,11 +177,7 @@ function CurrentBanners() {
                                                     displayName={
                                                         item.displayName
                                                     }
-                                                    rarity={
-                                                        !isTBA(item.name)
-                                                            ? "A"
-                                                            : "B"
-                                                    }
+                                                    rarity={getRarity(item.name, "A")}
                                                     disableLink={isTBA(
                                                         item.name
                                                     )}
@@ -225,10 +195,10 @@ function CurrentBanners() {
                                         />
                                     </Box>
                                 ))}
-                            </Grid>
-                        )}
-                    </Grid>
-                </>
+                            </Stack>
+                        </Box>
+                    )}
+                </FlexBox>
             ) : (
                 <>
                     <FlexBox>
