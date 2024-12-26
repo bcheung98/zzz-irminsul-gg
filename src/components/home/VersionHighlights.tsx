@@ -63,6 +63,13 @@ function VersionHighlights() {
         overflowY: "auto", 
     };
 
+    const iconStyle: React.CSSProperties = {
+        width: "32px",
+        marginRight: "8px",
+        backgroundColor: theme.icon.backgroundColor,
+        borderRadius: "64px",
+    }
+
     const version = updates[index].version;
 
     const characters = useAppSelector(selectCharacters)
@@ -137,12 +144,7 @@ function VersionHighlights() {
                             <Image
                                 src="icons/Characters"
                                 alt="New Agents"
-                                style={{
-                                    width: "32px",
-                                    marginRight: "8px",
-                                    backgroundColor: theme.icon.backgroundColor,
-                                    borderRadius: "64px",
-                                }}
+                                style={iconStyle}
                             />
                             <TextStyled variant="h6">New Agents</TextStyled>
                         </FlexBox>
@@ -170,12 +172,7 @@ function VersionHighlights() {
                             <Image
                                 src="icons/W-Engine"
                                 alt="New W-Engines"
-                                style={{
-                                    width: "32px",
-                                    marginRight: "8px",
-                                    backgroundColor: theme.icon.backgroundColor,
-                                    borderRadius: "64px",
-                                }}
+                                style={iconStyle}
                             />
                             <TextStyled variant="h6">New W-Engines</TextStyled>
                         </FlexBox>
@@ -202,12 +199,7 @@ function VersionHighlights() {
                             <Image
                                 src="icons/Drive_Disc"
                                 alt="New Drive Discs"
-                                style={{
-                                    width: "32px",
-                                    marginRight: "8px",
-                                    backgroundColor: theme.icon.backgroundColor,
-                                    borderRadius: "64px",
-                                }}
+                                style={iconStyle}
                             />
                             <TextStyled variant="h6">
                                 New Drive Discs
@@ -233,12 +225,7 @@ function VersionHighlights() {
                             <Image
                                 src="icons/Bangboo"
                                 alt="New Bangboos"
-                                style={{
-                                    width: "32px",
-                                    marginRight: "8px",
-                                    backgroundColor: theme.icon.backgroundColor,
-                                    borderRadius: "64px",
-                                }}
+                                style={iconStyle}
                             />
                             <TextStyled variant="h6">New Bangboos</TextStyled>
                         </FlexBox>
