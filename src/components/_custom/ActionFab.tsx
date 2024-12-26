@@ -68,7 +68,10 @@ function ActionFab({
                     >
                         {icon || <KeyboardArrowLeftIcon />}
                         {label && (
-                            <TextStyled variant="body2" sx={{ ml: "4px" }}>
+                            <TextStyled
+                                variant="body2-styled"
+                                sx={{ ml: "4px" }}
+                            >
                                 {label}
                             </TextStyled>
                         )}

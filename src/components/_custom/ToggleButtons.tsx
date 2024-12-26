@@ -23,7 +23,10 @@ export function ToggleButton(props: CustomToggleButtonProps) {
     return (
         <StyledToggleButton {...props} color={color}>
             {icon}
-            <TextStyled variant="body2" sx={{ color: "white", textTransform: "none" }}>
+            <TextStyled
+                variant="body2-styled"
+                sx={{ color: "white", textTransform: "none" }}
+            >
                 {label}
             </TextStyled>
         </StyledToggleButton>

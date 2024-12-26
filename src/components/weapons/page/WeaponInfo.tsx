@@ -48,7 +48,7 @@ function WeaponInfo({ weapon }: WeaponProps) {
                     style={{ width: "64px" }}
                 />
                 <Box sx={{ ml: "16px" }}>
-                    <TextStyled variant="h4" sx={{ mb: "8px" }}>
+                    <TextStyled variant="h4-styled" sx={{ mb: "8px" }}>
                         {displayName}
                     </TextStyled>
                     <InfoChip

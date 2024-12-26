@@ -18,7 +18,10 @@ function BangbooBrowser() {
 
     return (
         <>
-            <TextStyled variant="h5" sx={{ mb: "20px", lineHeight: "36px" }}>
+            <TextStyled
+                variant="h5-styled"
+                sx={{ mb: "20px", lineHeight: "36px" }}
+            >
                 Bangboos
             </TextStyled>
             <Grid container spacing={2}>

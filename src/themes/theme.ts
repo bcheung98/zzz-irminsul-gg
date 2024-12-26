@@ -155,6 +155,17 @@ export function getTheme(name: string) {
                     },
                 },
             },
+            MuiTypography: {
+                defaultProps: {
+                    variantMapping: {
+                        "h4-styled": "h4",
+                        "h5-styled": "h5",
+                        "h6-styled": "h6",
+                        "body1-styled": "p",
+                        "body2-styled": "p",
+                    },
+                },
+            },
         },
         typography: {
             sitename: {
@@ -185,7 +196,6 @@ export function getTheme(name: string) {
                     ),
                 },
             },
-
             h5: {
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(theme.font.sizes.h5.xs),

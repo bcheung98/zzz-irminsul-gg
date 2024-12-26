@@ -247,7 +247,9 @@ function BannerList({ type }: BannerListProps) {
                     onChange={handleSelect}
                     sx={{ mt: "3px" }}
                 />
-                <TextStyled variant="body2">Toggle "AND" Filter</TextStyled>
+                <TextStyled variant="body2-styled">
+                    Toggle "AND" Filter
+                </TextStyled>
                 <StyledTooltip
                     title="If toggled, will filter banners that only contain all selected items."
                     arrow

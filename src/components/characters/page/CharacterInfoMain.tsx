@@ -34,7 +34,7 @@ function CharacterInfoMain({ character }: CharacterProps) {
                 />
                 <Box sx={{ ml: "16px" }}>
                     <TextStyled
-                        variant="h4"
+                        variant="h4-styled"
                         className="page-name"
                         sx={{ mb: "8px" }}
                     >

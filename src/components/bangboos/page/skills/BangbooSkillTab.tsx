@@ -66,7 +66,7 @@ function BangbooSkillTab({ mode, skillKey, skillData }: BangbooSkillTabProps) {
             </TextStyled>
             {skillData.map((skill, index) => (
                 <Box key={`${skillKey}-${index}`} sx={{ pb: "16px" }}>
-                    <TextStyled variant="h5" sx={{ mb: "16px" }}>
+                    <TextStyled variant="h5-styled" sx={{ mb: "16px" }}>
                         {skill.name}
                     </TextStyled>
                     <Text sx={{ color: theme.text.description }}>

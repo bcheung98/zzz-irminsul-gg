@@ -2,7 +2,7 @@ import { TextStyled } from "styled/StyledTypography";
 
 function PageNotFound() {
     return (
-        <TextStyled variant="h5" className="page-name">
+        <TextStyled variant="h5-styled" className="page-name">
             Page Not Found
         </TextStyled>
     );

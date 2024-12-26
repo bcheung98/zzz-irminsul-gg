@@ -23,7 +23,7 @@ function DriveDiscInfo({ disc }: DriveDiscProps) {
                 backgroundColor: theme.background(2),
             }}
         >
-            <TextStyled variant="h4" sx={{ mb: "4px" }}>
+            <TextStyled variant="h4-styled" sx={{ mb: "4px" }}>
                 {displayName}
             </TextStyled>
             <Divider sx={{ my: "16px" }} />

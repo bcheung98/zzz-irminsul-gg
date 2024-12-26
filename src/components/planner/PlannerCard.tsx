@@ -139,7 +139,7 @@ function PlannerCard({ data }: PlannerCardProps) {
                                 .toLowerCase()}`}
                         >
                             <TextStyled
-                                variant="h6"
+                                variant="h6-styled"
                                 sx={{
                                     cursor: "pointer",
                                     color: "white",

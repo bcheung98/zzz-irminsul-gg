@@ -64,7 +64,7 @@ function MainContentBox({
                 >
                     {typeof title === "string" ? (
                         <TextStyled
-                            variant="h6"
+                            variant="h6-styled"
                             sx={{ color: theme.appbar.color }}
                         >
                             {title && title}

@@ -136,7 +136,7 @@ function VersionHighlights() {
                 </FlexBox>
             }
         >
-            <TextStyled variant="h5" sx={{ mb: "20px" }}>
+            <TextStyled variant="h5-styled" sx={{ mb: "20px" }}>
                 {updates[index].version} - <i>{updates[index].name}</i>
             </TextStyled>
             <Masonry columns={{ xs: 1, md: 2 }} spacing={4}>
@@ -148,7 +148,9 @@ function VersionHighlights() {
                                 alt="New Agents"
                                 style={iconStyle}
                             />
-                            <TextStyled variant="h6">New Agents</TextStyled>
+                            <TextStyled variant="h6-styled">
+                                New Agents
+                            </TextStyled>
                         </FlexBox>
                         <Grid container spacing={2}>
                             {characters.map((char, index) => (
@@ -176,7 +178,9 @@ function VersionHighlights() {
                                 alt="New W-Engines"
                                 style={iconStyle}
                             />
-                            <TextStyled variant="h6">New W-Engines</TextStyled>
+                            <TextStyled variant="h6-styled">
+                                New W-Engines
+                            </TextStyled>
                         </FlexBox>
                         <Grid container spacing={2}>
                             {weapons.map((weapon, index) => (
@@ -203,7 +207,7 @@ function VersionHighlights() {
                                 alt="New Drive Discs"
                                 style={iconStyle}
                             />
-                            <TextStyled variant="h6">
+                            <TextStyled variant="h6-styled">
                                 New Drive Discs
                             </TextStyled>
                         </FlexBox>
@@ -229,7 +233,9 @@ function VersionHighlights() {
                                 alt="New Bangboos"
                                 style={iconStyle}
                             />
-                            <TextStyled variant="h6">New Bangboos</TextStyled>
+                            <TextStyled variant="h6-styled">
+                                New Bangboos
+                            </TextStyled>
                         </FlexBox>
                         <Grid container spacing={2}>
                             {bangboos.map((bangboo, index) => (

@@ -31,7 +31,7 @@ function BangbooInfo({ bangboo }: BangbooProps) {
                     alt={rarity}
                     style={{ width: "48px" }}
                 />
-                <TextStyled variant="h4" sx={{ ml: "4px" }}>
+                <TextStyled variant="h4-styled" sx={{ ml: "4px" }}>
                     {displayName}
                 </TextStyled>
             </FlexBox>

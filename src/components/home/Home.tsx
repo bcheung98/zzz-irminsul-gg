@@ -15,7 +15,7 @@ function Home() {
                     p: "24px",
                 })}
             >
-                <TextStyled variant="h6">
+                <TextStyled variant="h6-styled">
                     Hello! This site is currently WIP. Features may be missing
                     or broken.
                 </TextStyled>

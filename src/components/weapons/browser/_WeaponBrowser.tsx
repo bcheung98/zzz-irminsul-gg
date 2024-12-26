@@ -98,7 +98,7 @@ function WeaponBrowser() {
                 sx={{ mb: "20px" }}
             >
                 <Grid size="auto">
-                    <TextStyled variant="h5" sx={{ lineHeight: "36px" }}>
+                    <TextStyled variant="h5-styled" sx={{ lineHeight: "36px" }}>
                         W-Engines
                     </TextStyled>
                 </Grid>

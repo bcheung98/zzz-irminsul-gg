@@ -59,7 +59,7 @@ function CharacterInfoMisc({ character }: CharacterProps) {
                                 align="left"
                                 sx={{ border: "none", py: "2px" }}
                             >
-                                <TextStyled variant="body2">
+                                <TextStyled variant="body2-styled">
                                     {row.key}
                                 </TextStyled>
                             </TableCell>

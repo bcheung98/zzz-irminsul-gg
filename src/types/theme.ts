@@ -3,6 +3,7 @@ import { themeNames } from "themes/theme";
 import { darkThemeData } from "themes/darkTheme";
 import { lightThemeData } from "themes/lightTheme";
 import { zzzThemeData } from "themes/zzzTheme";
+import { Variant } from "@mui/material/styles/createTypography";
 
 export type ThemeNames = (typeof themeNames)[number];
 
@@ -36,14 +37,15 @@ declare module "@mui/material/styles" {
     interface TypographyVariantsOptions extends TypographyVariantsOptionsType {}
 }
 
-type TypographyOverrides = {
-    sitename: true;
-    "h4-styled": true;
-    "h5-styled": true;
-    "h6-styled": true;
-    "body1-styled": true;
-    "body2-styled": true;
+type StyledTypographyVariants = {
+    [Property in Variant as `${string & Property}-styled`]: true;
 };
+
+type NewTypographyVariants = {
+    sitename: true;
+};
+
+type TypographyOverrides = StyledTypographyVariants & NewTypographyVariants;
 
 type TypographyVariantsType = {
     [Property in keyof TypographyOverrides]: React.CSSProperties;

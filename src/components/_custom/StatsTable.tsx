@@ -112,7 +112,6 @@ function StatsTable({
                                 {tableHeadRow.map((col) => (
                                     <StyledTableCell key={col}>
                                         <TextStyled
-                                            variant="body1"
                                             sx={{
                                                 color: "white",
                                                 textAlign: {

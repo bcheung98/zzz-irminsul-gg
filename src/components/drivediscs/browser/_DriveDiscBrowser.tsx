@@ -18,7 +18,10 @@ function DriveDiscBrowser() {
 
     return (
         <>
-            <TextStyled variant="h5" sx={{ mb: "20px", lineHeight: "36px" }}>
+            <TextStyled
+                variant="h5-styled"
+                sx={{ mb: "20px", lineHeight: "36px" }}
+            >
                 Drive Discs
             </TextStyled>
             <Grid container spacing={2}>

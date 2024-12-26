@@ -112,7 +112,7 @@ function NavMobile({ navItems, linkItems }: NavProps) {
                 </List>
                 <Divider variant="middle" />
                 <TextStyled
-                    variant="h6"
+                    variant="h6-styled"
                     sx={{ color: "white", ml: "20px", mt: "16px" }}
                 >
                     Other Games

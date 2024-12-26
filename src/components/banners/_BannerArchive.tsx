@@ -24,7 +24,9 @@ function BannerArchive() {
     const CharacterBannerList = <BannerList type="character" />;
     const WeaponBannerList = <BannerList type="weapon" />;
 
-    const [value, setValue] = React.useState<"character" | "weapon">("character");
+    const [value, setValue] = React.useState<"character" | "weapon">(
+        "character"
+    );
     const handleValue = (
         _: React.BaseSyntheticEvent,
         newView: "character" | "weapon"
@@ -41,7 +43,10 @@ function BannerArchive() {
 
     return (
         <>
-            <TextStyled variant="h5" sx={{ mb: "20px", lineHeight: "36px" }}>
+            <TextStyled
+                variant="h5-styled"
+                sx={{ mb: "20px", lineHeight: "36px" }}
+            >
                 Banner Archive
             </TextStyled>
             <ToggleButtons
@@ -57,13 +62,13 @@ function BannerArchive() {
             {!matches_md_dn ? (
                 <Grid container spacing={4}>
                     <Grid size={{ xs: 12, lg: 6, xl: maxWidth }}>
-                        <TextStyled variant="h6" sx={{ mb: "20px" }}>
+                        <TextStyled variant="h6-styled" sx={{ mb: "20px" }}>
                             Agent Banner
                         </TextStyled>
                         {CharacterBannerList}
                     </Grid>
                     <Grid size={{ xs: 12, lg: 6, xl: maxWidth }}>
-                        <TextStyled variant="h6" sx={{ mb: "20px" }}>
+                        <TextStyled variant="h6-styled" sx={{ mb: "20px" }}>
                             W-Engine Banner
                         </TextStyled>
                         {WeaponBannerList}
