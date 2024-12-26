@@ -1,4 +1,5 @@
-import { Outlet } from "react-router";
+import React from "react";
+import { Outlet, useLocation } from "react-router";
 
 // Component imports
 import RightHandDrawer from "custom/RightHandDrawer";
@@ -14,6 +15,11 @@ import { selectWidth } from "reducers/settings";
 
 function Layout() {
     const width = useAppSelector(selectWidth);
+
+    const location = useLocation().pathname;
+    React.useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location]);
 
     return (
         <>
