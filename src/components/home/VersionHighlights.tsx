@@ -19,6 +19,7 @@ import {
     IconButton,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { Masonry } from "@mui/lab";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
@@ -59,7 +60,8 @@ function VersionHighlights() {
     };
 
     const gridStyle: SxProps = {
-        maxHeight: "720px",
+        minHeight: "280px",
+        maxHeight: { xs: "720px", md: "100%" },
         overflowY: "auto",
     };
 
@@ -137,7 +139,7 @@ function VersionHighlights() {
             <TextStyled variant="h5" sx={{ mb: "20px" }}>
                 {updates[index].version} - <i>{updates[index].name}</i>
             </TextStyled>
-            <Grid container spacing={4}>
+            <Masonry columns={{ xs: 1, md: 2 }} spacing={4}>
                 {characters.length > 0 && (
                     <Grid size={{ xs: 12, lg: 6 }} sx={gridStyle}>
                         <FlexBox sx={{ mb: "20px" }}>
@@ -246,7 +248,7 @@ function VersionHighlights() {
                         </Grid>
                     </Grid>
                 )}
-            </Grid>
+            </Masonry>
         </MainContentBox>
     );
 }
