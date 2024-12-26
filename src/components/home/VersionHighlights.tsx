@@ -93,7 +93,11 @@ function VersionHighlights() {
         .sort((a, b) => a.displayName.localeCompare(b.displayName));
     const bangboos = useAppSelector(selectBangboos)
         .filter((bangboo) => bangboo.release.version === version)
-        .sort((a, b) => a.displayName.localeCompare(b.displayName));
+        .sort(
+            (a, b) =>
+                RarityMap[b.rarity] - RarityMap[a.rarity] ||
+                a.displayName.localeCompare(b.displayName)
+        );
 
     return (
         <MainContentBox
@@ -135,6 +139,7 @@ function VersionHighlights() {
                     </Box>
                 </FlexBox>
             }
+            contentProps={{ overflowX: "clip" }}
         >
             <TextStyled variant="h5-styled" sx={{ mb: "20px" }}>
                 {updates[index].version} - <i>{updates[index].name}</i>

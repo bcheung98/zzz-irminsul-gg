@@ -14,6 +14,7 @@ interface HeaderProps {
 interface ContentProps {
     padding?: string | number;
     backgroundColor?: string;
+    overflowX?: "visible" | "hidden" | "clip" | "scroll" | "auto";
 }
 
 interface MainContentBoxProps {
@@ -36,6 +37,7 @@ function MainContentBox({
     },
     contentProps = {
         padding: "24px",
+        overflowX: "visible",
     },
 }: MainContentBoxProps) {
     const theme = useTheme();
@@ -75,7 +77,16 @@ function MainContentBox({
                     {actions && actions}
                 </Toolbar>
             </AppBar>
-            <Box sx={{ p: contentProps.padding }} component={component}>
+            <Box
+                sx={{
+                    m:
+                        contentProps.padding !== undefined
+                            ? contentProps.padding
+                            : "24px",
+                    overflowX: contentProps.overflowX,
+                }}
+                component={component}
+            >
                 {children && children}
             </Box>
         </Card>
