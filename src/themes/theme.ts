@@ -1,3 +1,4 @@
+import type {} from "@mui/lab/themeAugmentation";
 import { createTheme, getContrastRatio, SxProps } from "@mui/material";
 import { darkTheme } from "./darkTheme";
 import { lightTheme } from "./lightTheme";
