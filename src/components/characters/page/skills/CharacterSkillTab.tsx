@@ -1,4 +1,3 @@
-import React from "react";
 import parse, {
     HTMLReactParserOptions,
     Element as DOMElement,
@@ -9,6 +8,7 @@ import parse, {
 // Component imports
 import CharacterSkillScaling from "./CharacterSkillScaling";
 import CharacterCoreSkillScaling from "./CharacterCoreSkillScaling";
+import CharacterSkillLevelUpCost from "./CharacterSkillLevelUpCost";
 import Image from "custom/Image";
 import { Text, TextStyled } from "styled/StyledTypography";
 
@@ -23,6 +23,7 @@ import {
 } from "types/character";
 import { Skill } from "types/skill";
 import { Element } from "types/_common";
+import { CharacterMaterials } from "types/materials";
 
 interface CharacterSkillTabProps {
     mode: "table" | "slider";
@@ -30,15 +31,23 @@ interface CharacterSkillTabProps {
     skillData: Skill[];
     ascension: CharacterAscensionStat;
     element: Element;
+    materials: CharacterMaterials;
     colors: CharacterColors;
 }
 
 export interface CharacterSkillScalingProps {
     mode: "table" | "slider";
     scaling: string[][];
-    colors: CharacterColors;
     element: Element;
+    colors: CharacterColors;
     ascension: CharacterAscensionStat;
+}
+
+export interface CharacterSkillLevelUpProps {
+    skillKey: CharacterSkillKey;
+    element: Element;
+    colors: CharacterColors;
+    materials: CharacterMaterials;
 }
 
 function CharacterSkillTab({
@@ -47,6 +56,7 @@ function CharacterSkillTab({
     skillData,
     ascension,
     element,
+    materials,
     colors,
 }: CharacterSkillTabProps) {
     const theme = useTheme();
@@ -67,7 +77,7 @@ function CharacterSkillTab({
                     ))}
                     <Box sx={{ pt: "16px" }}>
                         {skill.scaling && (
-                            <React.Fragment>
+                            <>
                                 {skillKey !== "core" ? (
                                     <CharacterSkillScaling
                                         mode={mode}
@@ -83,11 +93,17 @@ function CharacterSkillTab({
                                         ascension={ascension}
                                     />
                                 )}
-                            </React.Fragment>
+                            </>
                         )}
                     </Box>
                 </Box>
             ))}
+            <CharacterSkillLevelUpCost
+                skillKey={skillKey}
+                element={element}
+                colors={colors}
+                materials={materials}
+            />
         </Box>
     );
 }

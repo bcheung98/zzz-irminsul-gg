@@ -27,7 +27,7 @@ function CharacterSkills({ character }: CharacterProps) {
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
 
-    const { skills, stats, colors, element } = character;
+    const { skills, stats, colors, element, materials } = character;
 
     const [tabValue, setTabValue] = React.useState(0);
     const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -108,15 +108,13 @@ function CharacterSkills({ character }: CharacterProps) {
                     <StyledTab
                         key={key}
                         icon={
-                            <React.Fragment>
-                                <Image
-                                    src={`skills/${getSkillImage(
-                                        key as CharacterSkillKey
-                                    )}`}
-                                    alt={key}
-                                    style={skillIcon(index)}
-                                />
-                            </React.Fragment>
+                            <Image
+                                src={`skills/${getSkillImage(
+                                    key as CharacterSkillKey
+                                )}`}
+                                alt={key}
+                                style={skillIcon(index)}
+                            />
                         }
                         sx={{ px: 0 }}
                     />
@@ -130,6 +128,7 @@ function CharacterSkills({ character }: CharacterProps) {
                         skillData={skills[key as CharacterSkillKey]}
                         ascension={stats.ascension}
                         element={element}
+                        materials={materials}
                         colors={colors}
                     />
                 </TabPanel>
