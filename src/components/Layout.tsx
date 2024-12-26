@@ -26,7 +26,7 @@ function Layout() {
             <Box id="back-to-top-anchor" />
             <Box sx={{ display: "flex" }}>
                 <Nav />
-                <Box sx={{ width: "100vw" }}>
+                <Box sx={{ minWidth: "50vw", width: "100vw" }}>
                     <Box
                         sx={{
                             px: "24px",
