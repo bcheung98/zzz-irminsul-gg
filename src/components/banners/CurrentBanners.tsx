@@ -36,9 +36,10 @@ function CurrentBanners() {
         isCurrentBanner(
             createDateObject({ date: banner.start, region: region }).obj,
             createDateObject({ date: banner.end, region: region }).obj
-        )
+        );
 
-    const currentCharacterBanners = characterBanners.filter(filterCurrentBanner);
+    const currentCharacterBanners =
+        characterBanners.filter(filterCurrentBanner);
     const currentWeaponBanners = weaponBanners.filter(filterCurrentBanner);
 
     const activeBanners =
@@ -89,7 +90,10 @@ function CurrentBanners() {
                                                         displayName={
                                                             item.displayName
                                                         }
-                                                        rarity={getRarity(item.name, "S")}
+                                                        rarity={getRarity(
+                                                            item.name,
+                                                            "S"
+                                                        )}
                                                         disableLink={isTBA(
                                                             item.name
                                                         )}
@@ -111,7 +115,10 @@ function CurrentBanners() {
                                                         displayName={
                                                             item.displayName
                                                         }
-                                                        rarity={getRarity(item.name, "A")}
+                                                        rarity={getRarity(
+                                                            item.name,
+                                                            "A"
+                                                        )}
                                                         disableLink={isTBA(
                                                             item.name
                                                         )}
@@ -155,7 +162,10 @@ function CurrentBanners() {
                                                     displayName={
                                                         item.displayName
                                                     }
-                                                    rarity={getRarity(item.name, "S")}
+                                                    rarity={getRarity(
+                                                        item.name,
+                                                        "S"
+                                                    )}
                                                     disableLink={isTBA(
                                                         item.name
                                                     )}
@@ -177,7 +187,10 @@ function CurrentBanners() {
                                                     displayName={
                                                         item.displayName
                                                     }
-                                                    rarity={getRarity(item.name, "A")}
+                                                    rarity={getRarity(
+                                                        item.name,
+                                                        "A"
+                                                    )}
                                                     disableLink={isTBA(
                                                         item.name
                                                     )}

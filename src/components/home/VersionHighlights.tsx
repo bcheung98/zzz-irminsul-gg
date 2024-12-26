@@ -59,8 +59,8 @@ function VersionHighlights() {
     };
 
     const gridStyle: SxProps = {
-        maxHeight: "720px", 
-        overflowY: "auto", 
+        maxHeight: "720px",
+        overflowY: "auto",
     };
 
     const iconStyle: React.CSSProperties = {
@@ -68,7 +68,7 @@ function VersionHighlights() {
         marginRight: "8px",
         backgroundColor: theme.icon.backgroundColor,
         borderRadius: "64px",
-    }
+    };
 
     const version = updates[index].version;
 
