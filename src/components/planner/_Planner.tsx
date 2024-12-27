@@ -21,7 +21,20 @@ import {
 import { selectWidth } from "reducers/settings";
 
 function Planner() {
-    document.title = `Ascension Planner ${import.meta.env.VITE_DOCUMENT_TITLE}`;
+    const documentTitle = `Ascension Planner ${
+        import.meta.env.VITE_DOCUMENT_TITLE
+    }`;
+    const documentDesc = `Tool for calculating level-up costs`;
+    document.title = documentTitle;
+    document
+        .querySelector('meta[property="og:title"]')
+        ?.setAttribute("content", documentTitle);
+    document
+        .querySelector('meta[property="description"]')
+        ?.setAttribute("content", documentDesc);
+    document
+        .querySelector('meta[property="og:description"]')
+        ?.setAttribute("content", documentDesc);
 
     const dispatch = useAppDispatch();
 

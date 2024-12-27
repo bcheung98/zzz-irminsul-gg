@@ -20,9 +20,20 @@ function DriveDiscPage() {
     );
 
     if (driveDisc) {
-        document.title = `${driveDisc.displayName} ${
+        const documentTitle = `${driveDisc.displayName} ${
             import.meta.env.VITE_DOCUMENT_TITLE
         }`;
+        const documentDesc = `2-Pieces: ${driveDisc.setEffect.twoPiece}\n4-Pieces: ${driveDisc.setEffect.fourPiece}`;
+        document.title = documentTitle;
+        document
+            .querySelector('meta[property="og:title"]')
+            ?.setAttribute("content", documentTitle);
+        document
+            .querySelector('meta[property="description"]')
+            ?.setAttribute("content", documentDesc);
+        document
+            .querySelector('meta[property="og:description"]')
+            ?.setAttribute("content", documentDesc);
 
         return (
             <Grid container spacing={3}>
