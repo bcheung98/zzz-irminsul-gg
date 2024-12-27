@@ -28,9 +28,20 @@ function CharacterPage() {
     );
 
     if (character) {
-        document.title = `${character.fullName} ${
+        const documentTitle = `${character.fullName} ${
             import.meta.env.VITE_DOCUMENT_TITLE
         }`;
+        const documentDesc = `${character.fullName} - ${character.rarity}-Rank ${character.element} ${character.specialty}`;
+        document.title = documentTitle;
+        document
+            .querySelector('meta[property="og:title"]')
+            ?.setAttribute("content", documentTitle);
+        document
+            .querySelector('meta[property="description"]')
+            ?.setAttribute("content", documentDesc);
+        document
+            .querySelector('meta[property="og:description"]')
+            ?.setAttribute("content", documentDesc);
 
         const charSplash = <CharacterImage character={character} />;
         const infoMain = <CharacterInfoMain character={character} />;

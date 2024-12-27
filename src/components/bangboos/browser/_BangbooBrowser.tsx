@@ -10,7 +10,18 @@ import { useAppSelector } from "helpers/hooks";
 import { selectBangboos } from "reducers/bangboo";
 
 function BangbooBrowser() {
-    document.title = `Bangboos ${import.meta.env.VITE_DOCUMENT_TITLE}`;
+    const documentTitle = `Bangboos ${import.meta.env.VITE_DOCUMENT_TITLE}`;
+    const documentDesc = `A list of all Zenless Zone Zero Bangboos`;
+    document.title = documentTitle;
+    document
+        .querySelector('meta[property="og:title"]')
+        ?.setAttribute("content", documentTitle);
+    document
+        .querySelector('meta[property="description"]')
+        ?.setAttribute("content", documentDesc);
+    document
+        .querySelector('meta[property="og:description"]')
+        ?.setAttribute("content", documentDesc);
 
     const bangboos = [...useAppSelector(selectBangboos)].sort((a, b) =>
         a.displayName.localeCompare(b.displayName)

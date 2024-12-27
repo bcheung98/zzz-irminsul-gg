@@ -28,7 +28,18 @@ import {
 import { isRightDrawerOpen, toggleRightDrawer } from "reducers/layout";
 
 function CharacterBrowser() {
-    document.title = `Agents ${import.meta.env.VITE_DOCUMENT_TITLE}`;
+    const documentTitle = `Agents ${import.meta.env.VITE_DOCUMENT_TITLE}`;
+    const documentDesc = `A list of all Zenless Zone Zero Agents`;
+    document.title = documentTitle;
+    document
+        .querySelector('meta[property="og:title"]')
+        ?.setAttribute("content", documentTitle);
+    document
+        .querySelector('meta[property="description"]')
+        ?.setAttribute("content", documentDesc);
+    document
+        .querySelector('meta[property="og:description"]')
+        ?.setAttribute("content", documentDesc);
 
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));

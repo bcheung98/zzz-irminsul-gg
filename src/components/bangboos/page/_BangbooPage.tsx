@@ -21,9 +21,20 @@ function BangbooPage() {
     );
 
     if (bangboo) {
-        document.title = `${bangboo.displayName} ${
+        const documentTitle = `${bangboo.displayName} ${
             import.meta.env.VITE_DOCUMENT_TITLE
         }`;
+        const documentDesc = `${bangboo.displayName} - ${bangboo.rarity}-Rank Bangboo | ${bangboo.description}`;
+        document.title = documentTitle;
+        document
+            .querySelector('meta[property="og:title"]')
+            ?.setAttribute("content", documentTitle);
+        document
+            .querySelector('meta[property="description"]')
+            ?.setAttribute("content", documentDesc);
+        document
+            .querySelector('meta[property="og:description"]')
+            ?.setAttribute("content", documentDesc);
 
         return (
             <>

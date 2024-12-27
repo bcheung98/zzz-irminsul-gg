@@ -26,7 +26,18 @@ import { isRightDrawerOpen, toggleRightDrawer } from "reducers/layout";
 import { RarityMap } from "data/common";
 
 function WeaponBrowser() {
-    document.title = `W-Engines ${import.meta.env.VITE_DOCUMENT_TITLE}`;
+    const documentTitle = `W-Engines ${import.meta.env.VITE_DOCUMENT_TITLE}`;
+    const documentDesc = `A list of all Zenless Zone Zero W-Engines`;
+    document.title = documentTitle;
+    document
+        .querySelector('meta[property="og:title"]')
+        ?.setAttribute("content", documentTitle);
+    document
+        .querySelector('meta[property="description"]')
+        ?.setAttribute("content", documentDesc);
+    document
+        .querySelector('meta[property="og:description"]')
+        ?.setAttribute("content", documentDesc);
 
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));

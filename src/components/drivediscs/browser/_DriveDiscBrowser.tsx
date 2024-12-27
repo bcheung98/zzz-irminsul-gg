@@ -10,7 +10,18 @@ import { useAppSelector } from "helpers/hooks";
 import { selectDriveDiscs } from "reducers/driveDiscs";
 
 function DriveDiscBrowser() {
-    document.title = `Drive Discs ${import.meta.env.VITE_DOCUMENT_TITLE}`;
+    const documentTitle = `Drive Discs ${import.meta.env.VITE_DOCUMENT_TITLE}`;
+    const documentDesc = `A list of all Zenless Zone Zero Drive Discs`;
+    document.title = documentTitle;
+    document
+        .querySelector('meta[property="og:title"]')
+        ?.setAttribute("content", documentTitle);
+    document
+        .querySelector('meta[property="description"]')
+        ?.setAttribute("content", documentDesc);
+    document
+        .querySelector('meta[property="og:description"]')
+        ?.setAttribute("content", documentDesc);
 
     const driveDiscs = [...useAppSelector(selectDriveDiscs)].sort((a, b) =>
         a.displayName.localeCompare(b.displayName)
