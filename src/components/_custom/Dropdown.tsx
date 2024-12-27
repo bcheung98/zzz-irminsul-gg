@@ -60,7 +60,7 @@ function Dropdown({
                 </TextStyled>
             </ButtonBase>
             <Collapse in={open} timeout="auto" unmountOnExit={unmountOnExit}>
-                <Box sx={{ p: { xs: "4px 0", md: contentPadding } }}>
+                <Box sx={{ p: { xs: "8px 0", md: contentPadding } }}>
                     {children}
                 </Box>
             </Collapse>

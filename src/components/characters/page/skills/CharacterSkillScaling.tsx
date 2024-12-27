@@ -22,7 +22,11 @@ function CharacterSkillScaling({
     const levels = 16;
 
     return (
-        <Dropdown title="Skill Scaling" iconColor={getCharacterColor("accent")}>
+        <Dropdown
+            title="Skill Scaling"
+            iconColor={getCharacterColor("accent")}
+            contentPadding={mode === "slider" ? "4px 24px" : "4px 0px"}
+        >
             <StatsTable
                 mode={mode}
                 levels={range(1, levels)}
@@ -41,8 +45,9 @@ function CharacterSkillScaling({
                     sx: {
                         width:
                             mode === "slider"
-                                ? { xs: "100%", sm: "30%" }
+                                ? { sm: "100%", md: "50%" }
                                 : "100%",
+                        maxWidth: mode === "slider" ? { lg: "500px" } : "100%",
                         mt: "8px",
                     },
                 }}
