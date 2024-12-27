@@ -1,3 +1,5 @@
+import React from "react";
+
 // Component imports
 import CharacterSelector from "./CharacterSelector";
 import WeaponSelector from "./WeaponSelector";
@@ -9,17 +11,29 @@ import { TextStyled } from "styled/StyledTypography";
 import Grid from "@mui/material/Grid2";
 
 // Helper imports
-import { useAppSelector } from "helpers/hooks";
-import { getSelectedCharacters, getSelectedWeapons } from "reducers/planner";
+import { useAppDispatch, useAppSelector } from "helpers/hooks";
+import {
+    getSelectedCharacters,
+    getSelectedWeapons,
+    setPlannerCharacters,
+    setPlannerWeapons,
+} from "reducers/planner";
 import { selectWidth } from "reducers/settings";
 
 function Planner() {
     document.title = `Ascension Planner ${import.meta.env.VITE_DOCUMENT_TITLE}`;
 
+    const dispatch = useAppDispatch();
+
     const characters = useAppSelector(getSelectedCharacters);
     const weapons = useAppSelector(getSelectedWeapons);
 
     const maxWidth = useAppSelector(selectWidth) === "wide" ? 5 : 6;
+
+    React.useEffect(() => {
+        dispatch(setPlannerCharacters([]));
+        dispatch(setPlannerWeapons([]));
+    }, []);
 
     return (
         <>
