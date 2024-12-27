@@ -25,11 +25,16 @@ import {
     List,
     Divider,
     Collapse,
+    useScrollTrigger,
+    Fade,
+    Button,
+    getContrastRatio,
 } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 // Helper imports
 import { NavProps, navStyles } from "./Nav";
@@ -101,7 +106,27 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
                             }
                         />
                     </FlexBox>
-                    <Settings />
+                    <FlexBox columnGap="32px">
+                        <ScrollTopDesktop>
+                            <Button
+                                variant="contained"
+                                startIcon={<KeyboardArrowUpIcon />}
+                                sx={{
+                                    backgroundColor: theme.palette.info.dark,
+                                    color:
+                                        getContrastRatio(
+                                            theme.palette.info.dark,
+                                            theme.text.primary
+                                        ) > 4.5
+                                            ? theme.text.primary
+                                            : theme.text.contrast,
+                                }}
+                            >
+                                Back to Top
+                            </Button>
+                        </ScrollTopDesktop>
+                        <Settings />
+                    </FlexBox>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -280,3 +305,28 @@ const Drawer = styled(MuiDrawer, {
         },
     ],
 }));
+
+function ScrollTopDesktop({ children }: { children: React.ReactNode }) {
+    const trigger = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 100,
+    });
+
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        const anchor = (
+            (event.target as HTMLDivElement).ownerDocument || document
+        ).querySelector("#back-to-top-anchor");
+
+        if (anchor) {
+            anchor.scrollIntoView({
+                block: "center",
+            });
+        }
+    };
+
+    return (
+        <Fade in={trigger}>
+            <Box onClick={handleClick}>{children}</Box>
+        </Fade>
+    );
+}
