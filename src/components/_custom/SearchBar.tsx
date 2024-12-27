@@ -54,7 +54,7 @@ function SearchBar({
                 input: {
                     ...params?.InputProps,
                     startAdornment: (
-                        <React.Fragment>
+                        <>
                             <InputAdornment
                                 position="start"
                                 sx={{ color: theme.text.primary }}
@@ -62,7 +62,7 @@ function SearchBar({
                                 {inputIcon || <SearchIcon />}
                             </InputAdornment>
                             {params?.InputProps?.startAdornment}
-                        </React.Fragment>
+                        </>
                     ),
                 },
             }}
