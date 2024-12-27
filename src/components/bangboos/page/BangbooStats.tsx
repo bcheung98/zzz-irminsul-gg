@@ -59,10 +59,10 @@ function BangbooStatsTable({ bangboo }: BangbooProps) {
             "Crit DMG",
             ...levels.map((_, index) => `${stats.critDMG[index]}%` || 0),
         ],
-        [
-            "Anomaly Mastery",
-            ...levels.map((_, index) => stats.anomalyMastery[index] || 0),
-        ],
+        // [
+        //     "Anomaly Mastery",
+        //     ...levels.map((_, index) => stats.anomalyMastery[index] || 0),
+        // ],
     ];
 
     React.useEffect(() => {
