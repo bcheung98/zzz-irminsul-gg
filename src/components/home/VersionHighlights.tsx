@@ -119,7 +119,7 @@ function VersionHighlights() {
                         label="Version"
                         onChange={handleIndexChange}
                         input={<StyledInput />}
-                        sx={{ mx: "4px" }}
+                        sx={{ mx: "4px", width: "72px" }}
                     >
                         {updates.map((version, index) => (
                             <StyledMenuItem key={index} value={index}>
