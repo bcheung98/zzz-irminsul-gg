@@ -77,7 +77,7 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
         <StyledTableRow color="secondary" hover>
             {columns.map((col, index) => (
                 <StyledTableCell key={index} sx={{ maxWidth: "275px" }}>
-                    <FlexBox columnGap="8px">
+                    <FlexBox columnGap="16px">
                         {col.img && (
                             <RouterLink
                                 to={col.href || ""}
@@ -101,27 +101,28 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
                                 />
                             </RouterLink>
                         )}
-                        {col.label && (
-                            <RouterLink
-                                to={col.href || ""}
-                                sx={{
-                                    cursor: col.href ? "pointer" : "text",
-                                    userSelect: col.href ? "pointer" : "text",
-                                }}
-                            >
+                        {col.label &&
+                            (col.href ? (
+                                <RouterLink to={col.href}>
+                                    <TextStyled
+                                        sx={combineStyles(
+                                            { textAlign: "left" },
+                                            col.labelStyle
+                                        )}
+                                    >
+                                        {col.label}
+                                    </TextStyled>
+                                </RouterLink>
+                            ) : (
                                 <TextStyled
                                     sx={combineStyles(
-                                        {
-                                            marginLeft: "8px",
-                                            textAlign: "left",
-                                        },
+                                        { textAlign: "left" },
                                         col.labelStyle
                                     )}
                                 >
                                     {col.label}
                                 </TextStyled>
-                            </RouterLink>
-                        )}
+                            ))}
                     </FlexBox>
                 </StyledTableCell>
             ))}
