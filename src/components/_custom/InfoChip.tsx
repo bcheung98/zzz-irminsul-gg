@@ -41,7 +41,7 @@ function InfoChip({
             label={
                 label ? (
                     <TextStyled
-                        sx={{ color: theme.appbar.color, ml: "-8px" }}
+                        sx={{ color: theme.appbar.color, ml: src ? "-8px" : 0 }}
                         variant={textVariant}
                     >
                         {label}

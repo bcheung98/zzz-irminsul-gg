@@ -134,7 +134,6 @@ function CharacterFilters({
                 >
                     Reset
                 </Button>
-
                 <IconButton
                     onClick={handleClose}
                     sx={{ color: theme.appbar.color }}
