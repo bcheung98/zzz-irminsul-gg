@@ -5,7 +5,7 @@ import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
 // MUI imports
-import { useTheme, Box } from "@mui/material";
+import { useTheme, Box, Card } from "@mui/material";
 
 // Type imports
 import { CharacterProps } from "types/character";
@@ -16,23 +16,21 @@ function CharacterInfoMain({ character }: CharacterProps) {
     const { fullName, rarity, element, specialty } = character;
 
     return (
-        <Box
+        <Card
             sx={{
                 p: "16px",
-                mb: "16px",
-                width: "100%",
-                border: theme.mainContentBox.border,
-                borderRadius: theme.mainContentBox.borderRadius,
                 backgroundColor: theme.background(2),
             }}
         >
-            <FlexBox>
+            <FlexBox
+                sx={{ flexWrap: "wrap", columnGap: "16px", rowGap: "8px" }}
+            >
                 <Image
                     src={`ranks/character/${rarity}`}
                     alt={rarity}
                     style={{ width: "56px" }}
                 />
-                <Box sx={{ ml: "16px" }}>
+                <Box>
                     <TextStyled
                         variant="h4-styled"
                         className="page-name"
@@ -54,7 +52,7 @@ function CharacterInfoMain({ character }: CharacterProps) {
                     </FlexBox>
                 </Box>
             </FlexBox>
-        </Box>
+        </Card>
     );
 }
 

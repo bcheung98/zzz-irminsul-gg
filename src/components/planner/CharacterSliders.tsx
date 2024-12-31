@@ -105,7 +105,7 @@ function CharacterSliders({
     );
 
     return (
-        <Grid container rowSpacing={1} columnSpacing={6}>
+        <Grid container rowSpacing={1} columnSpacing={mode === "view" ? 2 : 6}>
             <Grid size={12}>{Level}</Grid>
             {[Basic, Dodge, Assist, Special, Chain, Core].map(
                 (slider, index) => (

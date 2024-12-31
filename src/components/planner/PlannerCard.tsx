@@ -12,7 +12,14 @@ import { TextStyled } from "styled/StyledTypography";
 import { StyledTooltip } from "styled/StyledTooltip";
 
 // MUI imports
-import { useTheme, Divider, IconButton, Stack, Button } from "@mui/material";
+import {
+    useTheme,
+    Divider,
+    IconButton,
+    Stack,
+    Button,
+    Box,
+} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import DoneIcon from "@mui/icons-material/Done";
 import EditIcon from "@mui/icons-material/Edit";
@@ -206,11 +213,13 @@ function PlannerCard({ data }: PlannerCardProps) {
             >
                 {mode !== "edit" ? "Edit" : "Done"}
             </Button>
-            {"element" in data ? (
-                <CharacterSliders character={data} mode={mode} />
-            ) : (
-                <WeaponSliders weapon={data} mode={mode} />
-            )}
+            <Box sx={{ mx: { xs: "0px", lg: "8px" } }}>
+                {"element" in data ? (
+                    <CharacterSliders character={data} mode={mode} />
+                ) : (
+                    <WeaponSliders weapon={data} mode={mode} />
+                )}
+            </Box>
         </MainContentBox>
     );
 }

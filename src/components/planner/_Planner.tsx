@@ -41,7 +41,9 @@ function Planner() {
     const characters = useAppSelector(getSelectedCharacters);
     const weapons = useAppSelector(getSelectedWeapons);
 
-    const maxWidth = useAppSelector(selectWidth) === "wide" ? 5 : 6;
+    const wideMode = useAppSelector(selectWidth) === "wide";
+    const maxWidthLG = wideMode ? 6 : 8;
+    const maxWidthXL = wideMode ? 5 : 6;
 
     React.useEffect(() => {
         dispatch(setPlannerCharacters([]));
@@ -57,23 +59,30 @@ function Planner() {
                 Ascension Planner
             </TextStyled>
             <Grid container spacing={4}>
-                <Grid size={{ xs: 12, lg: 6, xl: maxWidth }}>
+                <Grid size={{ xs: 12, lg: 6, xl: maxWidthXL }}>
                     <CharacterSelector />
                 </Grid>
-                <Grid size={{ xs: 12, lg: 6, xl: maxWidth }}>
+                <Grid size={{ xs: 12, lg: 6, xl: maxWidthXL }}>
                     <WeaponSelector />
                 </Grid>
             </Grid>
             <Grid container spacing={4} sx={{ my: "24px" }}>
-                <Grid size={{ xs: 12, xl: maxWidth * 2 }}>
+                <Grid size={{ xs: 12, xl: maxWidthXL * 2 }}>
                     <TotalCost />
                 </Grid>
             </Grid>
-            <Grid container spacing={4}>
+            <Grid
+                container
+                spacing={4}
+                justifyContent={{
+                    xs: wideMode ? "left" : "center",
+                    xl: "left",
+                }}
+            >
                 {[...characters, ...weapons].map((item) => (
                     <Grid
                         key={item.name}
-                        size={{ xs: 12, lg: 6, xl: maxWidth }}
+                        size={{ xs: 12, lg: maxWidthLG, xl: maxWidthXL }}
                     >
                         <PlannerCard data={item} />
                     </Grid>

@@ -166,11 +166,7 @@ function LevelSlider({
                             textTransform: "capitalize",
                         }}
                     >
-                        {dispatchProps.type === "level"
-                            ? `${
-                                  variant === "character" ? "Agent" : "W-Engine"
-                              } Level: `
-                            : "Lv. "}
+                        {dispatchProps.type === "level" && `Level: `}
                         {selected
                             ? `${levels[sliderValue[0] - 1]} → ${
                                   levels[sliderValue[1] - 1]
@@ -181,7 +177,7 @@ function LevelSlider({
             </Stack>
             <Grid
                 container
-                spacing={3.5}
+                columnSpacing={3.5}
                 sx={{
                     display: mode === "edit" ? "flex" : "none",
                     opacity: selected ? 1 : 0.35,
