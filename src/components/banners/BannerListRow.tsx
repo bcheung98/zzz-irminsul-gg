@@ -63,7 +63,7 @@ function BannerListRow({
                     {fiveStars.map((item, index: number) => (
                         <InfoCard
                             key={index}
-                            id={`${item.displayName}-${subVersion}`.toLowerCase()}
+                            id={`${item.displayName}-${subVersion}-${index}`}
                             variant="icon"
                             type={type}
                             name={item.name}
@@ -77,7 +77,7 @@ function BannerListRow({
                     {fourStars.map((item, index: number) => (
                         <InfoCard
                             key={index}
-                            id={`${item.displayName}-${subVersion}`.toLowerCase()}
+                            id={`${item.displayName}-${subVersion}-${index}`}
                             variant="icon"
                             type={type}
                             name={item.name}
