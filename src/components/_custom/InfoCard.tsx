@@ -1,4 +1,4 @@
-import React from "react";
+import { CSSProperties } from "react";
 
 // Component imports
 import Image from "./Image";
@@ -7,7 +7,7 @@ import { StyledTooltip } from "styled/StyledTooltip";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, SxProps, Box, Card } from "@mui/material";
+import { useTheme, SxProps, Box, Card, Skeleton } from "@mui/material";
 
 // Helper imports
 import { getBackgroundColor, getRarityColor } from "helpers/rarityColors";
@@ -32,6 +32,7 @@ interface InfoCardProps {
     disableTooltip?: boolean;
     disableLink?: boolean;
     disableZoomOnHover?: boolean;
+    loading?: boolean;
 }
 
 function InfoCard({
@@ -47,6 +48,7 @@ function InfoCard({
     disableTooltip = showName,
     disableLink = false,
     disableZoomOnHover = false,
+    loading = false,
 }: InfoCardProps) {
     const theme = useTheme();
 
@@ -132,7 +134,7 @@ function InfoCard({
         borderRadius: "4px",
     };
 
-    const mainImageStyle: React.CSSProperties = {
+    const mainImageStyle: CSSProperties = {
         width: imgSize,
         height: variant === "card" ? "auto" : imgSize,
         padding: variant === "card" && type !== "character" ? "16px" : "0px",
@@ -143,7 +145,7 @@ function InfoCard({
                 : "none",
     };
 
-    const smallIconStyle: React.CSSProperties = {
+    const smallIconStyle: CSSProperties = {
         boxSizing: "border-box",
         width: `calc(${size} / 10 + 14px)`,
         height: `calc(${size} / 10 + 14px)`,
@@ -157,97 +159,101 @@ function InfoCard({
 
     return (
         <Card sx={rootStyle}>
-            <StyledTooltip
-                title={!disableTooltip ? displayName : ""}
-                arrow
-                placement="top"
-            >
-                <Box
-                    sx={{ background: backgroundColor() }}
-                    onMouseEnter={() => handleHover("enter")}
-                    onMouseLeave={() => handleHover("leave")}
+            {!loading ? (
+                <StyledTooltip
+                    title={!disableTooltip ? displayName : ""}
+                    arrow
+                    placement="top"
                 >
-                    {info && (
-                        <Box
-                            sx={{
-                                display: "grid",
-                                position: "absolute",
-                                zIndex: 5,
-                                top: "10px",
-                                left: "10px",
-                            }}
-                        >
-                            {info.element !== undefined && (
-                                <Image
-                                    src={`elements/${info.element}`}
-                                    alt={info.element}
-                                    style={smallIconStyle}
-                                    tooltip={info.element}
-                                />
-                            )}
-                            {info.element && info.specialty && (
-                                <Box sx={{ my: "4px" }} />
-                            )}
-                            {info.specialty !== undefined && (
-                                <Image
-                                    src={`specialties/${info.specialty}`}
-                                    alt={info.specialty}
-                                    style={smallIconStyle}
-                                    tooltip={info.specialty}
-                                />
-                            )}
-                        </Box>
-                    )}
-                    <RouterLink to={href}>
-                        <Image
-                            src={imgSrc}
-                            alt={name}
-                            id={`${id}-img`}
-                            style={mainImageStyle}
-                        />
-                    </RouterLink>
                     <Box
-                        sx={{
-                            position: "relative",
-                            mt:
-                                variant === "icon"
-                                    ? "0px"
-                                    : type === "character"
-                                    ? "0px"
-                                    : "24px",
-                            borderBottom:
-                                variant === "icon"
-                                    ? "none"
-                                    : `calc(${size} / 25) solid ${getRarityColor(
-                                          rarity
-                                      )}`,
-                        }}
+                        sx={{ background: backgroundColor() }}
+                        onMouseEnter={() => handleHover("enter")}
+                        onMouseLeave={() => handleHover("leave")}
                     >
-                        <RouterLink
-                            to={href}
-                            sx={{
-                                position: "absolute",
-                                bottom: "50%",
-                                left: "50%",
-                                transform: "translate(-50%, 0%)",
-                                width: "90%",
-                            }}
-                        >
-                            <TextStyled
+                        {info && (
+                            <Box
                                 sx={{
-                                    textShadow:
-                                        "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
-                                    textAlign: "center",
-                                    mb: "4px",
-                                    color: "white",
+                                    display: "grid",
+                                    position: "absolute",
+                                    zIndex: 5,
+                                    top: "10px",
+                                    left: "10px",
                                 }}
                             >
-                                {showName && displayName}
-                            </TextStyled>
+                                {info.element !== undefined && (
+                                    <Image
+                                        src={`elements/${info.element}`}
+                                        alt={info.element}
+                                        style={smallIconStyle}
+                                        tooltip={info.element}
+                                    />
+                                )}
+                                {info.element && info.specialty && (
+                                    <Box sx={{ my: "4px" }} />
+                                )}
+                                {info.specialty !== undefined && (
+                                    <Image
+                                        src={`specialties/${info.specialty}`}
+                                        alt={info.specialty}
+                                        style={smallIconStyle}
+                                        tooltip={info.specialty}
+                                    />
+                                )}
+                            </Box>
+                        )}
+                        <RouterLink to={href}>
+                            <Image
+                                src={imgSrc}
+                                alt={name}
+                                id={`${id}-img`}
+                                style={mainImageStyle}
+                            />
                         </RouterLink>
+                        <Box
+                            sx={{
+                                position: "relative",
+                                mt:
+                                    variant === "icon"
+                                        ? "0px"
+                                        : type === "character"
+                                        ? "0px"
+                                        : "24px",
+                                borderBottom:
+                                    variant === "icon"
+                                        ? "none"
+                                        : `calc(${size} / 25) solid ${getRarityColor(
+                                              rarity
+                                          )}`,
+                            }}
+                        >
+                            <RouterLink
+                                to={href}
+                                sx={{
+                                    position: "absolute",
+                                    bottom: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, 0%)",
+                                    width: "90%",
+                                }}
+                            >
+                                <TextStyled
+                                    sx={{
+                                        textShadow:
+                                            "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
+                                        textAlign: "center",
+                                        mb: "4px",
+                                        color: "white",
+                                    }}
+                                >
+                                    {showName && displayName}
+                                </TextStyled>
+                            </RouterLink>
+                        </Box>
                     </Box>
-                </Box>
-            </StyledTooltip>
+                </StyledTooltip>
+            ) : (
+                <Skeleton variant="rounded" width={size} height={size} />
+            )}
         </Card>
     );
 }
