@@ -18,9 +18,11 @@ import { isTBA } from "helpers/utils";
 import { BannerRow } from "./BannerList";
 
 function BannerListRow({
+    loading,
     type,
     row,
 }: {
+    loading: boolean;
     type: "character" | "weapon";
     row: BannerRow;
 }) {
@@ -69,6 +71,7 @@ function BannerListRow({
                             rarity={!isTBA(item.name) ? "S" : "B"}
                             disableLink={isTBA(item.name)}
                             disableZoomOnHover={isTBA(item.name)}
+                            loading={loading}
                         />
                     ))}
                     {fourStars.map((item, index: number) => (
@@ -82,6 +85,7 @@ function BannerListRow({
                             rarity={!isTBA(item.name) ? "A" : "B"}
                             disableLink={isTBA(item.name)}
                             disableZoomOnHover={isTBA(item.name)}
+                            loading={loading}
                         />
                     ))}
                 </Grid>

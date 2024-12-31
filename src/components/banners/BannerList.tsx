@@ -28,6 +28,7 @@ import {
 import HelpIcon from "@mui/icons-material/Help";
 
 // Helper imports
+import store from "rtk/store";
 import { useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
 import { selectWeapons } from "reducers/weapon";
@@ -52,6 +53,9 @@ function BannerList({ type }: BannerListProps) {
             ? useAppSelector(selectCharacterBanners)
             : useAppSelector(selectWeaponBanners);
 
+    const characters = useAppSelector(selectCharacters);
+    const weapons = useAppSelector(selectWeapons);
+
     const [rows, setRows] = React.useState<BannerRow[]>([]);
 
     const [values, setValue] = React.useState<BannerOption[]>([]);
@@ -74,13 +78,15 @@ function BannerList({ type }: BannerListProps) {
         setSelected(!selected);
     };
 
-    React.useEffect(() => {
-        setRows(createBannerRows(banners, values, selected));
-    }, [banners, values, selected]);
-
     const headColumns: HeadColumn[] = [{ id: "subVersion", label: "Version" }];
 
     const smallIconStyle = { width: "20px", height: "20px" };
+
+    React.useEffect(() => {}, [characters, weapons]);
+
+    React.useEffect(() => {
+        setRows(createBannerRows(banners, values, selected));
+    }, [banners, values, selected]);
 
     return (
         <>
@@ -275,6 +281,9 @@ function BannerList({ type }: BannerListProps) {
                                 <BannerListRow
                                     key={index}
                                     type={type}
+                                    loading={
+                                        [...characters, ...weapons].length === 0
+                                    }
                                     row={row as unknown as BannerRow}
                                 />
                             ))}
@@ -305,10 +314,12 @@ function createOptions(banners: Banner[], type: "character" | "weapon") {
                 .sort((a, b) => a.localeCompare(b))
         ),
     ];
+    const characters = store.getState().characters.characters;
+    const weapons = store.getState().weapons.weapons;
     return options
         .map((option) => {
             if (type === "character") {
-                const character = useAppSelector(selectCharacters).find(
+                const character = characters.find(
                     (char) => char.name === option
                 );
                 return {
@@ -319,9 +330,7 @@ function createOptions(banners: Banner[], type: "character" | "weapon") {
                     specialty: character?.specialty,
                 } as BannerOption;
             } else {
-                const weapon = useAppSelector(selectWeapons).find(
-                    (wep) => wep.name === option
-                );
+                const weapon = weapons.find((wep) => wep.name === option);
                 return {
                     name: weapon?.name || "TBA",
                     displayName: weapon?.displayName || "TBA",
