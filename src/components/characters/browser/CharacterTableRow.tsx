@@ -78,16 +78,22 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
             {columns.map((col, index) => (
                 <StyledTableCell key={index} sx={{ maxWidth: "275px" }}>
                     <FlexBox columnGap="16px">
-                        {col.img && (
-                            <RouterLink
-                                to={col.href || ""}
-                                sx={{
-                                    cursor: col.href ? "pointer" : "default",
-                                    userSelect: col.href
-                                        ? "pointer"
-                                        : "default",
-                                }}
-                            >
+                        {col.img &&
+                            (col.href ? (
+                                <RouterLink to={col.href}>
+                                    <Image
+                                        src={col.img}
+                                        alt={col.label}
+                                        style={combineStyles(
+                                            {
+                                                width: "32px",
+                                                height: "32px",
+                                            },
+                                            col.imgStyle
+                                        )}
+                                    />
+                                </RouterLink>
+                            ) : (
                                 <Image
                                     src={col.img}
                                     alt={col.label}
@@ -99,8 +105,7 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
                                         col.imgStyle
                                     )}
                                 />
-                            </RouterLink>
-                        )}
+                            ))}
                         {col.label &&
                             (col.href ? (
                                 <RouterLink to={col.href}>

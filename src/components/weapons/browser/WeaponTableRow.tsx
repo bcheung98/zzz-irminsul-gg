@@ -100,16 +100,22 @@ function WeaponTableRow({ row }: { row: WeaponTableRowProps }) {
             {columns.map((col, index) => (
                 <StyledTableCell key={index}>
                     <FlexBox columnGap="16px">
-                        {col.img && (
-                            <RouterLink
-                                to={col.href || ""}
-                                sx={{
-                                    cursor: col.href ? "pointer" : "default",
-                                    userSelect: col.href
-                                        ? "pointer"
-                                        : "default",
-                                }}
-                            >
+                        {col.img &&
+                            (col.href ? (
+                                <RouterLink to={col.href}>
+                                    <Image
+                                        src={col.img}
+                                        alt={col.label}
+                                        style={combineStyles(
+                                            {
+                                                width: "32px",
+                                                height: "32px",
+                                            },
+                                            col.imgStyle
+                                        )}
+                                    />
+                                </RouterLink>
+                            ) : (
                                 <Image
                                     src={col.img}
                                     alt={col.label}
@@ -121,8 +127,7 @@ function WeaponTableRow({ row }: { row: WeaponTableRowProps }) {
                                         col.imgStyle
                                     )}
                                 />
-                            </RouterLink>
-                        )}
+                            ))}
                         {col.label &&
                             (col.href ? (
                                 <RouterLink to={col.href}>
