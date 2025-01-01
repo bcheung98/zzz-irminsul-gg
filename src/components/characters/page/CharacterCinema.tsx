@@ -53,7 +53,7 @@ function CharacterCinema({ character }: CharacterProps) {
                 {Object.keys(cinema).map((key, index) => (
                     <Grid
                         key={key}
-                        size={{ xs: 12, sm: 6, md: 4 }}
+                        size={{ xs: 12, md: 6 }}
                         sx={{
                             p: 2,
                             backgroundColor: theme.background(1, "light"),
