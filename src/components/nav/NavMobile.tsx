@@ -59,7 +59,7 @@ function NavMobile({ navItems, linkItems }: NavProps) {
                 </Toolbar>
             </AppBar>
             <SwipeableDrawer
-                anchor="top"
+                anchor="left"
                 open={drawerOpen}
                 onClose={toggleDrawer(false)}
                 onOpen={toggleDrawer(true)}
@@ -67,7 +67,7 @@ function NavMobile({ navItems, linkItems }: NavProps) {
                     [`& .MuiDrawer-paper`]: {
                         backgroundColor: theme.appbar.backgroundColor,
                         borderBottom: `1px solid ${theme.border.color.primary}`,
-                        height: "100%",
+                        width: "100%",
                         overflowX: "hidden",
                     },
                 }}
@@ -103,7 +103,9 @@ function NavMobile({ navItems, linkItems }: NavProps) {
                                     alt={item.text}
                                     style={styles.navItem()}
                                 />
-                                <TextStyled sx={styles.listItemText(true, item.link)}>
+                                <TextStyled
+                                    sx={styles.listItemText(true, item.link)}
+                                >
                                     {item.text}
                                 </TextStyled>
                             </ButtonBase>
@@ -113,7 +115,7 @@ function NavMobile({ navItems, linkItems }: NavProps) {
                 <Divider variant="middle" />
                 <TextStyled
                     variant="h6-styled"
-                    sx={{ color: "white", ml: "20px", mt: "16px" }}
+                    sx={{ color: theme.appbar.color, ml: "20px", mt: "16px" }}
                 >
                     Other Games
                 </TextStyled>
