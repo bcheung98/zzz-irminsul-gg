@@ -9,7 +9,15 @@ import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
 // MUI imports
-import { useTheme, Box, Divider, IconButton, Dialog } from "@mui/material";
+import {
+    useTheme,
+    Box,
+    Divider,
+    Card,
+    Stack,
+    IconButton,
+    Dialog,
+} from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -31,42 +39,44 @@ function WeaponInfo({ weapon }: WeaponProps) {
     };
 
     return (
-        <Box
+        <Card
             sx={{
                 p: "16px",
-                mb: "16px",
-                width: "100%",
-                border: theme.mainContentBox.border,
-                borderRadius: theme.mainContentBox.borderRadius,
                 backgroundColor: theme.background(2),
             }}
         >
-            <FlexBox>
-                <Image
-                    src={`ranks/item/${rarity}`}
-                    alt={rarity}
-                    style={{ width: "64px" }}
-                />
-                <Box sx={{ ml: "16px" }}>
-                    <TextStyled variant="h4-styled" sx={{ mb: "8px" }}>
-                        {displayName}
-                    </TextStyled>
-                    <InfoChip
-                        color="tertiary"
-                        src={`specialties/${specialty}`}
-                        label={specialty}
+            <Stack spacing={2} divider={<Divider />}>
+                <FlexBox
+                    sx={{ flexWrap: "wrap", columnGap: "16px", rowGap: "8px" }}
+                >
+                    <Image
+                        src={`ranks/item/${rarity}`}
+                        alt={rarity}
+                        style={{ width: "64px" }}
                     />
-                </Box>
-            </FlexBox>
-            <Divider sx={{ my: "16px" }} />
-            <FlexBox>
-                <IconButton disableRipple onClick={handleClickOpen}>
-                    <InfoOutlinedIcon />
-                </IconButton>
-                <TextStyled sx={{ fontStyle: "italic" }}>
-                    {parse(shortDescription)}
-                </TextStyled>
-            </FlexBox>
+                    <Box>
+                        <TextStyled variant="h4-styled" sx={{ mb: "8px" }}>
+                            {displayName}
+                        </TextStyled>
+                        <InfoChip
+                            color="tertiary"
+                            src={`specialties/${specialty}`}
+                            label={specialty}
+                        />
+                    </Box>
+                </FlexBox>
+                <FlexBox sx={{ alignItems: "center" }}>
+                    <IconButton disableRipple onClick={handleClickOpen}>
+                        <InfoOutlinedIcon />
+                    </IconButton>
+                    <TextStyled
+                        variant="subtitle1-styled"
+                        sx={{ fontStyle: "italic" }}
+                    >
+                        {parse(shortDescription)}
+                    </TextStyled>
+                </FlexBox>
+            </Stack>
             <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
                 <Box sx={{ overflowY: "auto", scrollbarWidth: "thin" }}>
                     <MainContentBox
@@ -81,11 +91,13 @@ function WeaponInfo({ weapon }: WeaponProps) {
                             </IconButton>
                         }
                     >
-                        <TextStyled>{parse(description)}</TextStyled>
+                        <TextStyled component="span">
+                            {parse(description)}
+                        </TextStyled>
                     </MainContentBox>
                 </Box>
             </Dialog>
-        </Box>
+        </Card>
     );
 }
 

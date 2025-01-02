@@ -4,7 +4,7 @@ import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 
 // MUI imports
-import { useTheme, Box, Divider } from "@mui/material";
+import { useTheme, Divider, Card, Stack } from "@mui/material";
 
 // Type imports
 import { BangbooProps } from "types/bangboo";
@@ -15,29 +15,28 @@ function BangbooInfo({ bangboo }: BangbooProps) {
     const { displayName, rarity, description } = bangboo;
 
     return (
-        <Box
+        <Card
             sx={{
                 p: "16px",
-                mb: "16px",
-                width: "100%",
-                border: theme.mainContentBox.border,
-                borderRadius: theme.mainContentBox.borderRadius,
                 backgroundColor: theme.background(2),
             }}
         >
-            <FlexBox>
-                <Image
-                    src={`ranks/bangboo/${rarity}`}
-                    alt={rarity}
-                    style={{ width: "48px" }}
-                />
-                <TextStyled variant="h4-styled" sx={{ ml: "4px" }}>
-                    {displayName}
+            <Stack spacing={2} divider={<Divider />}>
+                <FlexBox
+                    sx={{ flexWrap: "wrap", columnGap: "16px", rowGap: "8px" }}
+                >
+                    <Image
+                        src={`ranks/bangboo/${rarity}`}
+                        alt={rarity}
+                        style={{ width: "48px" }}
+                    />
+                    <TextStyled variant="h4-styled">{displayName}</TextStyled>
+                </FlexBox>
+                <TextStyled variant="subtitle1-styled" sx={{ fontStyle: "italic" }}>
+                    {description}
                 </TextStyled>
-            </FlexBox>
-            <Divider sx={{ my: "16px" }} />
-            <TextStyled sx={{ fontStyle: "italic" }}>{description}</TextStyled>
-        </Box>
+            </Stack>
+        </Card>
     );
 }
 

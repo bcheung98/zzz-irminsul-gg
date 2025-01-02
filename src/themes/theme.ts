@@ -263,6 +263,31 @@ export function getTheme(name: string) {
                     ),
                 },
             },
+            subtitle1: {
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.subtitle1.xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.subtitle1.sm
+                    ),
+                },
+            },
+            "subtitle1-styled": {
+                ...theme.typography.subtitle1,
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["subtitle1-styled"].xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["subtitle1-styled"].sm
+                    ),
+                },
+            },
             body2: {
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
@@ -285,6 +310,31 @@ export function getTheme(name: string) {
                 [theme.breakpoints.up("sm")]: {
                     fontSize: theme.typography.pxToRem(
                         theme.font.sizes["body2-styled"].sm
+                    ),
+                },
+            },
+            subtitle2: {
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.subtitle2.xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.subtitle2.sm
+                    ),
+                },
+            },
+            "subtitle2-styled": {
+                ...theme.typography.subtitle2,
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["subtitle2-styled"].xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes["subtitle2-styled"].sm
                     ),
                 },
             },

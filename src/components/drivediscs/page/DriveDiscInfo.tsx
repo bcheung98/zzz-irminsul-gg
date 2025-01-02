@@ -2,7 +2,7 @@
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, Box, Divider } from "@mui/material";
+import { useTheme, Card, Stack, Divider } from "@mui/material";
 
 // Type imports
 import { DriveDiscProps } from "types/driveDisc";
@@ -13,22 +13,24 @@ function DriveDiscInfo({ disc }: DriveDiscProps) {
     const { displayName, description } = disc;
 
     return (
-        <Box
+        <Card
             sx={{
                 p: "16px",
-                mb: "16px",
-                width: "100%",
-                border: theme.mainContentBox.border,
-                borderRadius: theme.mainContentBox.borderRadius,
                 backgroundColor: theme.background(2),
             }}
         >
-            <TextStyled variant="h4-styled" sx={{ mb: "4px" }}>
-                {displayName}
-            </TextStyled>
-            <Divider sx={{ my: "16px" }} />
-            <TextStyled sx={{ fontStyle: "italic" }}>{description}</TextStyled>
-        </Box>
+            <Stack spacing={2} divider={<Divider />}>
+                <TextStyled variant="h4-styled" sx={{ mb: "4px" }}>
+                    {displayName}
+                </TextStyled>
+                <TextStyled
+                    variant="subtitle1-styled"
+                    sx={{ fontStyle: "italic" }}
+                >
+                    {description}
+                </TextStyled>
+            </Stack>
+        </Card>
     );
 }
 

@@ -8,6 +8,7 @@ import BangbooSkills from "./skills/BangbooSkills";
 import PageNotFound from "components/PageNotFound";
 
 // MUI Imports
+import { Stack } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 // Helper imports
@@ -37,18 +38,20 @@ function BangbooPage() {
             ?.setAttribute("content", documentDesc);
 
         return (
-            <>
-                <Grid container spacing={3} sx={{ mb: "16px" }}>
+            <Stack spacing={2}>
+                <Grid container spacing={3}>
                     <Grid size={{ xs: 12, sm: "auto" }}>
                         <BangbooImage bangboo={bangboo} />
                     </Grid>
                     <Grid size="grow">
-                        <BangbooInfo bangboo={bangboo} />
-                        <BangbooStats bangboo={bangboo} />
+                        <Stack spacing={2}>
+                            <BangbooInfo bangboo={bangboo} />
+                            <BangbooStats bangboo={bangboo} />
+                        </Stack>
                     </Grid>
                 </Grid>
                 <BangbooSkills bangboo={bangboo} />
-            </>
+            </Stack>
         );
     } else {
         return <PageNotFound />;

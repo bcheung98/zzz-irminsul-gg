@@ -80,9 +80,17 @@ export const zzzThemeData = {
                 xs: 12,
                 sm: 14,
             },
+            "subtitle1-styled": {
+                xs: 11,
+                sm: 13,
+            },
             "body2-styled": {
                 xs: 10,
                 sm: 12,
+            },
+            "subtitle2-styled": {
+                xs: 9,
+                sm: 11,
             },
             h4: {
                 xs: 26,
@@ -100,9 +108,17 @@ export const zzzThemeData = {
                 xs: 14,
                 sm: 16,
             },
+            subtitle1: {
+                xs: 13,
+                sm: 15,
+            },
             body2: {
                 xs: 12,
                 sm: 14,
+            },
+            subtitle2: {
+                xs: 11,
+                sm: 13,
             },
         },
     },

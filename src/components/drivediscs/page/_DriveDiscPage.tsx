@@ -7,6 +7,7 @@ import DriveDiscEffect from "./DriveDiscEffect";
 import PageNotFound from "components/PageNotFound";
 
 // MUI Imports
+import { Stack } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
 // Helper imports
@@ -41,8 +42,10 @@ function DriveDiscPage() {
                     <DriveDiscImage disc={driveDisc} />
                 </Grid>
                 <Grid size="grow">
-                    <DriveDiscInfo disc={driveDisc} />
-                    <DriveDiscEffect disc={driveDisc} />
+                    <Stack spacing={2}>
+                        <DriveDiscInfo disc={driveDisc} />
+                        <DriveDiscEffect disc={driveDisc} />
+                    </Stack>
                 </Grid>
             </Grid>
         );
