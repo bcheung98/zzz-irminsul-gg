@@ -20,6 +20,10 @@ import {
 } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
+// Helper imports
+import { useAppSelector } from "helpers/hooks";
+import { selectWidth } from "reducers/settings";
+
 const bottomText = (
     <>
         IRMINSUL.GG is not affiliated with HoYoverse.
@@ -32,6 +36,8 @@ const githubURL = "project-phaethon";
 
 function NavBottom() {
     const theme = useTheme();
+
+    const width = useAppSelector(selectWidth);
 
     const textColor =
         getContrastRatio(theme.background(0), theme.text.primary) > 4.5
@@ -59,6 +65,11 @@ function NavBottom() {
                     flexWrap: "wrap",
                     gap: "8px",
                     py: "8px",
+                    width: {
+                        xs: "100%",
+                        lg: width === "standard" ? "75%" : "100%",
+                    },
+                    mx: "auto",
                 }}
             >
                 <TextStyled variant="body2-styled" sx={{ color: textColor }}>
