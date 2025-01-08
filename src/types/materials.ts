@@ -1,3 +1,4 @@
+import { NestedKeyOf } from "./_common";
 import {
     characterXPMaterials,
     weaponXPMaterials,
@@ -13,37 +14,34 @@ import { weaponAscensionMaterials } from "data/materials/weaponAscensionMaterial
 export type CharacterXPMaterial = keyof typeof characterXPMaterials;
 export type WeaponXPMaterial = keyof typeof weaponXPMaterials;
 
-type CharacterSkillMaterialType = typeof characterSkillMaterials;
-export type CharacterSkillMaterial =
-    | keyof CharacterSkillMaterialType
-    | keyof CharacterSkillMaterialType["Physical"]
-    | keyof CharacterSkillMaterialType["Fire"]
-    | keyof CharacterSkillMaterialType["Ice"]
-    | keyof CharacterSkillMaterialType["Electric"]
-    | keyof CharacterSkillMaterialType["Ether"];
+export type CharacterSkillMaterialKeys = keyof typeof characterSkillMaterials;
+export type CharacterSkillMaterial = NestedKeyOf<
+    typeof characterSkillMaterials
+>;
 
-type CharacterAscensionMaterialType = typeof characterAscensionMaterials;
-export type CharacterAscensionMaterial =
-    | keyof CharacterAscensionMaterialType
-    | keyof CharacterAscensionMaterialType["Attack"]
-    | keyof CharacterAscensionMaterialType["Stun"]
-    | keyof CharacterAscensionMaterialType["Anomaly"]
-    | keyof CharacterAscensionMaterialType["Defense"]
-    | keyof CharacterAscensionMaterialType["Support"];
+export type CharacterAscensionMaterialKeys =
+    keyof typeof characterAscensionMaterials;
+export type CharacterAscensionMaterial = NestedKeyOf<
+    typeof characterAscensionMaterials
+>;
 
 export type ExpertChallengeMaterial = keyof typeof expertChallengeMaterials;
 export type NotoriousHuntMaterial = keyof typeof notoroiusHuntMaterials;
 
-export interface CharacterMaterials {
-    bossMat: ExpertChallengeMaterial;
-    weeklyBossMat: NotoriousHuntMaterial;
+export interface Materials {
+    skillMat?: CharacterSkillMaterialKeys;
+    ascensionMat?: CharacterAscensionMaterialKeys;
+    bossMat?: ExpertChallengeMaterial;
+    weeklyBossMat?: NotoriousHuntMaterial;
 }
 
-type WeaponAscensionMaterialType = typeof weaponAscensionMaterials;
-export type WeaponAscensionMaterial =
-    | keyof WeaponAscensionMaterialType
-    | keyof WeaponAscensionMaterialType["Attack"]
-    | keyof WeaponAscensionMaterialType["Stun"]
-    | keyof WeaponAscensionMaterialType["Anomaly"]
-    | keyof WeaponAscensionMaterialType["Defense"]
-    | keyof WeaponAscensionMaterialType["Support"];
+export type CharacterMaterials = Required<Materials>;
+
+export type WeaponAscensionMaterialKeys = keyof typeof weaponAscensionMaterials;
+export type WeaponAscensionMaterial = NestedKeyOf<
+    typeof weaponAscensionMaterials
+>;
+
+export interface WeaponMaterials {
+    ascensionMat: WeaponAscensionMaterial;
+}
