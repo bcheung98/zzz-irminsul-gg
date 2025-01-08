@@ -9,7 +9,8 @@ export interface DriveDiscState {
     driveDiscs: DriveDisc[];
 }
 
-const storedDriveDiscs = localStorage.getItem("driveDiscs") || "null";
+const storedDriveDiscs = localStorage.getItem("data/driveDiscs") || "null";
+localStorage.removeItem("driveDiscs");
 
 const initialState: DriveDiscState = {
     status: "idle",
@@ -46,7 +47,7 @@ listenerMiddleware.startListening({
     effect: (action) => {
         const data = JSON.stringify(action.payload);
         if (data !== storedDriveDiscs) {
-            localStorage.setItem("driveDiscs", data);
+            localStorage.setItem("data/driveDiscs", data);
         }
     },
 });

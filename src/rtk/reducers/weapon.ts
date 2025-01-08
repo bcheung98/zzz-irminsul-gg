@@ -9,7 +9,8 @@ export interface WeaponState {
     weapons: Weapon[];
 }
 
-const storedWeapons = localStorage.getItem("weapons") || "null";
+const storedWeapons = localStorage.getItem("data/weapons") || "null";
+localStorage.removeItem("weapons");
 
 const initialState: WeaponState = {
     status: "idle",
@@ -46,7 +47,7 @@ listenerMiddleware.startListening({
     effect: (action) => {
         const data = JSON.stringify(action.payload);
         if (data !== storedWeapons) {
-            localStorage.setItem("weapons", data);
+            localStorage.setItem("data/weapons", data);
         }
     },
 });

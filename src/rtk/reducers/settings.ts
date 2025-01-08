@@ -15,9 +15,6 @@ export interface SettingsState {
 }
 
 const storedSettings = localStorage.getItem("settings") || "{}";
-localStorage.removeItem("theme");
-localStorage.removeItem("skillDisplay");
-localStorage.removeItem("server");
 
 const { theme, width, skillDisplay, server } = JSON.parse(storedSettings);
 

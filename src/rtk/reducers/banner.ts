@@ -15,8 +15,10 @@ export interface BannerState {
 }
 
 const storedCharacterBanners =
-    localStorage.getItem("characterBanners") || "null";
-const storedWeaponBanners = localStorage.getItem("weaponBanners") || "null";
+    localStorage.getItem("banners/characterBanners") || "null";
+const storedWeaponBanners = localStorage.getItem("banners/weaponBanners") || "null";
+localStorage.removeItem("characterBanners");
+localStorage.removeItem("weaponBanners");
 
 const initialState: BannerState = {
     status: "idle",
@@ -72,7 +74,7 @@ listenerMiddleware.startListening({
     effect: (action) => {
         const data = JSON.stringify(action.payload);
         if (data !== storedCharacterBanners) {
-            localStorage.setItem("characterBanners", data);
+            localStorage.setItem("banners/characterBanners", data);
         }
     },
 });
@@ -82,7 +84,7 @@ listenerMiddleware.startListening({
     effect: (action) => {
         const data = JSON.stringify(action.payload);
         if (data !== storedWeaponBanners) {
-            localStorage.setItem("weaponBanners", data);
+            localStorage.setItem("banners/weaponBanners", data);
         }
     },
 });

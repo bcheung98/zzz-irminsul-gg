@@ -9,7 +9,8 @@ export interface CharacterState {
     characters: Character[];
 }
 
-const storedCharacters = localStorage.getItem("characters") || "null";
+const storedCharacters = localStorage.getItem("data/characters") || "null";
+localStorage.removeItem("characters");
 
 const initialState: CharacterState = {
     status: "idle",
@@ -46,7 +47,7 @@ listenerMiddleware.startListening({
     effect: (action) => {
         const data = JSON.stringify(action.payload);
         if (data !== storedCharacters) {
-            localStorage.setItem("characters", data);
+            localStorage.setItem("data/characters", data);
         }
     },
 });

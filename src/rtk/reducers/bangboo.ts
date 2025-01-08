@@ -9,7 +9,8 @@ export interface BangbooState {
     bangboos: Bangboo[];
 }
 
-const storedBangboos = localStorage.getItem("bangboos") || "null";
+const storedBangboos = localStorage.getItem("data/bangboos") || "null";
+localStorage.removeItem("bangboos");
 
 const initialState: BangbooState = {
     status: "idle",
@@ -46,7 +47,7 @@ listenerMiddleware.startListening({
     effect: (action) => {
         const data = JSON.stringify(action.payload);
         if (data !== storedBangboos) {
-            localStorage.setItem("bangboos", data);
+            localStorage.setItem("data/bangboos", data);
         }
     },
 });
