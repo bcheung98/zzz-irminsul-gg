@@ -12,7 +12,7 @@ import { TextStyled } from "styled/StyledTypography";
 // MUI imports
 import { useTheme, useMediaQuery, Button, Drawer } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import ViewModuleIcon from "@mui/icons-material/ViewModule";
+import ViewCompactIcon from "@mui/icons-material/ViewCompact";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 import TuneIcon from "@mui/icons-material/Tune";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -74,8 +74,8 @@ function WeaponBrowser() {
         setMobileDrawerOpen(false);
     };
 
-    type View = "card" | "table";
-    const [view, setView] = React.useState<View>("card");
+    type View = "icon" | "table";
+    const [view, setView] = React.useState<View>("icon");
     const handleView = (_: React.BaseSyntheticEvent, newView: View) => {
         if (newView !== null) {
             setView(newView);
@@ -83,8 +83,8 @@ function WeaponBrowser() {
     };
     const buttons: CustomToggleButtonProps[] = [
         {
-            value: "card",
-            icon: <ViewModuleIcon />,
+            value: "icon",
+            icon: <ViewCompactIcon />,
         },
         {
             value: "table",
@@ -155,7 +155,7 @@ function WeaponBrowser() {
                     </Button>
                 </Grid>
             </Grid>
-            {view === "card" && (
+            {view === "icon" && (
                 <Grid container spacing={3}>
                     {currentWeapons.map((wep) => (
                         <InfoCard
