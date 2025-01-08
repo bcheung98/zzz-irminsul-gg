@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 // Component imports
 import NavDesktop from "./NavDesktop";
@@ -7,9 +7,39 @@ import NavMobile from "./NavMobile";
 // MUI imports
 import { useTheme, useMediaQuery, Theme, SxProps } from "@mui/material";
 
+const CURRENTGAME = "ZZZ";
+
+export interface Website {
+    title: string;
+    tag: string;
+    enabled: boolean;
+}
+
 function Nav() {
     const theme = useTheme();
     const matches_up_md = useMediaQuery(theme.breakpoints.up("md"));
+
+    const [websites, setWebsites] = useState<Website[]>([]);
+    useEffect(() => {
+        fetch("https://api.irminsul.gg/main/websites.json")
+            .then((response) => response.json())
+            .then((data) => {
+                setWebsites(data);
+            })
+            .catch((error) => console.error(error));
+    }, []);
+
+    const linkItems: NavItem[] = [];
+    websites.forEach(
+        (site) =>
+            site.tag !== CURRENTGAME &&
+            site.enabled &&
+            linkItems.push({
+                icon: `https://assets.irminsul.gg/main/game-icons/${site.tag}.png`,
+                text: site.title,
+                link: `https://${site.tag.toLowerCase()}.irminsul.gg/`,
+            })
+    );
 
     return (
         <>
@@ -70,24 +100,6 @@ const navItems: NavItem[] = [
         icon: "icons/Signal_Search",
         text: "Banner Archive",
         link: "/banners/",
-    },
-];
-
-const linkItems: NavItem[] = [
-    {
-        icon: "https://assets.irminsul.gg/main/game-icons/Genshin.png",
-        text: "Genshin Impact",
-        link: "https://genshin.irminsul.gg/",
-    },
-    {
-        icon: "https://assets.irminsul.gg/main/game-icons/HSR.png",
-        text: "Honkai: Star Rail",
-        link: "https://hsr.irminsul.gg/",
-    },
-    {
-        icon: "https://assets.irminsul.gg/main/game-icons/WutheringWaves.png",
-        text: "Wuthering Waves",
-        link: "https://wuwa.irminsul.gg/",
     },
 ];
 
