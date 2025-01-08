@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { Outlet, useLocation } from "react-router";
 
 // Component imports
@@ -17,7 +17,7 @@ function Layout() {
     const width = useAppSelector(selectWidth);
 
     const location = useLocation().pathname;
-    useEffect(() => {
+    useLayoutEffect(() => {
         window.scrollTo(0, 0);
     }, [location]);
 
