@@ -157,7 +157,7 @@ function VersionHighlights() {
                                 New Agents
                             </TextStyled>
                         </FlexBox>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={3} sx={{ px: 2 }}>
                             {characters.map((char, index) => (
                                 <InfoCard
                                     key={index}
@@ -187,7 +187,7 @@ function VersionHighlights() {
                                 New W-Engines
                             </TextStyled>
                         </FlexBox>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={3} sx={{ px: 2 }}>
                             {weapons.map((weapon, index) => (
                                 <InfoCard
                                     key={index}
@@ -216,7 +216,7 @@ function VersionHighlights() {
                                 New Drive Discs
                             </TextStyled>
                         </FlexBox>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={3} sx={{ px: 2 }}>
                             {driveDiscs.map((disc, index) => (
                                 <InfoCard
                                     key={index}
@@ -242,7 +242,7 @@ function VersionHighlights() {
                                 New Bangboos
                             </TextStyled>
                         </FlexBox>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={3} sx={{ px: 2 }}>
                             {bangboos.map((bangboo, index) => (
                                 <InfoCard
                                     key={index}

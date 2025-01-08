@@ -1,4 +1,4 @@
-import React from "react";
+import { BaseSyntheticEvent, useEffect, useMemo, useState } from "react";
 
 // Component imports
 import CharacterFilters from "./CharacterFilters";
@@ -12,6 +12,7 @@ import { TextStyled } from "styled/StyledTypography";
 // MUI imports
 import { useTheme, useMediaQuery, Button, Drawer } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import ViewCompactIcon from "@mui/icons-material/ViewCompact";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 import TuneIcon from "@mui/icons-material/Tune";
@@ -52,18 +53,18 @@ function CharacterBrowser() {
     );
     const filters = useAppSelector(selectCharacterFilters);
 
-    const [searchValue, setSearchValue] = React.useState("");
-    const handleInputChange = (event: React.BaseSyntheticEvent) => {
+    const [searchValue, setSearchValue] = useState("");
+    const handleInputChange = (event: BaseSyntheticEvent) => {
         setSearchValue(event.target.value);
     };
 
-    const currentCharacters = React.useMemo(
+    const currentCharacters = useMemo(
         () => filterCharacters(characters, filters, searchValue),
         [characters, filters, searchValue]
     );
 
     const drawerOpen = useAppSelector(isRightDrawerOpen);
-    const [mobileDrawerOpen, setMobileDrawerOpen] = React.useState(false);
+    const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
     const toggleDrawerState = () => {
         dispatch(toggleRightDrawer());
     };
@@ -74,14 +75,18 @@ function CharacterBrowser() {
         setMobileDrawerOpen(false);
     };
 
-    type View = "card" | "table";
-    const [view, setView] = React.useState<View>("card");
-    const handleView = (_: React.BaseSyntheticEvent, newView: View) => {
+    type View = "icon" | "card" | "table";
+    const [view, setView] = useState<View>("icon");
+    const handleView = (_: BaseSyntheticEvent, newView: View) => {
         if (newView !== null) {
             setView(newView);
         }
     };
     const buttons: CustomToggleButtonProps[] = [
+        {
+            value: "icon",
+            icon: <ViewCompactIcon />,
+        },
         {
             value: "card",
             icon: <ViewModuleIcon />,
@@ -92,11 +97,11 @@ function CharacterBrowser() {
         },
     ];
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(clearFilters());
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(toggleRightDrawer(matches_md_up));
     }, [matches_md_up]);
 
@@ -155,8 +160,8 @@ function CharacterBrowser() {
                     </Button>
                 </Grid>
             </Grid>
-            {view === "card" && (
-                <Grid container spacing={2}>
+            {view === "icon" && (
+                <Grid container spacing={3}>
                     {currentCharacters.map((char) => (
                         <InfoCard
                             key={char.id}
@@ -168,6 +173,31 @@ function CharacterBrowser() {
                             info={{
                                 element: char.element,
                                 specialty: char.specialty,
+                            }}
+                        />
+                    ))}
+                </Grid>
+            )}
+            {view === "card" && (
+                <Grid container spacing={3}>
+                    {currentCharacters.map((char) => (
+                        <InfoCard
+                            key={char.id}
+                            variant="material-card"
+                            id={`${char.name}-characterBrowser`}
+                            name={char.name}
+                            displayName={char.fullName}
+                            type="character"
+                            rarity={char.rarity}
+                            info={{
+                                element: char.element,
+                                specialty: char.specialty,
+                            }}
+                            materials={{
+                                skillMat: char.element,
+                                ascensionMat: char.specialty,
+                                bossMat: char.materials.bossMat,
+                                weeklyBossMat: char.materials.weeklyBossMat,
                             }}
                         />
                     ))}

@@ -49,7 +49,7 @@ function Image({
     const imgStyle = combineStyles(defaultImageStyle, style);
 
     const handleHover = (direction: "enter" | "leave") => {
-        zoomOnHover && zoomImageOnHover(direction, id);
+        zoomOnHover && zoomImageOnHover({ direction, id });
     };
 
     return (

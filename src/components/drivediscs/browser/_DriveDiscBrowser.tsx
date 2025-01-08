@@ -35,7 +35,7 @@ function DriveDiscBrowser() {
             >
                 Drive Discs
             </TextStyled>
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
                 {driveDiscs.map((disc, index) => (
                     <InfoCard
                         key={index}

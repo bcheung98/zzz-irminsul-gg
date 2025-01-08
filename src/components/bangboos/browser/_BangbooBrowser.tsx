@@ -35,7 +35,7 @@ function BangbooBrowser() {
             >
                 Bangboos
             </TextStyled>
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
                 {bangboos.map((bangboo, index) => (
                     <InfoCard
                         key={index}
