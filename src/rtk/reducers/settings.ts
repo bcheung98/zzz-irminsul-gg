@@ -12,17 +12,20 @@ export interface SettingsState {
     width: Width;
     skillDisplay: SkillDisplay;
     server: Region;
+    unreleasedContent: boolean;
 }
 
 const storedSettings = localStorage.getItem("settings") || "{}";
 
-const { theme, width, skillDisplay, server } = JSON.parse(storedSettings);
+const { theme, width, skillDisplay, server, unreleasedContent } =
+    JSON.parse(storedSettings);
 
 const initialState: SettingsState = {
     theme: theme || "Dark",
     width: width || "standard",
     skillDisplay: skillDisplay || "slider",
     server: server || "NA",
+    unreleasedContent: unreleasedContent || false,
 };
 
 export const settingsSlice = createSlice({
@@ -44,11 +47,20 @@ export const settingsSlice = createSlice({
         setServer: (state, action: PayloadAction<Region>) => {
             state.server = action.payload;
         },
+        toggleUnreleasedContent: (state) => {
+            state.unreleasedContent = !state.unreleasedContent;
+        },
     },
 });
 
-export const { setSettings, setTheme, setWidth, setSkillDisplay, setServer } =
-    settingsSlice.actions;
+export const {
+    setSettings,
+    setTheme,
+    setWidth,
+    setSkillDisplay,
+    setServer,
+    toggleUnreleasedContent,
+} = settingsSlice.actions;
 
 export const selectSettings = (state: RootState): SettingsState =>
     state.settings;
@@ -58,6 +70,8 @@ export const selectWidth = (state: RootState): Width => state.settings.width;
 export const selectSkillDisplay = (state: RootState): SkillDisplay =>
     state.settings.skillDisplay;
 export const selectServer = (state: RootState): Region => state.settings.server;
+export const selectUnreleasedContent = (state: RootState): boolean =>
+    state.settings.unreleasedContent;
 
 export default settingsSlice.reducer;
 

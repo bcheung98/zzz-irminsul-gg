@@ -5,6 +5,7 @@ import BangbooImage from "./BangbooImage";
 import BangbooInfo from "./BangbooInfo";
 import BangbooStats from "./BangbooStats";
 import BangbooSkills from "./skills/BangbooSkills";
+import BetaTag from "custom/BetaTag";
 import PageNotFound from "components/PageNotFound";
 
 // MUI Imports
@@ -45,6 +46,7 @@ function BangbooPage() {
                     </Grid>
                     <Grid size="grow">
                         <Stack spacing={2}>
+                            <BetaTag version={bangboo.release.version} />
                             <BangbooInfo bangboo={bangboo} />
                             <BangbooStats bangboo={bangboo} />
                         </Stack>

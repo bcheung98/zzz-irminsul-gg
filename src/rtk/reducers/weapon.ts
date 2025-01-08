@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { isUnreleasedContent } from "helpers/utils";
 import { fetchWeapons, LoadingStatus } from "rtk/fetchData";
 import { listenerMiddleware } from "rtk/middleware";
 import { RootState } from "rtk/store";
@@ -11,6 +12,9 @@ export interface WeaponState {
 
 const storedWeapons = localStorage.getItem("data/weapons") || "null";
 localStorage.removeItem("weapons");
+
+const storedSettings = localStorage.getItem("settings") || "{}";
+const { unreleasedContent = false } = JSON.parse(storedSettings);
 
 const initialState: WeaponState = {
     status: "idle",
@@ -26,8 +30,14 @@ export const weaponSlice = createSlice({
             state.status = "pending";
         });
         builder.addCase(fetchWeapons.fulfilled, (state, action) => {
-            if (JSON.stringify(action.payload) !== storedWeapons) {
-                state.weapons = action.payload;
+            let payload = action.payload;
+            if (!unreleasedContent) {
+                payload = payload.filter((item) =>
+                    isUnreleasedContent(item.release.version)
+                );
+            }
+            if (JSON.stringify(payload) !== storedWeapons) {
+                state.weapons = payload;
             }
             state.status = "success";
         });
@@ -45,7 +55,13 @@ export default weaponSlice.reducer;
 listenerMiddleware.startListening({
     actionCreator: fetchWeapons.fulfilled,
     effect: (action) => {
-        const data = JSON.stringify(action.payload);
+        let payload = action.payload;
+        if (!unreleasedContent) {
+            payload = payload.filter((item) =>
+                isUnreleasedContent(item.release.version)
+            );
+        }
+        const data = JSON.stringify(payload);
         if (data !== storedWeapons) {
             localStorage.setItem("data/weapons", data);
         }

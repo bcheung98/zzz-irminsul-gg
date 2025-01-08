@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { isUnreleasedContent } from "helpers/utils";
 import { fetchDriveDiscs, LoadingStatus } from "rtk/fetchData";
 import { listenerMiddleware } from "rtk/middleware";
 import { RootState } from "rtk/store";
@@ -11,6 +12,9 @@ export interface DriveDiscState {
 
 const storedDriveDiscs = localStorage.getItem("data/driveDiscs") || "null";
 localStorage.removeItem("driveDiscs");
+
+const storedSettings = localStorage.getItem("settings") || "{}";
+const { unreleasedContent = false } = JSON.parse(storedSettings);
 
 const initialState: DriveDiscState = {
     status: "idle",
@@ -26,6 +30,12 @@ export const driveDiscSlice = createSlice({
             state.status = "pending";
         });
         builder.addCase(fetchDriveDiscs.fulfilled, (state, action) => {
+            let payload = action.payload;
+            if (!unreleasedContent) {
+                payload = payload.filter((item) =>
+                    isUnreleasedContent(item.release.version)
+                );
+            }
             if (JSON.stringify(action.payload) !== storedDriveDiscs) {
                 state.driveDiscs = action.payload;
             }
@@ -45,7 +55,13 @@ export default driveDiscSlice.reducer;
 listenerMiddleware.startListening({
     actionCreator: fetchDriveDiscs.fulfilled,
     effect: (action) => {
-        const data = JSON.stringify(action.payload);
+        let payload = action.payload;
+        if (!unreleasedContent) {
+            payload = payload.filter((item) =>
+                isUnreleasedContent(item.release.version)
+            );
+        }
+        const data = JSON.stringify(payload);
         if (data !== storedDriveDiscs) {
             localStorage.setItem("data/driveDiscs", data);
         }

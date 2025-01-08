@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { isUnreleasedContent } from "helpers/utils";
 import { fetchCharacters, LoadingStatus } from "rtk/fetchData";
 import { listenerMiddleware } from "rtk/middleware";
 import { RootState } from "rtk/store";
@@ -11,6 +12,9 @@ export interface CharacterState {
 
 const storedCharacters = localStorage.getItem("data/characters") || "null";
 localStorage.removeItem("characters");
+
+const storedSettings = localStorage.getItem("settings") || "{}";
+const { unreleasedContent = false } = JSON.parse(storedSettings);
 
 const initialState: CharacterState = {
     status: "idle",
@@ -26,8 +30,14 @@ export const characterSlice = createSlice({
             state.status = "pending";
         });
         builder.addCase(fetchCharacters.fulfilled, (state, action) => {
-            if (JSON.stringify(action.payload) !== storedCharacters) {
-                state.characters = action.payload;
+            let payload = action.payload;
+            if (!unreleasedContent) {
+                payload = payload.filter((item) =>
+                    isUnreleasedContent(item.release.version)
+                );
+            }
+            if (JSON.stringify(payload) !== storedCharacters) {
+                state.characters = payload;
             }
             state.status = "success";
         });
@@ -45,7 +55,13 @@ export default characterSlice.reducer;
 listenerMiddleware.startListening({
     actionCreator: fetchCharacters.fulfilled,
     effect: (action) => {
-        const data = JSON.stringify(action.payload);
+        let payload = action.payload;
+        if (!unreleasedContent) {
+            payload = payload.filter((item) =>
+                isUnreleasedContent(item.release.version)
+            );
+        }
+        const data = JSON.stringify(payload);
         if (data !== storedCharacters) {
             localStorage.setItem("data/characters", data);
         }

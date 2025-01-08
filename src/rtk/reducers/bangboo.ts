@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { isUnreleasedContent } from "helpers/utils";
 import { fetchBangboos, LoadingStatus } from "rtk/fetchData";
 import { listenerMiddleware } from "rtk/middleware";
 import { RootState } from "rtk/store";
@@ -11,6 +12,9 @@ export interface BangbooState {
 
 const storedBangboos = localStorage.getItem("data/bangboos") || "null";
 localStorage.removeItem("bangboos");
+
+const storedSettings = localStorage.getItem("settings") || "{}";
+const { unreleasedContent = false } = JSON.parse(storedSettings);
 
 const initialState: BangbooState = {
     status: "idle",
@@ -26,8 +30,14 @@ export const bangbooSlice = createSlice({
             state.status = "pending";
         });
         builder.addCase(fetchBangboos.fulfilled, (state, action) => {
-            if (JSON.stringify(action.payload) !== storedBangboos) {
-                state.bangboos = action.payload;
+            let payload = action.payload;
+            if (!unreleasedContent) {
+                payload = payload.filter((item) =>
+                    isUnreleasedContent(item.release.version)
+                );
+            }
+            if (JSON.stringify(payload) !== storedBangboos) {
+                state.bangboos = payload;
             }
             state.status = "success";
         });
@@ -45,7 +55,13 @@ export default bangbooSlice.reducer;
 listenerMiddleware.startListening({
     actionCreator: fetchBangboos.fulfilled,
     effect: (action) => {
-        const data = JSON.stringify(action.payload);
+        let payload = action.payload;
+        if (!unreleasedContent) {
+            payload = payload.filter((item) =>
+                isUnreleasedContent(item.release.version)
+            );
+        }
+        const data = JSON.stringify(payload);
         if (data !== storedBangboos) {
             localStorage.setItem("data/bangboos", data);
         }

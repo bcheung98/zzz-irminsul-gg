@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import DriveDiscImage from "./DriveDiscImage";
 import DriveDiscInfo from "./DriveDiscInfo";
 import DriveDiscEffect from "./DriveDiscEffect";
+import BetaTag from "custom/BetaTag";
 import PageNotFound from "components/PageNotFound";
 
 // MUI Imports
@@ -43,6 +44,7 @@ function DriveDiscPage() {
                 </Grid>
                 <Grid size="grow">
                     <Stack spacing={2}>
+                        <BetaTag version={driveDisc.release.version} />
                         <DriveDiscInfo disc={driveDisc} />
                         <DriveDiscEffect disc={driveDisc} />
                     </Stack>

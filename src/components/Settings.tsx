@@ -1,21 +1,27 @@
-import React from "react";
+import { BaseSyntheticEvent, useRef, useState } from "react";
 
 // Component imports
 import MainContentBox from "custom/MainContentBox";
 import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
-import { TextStyled } from "styled/StyledTypography";
+import { Text, TextStyled } from "styled/StyledTypography";
+import { StyledSwitch } from "styled/StyledSwitch";
 
 // MUI imports
 import {
     useTheme,
     useMediaQuery,
+    SxProps,
     IconButton,
     Dialog,
     Stack,
     Box,
+    Divider,
+    Collapse,
+    Card,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
+import HelpIcon from "@mui/icons-material/Help";
 
 // Helper imports
 import { objectKeys } from "helpers/utils";
@@ -28,6 +34,7 @@ import {
     setTheme,
     setWidth,
     SkillDisplay,
+    toggleUnreleasedContent,
     Width,
 } from "reducers/settings";
 import { navStyles } from "./nav/Nav";
@@ -46,21 +53,51 @@ function Settings() {
 
     const settings = useAppSelector(selectSettings);
     const themeName = settings.theme;
-    const { width, skillDisplay, server } = settings;
+    const { width, skillDisplay, server, unreleasedContent } = settings;
+    const unreleasedContentOld = useRef(unreleasedContent);
 
-    const [settingsOpen, setSettingsOpen] = React.useState(false);
+    const [settingsOpen, setSettingsOpen] = useState(false);
     const handleSettingsOpen = () => {
+        unreleasedContentOld.current = unreleasedContent;
         setSettingsOpen(true);
     };
     const handleSettingsClose = () => {
         dispatch(setSettings(settings));
+        if (unreleasedContentOld.current !== unreleasedContent) {
+            window.location.reload();
+        }
         setSettingsOpen(false);
+    };
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const toggleDropdownState = () => {
+        setDropdownOpen(!dropdownOpen);
     };
 
     const toggleButtonsParams = {
         spacing: 0,
         padding: "4px 12px",
         highlightOnHover: false,
+    };
+
+    const settingsBoxStyle: SxProps = {
+        display: {
+            xs: "block",
+            sm: "flex",
+        },
+        flexGrow: 1,
+        flexWrap: "wrap",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: "8px",
+    };
+
+    const settingsTextStyle: SxProps = {
+        display: {
+            xs: "block",
+            sm: "flex",
+        },
+        mb: { xs: "8px", sm: "0px" },
     };
 
     const settingsList = [
@@ -71,10 +108,7 @@ function Settings() {
                     buttons={themeButtons}
                     value={themeName}
                     exclusive
-                    onChange={(
-                        _: React.BaseSyntheticEvent,
-                        newValue: ThemeNames
-                    ) => {
+                    onChange={(_: BaseSyntheticEvent, newValue: ThemeNames) => {
                         if (newValue !== null) {
                             dispatch(setTheme(newValue));
                         }
@@ -90,10 +124,7 @@ function Settings() {
                     buttons={widthButtons}
                     value={width}
                     exclusive
-                    onChange={(
-                        _: React.BaseSyntheticEvent,
-                        newValue: Width
-                    ) => {
+                    onChange={(_: BaseSyntheticEvent, newValue: Width) => {
                         if (newValue !== null) {
                             dispatch(setWidth(newValue));
                         }
@@ -110,7 +141,7 @@ function Settings() {
                     value={skillDisplay}
                     exclusive
                     onChange={(
-                        _: React.BaseSyntheticEvent,
+                        _: BaseSyntheticEvent,
                         newValue: SkillDisplay
                     ) => {
                         if (newValue !== null) {
@@ -128,10 +159,7 @@ function Settings() {
                     buttons={regionButtons}
                     value={server}
                     exclusive
-                    onChange={(
-                        _: React.BaseSyntheticEvent,
-                        newValue: Region
-                    ) => {
+                    onChange={(_: BaseSyntheticEvent, newValue: Region) => {
                         if (newValue !== null) {
                             dispatch(setServer(newValue));
                         }
@@ -194,32 +222,69 @@ function Settings() {
                         }
                         contentProps={{ padding: "16px" }}
                     >
-                        <Stack spacing={2}>
-                            {settingsList.map((setting, index) => (
-                                <Box
-                                    key={index}
-                                    sx={{
-                                        display: { xs: "block", sm: "flex" },
-                                        flexGrow: 1,
-                                        flexWrap: "wrap",
-                                        justifyContent: "space-between",
-                                        gap: "8px",
-                                    }}
-                                >
-                                    <TextStyled
+                        <Stack spacing={2} divider={<Divider />}>
+                            <Stack spacing={2}>
+                                {settingsList.map((setting, index) => (
+                                    <Box key={index} sx={settingsBoxStyle}>
+                                        <TextStyled sx={settingsTextStyle}>
+                                            {setting.label}
+                                        </TextStyled>
+                                        {setting.options}
+                                    </Box>
+                                ))}
+                            </Stack>
+                            <Box>
+                                <Box sx={settingsBoxStyle}>
+                                    <Stack direction="row" alignItems="center">
+                                        <TextStyled sx={settingsTextStyle}>
+                                            Forbidden Knowledge
+                                        </TextStyled>
+                                        <IconButton
+                                            onClick={toggleDropdownState}
+                                            disableRipple
+                                            disableTouchRipple
+                                        >
+                                            <HelpIcon
+                                                sx={{
+                                                    color: theme.text.primary,
+                                                }}
+                                            />
+                                        </IconButton>
+                                    </Stack>
+                                    <StyledSwitch
+                                        checked={unreleasedContent}
+                                        onChange={() =>
+                                            dispatch(toggleUnreleasedContent())
+                                        }
+                                    />
+                                </Box>
+                                <Collapse in={dropdownOpen} timeout="auto">
+                                    <Card
                                         sx={{
-                                            display: {
-                                                xs: "block",
-                                                sm: "flex",
-                                            },
-                                            mb: { xs: "8px", sm: "0px" },
+                                            m: 1,
+                                            p: 1,
+                                            backgroundColor:
+                                                theme.palette.error.dark,
                                         }}
                                     >
-                                        {setting.label}
-                                    </TextStyled>
-                                    {setting.options}
-                                </Box>
-                            ))}
+                                        <Text component="span" variant="body2">
+                                            Enabling this option will allow you
+                                            to view content from the game's beta
+                                            version.
+                                            <br />
+                                            Any information from the beta is
+                                            heavily subject to change and will
+                                            usually be incomplete and/or
+                                            inaccurate.
+                                            <br />
+                                            Please note that updates from the
+                                            beta are not done automatically and
+                                            may differ from other websites that
+                                            you might use.
+                                        </Text>
+                                    </Card>
+                                </Collapse>
+                            </Box>
                         </Stack>
                     </MainContentBox>
                 </Box>

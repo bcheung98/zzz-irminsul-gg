@@ -1,4 +1,5 @@
 import { Shade } from "types/theme";
+import { updates } from "data/versions";
 
 export function range(len: number): number[];
 export function range(start: number, stop: number, step?: number): number[];
@@ -53,6 +54,11 @@ export function zoomImageOnHover({
 
 export function isTBA(str: string) {
     return str === "TBA" || str === "To be announced";
+}
+
+export function isUnreleasedContent(version: string) {
+    const versions = updates.map((update) => update.version);
+    return versions.includes(version);
 }
 
 interface GetThemeBackgroundColorsProps {

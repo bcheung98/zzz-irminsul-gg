@@ -6,6 +6,7 @@ import WeaponInfo from "./WeaponInfo";
 import WeaponPassive from "./WeaponPassive";
 import WeaponStats from "./WeaponStats";
 import WeaponAscension from "./WeaponAscension";
+import BetaTag from "custom/BetaTag";
 import PageNotFound from "components/PageNotFound";
 
 // MUI Imports
@@ -45,6 +46,7 @@ function WeaponPage() {
                 </Grid>
                 <Grid size="grow">
                     <Stack spacing={2}>
+                        <BetaTag version={weapon.release.version} />
                         <WeaponInfo weapon={weapon} />
                         <Grid container columnSpacing={3} rowSpacing={2}>
                             <Grid size={{ xs: 12, md: 7 }}>
