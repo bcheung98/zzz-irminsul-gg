@@ -41,6 +41,7 @@ export interface CharacterSkillScalingProps {
     element: Element;
     colors: CharacterColors;
     ascension: CharacterAscensionStat;
+    index?: number;
 }
 
 export interface CharacterSkillLevelUpProps {
@@ -72,7 +73,7 @@ function CharacterSkillTab({
                     </TextStyled>
                     {skill.description.split("<br />").map((line, i) => (
                         <Text sx={{ color: theme.text.description }} key={i}>
-                            {parseSkillDescription(line)}
+                            {parseSkillDescription(line, index)}
                         </Text>
                     ))}
                     <Box sx={{ pt: "16px" }}>
@@ -84,6 +85,7 @@ function CharacterSkillTab({
                                         scaling={skill.scaling}
                                         element={element}
                                         colors={colors}
+                                        index={index}
                                     />
                                 ) : (
                                     <CharacterCoreSkillScaling
@@ -110,7 +112,7 @@ function CharacterSkillTab({
 
 export default CharacterSkillTab;
 
-function parseSkillDescription(description: string) {
+function parseSkillDescription(description: string, index: number) {
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
     const options: HTMLReactParserOptions = {
@@ -136,14 +138,14 @@ function parseSkillDescription(description: string) {
                 } else if (className.split("-")[0].startsWith("text")) {
                     const tag = className.split("-")[1];
                     return (
-                        <Text
-                            component="span"
+                        <span
                             className={
                                 className === "text-value"
-                                    ? "character-skill-value"
+                                    ? `character-skill-value-${index}`
                                     : className
                             }
-                            sx={{
+                            data-index={domNode.attribs["data-index"]}
+                            style={{
                                 color: theme.text[
                                     tag as keyof typeof theme.text
                                 ],
@@ -154,7 +156,7 @@ function parseSkillDescription(description: string) {
                             }}
                         >
                             {domToReact(domNode.children as DOMNode[], options)}
-                        </Text>
+                        </span>
                     );
                 }
             }

@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 // Component imports
 import { FlexBox } from "styled/StyledBox";
@@ -52,7 +52,7 @@ function StatsTable({
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
 
-    const [sliderValue, setSliderValue] = React.useState(
+    const [sliderValue, setSliderValue] = useState(
         sliderProps?.initialValue || levels.length
     );
     const handleSliderChange = (_: Event, newValue: number | number[]) => {
@@ -60,11 +60,18 @@ function StatsTable({
     };
 
     const targets = document.getElementsByClassName(textID);
-    React.useEffect(() => {
+    useEffect(() => {
         data.forEach((subScaling: (string | number)[], index: number) => {
-            const target = targets[index];
+            const target = targets[index] as HTMLElement;
             if (target) {
-                target.innerHTML = subScaling[sliderValue].toString();
+                if (target.dataset.index) {
+                    target.innerHTML =
+                        data[Number(target.dataset.index)][
+                            sliderValue
+                        ].toString();
+                } else {
+                    target.innerHTML = subScaling[sliderValue].toString();
+                }
             }
         });
     }, [sliderValue]);

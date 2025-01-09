@@ -15,6 +15,7 @@ function CharacterSkillScaling({
     scaling,
     colors,
     element,
+    index = 0,
 }: Omit<CharacterSkillScalingProps, "ascension">) {
     const getCharacterColor = (option: keyof CharacterColors) =>
         characterColors(colors, option, element);
@@ -51,7 +52,7 @@ function CharacterSkillScaling({
                         mt: "8px",
                     },
                 }}
-                textID="character-skill-value"
+                textID={`character-skill-value-${index}`}
             />
         </Dropdown>
     );

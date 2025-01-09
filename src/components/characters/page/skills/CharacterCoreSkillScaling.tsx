@@ -36,7 +36,7 @@ function CharacterCoreSkillScaling({
         value: index,
         label: <TextStyled sx={{ userSelect: "none" }}>{level}</TextStyled>,
     }));
-    const targets = document.getElementsByClassName("character-skill-value");
+    const targets = document.getElementsByClassName("character-skill-value-0");
     scaling.forEach((subScaling: string[], index: number) => {
         let target = targets[index];
         if (target) {
