@@ -81,3 +81,14 @@ export function getHoverColor(color: string, contrast = 20) {
         .map((color) => Number(color));
     return `rgb(${r + contrast}, ${g + contrast}, ${b + contrast})`;
 }
+
+export function pxToInt(num: string | number) {
+    if (typeof num === "number") {
+        return num;
+    } else if (!num.endsWith("px")) {
+        console.warn("Recieved non-pixel unit");
+        return 0;
+    } else {
+        return Number(num.slice(0, -2));
+    }
+}

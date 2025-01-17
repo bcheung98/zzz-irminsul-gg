@@ -128,7 +128,6 @@ function LevelUpCosts({
                         rarity={material.rarity}
                         cost={material.cost}
                         imgSrc={material.img}
-                        size="64px"
                     />
                 ))}
             </Grid>

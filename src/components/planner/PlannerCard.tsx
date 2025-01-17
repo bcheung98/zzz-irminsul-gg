@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 // Component imports
 import CharacterSliders from "./CharacterSliders";
@@ -62,7 +62,7 @@ function PlannerCard({ data }: PlannerCardProps) {
     const characters = useAppSelector(getSelectedCharacters);
     const weapons = useAppSelector(getSelectedWeapons);
 
-    const [mode, setMode] = React.useState<CardMode>("view");
+    const [mode, setMode] = useState<CardMode>("view");
     const handleModeChange = () => {
         if (mode === "view") {
             setMode("edit");
@@ -197,7 +197,7 @@ function PlannerCard({ data }: PlannerCardProps) {
                             rarity={material.rarity}
                             cost={material.cost}
                             imgSrc={material.img}
-                            size="64px"
+                            size="56px"
                         />
                     )
                 )}

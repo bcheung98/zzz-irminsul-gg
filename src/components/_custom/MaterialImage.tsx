@@ -1,13 +1,14 @@
-import React from "react";
+import { CSSProperties } from "react";
 
 // Component imports
 import Image from "./Image";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, Box } from "@mui/material";
+import { useTheme, useMediaQuery, Box } from "@mui/material";
 
 // Helper imports
+import { pxToInt } from "helpers/utils";
 import { getRarityColor } from "helpers/rarityColors";
 
 // Type imports
@@ -27,19 +28,29 @@ function MaterialImage({
     rarity,
     cost,
     imgSrc,
-    size = "72px",
+    size = "64px",
     labelColor,
 }: MaterialImageProps) {
     const theme = useTheme();
 
-    const cardStyle: React.CSSProperties = {
+    size = useMediaQuery(theme.breakpoints.up("sm"))
+        ? size
+        : `${pxToInt(size) - 8}px`;
+
+    const intSize = pxToInt(size) / 4;
+    const fontSize =
+        cost.toLocaleString().length < 8
+            ? intSize - 4
+            : intSize - (cost.toLocaleString().length - 4);
+
+    const cardStyle: CSSProperties = {
         padding: "4px 4px 2px",
         marginBottom: "4px",
         backgroundColor: getRarityColor(rarity),
         borderRadius: "12px",
     };
 
-    const imgStyle: React.CSSProperties = {
+    const imgStyle: CSSProperties = {
         width: `calc(${size} - 8px)`,
         height: "auto",
         padding: !imgSrc.endsWith(".gif") ? "4px" : "0px",
@@ -47,12 +58,9 @@ function MaterialImage({
         borderRadius: "12px",
     };
 
-    const labelStyle: React.CSSProperties = {
+    const labelStyle: CSSProperties = {
         display: "block",
-        fontSize:
-            cost.toLocaleString().length < 10
-                ? `calc(${size} / 6) !important`
-                : `calc(${size} / 7) !important`,
+        fontSize: `${fontSize}px !important`,
         width: "100%",
         margin: "auto",
         borderRadius: "12px",

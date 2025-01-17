@@ -25,7 +25,7 @@ function TotalCost() {
                                 rarity={material.rarity}
                                 cost={material.cost}
                                 imgSrc={material.img}
-                                size="64px"
+                                size="56px"
                             />
                         ))}
                     </Grid>
