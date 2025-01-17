@@ -218,7 +218,7 @@ function InfoCard({
                                     borderTop:
                                         variant === "icon"
                                             ? "none"
-                                            : `calc(${imgSize} / 25) solid ${getRarityColor(
+                                            : `calc(${imgSize} / 20) solid ${getRarityColor(
                                                   rarity
                                               )}`,
                                 }}
