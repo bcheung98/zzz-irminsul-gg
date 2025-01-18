@@ -110,8 +110,8 @@ export function createBannerItems(
     return items.map((item: string) => {
         if (isTBA(item)) {
             return {
-                name: "",
-                displayName: "",
+                name: "TBA",
+                displayName: "TBA",
             };
         } else {
             if (type === "character") {
