@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import parse from "html-react-parser";
 
 // Component imports
@@ -21,16 +21,25 @@ import {
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 
+// Helper imports
+import { getRarityColor } from "helpers/rarityColors";
+
 // Type imports
 import { WeaponProps } from "types/weapon";
 
 function WeaponInfo({ weapon }: WeaponProps) {
     const theme = useTheme();
 
-    const { displayName, rarity, specialty, description, shortDescription } =
-        weapon;
+    const {
+        displayName,
+        rarity,
+        specialty,
+        signature,
+        description,
+        shortDescription,
+    } = weapon;
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -80,7 +89,23 @@ function WeaponInfo({ weapon }: WeaponProps) {
             <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
                 <Box sx={{ overflowY: "auto", scrollbarWidth: "thin" }}>
                     <MainContentBox
-                        title=""
+                        title={
+                            signature ? (
+                                <Image
+                                    src={`characters/icons/${signature}`}
+                                    alt={signature}
+                                    style={{
+                                        width: "48px",
+                                        border: `2px solid ${getRarityColor(
+                                            rarity
+                                        )}`,
+                                        borderRadius: "4px",
+                                    }}
+                                />
+                            ) : (
+                                ""
+                            )
+                        }
                         actions={
                             <IconButton
                                 disableRipple
