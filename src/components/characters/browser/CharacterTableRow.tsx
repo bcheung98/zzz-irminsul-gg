@@ -18,6 +18,7 @@ import { combineStyles } from "helpers/utils";
 import { CharacterRow } from "./CharacterTable";
 
 interface CharacterTableRowProps extends CharacterRow {
+    subElement: string;
     releaseDate: string;
     version: string;
 }
@@ -49,8 +50,8 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
             img: `ranks/character/${row.rarity}`,
         },
         {
-            label: row.element,
-            img: `elements/${row.element}`,
+            label: row.subElement,
+            img: `elements/${row.subElement}`,
         },
         {
             label: row.specialty,
@@ -63,7 +64,7 @@ function CharacterTableRow({ row }: { row: CharacterTableRowProps }) {
         {
             label: row.faction,
             img: `factions/${row.faction}`,
-            imgStyle: { width: "48px", height: "48px" },
+            imgStyle: { width: "40px", height: "40px" },
         },
         {
             label: `${

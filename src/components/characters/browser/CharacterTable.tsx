@@ -1,4 +1,4 @@
-import React from "react";
+import { BaseSyntheticEvent, useState } from "react";
 
 // Component imports
 import CharacterTableRow from "./CharacterTableRow";
@@ -28,13 +28,10 @@ export type CharacterRow = Pick<
 >;
 
 function CharacterTable({ characters }: { characters: Character[] }) {
-    const [order, setOrder] = React.useState<Order>("asc");
-    const [orderBy, setOrderBy] = React.useState("fullName");
+    const [order, setOrder] = useState<Order>("asc");
+    const [orderBy, setOrderBy] = useState("fullName");
 
-    const handleRequestSort = (
-        _: React.BaseSyntheticEvent,
-        property: string
-    ) => {
+    const handleRequestSort = (_: BaseSyntheticEvent, property: string) => {
         const isAsc = orderBy === property && order === "asc";
         setOrder(isAsc ? "desc" : "asc");
         setOrderBy(property);
@@ -56,6 +53,7 @@ function CharacterTable({ characters }: { characters: Character[] }) {
         fullName: char.fullName,
         rarity: char.rarity,
         element: char.element,
+        subElement: char.subElement || char.element,
         specialty: char.specialty,
         attackType: char.attackType,
         faction: char.faction,

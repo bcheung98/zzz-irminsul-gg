@@ -171,7 +171,7 @@ function CharacterBrowser() {
                             type="character"
                             rarity={char.rarity}
                             info={{
-                                element: char.element,
+                                element: char.subElement || char.element,
                                 specialty: char.specialty,
                             }}
                         />
@@ -190,7 +190,7 @@ function CharacterBrowser() {
                             type="character"
                             rarity={char.rarity}
                             info={{
-                                element: char.element,
+                                element: char.subElement || char.element,
                                 specialty: char.specialty,
                             }}
                             materials={{

@@ -20,7 +20,7 @@ import {
 } from "data/materials/characterCoreSkillMaterials";
 
 // Type imports
-import { Element, Rarity, Specialty } from "types/_common";
+import { Rarity, Specialty } from "types/_common";
 import {
     ExpertChallengeMaterial,
     Materials,
@@ -37,7 +37,7 @@ interface InfoCardProps {
     size?: string;
     showName?: boolean;
     info?: {
-        element?: Element;
+        element?: string;
         specialty?: Specialty;
     };
     materials?: Materials;

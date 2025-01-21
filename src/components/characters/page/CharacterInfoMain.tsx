@@ -13,7 +13,8 @@ import { CharacterProps } from "types/character";
 function CharacterInfoMain({ character }: CharacterProps) {
     const theme = useTheme();
 
-    const { fullName, rarity, element, specialty } = character;
+    const { fullName, rarity, specialty } = character;
+    const element = character.subElement || character.element;
 
     return (
         <Card
@@ -31,13 +32,14 @@ function CharacterInfoMain({ character }: CharacterProps) {
                     style={{ width: "56px" }}
                 />
                 <Box>
-                    <TextStyled
-                        variant="h4-styled"
-                        className="page-name"
-                        sx={{ mb: "8px" }}
-                    >
-                        {fullName}
-                    </TextStyled>
+                    <Box sx={{ mb: "8px" }}>
+                        <TextStyled variant="h4-styled">{fullName}</TextStyled>
+                        {character.title && (
+                            <TextStyled sx={{ mt: "4px", fontStyle: "italic" }}>
+                                {character.title}
+                            </TextStyled>
+                        )}
+                    </Box>
                     <FlexBox sx={{ flexWrap: "wrap", gap: "8px" }}>
                         <InfoChip
                             color="tertiary"
