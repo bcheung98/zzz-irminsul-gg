@@ -167,7 +167,8 @@ function VersionHighlights() {
                                     type="character"
                                     rarity={char.rarity}
                                     info={{
-                                        element: char.element,
+                                        element:
+                                            char.subElement || char.element,
                                         specialty: char.specialty,
                                     }}
                                 />
@@ -246,7 +247,7 @@ function VersionHighlights() {
                             {bangboos.map((bangboo, index) => (
                                 <InfoCard
                                     key={index}
-                                    id={`${bangboo.name}-bangbooBrowser`}
+                                    id={`${bangboo.name}-versionHighlights`}
                                     name={bangboo.name}
                                     displayName={bangboo.displayName}
                                     info={{
