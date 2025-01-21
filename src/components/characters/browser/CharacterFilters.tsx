@@ -1,4 +1,4 @@
-import React from "react";
+import { BaseSyntheticEvent } from "react";
 
 // Component imports
 import Dropdown from "custom/Dropdown";
@@ -53,21 +53,21 @@ function CharacterFilters({
         {
             name: "Attribute",
             value: filters.element,
-            onChange: (_: React.BaseSyntheticEvent, newValues: Element[]) =>
+            onChange: (_: BaseSyntheticEvent, newValues: Element[]) =>
                 dispatch(setElement(newValues)),
             buttons: createButtons<Element>(elements, "elements"),
         },
         {
             name: "Specialty",
             value: filters.specialty,
-            onChange: (_: React.BaseSyntheticEvent, newValues: Specialty[]) =>
+            onChange: (_: BaseSyntheticEvent, newValues: Specialty[]) =>
                 dispatch(setSpecialty(newValues)),
             buttons: createButtons<Specialty>(specialities, "specialties"),
         },
         {
             name: "Attack Type",
             value: filters.attackType,
-            onChange: (_: React.BaseSyntheticEvent, newValues: AttackType[]) =>
+            onChange: (_: BaseSyntheticEvent, newValues: AttackType[]) =>
                 dispatch(setAttackType(newValues)),
             buttons: createButtons<AttackType>(
                 attackTypes,
@@ -77,14 +77,14 @@ function CharacterFilters({
         {
             name: "Rank",
             value: filters.rarity,
-            onChange: (_: React.BaseSyntheticEvent, newValues: Rarity[]) =>
+            onChange: (_: BaseSyntheticEvent, newValues: Rarity[]) =>
                 dispatch(setRarity(newValues)),
             buttons: createButtons<Rarity>(["S", "A"], "ranks/character"),
         },
         {
             name: "Faction",
             value: filters.faction,
-            onChange: (_: React.BaseSyntheticEvent, newValues: Faction[]) =>
+            onChange: (_: BaseSyntheticEvent, newValues: Faction[]) =>
                 dispatch(setFaction(newValues)),
             buttons: createButtons<Faction>(factions, "factions"),
         },
@@ -92,7 +92,7 @@ function CharacterFilters({
             name: "Expert Challenge Material",
             value: filters.bossMat,
             onChange: (
-                _: React.BaseSyntheticEvent,
+                _: BaseSyntheticEvent,
                 newValues: ExpertChallengeMaterial[]
             ) => dispatch(setBossMat(newValues)),
             buttons: createButtons<ExpertChallengeMaterial>(
@@ -104,7 +104,7 @@ function CharacterFilters({
             name: "Notorious Hunt Material",
             value: filters.weeklyBossMat,
             onChange: (
-                _: React.BaseSyntheticEvent,
+                _: BaseSyntheticEvent,
                 newValues: NotoriousHuntMaterial[]
             ) => dispatch(setWeeklyBossMat(newValues)),
             buttons: createButtons<NotoriousHuntMaterial>(

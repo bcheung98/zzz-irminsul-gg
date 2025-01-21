@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 
 // Component imports
 import NavDesktop from "./NavDesktop";
@@ -104,13 +104,13 @@ const navItems: NavItem[] = [
 ];
 
 export const navStyles = (location: string) => ({
-    navItem: (size = 32): React.CSSProperties => ({
+    navItem: (size = 32): CSSProperties => ({
         width: size,
         height: size,
         padding: "2px",
         color: "rgb(255, 255, 255)",
     }),
-    linkItem: (size = 32): React.CSSProperties => ({
+    linkItem: (size = 32): CSSProperties => ({
         width: size,
         height: size,
         borderRadius: "4px",

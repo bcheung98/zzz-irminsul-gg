@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 // Component imports
 import { TextStyled } from "styled/StyledTypography";
@@ -10,9 +10,9 @@ import { DateObject } from "helpers/dates";
 function Countdown(props: { date: DateObject }) {
     const date = props.date.obj.getTime();
     const initialTime = date - new Date().getTime();
-    const [timeRemaining, setTimeRemaining] = React.useState(initialTime);
+    const [timeRemaining, setTimeRemaining] = useState(initialTime);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const timerInterval = setInterval(() => {
             const now = new Date().getTime();
             const diff = date - now;

@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 // Component imports
 import MaterialImage from "custom/MaterialImage";
@@ -67,7 +67,7 @@ function LevelUpCosts({
     const levels = getLevels(skillKey);
     const minDistance = 1;
     const maxValue = levels.length;
-    const [values, setValues] = React.useState([1, maxValue]);
+    const [values, setValues] = useState([1, maxValue]);
     const handleSliderChange = (
         _: Event,
         newValue: number | number[],

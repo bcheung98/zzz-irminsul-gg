@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 // Component imports
 import { TextStyled } from "styled/StyledTypography";
@@ -26,7 +26,7 @@ function Dropdown({
 }: DropdownProps) {
     const theme = useTheme();
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const toggleDropdownState = () => {
         setOpen(!open);
     };

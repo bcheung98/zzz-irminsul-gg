@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode, useState } from "react";
 import { useLocation } from "react-router";
 
 // Component imports
@@ -49,12 +49,12 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
     const location = useLocation().pathname;
     const styles = navStyles(location);
 
-    const [drawerOpen, setDrawerOpen] = React.useState(matches_lg_up);
+    const [drawerOpen, setDrawerOpen] = useState(matches_lg_up);
     const toggleDrawerState = () => {
         setDrawerOpen(!drawerOpen);
     };
 
-    const [dropdownOpen, setDropdownOpen] = React.useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggleDropdownState = () => {
         setDropdownOpen(!dropdownOpen);
     };
@@ -306,7 +306,7 @@ const Drawer = styled(MuiDrawer, {
     ],
 }));
 
-function ScrollTopDesktop({ children }: { children: React.ReactNode }) {
+function ScrollTopDesktop({ children }: { children: ReactNode }) {
     const trigger = useScrollTrigger({
         disableHysteresis: true,
         threshold: 100,

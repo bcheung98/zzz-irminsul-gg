@@ -1,4 +1,4 @@
-import React from "react";
+import { BaseSyntheticEvent, CSSProperties, useEffect, useState } from "react";
 
 // Component imports
 import BangbooSkillTab from "./BangbooSkillTab";
@@ -30,20 +30,20 @@ function BangbooSkills({ bangboo }: BangbooProps) {
         Object.entries(bangboo.skills).filter(([_, arr]) => arr.length > 0)
     ) as BangbooSkillsType;
 
-    const [tabValue, setTabValue] = React.useState(0);
-    const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
+    const [tabValue, setTabValue] = useState(0);
+    const handleTabChange = (_: BaseSyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
 
     const currentSkillDisplay = useAppSelector(selectSkillDisplay);
-    const [mode, setMode] = React.useState<SkillDisplay>(currentSkillDisplay);
-    const handleMode = (_: React.BaseSyntheticEvent, newView: SkillDisplay) => {
+    const [mode, setMode] = useState<SkillDisplay>(currentSkillDisplay);
+    const handleMode = (_: BaseSyntheticEvent, newView: SkillDisplay) => {
         if (newView !== null) {
             setMode(newView);
         }
     };
 
-    const skillIcon = (index: number): React.CSSProperties => {
+    const skillIcon = (index: number): CSSProperties => {
         const selected = index === tabValue;
         return {
             width: "64px",
@@ -53,7 +53,7 @@ function BangbooSkills({ bangboo }: BangbooProps) {
         };
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         setMode(currentSkillDisplay);
     }, [currentSkillDisplay]);
 

@@ -1,4 +1,4 @@
-import React from "react";
+import { BaseSyntheticEvent, useEffect, useState } from "react";
 
 // Component imports
 import MainContentBox from "custom/MainContentBox";
@@ -18,8 +18,8 @@ function WeaponStats({ weapon }: WeaponProps) {
     const { rarity, stats } = weapon;
 
     const currentSkillDisplay = useAppSelector(selectSkillDisplay);
-    const [mode, setMode] = React.useState<SkillDisplay>(currentSkillDisplay);
-    const handleMode = (_: React.BaseSyntheticEvent, newView: SkillDisplay) => {
+    const [mode, setMode] = useState<SkillDisplay>(currentSkillDisplay);
+    const handleMode = (_: BaseSyntheticEvent, newView: SkillDisplay) => {
         if (newView !== null) {
             setMode(newView);
         }
@@ -60,7 +60,7 @@ function WeaponStats({ weapon }: WeaponProps) {
         ],
     ];
 
-    React.useEffect(() => {
+    useEffect(() => {
         setMode(currentSkillDisplay);
     }, [currentSkillDisplay]);
 

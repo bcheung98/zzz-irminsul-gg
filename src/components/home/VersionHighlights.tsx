@@ -1,4 +1,4 @@
-import React from "react";
+import { CSSProperties, useState } from "react";
 
 // Component imports
 import Image from "custom/Image";
@@ -35,7 +35,7 @@ import { selectBangboos } from "reducers/bangboo";
 function VersionHighlights() {
     const theme = useTheme();
 
-    const [index, setIndex] = React.useState(0);
+    const [index, setIndex] = useState(0);
     const handleIndexChange = (event: SelectChangeEvent) => {
         setIndex(Number(event.target.value));
     };
@@ -65,7 +65,7 @@ function VersionHighlights() {
         overflowY: "auto",
     };
 
-    const iconStyle: React.CSSProperties = {
+    const iconStyle: CSSProperties = {
         width: "32px",
         marginRight: "8px",
         backgroundColor: theme.icon.backgroundColor,

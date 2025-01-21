@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import parse, {
     HTMLReactParserOptions,
     Element as DOMElement,
@@ -23,7 +23,7 @@ function WeaponPassive({ weapon }: WeaponProps) {
 
     const { specialty, stats } = weapon;
 
-    const [sliderValue, setSliderValue] = React.useState(1);
+    const [sliderValue, setSliderValue] = useState(1);
     const handleSliderChange = (_: Event, newValue: number | number[]) => {
         setSliderValue(newValue as number);
     };

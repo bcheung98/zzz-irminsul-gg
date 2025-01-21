@@ -1,4 +1,4 @@
-import React from "react";
+import { BaseSyntheticEvent, useState } from "react";
 
 // Component imports
 import BannerList from "./BannerList";
@@ -37,11 +37,9 @@ function BannerArchive() {
     const CharacterBannerList = <BannerList type="character" />;
     const WeaponBannerList = <BannerList type="weapon" />;
 
-    const [value, setValue] = React.useState<"character" | "weapon">(
-        "character"
-    );
+    const [value, setValue] = useState<"character" | "weapon">("character");
     const handleValue = (
-        _: React.BaseSyntheticEvent,
+        _: BaseSyntheticEvent,
         newView: "character" | "weapon"
     ) => {
         if (newView !== null) {

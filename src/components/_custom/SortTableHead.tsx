@@ -1,3 +1,5 @@
+import { BaseSyntheticEvent } from "react";
+
 // Component imports
 import { StyledTableCell } from "styled/StyledTable";
 import { TextStyled } from "styled/StyledTypography";
@@ -17,7 +19,7 @@ interface SortTableHeadProps {
     headColumns: HeadColumn[];
     order: Order;
     orderBy: string;
-    onRequestSort: (event: React.BaseSyntheticEvent, property: string) => void;
+    onRequestSort: (event: BaseSyntheticEvent, property: string) => void;
 }
 
 function SortTableHead({
@@ -29,7 +31,7 @@ function SortTableHead({
     const theme = useTheme();
 
     const createSortHandler =
-        (property: string) => (event: React.BaseSyntheticEvent) => {
+        (property: string) => (event: BaseSyntheticEvent) => {
             onRequestSort(event, property);
         };
 

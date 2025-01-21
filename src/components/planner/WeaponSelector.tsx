@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo } from "react";
 
 // Component imports
 import Image from "custom/Image";
@@ -32,7 +32,7 @@ function WeaponSelector() {
             RarityMap[b.rarity] - RarityMap[a.rarity] ||
             a.displayName.localeCompare(b.displayName)
     );
-    const options = React.useMemo(
+    const options = useMemo(
         () => createOptions(weapons),
         [JSON.stringify(weapons)]
     );

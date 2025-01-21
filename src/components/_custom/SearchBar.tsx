@@ -1,11 +1,11 @@
-import React from "react";
+import { BaseSyntheticEvent } from "react";
 
 // MUI imports
 import { useTheme, TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 interface SearchBarProps {
-    onChange?: (event: React.BaseSyntheticEvent) => void;
+    onChange?: (event: BaseSyntheticEvent) => void;
     value?: string;
     placeholder?: string;
     inputIcon?: React.ReactNode;

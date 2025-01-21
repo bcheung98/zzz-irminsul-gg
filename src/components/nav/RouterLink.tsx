@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import { Link } from "react-router";
 import { ButtonBase, ButtonBaseProps } from "@mui/material";
 
@@ -7,7 +7,7 @@ interface RouterLinkProps extends ButtonBaseProps {
     openInNewTab?: boolean;
 }
 
-const RouterLink = React.forwardRef((props: RouterLinkProps, ref) => {
+const RouterLink = forwardRef((props: RouterLinkProps, ref) => {
     const { to, openInNewTab, children, ...other } = props;
 
     return (

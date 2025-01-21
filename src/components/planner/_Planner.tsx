@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 
 // Component imports
 import CharacterSelector from "./CharacterSelector";
@@ -45,7 +45,7 @@ function Planner() {
     const maxWidthLG = wideMode ? 6 : 8;
     const maxWidthXL = wideMode ? 5 : 6;
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(setPlannerCharacters([]));
         dispatch(setPlannerWeapons([]));
     }, []);

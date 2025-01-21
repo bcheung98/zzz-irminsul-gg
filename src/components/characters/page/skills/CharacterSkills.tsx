@@ -1,4 +1,4 @@
-import React from "react";
+import { BaseSyntheticEvent, CSSProperties, useEffect, useState } from "react";
 
 // Component imports
 import CharacterSkillTab from "./CharacterSkillTab";
@@ -29,14 +29,14 @@ function CharacterSkills({ character }: CharacterProps) {
 
     const { skills, stats, colors, element, materials } = character;
 
-    const [tabValue, setTabValue] = React.useState(0);
-    const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
+    const [tabValue, setTabValue] = useState(0);
+    const handleTabChange = (_: BaseSyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
 
     const currentSkillDisplay = useAppSelector(selectSkillDisplay);
-    const [mode, setMode] = React.useState<SkillDisplay>(currentSkillDisplay);
-    const handleMode = (_: React.BaseSyntheticEvent, newView: SkillDisplay) => {
+    const [mode, setMode] = useState<SkillDisplay>(currentSkillDisplay);
+    const handleMode = (_: BaseSyntheticEvent, newView: SkillDisplay) => {
         if (newView !== null) {
             setMode(newView);
         }
@@ -45,7 +45,7 @@ function CharacterSkills({ character }: CharacterProps) {
     const getCharacterColor = (option: keyof CharacterColors) =>
         characterColors(colors, option, element);
 
-    const skillIcon = (index: number): React.CSSProperties => {
+    const skillIcon = (index: number): CSSProperties => {
         const selected = index === tabValue;
         return {
             width: "48px",
@@ -62,7 +62,7 @@ function CharacterSkills({ character }: CharacterProps) {
         };
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         setMode(currentSkillDisplay);
     }, [currentSkillDisplay]);
 

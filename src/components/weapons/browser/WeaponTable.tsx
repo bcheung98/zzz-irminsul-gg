@@ -1,4 +1,4 @@
-import React from "react";
+import { BaseSyntheticEvent, useState } from "react";
 
 // Component imports
 import WeaponTableRow from "./WeaponTableRow";
@@ -29,13 +29,10 @@ export type WeaponRow = Pick<
 function WeaponTable({ weapons }: { weapons: Weapon[] }) {
     const characters = useAppSelector(selectCharacters);
 
-    const [order, setOrder] = React.useState<Order>("desc");
-    const [orderBy, setOrderBy] = React.useState("rank");
+    const [order, setOrder] = useState<Order>("desc");
+    const [orderBy, setOrderBy] = useState("rank");
 
-    const handleRequestSort = (
-        _: React.BaseSyntheticEvent,
-        property: string
-    ) => {
+    const handleRequestSort = (_: BaseSyntheticEvent, property: string) => {
         const isAsc = orderBy === property && order === "asc";
         setOrder(isAsc ? "desc" : "asc");
         setOrderBy(property);

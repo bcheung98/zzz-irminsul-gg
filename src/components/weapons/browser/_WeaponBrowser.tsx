@@ -1,4 +1,4 @@
-import React from "react";
+import { BaseSyntheticEvent, useEffect, useMemo, useState } from "react";
 
 // Component imports
 import WeaponFilters from "./WeaponFilters";
@@ -52,18 +52,18 @@ function WeaponBrowser() {
     );
     const filters = useAppSelector(selectWeaponFilters);
 
-    const [searchValue, setSearchValue] = React.useState("");
-    const handleInputChange = (event: React.BaseSyntheticEvent) => {
+    const [searchValue, setSearchValue] = useState("");
+    const handleInputChange = (event: BaseSyntheticEvent) => {
         setSearchValue(event.target.value);
     };
 
-    const currentWeapons = React.useMemo(
+    const currentWeapons = useMemo(
         () => filterWeapons(weapons, filters, searchValue),
         [weapons, filters, searchValue]
     );
 
     const drawerOpen = useAppSelector(isRightDrawerOpen);
-    const [mobileDrawerOpen, setMobileDrawerOpen] = React.useState(false);
+    const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
     const toggleDrawerState = () => {
         dispatch(toggleRightDrawer());
     };
@@ -75,8 +75,8 @@ function WeaponBrowser() {
     };
 
     type View = "icon" | "table";
-    const [view, setView] = React.useState<View>("icon");
-    const handleView = (_: React.BaseSyntheticEvent, newView: View) => {
+    const [view, setView] = useState<View>("icon");
+    const handleView = (_: BaseSyntheticEvent, newView: View) => {
         if (newView !== null) {
             setView(newView);
         }
@@ -92,11 +92,11 @@ function WeaponBrowser() {
         },
     ];
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(clearFilters());
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(toggleRightDrawer(matches_md_up));
     }, [matches_md_up]);
 

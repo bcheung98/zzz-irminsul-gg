@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { BrowserRouter } from "react-router";
 import "App.css";
 
@@ -24,7 +24,7 @@ import { getTheme } from "themes/theme";
 function App() {
     const dispatch = useAppDispatch();
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(fetchCharacters());
         dispatch(fetchWeapons());
         dispatch(fetchBangboos());
@@ -35,7 +35,7 @@ function App() {
 
     const theme = useAppSelector(selectTheme);
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(setTheme(theme));
     }, [theme]);
 

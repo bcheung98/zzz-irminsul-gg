@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router";
 
 // Component imports
@@ -31,7 +31,7 @@ function NavMobile({ navItems, linkItems }: NavProps) {
     const location = useLocation().pathname;
     const styles = navStyles(location);
 
-    const [drawerOpen, setDrawerOpen] = React.useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const toggleDrawer =
         (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
             if (

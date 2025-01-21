@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo } from "react";
 
 // Component imports
 import Image from "custom/Image";
@@ -34,7 +34,7 @@ function CharacterSelector() {
     const characters = [...useAppSelector(selectCharacters)].sort((a, b) =>
         a.fullName.localeCompare(b.fullName)
     );
-    const options = React.useMemo(
+    const options = useMemo(
         () => createOptions(characters),
         [JSON.stringify(characters)]
     );
