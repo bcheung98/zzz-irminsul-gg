@@ -49,7 +49,7 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
             buttons: createButtons<Rarity>(["S", "A", "B"], "ranks/item"),
         },
         {
-            name: "Substat",
+            name: "Advanced Stat",
             value: filters.substats,
             onChange: (_: BaseSyntheticEvent, newValues: WeaponSubStat[]) =>
                 dispatch(setSubstat(newValues)),
