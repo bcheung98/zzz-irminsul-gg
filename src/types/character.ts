@@ -11,8 +11,10 @@ export interface Character {
     id: number;
     name: string;
     fullName: string;
+    title?: string;
     rarity: Exclude<Rarity, "B" | "C">;
     element: Element;
+    subElement?: string;
     specialty: Specialty;
     attackType: AttackType;
     skills: CharacterSkills;
@@ -23,6 +25,7 @@ export interface Character {
     gender: "Male" | "Female";
     faction: Faction;
     colors: CharacterColors;
+    outfits: CharacterOutfit[];
     voiceActors: {
         en: string;
         jp: string;
@@ -61,10 +64,22 @@ export interface CharacterStats {
     hp: number[];
     atk: number[];
     def: number[];
+    impact: number[];
+    am: number[];
+    ap: number[];
+    pen: number[];
+    er: number[];
 }
 
 export interface CharacterColors {
     primary: string;
     secondary: string;
     accent: string;
+}
+
+export interface CharacterOutfit {
+    name: string;
+    displayName?: string;
+    rarity: Rarity;
+    description: string;
 }
