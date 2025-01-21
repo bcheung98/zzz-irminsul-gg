@@ -32,4 +32,5 @@ export const factions = [
     "Criminal Investigation Special Response Team",
     "Sons of Calydon",
     "Hollow Special Operations Section 6",
+    "Stars of Lyra",
 ] as const;
