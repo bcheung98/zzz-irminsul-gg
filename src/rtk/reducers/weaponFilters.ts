@@ -1,15 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "rtk/store";
 import { Rarity, Specialty } from "types/_common";
+import { WeaponSubStat } from "data/weaponStats";
 
 export interface WeaponFilterState {
     specialty: Specialty[];
     rarity: Rarity[];
+    substats: WeaponSubStat[];
 }
 
 const initialState: WeaponFilterState = {
     specialty: [],
     rarity: [],
+    substats: [],
 };
 
 export const weaponFilterSlice = createSlice({
@@ -21,6 +24,9 @@ export const weaponFilterSlice = createSlice({
         },
         setRarity: (state, action: PayloadAction<Rarity[]>) => {
             state.rarity = action.payload;
+        },
+        setSubstat: (state, action: PayloadAction<WeaponSubStat[]>) => {
+            state.substats = action.payload;
         },
         clearFilters: (
             state,
@@ -35,7 +41,7 @@ export const weaponFilterSlice = createSlice({
     },
 });
 
-export const { setSpecialty, setRarity, clearFilters } =
+export const { setSpecialty, setRarity, setSubstat, clearFilters } =
     weaponFilterSlice.actions;
 
 export const selectWeaponFilters = (state: RootState): WeaponFilterState =>

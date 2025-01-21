@@ -1,4 +1,4 @@
-import React from "react";
+import { BaseSyntheticEvent } from "react";
 
 // Component imports
 import Dropdown from "custom/Dropdown";
@@ -11,6 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 // Helper imports
+import { objectKeys } from "helpers/utils";
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import {
     activeWeaponFilters,
@@ -18,8 +19,10 @@ import {
     selectWeaponFilters,
     setRarity,
     setSpecialty,
+    setSubstat,
 } from "reducers/weaponFilters";
 import { specialities } from "data/common";
+import { subStats, WeaponSubStat } from "data/weaponStats";
 
 // Type imports
 import { Rarity, Specialty } from "types/_common";
@@ -34,16 +37,23 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
         {
             name: "Specialty",
             value: filters.specialty,
-            onChange: (_: React.BaseSyntheticEvent, newValues: Specialty[]) =>
+            onChange: (_: BaseSyntheticEvent, newValues: Specialty[]) =>
                 dispatch(setSpecialty(newValues)),
             buttons: createButtons<Specialty>(specialities, "specialties"),
         },
         {
             name: "Rank",
             value: filters.rarity,
-            onChange: (_: React.BaseSyntheticEvent, newValues: Rarity[]) =>
+            onChange: (_: BaseSyntheticEvent, newValues: Rarity[]) =>
                 dispatch(setRarity(newValues)),
             buttons: createButtons<Rarity>(["S", "A", "B"], "ranks/item"),
+        },
+        {
+            name: "Substat",
+            value: filters.substats,
+            onChange: (_: BaseSyntheticEvent, newValues: WeaponSubStat[]) =>
+                dispatch(setSubstat(newValues)),
+            buttons: createButtons(objectKeys(subStats), "stat_icons"),
         },
     ];
 

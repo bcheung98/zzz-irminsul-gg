@@ -13,6 +13,11 @@ export function filterWeapons(
     if (filters.rarity.length > 0) {
         weps = weps.filter((wep) => filters.rarity.includes(wep.rarity));
     }
+    if (filters.substats.length > 0) {
+        weps = weps.filter((weapon) =>
+            filters.substats.includes(weapon.stats.subStat)
+        );
+    }
     if (searchValue) {
         weps = weps.filter(
             (wep) =>
