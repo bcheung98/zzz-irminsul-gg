@@ -3,12 +3,11 @@ import { useMemo } from "react";
 // Component imports
 import Image from "custom/Image";
 import SearchBar from "custom/SearchBar";
-import { FlexBox } from "styled/StyledBox";
 import { StyledMenuItem } from "styled/StyledMenu";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, Autocomplete, Box } from "@mui/material";
+import { useTheme, Autocomplete, Stack } from "@mui/material";
 
 // Helper imports
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
@@ -38,7 +37,7 @@ function WeaponSelector() {
     );
     const values = useAppSelector(getSelectedWeapons);
 
-    const smallIconStyle = { width: "20px", height: "20px" };
+    const smallIconStyle = { width: "16px", height: "16px" };
 
     return (
         <Autocomplete
@@ -95,15 +94,22 @@ function WeaponSelector() {
                         },
                     }}
                 >
-                    <FlexBox>
-                        <Box sx={{ mr: "8px", mt: "6px" }}>
+                    <Stack spacing={2} direction="row" alignItems="center">
+                        <Stack
+                            spacing={1}
+                            sx={{
+                                p: "4px",
+                                borderRadius: "16px",
+                                backgroundColor: theme.appbar.backgroundColor,
+                            }}
+                        >
                             <Image
                                 src={`specialties/${option.specialty}`}
                                 alt={option.specialty}
                                 style={smallIconStyle}
                                 tooltip={option.specialty}
                             />
-                        </Box>
+                        </Stack>
                         <Image
                             src={`w-engines/${option.name}`}
                             alt={option.name}
@@ -111,7 +117,6 @@ function WeaponSelector() {
                                 width: "48px",
                                 height: "48px",
                                 padding: "4px",
-                                marginRight: "8px",
                                 border: `2px solid ${getRarityColor(
                                     option.rarity
                                 )}`,
@@ -123,7 +128,7 @@ function WeaponSelector() {
                             }}
                         />
                         <TextStyled noWrap>{option.displayName}</TextStyled>
-                    </FlexBox>
+                    </Stack>
                 </StyledMenuItem>
             )}
         />

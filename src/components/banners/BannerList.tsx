@@ -18,12 +18,12 @@ import SortTableHead, {
 import {
     useTheme,
     Autocomplete,
-    Box,
     Card,
     IconButton,
     TableContainer,
     Table,
     TableBody,
+    Stack,
 } from "@mui/material";
 import HelpIcon from "@mui/icons-material/Help";
 
@@ -77,7 +77,7 @@ function BannerList({ type }: BannerListProps) {
 
     const headColumns: HeadColumn[] = [{ id: "subVersion", label: "Version" }];
 
-    const smallIconStyle = { width: "20px", height: "20px" };
+    const smallIconStyle = { width: "16px", height: "16px" };
 
     useEffect(() => {}, [characters, weapons]);
 
@@ -162,85 +162,56 @@ function BannerList({ type }: BannerListProps) {
                             },
                         }}
                     >
-                        <FlexBox>
-                            <Box
+                        <Stack spacing={2} direction="row" alignItems="center">
+                            <Stack
+                                spacing={1}
                                 sx={{
-                                    mr: type === "character" ? "4px" : "8px",
-                                    mt: "6px",
+                                    p: "4px",
+                                    borderRadius: "16px",
+                                    backgroundColor:
+                                        theme.appbar.backgroundColor,
                                 }}
                             >
-                                <Box
-                                    sx={{
-                                        display:
-                                            type === "character"
-                                                ? "block"
-                                                : "none",
-                                    }}
-                                >
+                                {option.element && (
                                     <Image
                                         src={`elements/${option.element}`}
                                         alt={option.element}
                                         style={smallIconStyle}
                                         tooltip={option.element}
                                     />
-                                </Box>
-                                <Box>
-                                    <Image
-                                        src={`specialties/${option.specialty}`}
-                                        alt={option.specialty}
-                                        style={smallIconStyle}
-                                        tooltip={option.specialty}
-                                    />
-                                </Box>
-                            </Box>
-                            {type === "character" ? (
-                                <Card
-                                    sx={{
-                                        width: "38px",
-                                        height: "48px",
-                                        border: `2px solid ${getRarityColor(
-                                            option.rarity
-                                        )}`,
-                                        borderRadius: "4px",
-                                        backgroundColor: theme.background(2),
-                                        mr: "16px",
-                                        transform:
-                                            "skewX(15deg) translate(7px)",
-                                    }}
-                                >
-                                    <Image
-                                        src={`characters/avatars/${option.name}`}
-                                        alt={option.name}
-                                        style={{
-                                            width: "48px",
-                                            transform:
-                                                "skewX(-15deg) translate(-7px)",
-                                        }}
-                                    />
-                                </Card>
-                            ) : (
+                                )}
                                 <Image
-                                    src={`w-engines/${option.name}`}
-                                    alt={option.name}
-                                    style={{
-                                        width: "48px",
-                                        height: "48px",
-                                        padding: "4px",
-                                        marginRight: "12px",
-                                        border: `2px solid ${getRarityColor(
-                                            option.rarity
-                                        )}`,
-                                        borderRadius:
-                                            theme.mainContentBox.borderRadius,
-                                        backgroundColor: theme.background(2),
-                                        boxShadow: `inset 0 0 24px 16px ${getBackgroundColor(
-                                            option.rarity
-                                        )}`,
-                                    }}
+                                    src={`specialties/${option.specialty}`}
+                                    alt={option.specialty}
+                                    style={smallIconStyle}
+                                    tooltip={option.specialty}
                                 />
-                            )}
+                            </Stack>
+                            <Image
+                                src={
+                                    type === "character"
+                                        ? `characters/icons/${option.name}`
+                                        : `w-engines/${option.name}`
+                                }
+                                alt={option.name}
+                                style={{
+                                    width: "48px",
+                                    height: "48px",
+                                    padding:
+                                        type === "character" ? "0px" : "4px",
+                                    border: `2px solid ${getRarityColor(
+                                        option.rarity
+                                    )}`,
+                                    borderRadius:
+                                        theme.mainContentBox.borderRadius,
+                                    backgroundColor: theme.background(2),
+                                    boxShadow: `inset 0 0 24px 16px ${getBackgroundColor(
+                                        option.rarity
+                                    )}`,
+                                }}
+                            />
                             <TextStyled noWrap>{option.displayName}</TextStyled>
-                        </FlexBox>
+                        </Stack>
                     </StyledMenuItem>
                 )}
             />

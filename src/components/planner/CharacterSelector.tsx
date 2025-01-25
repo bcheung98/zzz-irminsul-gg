@@ -3,18 +3,17 @@ import { useMemo } from "react";
 // Component imports
 import Image from "custom/Image";
 import SearchBar from "custom/SearchBar";
-import { FlexBox } from "styled/StyledBox";
 import { StyledMenuItem } from "styled/StyledMenu";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, Autocomplete, Box, Card } from "@mui/material";
+import { useTheme, Autocomplete, Stack } from "@mui/material";
 
 // Helper imports
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
 import { getSelectedCharacters, setPlannerCharacters } from "reducers/planner";
-import { getRarityColor } from "helpers/rarityColors";
+import { getBackgroundColor, getRarityColor } from "helpers/rarityColors";
 
 // Type imports
 import { Character } from "types/character";
@@ -40,7 +39,7 @@ function CharacterSelector() {
     );
     const values = useAppSelector(getSelectedCharacters);
 
-    const smallIconStyle = { width: "20px", height: "20px" };
+    const smallIconStyle = { width: "16px", height: "16px" };
 
     return (
         <Autocomplete
@@ -99,49 +98,47 @@ function CharacterSelector() {
                         },
                     }}
                 >
-                    <FlexBox>
-                        <Box sx={{ mr: "4px", mt: "8px" }}>
-                            <Box>
-                                <Image
-                                    src={`elements/${option.element}`}
-                                    alt={option.element}
-                                    style={smallIconStyle}
-                                    tooltip={option.element}
-                                />
-                            </Box>
-                            <Box>
-                                <Image
-                                    src={`specialties/${option.specialty}`}
-                                    alt={option.specialty}
-                                    style={smallIconStyle}
-                                    tooltip={option.specialty}
-                                />
-                            </Box>
-                        </Box>
-                        <Card
+                    <Stack spacing={2} direction="row" alignItems="center">
+                        <Stack
+                            spacing={1}
                             sx={{
-                                width: "38px",
+                                p: "4px",
+                                borderRadius: "16px",
+                                backgroundColor: theme.appbar.backgroundColor,
+                            }}
+                        >
+                            <Image
+                                src={`elements/${option.element}`}
+                                alt={option.element}
+                                style={smallIconStyle}
+                                tooltip={option.element}
+                            />
+
+                            <Image
+                                src={`specialties/${option.specialty}`}
+                                alt={option.specialty}
+                                style={smallIconStyle}
+                                tooltip={option.specialty}
+                            />
+                        </Stack>
+                        <Image
+                            src={`characters/icons/${option.name}`}
+                            alt={option.name}
+                            style={{
+                                width: "48px",
                                 height: "48px",
                                 border: `2px solid ${getRarityColor(
                                     option.rarity
                                 )}`,
-                                borderRadius: "4px",
+                                borderRadius: theme.mainContentBox.borderRadius,
                                 backgroundColor: theme.background(2),
-                                mr: "16px",
-                                transform: "skewX(15deg) translate(7px)",
+                                boxShadow: `inset 0 0 24px 16px ${getBackgroundColor(
+                                    option.rarity
+                                )}`,
                             }}
-                        >
-                            <Image
-                                src={`characters/avatars/${option.name}`}
-                                alt={option.name}
-                                style={{
-                                    width: "48px",
-                                    transform: "skewX(-15deg) translate(-7px)",
-                                }}
-                            />
-                        </Card>
+                        />
                         <TextStyled noWrap>{option.fullName}</TextStyled>
-                    </FlexBox>
+                    </Stack>
                 </StyledMenuItem>
             )}
         />
