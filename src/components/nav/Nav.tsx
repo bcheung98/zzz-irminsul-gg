@@ -29,7 +29,7 @@ function Nav() {
             .catch((error) => console.error(error));
     }, []);
 
-    const linkItems: NavItem[] = [];
+    let linkItems: NavItem[] = [];
     websites.forEach(
         (site) =>
             site.tag !== CURRENTGAME &&
@@ -40,6 +40,7 @@ function Nav() {
                 link: `https://${site.tag.toLowerCase()}.irminsul.gg/`,
             })
     );
+    linkItems = linkItems.sort((a, b) => a.text.localeCompare(b.text));
 
     return (
         <>
@@ -106,7 +107,7 @@ const navItems: NavItem[] = [
 export const navStyles = (location: string) => ({
     navItem: (size = 32): CSSProperties => ({
         width: size,
-        height: size,
+        height: "auto",
         padding: "2px",
         color: "rgb(255, 255, 255)",
     }),

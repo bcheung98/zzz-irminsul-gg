@@ -137,6 +137,28 @@ function NavMobile({ navItems, linkItems }: NavProps) {
                         </Box>
                     ))}
                 </List>
+                <Divider variant="middle" />
+                <List>
+                    <Box sx={styles.listItem("_")}>
+                        <ButtonBase
+                            href="https://ko-fi.com/bcheung"
+                            target="_blank"
+                            rel="noopener"
+                            disableRipple
+                            disableTouchRipple
+                            sx={styles.listItemButton()}
+                        >
+                            <Image
+                                src="https://storage.ko-fi.com/cdn/brandasset/v2/kofi_symbol.png"
+                                alt="Ko-Fi"
+                                style={styles.navItem()}
+                            />
+                            <TextStyled sx={styles.listItemText()}>
+                                Buy me a Ko-Fi
+                            </TextStyled>
+                        </ButtonBase>
+                    </Box>
+                </List>
             </SwipeableDrawer>
         </>
     );
