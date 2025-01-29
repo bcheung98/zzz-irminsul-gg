@@ -9,7 +9,6 @@ import { StyledSwitch } from "styled/StyledSwitch";
 // MUI imports
 import {
     useTheme,
-    useMediaQuery,
     SxProps,
     IconButton,
     Dialog,
@@ -37,17 +36,15 @@ import {
     toggleUnreleasedContent,
     Width,
 } from "reducers/settings";
-import { navStyles } from "./nav/Nav";
 import { themeList } from "themes/theme";
 import { Region, regions } from "helpers/dates";
 
 // Type imports
 import { ThemeNames } from "types/theme";
+import { StyledTooltip } from "styled/StyledTooltip";
 
 function Settings() {
     const theme = useTheme();
-    const matches_up_md = useMediaQuery(theme.breakpoints.up("md"));
-    const styles = navStyles("_");
 
     const dispatch = useAppDispatch();
 
@@ -172,36 +169,25 @@ function Settings() {
 
     return (
         <>
-            <IconButton
-                disableRipple
-                disableTouchRipple
-                onClick={handleSettingsOpen}
-                sx={
-                    matches_up_md
-                        ? {
-                              borderRadius: "64px",
-                              px: "2px",
-                              width: "36px",
-                              height: "36px",
-                              color: "white",
-                              "&:hover": {
-                                  backgroundColor: theme.appbar.hover,
-                              },
-                          }
-                        : styles.listItemButton()
-                }
-            >
-                <SettingsIcon
-                    sx={matches_up_md ? undefined : styles.navItem()}
-                />
-                {!matches_up_md && (
-                    <TextStyled
-                        sx={matches_up_md ? undefined : styles.listItemText()}
-                    >
-                        Settings
-                    </TextStyled>
-                )}
-            </IconButton>
+            <StyledTooltip title="Settings" placement="bottom">
+                <IconButton
+                    disableRipple
+                    disableTouchRipple
+                    onClick={handleSettingsOpen}
+                    sx={{
+                        borderRadius: "64px",
+                        px: "2px",
+                        width: "36px",
+                        height: "36px",
+                        color: theme.appbar.color,
+                        "&:hover": {
+                            backgroundColor: theme.appbar.hover,
+                        },
+                    }}
+                >
+                    <SettingsIcon />
+                </IconButton>
+            </StyledTooltip>
             <Dialog
                 open={settingsOpen}
                 onClose={handleSettingsClose}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router";
 
 // Component imports
+import Search from "components/Search";
 import Settings from "components/Settings";
 import Image from "custom/Image";
 import { TextStyled } from "styled/StyledTypography";
@@ -10,6 +11,7 @@ import Logo from "./Logo";
 // MUI imports
 import {
     useTheme,
+    useMediaQuery,
     AppBar,
     Toolbar,
     IconButton,
@@ -18,6 +20,7 @@ import {
     List,
     ButtonBase,
     Divider,
+    Stack,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -27,6 +30,7 @@ import { NavProps, navStyles } from "./Nav";
 
 function NavMobile({ navItems, linkItems }: NavProps) {
     const theme = useTheme();
+    const matches_up_sm = useMediaQuery(theme.breakpoints.up("sm"));
 
     const location = useLocation().pathname;
     const styles = navStyles(location);
@@ -48,14 +52,23 @@ function NavMobile({ navItems, linkItems }: NavProps) {
     return (
         <>
             <AppBar position="fixed">
-                <Toolbar disableGutters>
-                    <IconButton
-                        onClick={toggleDrawer(true)}
-                        sx={{ mx: "8px", color: theme.appbar.color }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Logo href="/" />
+                <Toolbar
+                    disableGutters
+                    sx={{ pr: "16px", justifyContent: "space-between" }}
+                >
+                    <Box>
+                        <IconButton
+                            onClick={toggleDrawer(true)}
+                            sx={{ mx: "8px", color: theme.appbar.color }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Logo href="/" showText={matches_up_sm} />
+                    </Box>
+                    <Stack direction="row" spacing={1} alignItems="center">
+                        <Search />
+                        <Settings />
+                    </Stack>
                 </Toolbar>
             </AppBar>
             <SwipeableDrawer
@@ -82,12 +95,6 @@ function NavMobile({ navItems, linkItems }: NavProps) {
                         <Logo href="https://irminsul.gg/" />
                     </Toolbar>
                 </AppBar>
-                <List>
-                    <Box sx={styles.listItem("_")}>
-                        <Settings />
-                    </Box>
-                </List>
-                <Divider variant="middle" />
                 <List>
                     {navItems.map((item, index) => (
                         <Box key={index} sx={styles.listItem(item.link)}>

@@ -3,6 +3,7 @@ import { useLocation } from "react-router";
 
 // Component imports
 import Logo from "./Logo";
+import Search from "components/Search";
 import Settings from "components/Settings";
 import Image from "custom/Image";
 import RouterLink from "./RouterLink";
@@ -112,6 +113,7 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
                                 variant="contained"
                                 startIcon={<KeyboardArrowUpIcon />}
                                 sx={{
+                                    height: "32px",
                                     backgroundColor: theme.palette.info.dark,
                                     color:
                                         getContrastRatio(
@@ -125,6 +127,7 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
                                 Back to Top
                             </Button>
                         </ScrollTopDesktop>
+                        <Search />
                         <Settings />
                     </FlexBox>
                 </Toolbar>
@@ -348,6 +351,7 @@ function ScrollTopDesktop({ children }: { children: React.ReactNode }) {
 
         if (anchor) {
             anchor.scrollIntoView({
+                behavior: "smooth",
                 block: "center",
             });
         }
