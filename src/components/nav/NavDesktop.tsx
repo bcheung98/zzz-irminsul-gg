@@ -16,20 +16,21 @@ import {
     styled,
     useTheme,
     useMediaQuery,
+    useScrollTrigger,
+    alpha,
+    getContrastRatio,
     Theme,
     CSSObject,
     SxProps,
     Toolbar,
     Box,
+    Button,
     IconButton,
     ButtonBase,
     List,
     Divider,
     Collapse,
-    useScrollTrigger,
     Fade,
-    Button,
-    getContrastRatio,
 } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
@@ -82,7 +83,13 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
 
     return (
         <>
-            <AppBar position="fixed">
+            <AppBar
+                position="fixed"
+                sx={{
+                    backgroundColor: alpha(theme.appbar.backgroundColor, 0.88),
+                    backdropFilter: "blur(8px)",
+                }}
+            >
                 <Toolbar
                     disableGutters
                     sx={{

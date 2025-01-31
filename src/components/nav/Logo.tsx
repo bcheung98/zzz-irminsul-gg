@@ -24,7 +24,16 @@ function Logo({
                     style={{ width: size, height: size }}
                 />
                 {showText && (
-                    <TextStyled variant="sitename" sx={{ lineHeight: size }}>
+                    <TextStyled
+                        variant="sitename"
+                        sx={{
+                            lineHeight: size,
+                            display: {
+                                "@": "none",
+                                "@350": "block",
+                            },
+                        }}
+                    >
                         IRMINSUL.GG
                     </TextStyled>
                 )}

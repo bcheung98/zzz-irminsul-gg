@@ -170,10 +170,16 @@ export function getTheme(name: string) {
         typography: {
             sitename: {
                 fontFamily: "Rowdies, Inter !important",
-                fontSize: "1.25rem",
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: "1rem",
+                    letterSpacing: ".075rem",
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: "1.25rem",
+                    letterSpacing: ".1rem",
+                },
                 fontWeight: "400 !important",
                 color: "rgb(255, 255, 255) !important",
-                letterSpacing: ".1rem",
             },
             h4: {
                 [theme.breakpoints.up("xs")]: {
