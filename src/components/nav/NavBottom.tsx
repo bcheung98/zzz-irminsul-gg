@@ -1,7 +1,3 @@
-import viteLogo from "/vite.svg";
-import reactLogo from "/react.svg";
-import muiLogo from "/mui.svg";
-
 // Component imports
 import { FlexBox } from "styled/StyledBox";
 import { TextStyled } from "styled/StyledTypography";
@@ -23,6 +19,10 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 // Helper imports
 import { useAppSelector } from "helpers/hooks";
 import { selectWidth } from "reducers/settings";
+
+const viteLogo = "https://irminsul.gg/vite.svg";
+const reactLogo = "https://irminsul.gg/react.svg";
+const muiLogo = "https://irminsul.gg/mui.svg";
 
 const bottomText = (
     <>
