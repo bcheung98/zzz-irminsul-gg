@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 
 // Component imports
 import { TextStyled } from "styled/StyledTypography";
@@ -6,27 +6,35 @@ import { TextStyled } from "styled/StyledTypography";
 // MUI imports
 import { useTheme, ButtonBase, Collapse, Box } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
+import Image from "./Image";
+import { combineStyles } from "helpers/utils";
 
 interface DropdownProps {
     children?: React.ReactNode;
     title?: string;
     titleColor?: string;
+    img?: string;
+    imgStyle?: CSSProperties;
     iconColor?: string;
     contentPadding?: string | number;
     unmountOnExit?: boolean;
+    defaultOpen?: boolean;
 }
 
 function Dropdown({
     children,
     title = "",
     titleColor,
+    img,
+    imgStyle,
     iconColor,
     contentPadding = "4px 24px",
     unmountOnExit = false,
+    defaultOpen = false,
 }: DropdownProps) {
     const theme = useTheme();
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(defaultOpen);
     const toggleDropdownState = () => {
         setOpen(!open);
     };
@@ -52,6 +60,19 @@ function Dropdown({
                         transition: "transform 0.25s",
                     }}
                 />
+                {img && (
+                    <Image
+                        src={img}
+                        style={combineStyles(
+                            {
+                                width: "32px",
+                                height: "32px",
+                                marginRight: "8px",
+                            },
+                            imgStyle
+                        )}
+                    />
+                )}
                 <TextStyled
                     sx={{ color: titleColor || theme.text.primary }}
                     noWrap

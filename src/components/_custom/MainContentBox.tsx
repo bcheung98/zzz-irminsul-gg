@@ -1,5 +1,3 @@
-import React from "react";
-
 // Component imports
 import { TextStyled } from "styled/StyledTypography";
 
@@ -61,7 +59,7 @@ function MainContentBox({
                         flexGrow: 1,
                         flexWrap: "wrap",
                         justifyContent: "space-between",
-                        rowGap: "8px",
+                        gap: "8px",
                     }}
                 >
                     {typeof title === "string" ? (
