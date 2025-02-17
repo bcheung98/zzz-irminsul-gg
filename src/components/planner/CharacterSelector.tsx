@@ -10,6 +10,7 @@ import { TextStyled } from "styled/StyledTypography";
 import { useTheme, Autocomplete, Stack } from "@mui/material";
 
 // Helper imports
+import { range } from "helpers/utils";
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
 import { getSelectedCharacters, setPlannerCharacters } from "reducers/planner";
@@ -46,6 +47,7 @@ function CharacterSelector() {
             multiple
             autoComplete
             filterSelectedOptions
+            disableClearable
             options={options}
             getOptionLabel={(option) => option.fullName}
             filterOptions={(options, { inputValue }) =>
@@ -62,11 +64,24 @@ function CharacterSelector() {
             noOptionsText="No Agents"
             value={values}
             isOptionEqualToValue={(option, value) => option.name === value.name}
-            onChange={(_: any, newValue: CharacterCostObject[] | null) =>
+            onChange={(
+                event,
+                newValue: CharacterCostObject[] | null,
+                reason
+            ) => {
+                if (
+                    event.type === "keydown" &&
+                    ((event as React.KeyboardEvent).key === "Backspace" ||
+                        (event as React.KeyboardEvent).key === "Delete") &&
+                    reason === "removeOption"
+                ) {
+                    return;
+                }
                 dispatch(
                     setPlannerCharacters(newValue as CharacterCostObject[])
-                )
-            }
+                );
+            }}
+            renderTags={() => null}
             renderInput={(params) => (
                 <SearchBar
                     params={params}
@@ -148,59 +163,65 @@ function CharacterSelector() {
 export default CharacterSelector;
 
 function createOptions(characters: Character[]) {
+    const costArray = range(0, 7, 0);
     return characters.map(
         (char) =>
             ({
+                id: `character_${char.id}`,
                 name: char.name,
                 fullName: char.fullName,
                 rarity: char.rarity,
                 element: char.element,
                 specialty: char.specialty,
                 colors: char.colors,
+                release: char.release,
                 costs: {
                     // Source of each material is mapped to a specific index in the array:
                     // [Level, Basic, Dodge, Assist, Special, Chain, Core]
                     credits: {
-                        Credit: [0, 0, 0, 0, 0, 0, 0],
+                        Credit: costArray,
                     },
                     characterXP: {
-                        CharacterXP1: [0, 0, 0, 0, 0, 0, 0],
-                        CharacterXP2: [0, 0, 0, 0, 0, 0, 0],
-                        CharacterXP3: [0, 0, 0, 0, 0, 0, 0],
+                        CharacterXP1: costArray,
+                        CharacterXP2: costArray,
+                        CharacterXP3: costArray,
                     },
                     bossMat: {
                         [`${char.materials.bossMat}` as ExpertChallengeMaterial]:
-                            [0, 0, 0, 0, 0, 0, 0],
+                            costArray,
                     },
                     weeklyBossMat: {
                         [`${char.materials.weeklyBossMat}` as NotoriousHuntMaterial]:
-                            [0, 0, 0, 0, 0, 0, 0],
+                            costArray,
                     },
                     hamsterCagePass: {
-                        "Hamster Cage Pass": [0, 0, 0, 0, 0, 0, 0],
+                        "Hamster Cage Pass": costArray,
                     },
                     characterAscension: {
-                        [`${char.specialty}1` as CharacterAscensionMaterial]: [
-                            0, 0, 0, 0, 0, 0, 0,
-                        ],
-                        [`${char.specialty}2` as CharacterAscensionMaterial]: [
-                            0, 0, 0, 0, 0, 0, 0,
-                        ],
-                        [`${char.specialty}3` as CharacterAscensionMaterial]: [
-                            0, 0, 0, 0, 0, 0, 0,
-                        ],
+                        [`${char.specialty}1` as CharacterAscensionMaterial]:
+                            costArray,
+                        [`${char.specialty}2` as CharacterAscensionMaterial]:
+                            costArray,
+                        [`${char.specialty}3` as CharacterAscensionMaterial]:
+                            costArray,
                     },
                     characterSkill: {
-                        [`${char.element}1` as CharacterSkillMaterial]: [
-                            0, 0, 0, 0, 0, 0, 0,
-                        ],
-                        [`${char.element}2` as CharacterSkillMaterial]: [
-                            0, 0, 0, 0, 0, 0, 0,
-                        ],
-                        [`${char.element}3` as CharacterSkillMaterial]: [
-                            0, 0, 0, 0, 0, 0, 0,
-                        ],
+                        [`${char.element}1` as CharacterSkillMaterial]:
+                            costArray,
+                        [`${char.element}2` as CharacterSkillMaterial]:
+                            costArray,
+                        [`${char.element}3` as CharacterSkillMaterial]:
+                            costArray,
                     },
+                },
+                values: {
+                    level: {},
+                    basic: {},
+                    dodge: {},
+                    assist: {},
+                    special: {},
+                    chain: {},
+                    core: {},
                 },
             } as CharacterCostObject)
     );

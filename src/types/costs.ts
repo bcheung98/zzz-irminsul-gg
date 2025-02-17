@@ -10,7 +10,7 @@ import {
 } from "./materials";
 import { Character } from "./character";
 import { Weapon } from "./weapon";
-import { CostObjectSourceIndex } from "reducers/planner";
+import { Rarity } from "./_common";
 
 export type CostObjectKeys =
     | TotalCostObjectKeys
@@ -44,10 +44,38 @@ export type PayloadCostObject = Record<
     Record<CostObjectKeys, number>
 >;
 
+export enum CostObjectSourceIndex {
+    level,
+    basic,
+    dodge,
+    assist,
+    special,
+    chain,
+    core,
+}
+
+export interface CostSliderData {
+    start: number;
+    stop: number;
+    selected: boolean;
+}
+
+export type CostSliderValues = Record<
+    keyof typeof CostObjectSourceIndex,
+    CostSliderData
+>;
+
+export type CharacterCostSliderValues = CostSliderValues;
+export type WeaponCostSliderValues = Pick<CostSliderValues, "level">;
+
+export interface PayloadData extends Partial<CostSliderData> {
+    rarity?: Rarity;
+}
+
 export interface UpdateCostsPayload {
     name: string;
     type: keyof typeof CostObjectSourceIndex;
-    costs: PayloadCostObject;
+    data: PayloadData;
 }
 
 export interface CharacterCost {
@@ -63,9 +91,17 @@ export interface CharacterCost {
 export interface CharacterCostObject
     extends Pick<
         Character,
-        "name" | "fullName" | "rarity" | "element" | "specialty" | "colors"
+        | "name"
+        | "fullName"
+        | "rarity"
+        | "element"
+        | "specialty"
+        | "colors"
+        | "release"
     > {
+    id: string;
     costs: CharacterCost;
+    values: CharacterCostSliderValues;
 }
 
 export interface WeaponCost {
@@ -75,6 +111,11 @@ export interface WeaponCost {
 }
 
 export interface WeaponCostObject
-    extends Pick<Weapon, "name" | "displayName" | "rarity" | "specialty"> {
+    extends Pick<
+        Weapon,
+        "name" | "displayName" | "rarity" | "specialty" | "release"
+    > {
+    id: string;
     costs: WeaponCost;
+    values: WeaponCostSliderValues;
 }

@@ -19,13 +19,12 @@ import {
     getCharacterSkillCost,
     getWeaponLevelCost,
 } from "helpers/getLevelUpCosts";
-import { CostObjectSourceIndex } from "reducers/planner";
 import { createMaterialCostData } from "helpers/createMaterialCostData";
 
 // Type imports
 import { Element, Rarity, Specialty } from "types/_common";
 import { CharacterColors } from "types/character";
-import { TotalCostObject } from "types/costs";
+import { CostObjectSourceIndex, TotalCostObject } from "types/costs";
 import {
     CharacterAscensionMaterial,
     CharacterMaterials,
@@ -178,7 +177,7 @@ function getCosts({
 }: {
     type: "character" | "weapon" | "bangboo";
     skillKey: LevelUpCostsProps["skillKey"];
-    rarity: Exclude<Rarity, "C">;
+    rarity: Rarity;
     values: number[];
     element?: Element;
     specialty?: Specialty;
@@ -189,7 +188,12 @@ function getCosts({
         case "level":
             // TODO: Add bangboo level-up costs
             if (type === "character") {
-                levelUpCost = getCharacterLevelCost(values, true, false);
+                levelUpCost = getCharacterLevelCost({
+                    start: values[0],
+                    stop: values[1],
+                    selected: true,
+                    withXP: false,
+                });
                 costs = {
                     credits: {
                         Credit: levelUpCost.credits.Credit,
@@ -204,7 +208,13 @@ function getCosts({
                     },
                 } as TotalCostObject;
             } else {
-                levelUpCost = getWeaponLevelCost(rarity, values, true, false);
+                levelUpCost = getWeaponLevelCost({
+                    start: values[0],
+                    stop: values[1],
+                    selected: true,
+                    withXP: false,
+                    rarity: rarity,
+                });
                 costs = {
                     credits: {
                         Credit: levelUpCost.credits.Credit,
@@ -225,7 +235,11 @@ function getCosts({
         case "assist":
         case "special":
         case "chain":
-            levelUpCost = getCharacterSkillCost(values, true);
+            levelUpCost = getCharacterSkillCost({
+                start: values[0],
+                stop: values[1],
+                selected: true,
+            });
             costs = {
                 credits: {
                     Credit: levelUpCost.credits.Credit,
@@ -246,7 +260,11 @@ function getCosts({
             break;
         case "core":
             let materials = mats as CharacterMaterials;
-            levelUpCost = getCharacterCoreSkillCost(values, true);
+            levelUpCost = getCharacterCoreSkillCost({
+                start: values[0],
+                stop: values[1],
+                selected: true,
+            });
             costs = {
                 credits: {
                     Credit: levelUpCost.credits.Credit,

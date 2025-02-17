@@ -44,6 +44,7 @@ function WeaponSelector() {
             multiple
             autoComplete
             filterSelectedOptions
+            disableClearable
             options={options}
             getOptionLabel={(option) => option.displayName}
             filterOptions={(options, { inputValue }) =>
@@ -60,9 +61,18 @@ function WeaponSelector() {
             noOptionsText="No W-Engines"
             value={values}
             isOptionEqualToValue={(option, value) => option.name === value.name}
-            onChange={(_: any, newValue: WeaponCostObject[] | null) =>
-                dispatch(setPlannerWeapons(newValue as WeaponCostObject[]))
-            }
+            onChange={(event, newValue: WeaponCostObject[] | null, reason) => {
+                if (
+                    event.type === "keydown" &&
+                    ((event as React.KeyboardEvent).key === "Backspace" ||
+                        (event as React.KeyboardEvent).key === "Delete") &&
+                    reason === "removeOption"
+                ) {
+                    return;
+                }
+                dispatch(setPlannerWeapons(newValue as WeaponCostObject[]));
+            }}
+            renderTags={() => null}
             renderInput={(params) => (
                 <SearchBar
                     params={params}
@@ -141,10 +151,12 @@ function createOptions(weapons: Weapon[]) {
     return weapons.map(
         (wep) =>
             ({
+                id: `weapon_${wep.id}`,
                 name: wep.name,
                 displayName: wep.displayName,
                 rarity: wep.rarity,
                 specialty: wep.specialty,
+                release: wep.release,
                 costs: {
                     credits: {
                         Credit: 0,
@@ -159,6 +171,9 @@ function createOptions(weapons: Weapon[]) {
                         [`${wep.specialty}2` as WeaponAscensionMaterial]: 0,
                         [`${wep.specialty}3` as WeaponAscensionMaterial]: 0,
                     },
+                },
+                values: {
+                    level: {},
                 },
             } as WeaponCostObject)
     );

@@ -10,6 +10,7 @@ export interface CharacterProps {
 export interface Character {
     id: number;
     name: string;
+    displayName?: string;
     fullName: string;
     title?: string;
     rarity: Exclude<Rarity, "B" | "C">;

@@ -6,15 +6,14 @@ import Grid from "@mui/material/Grid2";
 
 // Helper imports
 import { range } from "helpers/utils";
-import {
-    getCharacterCoreSkillCost,
-    getCharacterLevelCost,
-    getCharacterSkillCost,
-} from "helpers/getLevelUpCosts";
 import { characterColors } from "helpers/characterColors";
 
 // Type imports
-import { CharacterCostObject, UpdateCostsPayload } from "types/costs";
+import {
+    CharacterCostObject,
+    CostSliderData,
+    UpdateCostsPayload,
+} from "types/costs";
 import { CharacterColors } from "types/character";
 import { CardMode } from "./PlannerCard";
 
@@ -28,60 +27,62 @@ function CharacterSliders({
     const getCharacterColor = (option: keyof CharacterColors) =>
         characterColors(character.colors, option, character.element);
 
+    const values = character.values;
+
     const sliders: {
         title: string;
         icon?: string;
         levels: (string | number)[];
         type: UpdateCostsPayload["type"];
-        fn: Function;
+        values: CostSliderData;
     }[] = [
         {
             title: "Level",
             levels: charLevel,
             type: "level",
-            fn: getCharacterLevelCost,
+            values: values.level,
         },
         {
             title: "Basic Attack",
             icon: "skills/Basic",
             levels: skillLevel,
             type: "basic",
-            fn: getCharacterSkillCost,
+            values: values.basic,
         },
         {
             title: "Dodge",
             icon: "skills/Dodge",
             levels: skillLevel,
             type: "dodge",
-            fn: getCharacterSkillCost,
+            values: values.dodge,
         },
         {
             title: "Assist",
             icon: "skills/Assist",
             levels: skillLevel,
             type: "assist",
-            fn: getCharacterSkillCost,
+            values: values.assist,
         },
         {
             title: "Special Attack",
             icon: "skills/SpecialEX",
             levels: skillLevel,
             type: "special",
-            fn: getCharacterSkillCost,
+            values: values.special,
         },
         {
             title: "Chain Attack",
             icon: "skills/Ultimate",
             levels: skillLevel,
             type: "chain",
-            fn: getCharacterSkillCost,
+            values: values.chain,
         },
         {
             title: "Core Skill",
             icon: "skills/Core",
             levels: coreSkillLevel,
             type: "core",
-            fn: getCharacterCoreSkillCost,
+            values: values.core,
         },
     ];
 
@@ -95,11 +96,9 @@ function CharacterSliders({
                 title={slider.title}
                 icon={slider.icon}
                 levels={slider.levels}
+                values={slider.values}
                 color={getCharacterColor("accent")}
-                dispatchProps={{
-                    type: slider.type,
-                    getCost: slider.fn,
-                }}
+                type={slider.type}
             />
         )
     );
@@ -113,7 +112,7 @@ function CharacterSliders({
                         key={index}
                         size={
                             mode === "view"
-                                ? { xs: 12, sm: 4 }
+                                ? { xs: 6, sm: 4 }
                                 : { xs: 12, md: 6 }
                         }
                     >

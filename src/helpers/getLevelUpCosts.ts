@@ -7,12 +7,24 @@ import {
     weaponLevel,
 } from "data/levelUpCosts";
 import { Weapon } from "types/weapon";
+import { Rarity } from "types/_common";
 
-export function getCharacterLevelCost(
-    [start, stop]: number[],
-    selected: boolean,
-    withXP = true
-) {
+export interface GetLevelUpCostsProps {
+    start?: number;
+    stop?: number;
+    selected?: boolean;
+    withXP?: boolean;
+    rarity?: Rarity;
+}
+
+export function getCharacterLevelCost({
+    start,
+    stop,
+    selected,
+    withXP,
+}: Required<
+    Pick<GetLevelUpCostsProps, "start" | "stop" | "selected" | "withXP">
+>) {
     const costs = { ...characterLevel };
     if (!withXP) {
         objectKeys(costs).forEach((material) => {
@@ -58,10 +70,11 @@ export function getCharacterLevelCost(
     } as PayloadCostObject;
 }
 
-export function getCharacterSkillCost(
-    [start, stop]: number[],
-    selected: boolean
-) {
+export function getCharacterSkillCost({
+    start,
+    stop,
+    selected,
+}: Required<Pick<GetLevelUpCostsProps, "start" | "stop" | "selected">>) {
     const costs = { ...characterSkill };
     let [
         credits,
@@ -92,10 +105,11 @@ export function getCharacterSkillCost(
     } as PayloadCostObject;
 }
 
-export function getCharacterCoreSkillCost(
-    [start, stop]: number[],
-    selected: boolean
-) {
+export function getCharacterCoreSkillCost({
+    start,
+    stop,
+    selected,
+}: Required<Pick<GetLevelUpCostsProps, "start" | "stop" | "selected">>) {
     const costs = { ...characterCoreSkill };
     let [credits, bossMat, weeklyBossMat] = range(
         0,
@@ -118,13 +132,14 @@ export function getCharacterCoreSkillCost(
     } as PayloadCostObject;
 }
 
-export function getWeaponLevelCost(
-    rarity: Weapon["rarity"],
-    [start, stop]: number[],
-    selected: boolean,
-    withXP = true
-) {
-    const costs = { ...weaponLevel(rarity) };
+export function getWeaponLevelCost({
+    start,
+    stop,
+    selected,
+    withXP,
+    rarity,
+}: Required<GetLevelUpCostsProps>) {
+    const costs = { ...weaponLevel(rarity as Weapon["rarity"]) };
     if (!withXP) {
         objectKeys(costs).forEach((material) => {
             costs[material] = costs[material]
