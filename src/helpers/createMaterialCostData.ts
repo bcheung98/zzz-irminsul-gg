@@ -1,27 +1,25 @@
 import { objectKeys } from "./utils";
+import { formatMaterialName } from "./materials";
 import { materialRarity } from "./materialRarity";
 import { RarityMap } from "data/common";
 import {
-    characterXPMaterials,
-    weaponXPMaterials,
+    getCharacterXPMaterial,
+    getWeaponXPMaterial,
 } from "data/materials/xpMaterials";
-import { characterAscensionMaterials } from "data/materials/characterAscensionMaterials";
-import { characterSkillMaterials } from "data/materials/characterSkillMaterials";
-import { weaponAscensionMaterials } from "data/materials/weaponAscensionMaterials";
+import { getCharacterAscensionMaterial } from "data/materials/characterAscensionMaterials";
+import { getCharacterSkillMaterial } from "data/materials/characterSkillMaterials";
+import { getWeaponAscensionMaterial } from "data/materials/weaponAscensionMaterials";
 import {
-    formatExpertChallengeMaterials,
-    formatNotoriousHuntMaterials,
+    getExpertChallengeMaterial,
+    getNotoriousHuntMaterial,
 } from "data/materials/characterCoreSkillMaterials";
-import { Element, Rarity, Specialty } from "types/_common";
+import { Rarity } from "types/_common";
 import {
     CharacterCost,
     TotalCostObject,
     TotalCostObjectKeys,
 } from "types/costs";
-import {
-    ExpertChallengeMaterial,
-    NotoriousHuntMaterial,
-} from "types/materials";
+import { Material } from "types/materials";
 
 export interface MaterialCostData {
     name: string;
@@ -59,67 +57,73 @@ function getMaterialData(
     key: TotalCostObjectKeys,
     material = ""
 ): { name: string; rarity?: Rarity; img: string } {
+    let mat: Material | undefined;
     switch (key) {
         case "credits":
-            return { name: "Denny", img: "Denny" };
+            return { name: "Denny", rarity: "B", img: "Denny" };
         case "characterXP":
+            mat = getCharacterXPMaterial({ tag: material, id: material })!;
             return {
-                name: characterXPMaterials[
-                    `${material}` as keyof typeof characterXPMaterials
-                ],
-                img: `xp/${material}`,
+                name: mat.displayName,
+                rarity: mat.rarity,
+                img: `xp/${mat.tag}`,
             };
         case "weaponXP":
+            mat = getWeaponXPMaterial({ tag: material, id: material })!;
             return {
-                name: weaponXPMaterials[
-                    `${material}` as keyof typeof weaponXPMaterials
-                ],
-                img: `xp/${material}`,
+                name: mat.displayName,
+                rarity: mat.rarity,
+                img: `xp/${mat.tag}`,
             };
         case "bossMat":
+            mat = getExpertChallengeMaterial({ tag: material, id: material })!;
             return {
-                name: formatExpertChallengeMaterials(
-                    material as ExpertChallengeMaterial
-                ),
-                img: `boss/${material}.gif`,
+                name: formatMaterialName(mat),
+                rarity: mat.rarity,
+                img: `boss/${mat.tag}.gif`,
             };
         case "weeklyBossMat":
+            mat = getNotoriousHuntMaterial({ tag: material, id: material })!;
             return {
-                name: formatNotoriousHuntMaterials(
-                    material as NotoriousHuntMaterial
-                ),
-                img: `weekly/${material}.gif`,
+                name: formatMaterialName(mat),
+                rarity: mat.rarity,
+                img: `weekly/${mat.tag}.gif`,
             };
         case "hamsterCagePass":
             return {
                 name: "Hamster Cage Pass",
+                rarity: "S",
                 img: "Hamster_Cage_Pass",
             };
         case "characterAscension":
-            let charAscensionMats =
-                characterAscensionMaterials[material.slice(0, -1) as Specialty];
+            mat = getCharacterAscensionMaterial({
+                tag: material,
+                id: material,
+            })!;
             return {
-                name: charAscensionMats[
-                    material as keyof typeof charAscensionMats
-                ],
-                img: `agent/ascension/${material}`,
+                name: formatMaterialName(mat),
+                rarity: mat.rarity,
+                img: `agent/ascension/${mat.tag}`,
             };
         case "characterSkill":
-            let charSkillMats =
-                characterSkillMaterials[material.slice(0, -1) as Element];
+            mat = getCharacterSkillMaterial({
+                tag: material,
+                id: material,
+            })!;
             return {
-                name: charSkillMats[material as keyof typeof charSkillMats],
-                img: `agent/skill/${material}`,
+                name: formatMaterialName(mat),
+                rarity: mat.rarity,
+                img: `agent/skill/${mat.tag}`,
             };
-
         case "weaponAscension":
-            let wepAscensionMats =
-                weaponAscensionMaterials[material.slice(0, -1) as Specialty];
+            mat = getWeaponAscensionMaterial({
+                tag: material,
+                id: material,
+            })!;
             return {
-                name: wepAscensionMats[
-                    material as keyof typeof wepAscensionMats
-                ],
-                img: `weapon/${material}`,
+                name: formatMaterialName(mat),
+                rarity: mat.rarity,
+                img: `weapon/${mat.tag}`,
             };
     }
 }

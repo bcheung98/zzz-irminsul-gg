@@ -12,6 +12,7 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 // Helper imports
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
+import { selectUnreleasedContent } from "reducers/settings";
 import {
     activeCharacterFilters,
     clearFilters,
@@ -25,11 +26,12 @@ import {
     setWeeklyBossMat,
 } from "reducers/characterFilters";
 import { attackTypes, elements, factions, specialities } from "data/common";
+import { formatMaterialName, getMaterialKeyNames } from "helpers/materials";
 import {
-    expertChallengeMaterialNames,
-    formatExpertChallengeMaterials,
-    notoroiusHuntMaterialNames,
-    formatNotoriousHuntMaterials,
+    getExpertChallengeMaterial,
+    getNotoriousHuntMaterial,
+    expertChallengeMaterials,
+    notoriousHuntMaterials,
 } from "data/materials/characterCoreSkillMaterials";
 
 // Type imports
@@ -49,44 +51,43 @@ function CharacterFilters({
     const filters = useAppSelector(selectCharacterFilters);
     const dispatch = useAppDispatch();
 
+    const showUnreleased = useAppSelector(selectUnreleasedContent);
+
     const filterGroups = [
         {
             name: "Attribute",
             value: filters.element,
             onChange: (_: BaseSyntheticEvent, newValues: Element[]) =>
                 dispatch(setElement(newValues)),
-            buttons: createButtons<Element>(elements, "elements"),
+            buttons: createButtons(elements, "elements"),
         },
         {
             name: "Specialty",
             value: filters.specialty,
             onChange: (_: BaseSyntheticEvent, newValues: Specialty[]) =>
                 dispatch(setSpecialty(newValues)),
-            buttons: createButtons<Specialty>(specialities, "specialties"),
+            buttons: createButtons(specialities, "specialties"),
         },
         {
             name: "Attack Type",
             value: filters.attackType,
             onChange: (_: BaseSyntheticEvent, newValues: AttackType[]) =>
                 dispatch(setAttackType(newValues)),
-            buttons: createButtons<AttackType>(
-                attackTypes,
-                "specialties/attack_types"
-            ),
+            buttons: createButtons(attackTypes, "specialties/attack_types"),
         },
         {
             name: "Rank",
             value: filters.rarity,
             onChange: (_: BaseSyntheticEvent, newValues: Rarity[]) =>
                 dispatch(setRarity(newValues)),
-            buttons: createButtons<Rarity>(["S", "A"], "ranks/character"),
+            buttons: createButtons(["S", "A"], "ranks/character"),
         },
         {
             name: "Faction",
             value: filters.faction,
             onChange: (_: BaseSyntheticEvent, newValues: Faction[]) =>
                 dispatch(setFaction(newValues)),
-            buttons: createButtons<Faction>(factions, "factions"),
+            buttons: createButtons(factions, "factions"),
         },
         {
             name: "Expert Challenge Material",
@@ -95,8 +96,11 @@ function CharacterFilters({
                 _: BaseSyntheticEvent,
                 newValues: ExpertChallengeMaterial[]
             ) => dispatch(setBossMat(newValues)),
-            buttons: createButtons<ExpertChallengeMaterial>(
-                expertChallengeMaterialNames,
+            buttons: createButtons(
+                getMaterialKeyNames(
+                    [...expertChallengeMaterials],
+                    showUnreleased
+                ),
                 "materials/boss"
             ),
         },
@@ -107,8 +111,11 @@ function CharacterFilters({
                 _: BaseSyntheticEvent,
                 newValues: NotoriousHuntMaterial[]
             ) => dispatch(setWeeklyBossMat(newValues)),
-            buttons: createButtons<NotoriousHuntMaterial>(
-                notoroiusHuntMaterialNames,
+            buttons: createButtons(
+                getMaterialKeyNames(
+                    [...notoriousHuntMaterials],
+                    showUnreleased
+                ),
                 "materials/weekly"
             ),
         },
@@ -170,7 +177,7 @@ function CharacterFilters({
 
 export default CharacterFilters;
 
-function createButtons<T>(items: readonly T[], url: string) {
+function createButtons<T extends string>(items: readonly T[], url: string) {
     const padding = url.startsWith("materials/") ? "0px" : "4px";
     return items.map((item) => ({
         value: item,
@@ -187,15 +194,15 @@ function createButtons<T>(items: readonly T[], url: string) {
     }));
 }
 
-function getTooltip<T>(item: T, url: string) {
+function getTooltip<T extends string>(item: T, url: string) {
     let tooltip;
     if (url.startsWith("materials/boss")) {
-        tooltip = `${formatExpertChallengeMaterials(
-            item as ExpertChallengeMaterial
+        tooltip = `${formatMaterialName(
+            getExpertChallengeMaterial({ tag: item })
         )}`;
     } else if (url.startsWith("materials/weekly")) {
-        tooltip = `${formatNotoriousHuntMaterials(
-            item as NotoriousHuntMaterial
+        tooltip = `${formatMaterialName(
+            getNotoriousHuntMaterial({ tag: item })
         )}`;
     } else if (url.startsWith("ranks")) {
         tooltip = "";

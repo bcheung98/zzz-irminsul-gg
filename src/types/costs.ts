@@ -1,4 +1,7 @@
 import { characterLevel, characterSkill, weaponLevel } from "data/levelUpCosts";
+import { NestedKeyOf, Rarity } from "./_common";
+import { Character } from "./character";
+import { Weapon } from "./weapon";
 import {
     CharacterAscensionMaterial,
     CharacterSkillMaterial,
@@ -8,17 +11,9 @@ import {
     WeaponAscensionMaterial,
     WeaponXPMaterial,
 } from "./materials";
-import { Character } from "./character";
-import { Weapon } from "./weapon";
-import { Rarity } from "./_common";
 
 export type CostObjectKeys =
-    | TotalCostObjectKeys
-    | CharacterXPMaterial
-    | ExpertChallengeMaterial
-    | NotoriousHuntMaterial
-    | CharacterSkillMaterial
-    | CharacterAscensionMaterial
+    | NestedKeyOf<TotalCostObject>
     | keyof typeof characterLevel
     | keyof typeof characterSkill
     | keyof ReturnType<typeof weaponLevel>
@@ -102,6 +97,7 @@ export interface CharacterCostObject
     id: string;
     costs: CharacterCost;
     values: CharacterCostSliderValues;
+    dataFormat?: string;
 }
 
 export interface WeaponCost {
@@ -118,4 +114,5 @@ export interface WeaponCostObject
     id: string;
     costs: WeaponCost;
     values: WeaponCostSliderValues;
+    dataFormat?: string;
 }
