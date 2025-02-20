@@ -39,14 +39,14 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
             value: filters.specialty,
             onChange: (_: BaseSyntheticEvent, newValues: Specialty[]) =>
                 dispatch(setSpecialty(newValues)),
-            buttons: createButtons<Specialty>(specialities, "specialties"),
+            buttons: createButtons(specialities, "specialties"),
         },
         {
             name: "Rank",
             value: filters.rarity,
             onChange: (_: BaseSyntheticEvent, newValues: Rarity[]) =>
                 dispatch(setRarity(newValues)),
-            buttons: createButtons<Rarity>(["S", "A", "B"], "ranks/item"),
+            buttons: createButtons(["S", "A", "B"], "ranks/item"),
         },
         {
             name: "Advanced Stat",
@@ -113,7 +113,7 @@ function WeaponFilters({ handleClose }: { handleClose: (arg0: any) => void }) {
 
 export default WeaponFilters;
 
-function createButtons<T>(items: readonly T[], url: string) {
+function createButtons<T extends string>(items: readonly T[], url: string) {
     const padding = url.startsWith("ranks/") ? "0px" : "4px";
     return items.map((item) => ({
         value: item,
@@ -128,7 +128,7 @@ function createButtons<T>(items: readonly T[], url: string) {
     }));
 }
 
-function getTooltip<T>(item: T, url: string) {
+function getTooltip<T extends string>(item: T, url: string) {
     let tooltip;
     if (url.startsWith("ranks")) {
         tooltip = "";

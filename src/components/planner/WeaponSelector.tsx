@@ -15,11 +15,11 @@ import { selectWeapons } from "reducers/weapon";
 import { getSelectedWeapons, setPlannerWeapons } from "reducers/planner";
 import { getBackgroundColor, getRarityColor } from "helpers/rarityColors";
 import { RarityMap } from "data/common";
+import { getWeaponAscensionMaterial } from "data/materials/weaponAscensionMaterials";
 
 // Type imports
 import { Weapon } from "types/weapon";
 import { WeaponCostObject } from "types/costs";
-import { WeaponAscensionMaterial } from "types/materials";
 
 function WeaponSelector() {
     const theme = useTheme();
@@ -167,14 +167,21 @@ function createOptions(weapons: Weapon[]) {
                         WeaponXP3: 0,
                     },
                     weaponAscension: {
-                        [`${wep.specialty}1` as WeaponAscensionMaterial]: 0,
-                        [`${wep.specialty}2` as WeaponAscensionMaterial]: 0,
-                        [`${wep.specialty}3` as WeaponAscensionMaterial]: 0,
+                        [getWeaponAscensionMaterial({
+                            tag: `${wep.specialty}1`,
+                        })?.id!]: 0,
+                        [getWeaponAscensionMaterial({
+                            tag: `${wep.specialty}2`,
+                        })?.id!]: 0,
+                        [getWeaponAscensionMaterial({
+                            tag: `${wep.specialty}3`,
+                        })?.id!]: 0,
                     },
                 },
                 values: {
                     level: {},
                 },
+                dataFormat: "v2",
             } as WeaponCostObject)
     );
 }

@@ -15,16 +15,16 @@ import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
 import { getSelectedCharacters, setPlannerCharacters } from "reducers/planner";
 import { getBackgroundColor, getRarityColor } from "helpers/rarityColors";
+import {
+    getExpertChallengeMaterial,
+    getNotoriousHuntMaterial,
+} from "data/materials/characterCoreSkillMaterials";
+import { getCharacterAscensionMaterial } from "data/materials/characterAscensionMaterials";
+import { getCharacterSkillMaterial } from "data/materials/characterSkillMaterials";
 
 // Type imports
 import { Character } from "types/character";
 import { CharacterCostObject } from "types/costs";
-import {
-    CharacterAscensionMaterial,
-    CharacterSkillMaterial,
-    ExpertChallengeMaterial,
-    NotoriousHuntMaterial,
-} from "types/materials";
 
 function CharacterSelector() {
     const theme = useTheme();
@@ -187,31 +187,36 @@ function createOptions(characters: Character[]) {
                         CharacterXP3: costArray,
                     },
                     bossMat: {
-                        [`${char.materials.bossMat}` as ExpertChallengeMaterial]:
-                            costArray,
+                        [getExpertChallengeMaterial({
+                            tag: char.materials.bossMat,
+                        })?.id!]: costArray,
                     },
                     weeklyBossMat: {
-                        [`${char.materials.weeklyBossMat}` as NotoriousHuntMaterial]:
-                            costArray,
+                        [getNotoriousHuntMaterial({
+                            tag: char.materials.weeklyBossMat,
+                        })?.id!]: costArray,
                     },
                     hamsterCagePass: {
                         "Hamster Cage Pass": costArray,
                     },
                     characterAscension: {
-                        [`${char.specialty}1` as CharacterAscensionMaterial]:
-                            costArray,
-                        [`${char.specialty}2` as CharacterAscensionMaterial]:
-                            costArray,
-                        [`${char.specialty}3` as CharacterAscensionMaterial]:
-                            costArray,
+                        [getCharacterAscensionMaterial({
+                            tag: `${char.specialty}1`,
+                        })?.id!]: costArray,
+                        [getCharacterAscensionMaterial({
+                            tag: `${char.specialty}2`,
+                        })?.id!]: costArray,
+                        [getCharacterAscensionMaterial({
+                            tag: `${char.specialty}3`,
+                        })?.id!]: costArray,
                     },
                     characterSkill: {
-                        [`${char.element}1` as CharacterSkillMaterial]:
-                            costArray,
-                        [`${char.element}2` as CharacterSkillMaterial]:
-                            costArray,
-                        [`${char.element}3` as CharacterSkillMaterial]:
-                            costArray,
+                        [getCharacterSkillMaterial({ tag: `${char.element}1` })
+                            ?.id!]: costArray,
+                        [getCharacterSkillMaterial({ tag: `${char.element}2` })
+                            ?.id!]: costArray,
+                        [getCharacterSkillMaterial({ tag: `${char.element}3` })
+                            ?.id!]: costArray,
                     },
                 },
                 values: {
@@ -223,6 +228,7 @@ function createOptions(characters: Character[]) {
                     chain: {},
                     core: {},
                 },
+                dataFormat: "v2",
             } as CharacterCostObject)
     );
 }

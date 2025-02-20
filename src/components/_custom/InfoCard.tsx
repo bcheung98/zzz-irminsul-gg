@@ -14,18 +14,15 @@ import Grid from "@mui/material/Grid2";
 import { getRarityColor } from "helpers/rarityColors";
 import { RarityMap } from "data/common";
 import { zoomImageOnHover } from "helpers/utils";
+import { formatMaterialName } from "helpers/materials";
 import {
-    formatExpertChallengeMaterials,
-    formatNotoriousHuntMaterials,
+    getExpertChallengeMaterial,
+    getNotoriousHuntMaterial,
 } from "data/materials/characterCoreSkillMaterials";
 
 // Type imports
 import { Rarity, Specialty } from "types/_common";
-import {
-    ExpertChallengeMaterial,
-    Materials,
-    NotoriousHuntMaterial,
-} from "types/materials";
+import { CharacterMaterials } from "types/materials";
 
 interface InfoCardProps {
     name: string;
@@ -40,7 +37,7 @@ interface InfoCardProps {
         element?: string;
         specialty?: Specialty;
     };
-    materials?: Materials;
+    materials?: CharacterMaterials;
     backgroundColor?: string;
     disableTooltip?: boolean;
     disableLink?: boolean;
@@ -296,7 +293,7 @@ function MaterialGrid({
     type,
     size,
 }: {
-    materials: Materials;
+    materials: CharacterMaterials;
     type: "character" | "weapon" | "drivedisc" | "bangboo";
     size: string;
 }) {
@@ -325,14 +322,14 @@ function MaterialGrid({
         },
         {
             src: `materials/boss/${bossMat}.gif`,
-            tag: formatExpertChallengeMaterials(
-                bossMat as ExpertChallengeMaterial
+            tag: formatMaterialName(
+                getExpertChallengeMaterial({ tag: bossMat })
             ),
         },
         {
             src: `materials/weekly/${weeklyBossMat}.gif`,
-            tag: formatNotoriousHuntMaterials(
-                weeklyBossMat as NotoriousHuntMaterial
+            tag: formatMaterialName(
+                getNotoriousHuntMaterial({ tag: weeklyBossMat })
             ),
         },
     ];

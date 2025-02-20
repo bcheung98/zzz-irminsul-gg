@@ -1,47 +1,58 @@
-import { NestedKeyOf } from "./_common";
+import { Rarity } from "./_common";
 import {
-    characterXPMaterials,
-    weaponXPMaterials,
+    characterXPMatNames,
+    weaponXPMatNames,
 } from "data/materials/xpMaterials";
-import { characterSkillMaterials } from "data/materials/characterSkillMaterials";
-import { characterAscensionMaterials } from "data/materials/characterAscensionMaterials";
+import { characterSkillMatNames } from "data/materials/characterSkillMaterials";
+import { characterAscensionMatNames } from "data/materials/characterAscensionMaterials";
 import {
-    expertChallengeMaterials,
-    notoroiusHuntMaterials,
+    expertChallengeMatNames,
+    notoriousHuntMatNames,
 } from "data/materials/characterCoreSkillMaterials";
-import { weaponAscensionMaterials } from "data/materials/weaponAscensionMaterials";
+import { weaponAscensionMatNames } from "data/materials/weaponAscensionMaterials";
+import { Version } from "./version";
 
-export type CharacterXPMaterial = keyof typeof characterXPMaterials;
-export type WeaponXPMaterial = keyof typeof weaponXPMaterials;
+export type MaterialCategory =
+    | "credits"
+    | "characterXP"
+    | "weaponXP"
+    | "bossMat"
+    | "weeklyBossMat"
+    | "hamsterCagePass"
+    | "characterAscension"
+    | "characterSkill"
+    | "weaponAscension";
 
-export type CharacterSkillMaterialKeys = keyof typeof characterSkillMaterials;
-export type CharacterSkillMaterial = NestedKeyOf<
-    typeof characterSkillMaterials
->;
+export interface Material {
+    id: string;
+    category: MaterialCategory;
+    tag: string;
+    name: string;
+    displayName: string;
+    source?: string;
+    rarity?: Rarity;
+    release: Version;
+}
 
-export type CharacterAscensionMaterialKeys =
-    keyof typeof characterAscensionMaterials;
-export type CharacterAscensionMaterial = NestedKeyOf<
-    typeof characterAscensionMaterials
->;
+export type CharacterXPMaterial = (typeof characterXPMatNames)[number];
+export type WeaponXPMaterial = (typeof weaponXPMatNames)[number];
 
-export type ExpertChallengeMaterial = keyof typeof expertChallengeMaterials;
-export type NotoriousHuntMaterial = keyof typeof notoroiusHuntMaterials;
+export type CharacterSkillMaterial = (typeof characterSkillMatNames)[number];
+export type CharacterAscensionMaterial =
+    (typeof characterAscensionMatNames)[number];
+export type ExpertChallengeMaterial = (typeof expertChallengeMatNames)[number];
+export type NotoriousHuntMaterial = (typeof notoriousHuntMatNames)[number];
+
+export type WeaponAscensionMaterial = (typeof weaponAscensionMatNames)[number];
 
 export interface Materials {
-    skillMat?: CharacterSkillMaterialKeys;
-    ascensionMat?: CharacterAscensionMaterialKeys;
+    skillMat?: CharacterSkillMaterial;
+    ascensionMat?: CharacterAscensionMaterial;
     bossMat?: ExpertChallengeMaterial;
     weeklyBossMat?: NotoriousHuntMaterial;
 }
 
 export type CharacterMaterials = Required<Materials>;
-
-export type WeaponAscensionMaterialKeys = keyof typeof weaponAscensionMaterials;
-export type WeaponAscensionMaterial = NestedKeyOf<
-    typeof weaponAscensionMaterials
->;
-
 export interface WeaponMaterials {
     ascensionMat: WeaponAscensionMaterial;
 }
