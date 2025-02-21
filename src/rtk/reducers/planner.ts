@@ -8,6 +8,12 @@ import { startAppListening } from "helpers/hooks";
 import { reduceMaterialCosts } from "helpers/createMaterialCostData";
 import { objectKeys } from "helpers/utils";
 import {
+    getCharacterCoreSkillCost,
+    getCharacterLevelCost,
+    getCharacterSkillCost,
+    getWeaponLevelCost,
+} from "helpers/getLevelUpCosts";
+import {
     CharacterCostObject,
     CostObjectSourceIndex,
     PayloadData,
@@ -15,14 +21,6 @@ import {
     UpdateCostsPayload,
     WeaponCostObject,
 } from "types/costs";
-import { Character } from "types/character";
-import { Weapon } from "types/weapon";
-import {
-    getCharacterCoreSkillCost,
-    getCharacterLevelCost,
-    getCharacterSkillCost,
-    getWeaponLevelCost,
-} from "helpers/getLevelUpCosts";
 
 interface PlannerState {
     totalCost: TotalCostObject;
@@ -59,8 +57,8 @@ const initialState: PlannerState = {
         characterSkill: {},
         weaponAscension: {},
     } as TotalCostObject,
-    characters: parseLocalStorage(storedCharacters),
-    weapons: parseLocalStorage(storedWeapons),
+    characters: storedCharacters !== "null" ? JSON.parse(storedCharacters) : [],
+    weapons: storedWeapons !== "null" ? JSON.parse(storedWeapons) : [],
     hidden: storedHidden !== "null" ? JSON.parse(storedHidden) : [],
 };
 
@@ -302,36 +300,3 @@ startAppListening({
         localStorage.setItem("planner/hidden", data);
     },
 });
-
-function parseLocalStorage<T extends CharacterCostObject | WeaponCostObject>(
-    dataString: string
-) {
-    if (dataString !== "null") {
-        const reformattedData = (JSON.parse(dataString) as T[])
-            .map((item) => {
-                const type = "element" in item ? "character" : "weapon";
-                const data: Character[] | Weapon[] = JSON.parse(
-                    localStorage.getItem(`data/${type}s`)!
-                );
-                const target: Character | Weapon = data.find(
-                    (d) => d.id === Number(item.id.split("_")[1])
-                )!;
-                const id = `${type}_${target.id}`;
-                return {
-                    ...item,
-                    id: id,
-                    name: target.name,
-                    displayName: target.displayName,
-                };
-            })
-            .filter((item) => item.dataFormat !== undefined);
-        if (reformattedData.length === 0) {
-            localStorage.removeItem("planner/characters");
-            localStorage.removeItem("planner/weapons");
-            localStorage.removeItem("planner/hidden");
-        }
-        return reformattedData;
-    } else {
-        return [];
-    }
-}
