@@ -23,7 +23,7 @@ import { filterWeapons } from "helpers/filterWeapons";
 import { selectWeapons } from "reducers/weapon";
 import { clearFilters, selectWeaponFilters } from "reducers/weaponFilters";
 import { isRightDrawerOpen, toggleRightDrawer } from "reducers/layout";
-import { RarityMap } from "data/common";
+import { selectBrowserSettings, setBrowserView, View } from "reducers/browser";
 
 function WeaponBrowser() {
     const documentTitle = `W-Engines ${import.meta.env.VITE_DOCUMENT_TITLE}`;
@@ -45,12 +45,9 @@ function WeaponBrowser() {
 
     const dispatch = useAppDispatch();
 
-    const weapons = [...useAppSelector(selectWeapons)].sort(
-        (a, b) =>
-            RarityMap[b.rarity] - RarityMap[a.rarity] ||
-            a.displayName.localeCompare(b.displayName)
-    );
+    const weapons = [...useAppSelector(selectWeapons)];
     const filters = useAppSelector(selectWeaponFilters);
+    const browserSettings = useAppSelector(selectBrowserSettings).weapons;
 
     const [searchValue, setSearchValue] = useState("");
     const handleInputChange = (event: BaseSyntheticEvent) => {
@@ -58,8 +55,8 @@ function WeaponBrowser() {
     };
 
     const currentWeapons = useMemo(
-        () => filterWeapons(weapons, filters, searchValue),
-        [weapons, filters, searchValue]
+        () => filterWeapons(weapons, filters, searchValue, browserSettings),
+        [weapons, filters, searchValue, browserSettings]
     );
 
     const drawerOpen = useAppSelector(isRightDrawerOpen);
@@ -74,11 +71,12 @@ function WeaponBrowser() {
         setMobileDrawerOpen(false);
     };
 
-    type View = "icon" | "table";
-    const [view, setView] = useState<View>("icon");
-    const handleView = (_: BaseSyntheticEvent, newView: View) => {
-        if (newView !== null) {
-            setView(newView);
+    const currentView = browserSettings.view;
+    const [view, setView] = useState<View>(currentView);
+    const handleView = (_: BaseSyntheticEvent, view: View) => {
+        if (view !== null) {
+            setView(view);
+            dispatch(setBrowserView({ type: "weapons", view }));
         }
     };
     const buttons: CustomToggleButtonProps[] = [
