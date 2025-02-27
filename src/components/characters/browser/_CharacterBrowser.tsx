@@ -27,6 +27,7 @@ import {
     selectCharacterFilters,
 } from "reducers/characterFilters";
 import { isRightDrawerOpen, toggleRightDrawer } from "reducers/layout";
+import { selectBrowserSettings, setBrowserView, View } from "reducers/browser";
 
 function CharacterBrowser() {
     const documentTitle = `Agents ${import.meta.env.VITE_DOCUMENT_TITLE}`;
@@ -48,10 +49,9 @@ function CharacterBrowser() {
 
     const dispatch = useAppDispatch();
 
-    const characters = [...useAppSelector(selectCharacters)].sort((a, b) =>
-        a.fullName.localeCompare(b.fullName)
-    );
+    const characters = [...useAppSelector(selectCharacters)];
     const filters = useAppSelector(selectCharacterFilters);
+    const browserSettings = useAppSelector(selectBrowserSettings).characters;
 
     const [searchValue, setSearchValue] = useState("");
     const handleInputChange = (event: BaseSyntheticEvent) => {
@@ -59,8 +59,9 @@ function CharacterBrowser() {
     };
 
     const currentCharacters = useMemo(
-        () => filterCharacters(characters, filters, searchValue),
-        [characters, filters, searchValue]
+        () =>
+            filterCharacters(characters, filters, searchValue, browserSettings),
+        [characters, filters, searchValue, browserSettings]
     );
 
     const drawerOpen = useAppSelector(isRightDrawerOpen);
@@ -75,11 +76,12 @@ function CharacterBrowser() {
         setMobileDrawerOpen(false);
     };
 
-    type View = "icon" | "card" | "table";
-    const [view, setView] = useState<View>("icon");
-    const handleView = (_: BaseSyntheticEvent, newView: View) => {
-        if (newView !== null) {
-            setView(newView);
+    const currentView = browserSettings.view;
+    const [view, setView] = useState<View>(currentView);
+    const handleView = (_: BaseSyntheticEvent, view: View) => {
+        if (view !== null) {
+            setView(view);
+            dispatch(setBrowserView({ type: "characters", view }));
         }
     };
     const buttons: CustomToggleButtonProps[] = [

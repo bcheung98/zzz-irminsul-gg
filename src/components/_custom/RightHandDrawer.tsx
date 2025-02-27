@@ -1,4 +1,3 @@
-import React from "react";
 import { useLocation } from "react-router";
 
 // Component imports
@@ -18,10 +17,9 @@ import {
 
 // Helper imports
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
-
 import { isRightDrawerOpen, toggleRightDrawer } from "reducers/layout";
 
-const width = 320; // px
+const width = 360; // px
 
 function RightHandDrawer() {
     const theme = useTheme();

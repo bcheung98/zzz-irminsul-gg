@@ -1,10 +1,13 @@
-import { CharacterFilterState } from "reducers/characterFilters";
 import { Character } from "types/character";
+import { CharacterFilterState } from "reducers/characterFilters";
+import { BrowserSettings } from "reducers/browser";
+import { RarityMap } from "data/common";
 
 export function filterCharacters(
     characters: Character[],
     filters: CharacterFilterState,
-    searchValue: string
+    searchValue: string,
+    sortSettings: BrowserSettings
 ) {
     let chars = [...characters];
     if (filters.element.length > 0) {
@@ -47,5 +50,42 @@ export function filterCharacters(
                     .includes(searchValue.toLocaleLowerCase())
         );
     }
+
+    switch (sortSettings.sortBy) {
+        case "name":
+            chars = chars.sort((a, b) => a.fullName.localeCompare(b.fullName));
+            break;
+        case "rarity":
+            chars = chars.sort(
+                (a, b) =>
+                    RarityMap[b.rarity] - RarityMap[a.rarity] ||
+                    a.fullName.localeCompare(b.fullName)
+            );
+            break;
+        case "element":
+            chars = chars.sort(
+                (a, b) =>
+                    a.element.localeCompare(b.element) ||
+                    a.fullName.localeCompare(b.fullName)
+            );
+            break;
+        case "specialty":
+            chars = chars.sort(
+                (a, b) =>
+                    a.specialty.localeCompare(b.specialty) ||
+                    a.fullName.localeCompare(b.fullName)
+            );
+            break;
+        case "release":
+            chars = chars.sort(
+                (a, b) => b.id - a.id || a.fullName.localeCompare(b.fullName)
+            );
+            break;
+    }
+
+    if (sortSettings.sortDirection === "desc") {
+        chars = chars.reverse();
+    }
+
     return chars;
 }
