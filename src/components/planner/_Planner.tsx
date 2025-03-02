@@ -12,6 +12,8 @@ import Grid from "@mui/material/Grid2";
 
 // Helper imports
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
+import { selectCharacters } from "reducers/character";
+import { selectWeapons } from "reducers/weapon";
 import {
     getSelectedCharacters,
     getSelectedWeapons,
@@ -49,12 +51,34 @@ function Planner() {
     let characters = useAppSelector(getSelectedCharacters);
     let weapons = useAppSelector(getSelectedWeapons);
 
+    const charData = useAppSelector(selectCharacters);
+    const wepData = useAppSelector(selectWeapons);
+
+    characters = characters.map((character) => {
+        const currentChar = charData.find(
+            (c) => c.id === Number(character.id.split("_")[1])
+        )!;
+        character = JSON.parse(JSON.stringify(character));
+        character.name = currentChar.name;
+        character.fullName = currentChar.fullName;
+        return character;
+    });
+    weapons = weapons.map((weapon) => {
+        const currentWep = wepData.find(
+            (w) => w.id === Number(weapon.id.split("_")[1])
+        )!;
+        weapon = JSON.parse(JSON.stringify(weapon));
+        weapon.name = currentWep.name;
+        weapon.displayName = currentWep.displayName;
+        return weapon;
+    });
+
     if (!unreleasedContent) {
         characters = characters.filter((char) =>
-            isUnreleasedContent(char.release?.version ?? "1.0")
+            isUnreleasedContent(char.release.version)
         );
         weapons = weapons.filter((wep) =>
-            isUnreleasedContent(wep.release?.version ?? "1.0")
+            isUnreleasedContent(wep.release.version)
         );
     }
 
