@@ -196,6 +196,11 @@ function InfoCard({
                                         alt={name}
                                         id={`${id}-img`}
                                         style={imageStyle}
+                                        fallbackSrc={`images/${
+                                            type === "character"
+                                                ? "Unknown2"
+                                                : "Unknown"
+                                        }`}
                                     />
                                 </RouterLink>
                                 {variant === "material-card" && materials && (
