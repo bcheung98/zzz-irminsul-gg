@@ -68,7 +68,7 @@ function CharacterSkillTab({
             </TextStyled>
             {skillData.map((skill, index) => (
                 <Box key={`${skillKey}-${index}`} sx={{ pb: "16px" }}>
-                    <TextStyled variant="h5-styled" sx={{ mb: "4px" }}>
+                    <TextStyled variant="h6-styled" sx={{ mb: "4px" }}>
                         {skill.name}
                     </TextStyled>
                     {skill.description.split("<br />").map((line, i) => (
