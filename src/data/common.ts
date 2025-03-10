@@ -28,9 +28,10 @@ export const factions = [
     "Cunning Hares",
     "Belobog Heavy Industries",
     "Victoria Housekeeping Co.",
-    "Obol Squad",
+    "New Eridu Defense Force",
     "Criminal Investigation Special Response Team",
     "Sons of Calydon",
     "Hollow Special Operations Section 6",
     "Stars of Lyra",
+    "Mockingbird",
 ] as const;
