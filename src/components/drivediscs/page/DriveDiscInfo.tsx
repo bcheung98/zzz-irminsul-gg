@@ -1,3 +1,5 @@
+import parse from "html-react-parser";
+
 // Component imports
 import { TextStyled } from "styled/StyledTypography";
 
@@ -27,7 +29,7 @@ function DriveDiscInfo({ disc }: DriveDiscProps) {
                     variant="subtitle1-styled"
                     sx={{ fontStyle: "italic" }}
                 >
-                    {description}
+                    {parse(description)}
                 </TextStyled>
             </Stack>
         </Card>
