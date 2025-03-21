@@ -2,6 +2,8 @@ import { Character } from "types/character";
 import { CharacterFilterState } from "reducers/characterFilters";
 import { BrowserSettings } from "reducers/browser";
 import { RarityMap } from "data/common";
+import { createDateObject } from "./dates";
+import { sortBy } from "./utils";
 
 export function filterCharacters(
     characters: Character[],
@@ -51,40 +53,50 @@ export function filterCharacters(
         );
     }
 
+    const reverse = sortSettings.sortDirection === "desc";
+
     switch (sortSettings.sortBy) {
         case "name":
             chars = chars.sort((a, b) => a.fullName.localeCompare(b.fullName));
+            if (reverse) {
+                chars = chars.reverse();
+            }
             break;
         case "rarity":
             chars = chars.sort(
                 (a, b) =>
-                    RarityMap[b.rarity] - RarityMap[a.rarity] ||
+                    sortBy(RarityMap[a.rarity], RarityMap[b.rarity], reverse) ||
                     a.fullName.localeCompare(b.fullName)
             );
             break;
         case "element":
             chars = chars.sort(
                 (a, b) =>
-                    a.element.localeCompare(b.element) ||
+                    sortBy(b.element, a.element, reverse) ||
                     a.fullName.localeCompare(b.fullName)
             );
             break;
         case "specialty":
             chars = chars.sort(
                 (a, b) =>
-                    a.specialty.localeCompare(b.specialty) ||
+                    sortBy(b.specialty, a.specialty, reverse) ||
                     a.fullName.localeCompare(b.fullName)
             );
             break;
         case "release":
             chars = chars.sort(
-                (a, b) => b.id - a.id || a.fullName.localeCompare(b.fullName)
+                (a, b) =>
+                    sortBy(
+                        createDateObject({
+                            date: a.release.date,
+                        }).obj.getTime(),
+                        createDateObject({
+                            date: b.release.date,
+                        }).obj.getTime(),
+                        reverse
+                    ) || sortBy(b.fullName, a.fullName, !reverse)
             );
             break;
-    }
-
-    if (sortSettings.sortDirection === "desc") {
-        chars = chars.reverse();
     }
 
     return chars;

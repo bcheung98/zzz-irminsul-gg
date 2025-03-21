@@ -2,6 +2,7 @@ import { Weapon } from "types/weapon";
 import { WeaponFilterState } from "reducers/weaponFilters";
 import { BrowserSettings } from "reducers/browser";
 import { RarityMap } from "data/common";
+import { sortBy } from "./utils";
 
 export function filterWeapons(
     weapons: Weapon[],
@@ -33,38 +34,40 @@ export function filterWeapons(
         );
     }
 
+    const reverse = sortSettings.sortDirection === "desc";
+
     switch (sortSettings.sortBy) {
         case "name":
             weps = weps.sort((a, b) =>
                 a.displayName.localeCompare(b.displayName)
             );
+            if (reverse) {
+                weps = weps.reverse();
+            }
             break;
         case "rarity":
             weps = weps.sort(
                 (a, b) =>
-                    RarityMap[b.rarity] - RarityMap[a.rarity] ||
+                    sortBy(RarityMap[a.rarity], RarityMap[b.rarity], reverse) ||
                     a.displayName.localeCompare(b.displayName)
             );
             break;
         case "specialty":
             weps = weps.sort(
                 (a, b) =>
-                    a.specialty.localeCompare(b.specialty) ||
+                    sortBy(b.specialty, a.specialty, reverse) ||
                     a.displayName.localeCompare(b.displayName)
             );
             break;
         case "release":
             weps = weps.sort(
                 (a, b) =>
-                    b.id - a.id || a.displayName.localeCompare(b.displayName)
+                    sortBy(a.id, b.id, reverse) ||
+                    b.displayName.localeCompare(a.displayName)
             );
             break;
         case "element":
             break;
-    }
-
-    if (sortSettings.sortDirection === "desc") {
-        weps = weps.reverse();
     }
 
     return weps;
