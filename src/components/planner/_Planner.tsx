@@ -22,6 +22,16 @@ import {
 } from "reducers/planner";
 import { selectWidth } from "reducers/settings";
 import { isUnreleasedContent } from "helpers/utils";
+import {
+    getExpertChallengeMaterial,
+    getNotoriousHuntMaterial,
+} from "data/materials/characterCoreSkillMaterials";
+
+// Type imports
+import {
+    ExpertChallengeMaterial,
+    NotoriousHuntMaterial,
+} from "types/materials";
 
 function Planner() {
     const documentTitle = `Ascension Planner ${
@@ -61,6 +71,33 @@ function Planner() {
         character = JSON.parse(JSON.stringify(character));
         character.name = currentChar.name;
         character.fullName = currentChar.fullName;
+
+        const oldBossMat = Object.keys(
+            character.costs.bossMat
+        )[0] as ExpertChallengeMaterial;
+        const newBossMat = getExpertChallengeMaterial({
+            tag: currentChar.materials.bossMat,
+        })?.id! as ExpertChallengeMaterial;
+        const costsBossMat = Object.values(character.costs.bossMat)[0];
+        delete Object.assign(character.costs.bossMat, {
+            [newBossMat]: character.costs.bossMat[oldBossMat],
+        })[oldBossMat];
+        character.costs.bossMat[newBossMat] = costsBossMat;
+
+        const oldWeeklyBossMat = Object.keys(
+            character.costs.weeklyBossMat
+        )[0] as NotoriousHuntMaterial;
+        const newWeeklyBossMat = getNotoriousHuntMaterial({
+            tag: currentChar.materials.weeklyBossMat,
+        })?.id! as NotoriousHuntMaterial;
+        const costsWeeklyBossMat = Object.values(
+            character.costs.weeklyBossMat
+        )[0];
+        delete Object.assign(character.costs.weeklyBossMat, {
+            [newWeeklyBossMat]: character.costs.weeklyBossMat[oldWeeklyBossMat],
+        })[oldWeeklyBossMat];
+        character.costs.weeklyBossMat[newWeeklyBossMat] = costsWeeklyBossMat;
+
         return character;
     });
     weapons = weapons.map((weapon) => {
