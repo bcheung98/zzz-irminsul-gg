@@ -8,7 +8,13 @@ import { StyledInput } from "styled/StyledInput";
 import { StyledMenuItem } from "styled/StyledMenu";
 
 // MUI imports
-import { Box, Divider, Select, SelectChangeEvent } from "@mui/material";
+import {
+    useTheme,
+    Box,
+    Divider,
+    Select,
+    SelectChangeEvent,
+} from "@mui/material";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
@@ -29,6 +35,8 @@ interface BrowserSortProps {
 }
 
 function BrowserSort({ type, options }: BrowserSortProps) {
+    const theme = useTheme();
+
     const dispatch = useAppDispatch();
 
     const sortSettings = useAppSelector(selectBrowserSettings)[type];
@@ -64,7 +72,9 @@ function BrowserSort({ type, options }: BrowserSortProps) {
             }}
         >
             <Divider sx={{ mb: 2 }} />
-            <TextStyled sx={{ mb: 2 }}>Sort By</TextStyled>
+            <TextStyled sx={{ mb: 2, color: theme.appbar.color }}>
+                Sort By
+            </TextStyled>
             <FlexBox sx={{ alignItems: "center", flexWrap: "wrap", gap: 2 }}>
                 <Select
                     value={sortBy}
