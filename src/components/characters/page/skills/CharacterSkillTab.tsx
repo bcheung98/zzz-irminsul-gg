@@ -140,14 +140,16 @@ function parseSkillDescription(description: string, index: number) {
                     return (
                         <span
                             className={
-                                className === "text-value"
+                                className.startsWith("text-value")
                                     ? `character-skill-value-${index}`
                                     : className
                             }
                             data-index={domNode.attribs["data-index"]}
                             style={{
                                 color: theme.text[
-                                    tag as keyof typeof theme.text
+                                    tag
+                                        .split(" ")
+                                        .slice(-1)[0] as keyof typeof theme.text
                                 ],
                                 fontWeight:
                                     tag === "highlight"
