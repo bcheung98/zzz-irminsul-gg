@@ -73,7 +73,7 @@ export const { selectBrowserSettings } = browserSlice.selectors;
 export default browserSlice.reducer;
 
 startAppListening({
-    matcher: isAnyOf(setSortBy, setSortDirection),
+    matcher: isAnyOf(setSortBy, setSortDirection, setBrowserView),
     effect: (_, state) => {
         const data = JSON.stringify(state.getState().browser);
         localStorage.setItem("browser", data);
