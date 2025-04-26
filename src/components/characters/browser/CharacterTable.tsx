@@ -17,14 +17,7 @@ import { Character } from "types/character";
 
 export type CharacterRow = Pick<
     Character,
-    | "id"
-    | "name"
-    | "fullName"
-    | "rarity"
-    | "element"
-    | "specialty"
-    | "attackType"
-    | "faction"
+    "id" | "name" | "fullName" | "rarity" | "element" | "specialty" | "faction"
 >;
 
 function CharacterTable({ characters }: { characters: Character[] }) {
@@ -55,7 +48,7 @@ function CharacterTable({ characters }: { characters: Character[] }) {
         element: char.element,
         subElement: char.subElement || char.element,
         specialty: char.specialty,
-        attackType: char.attackType,
+        attackType: char.attackType[0],
         faction: char.faction,
         releaseDate: char.release.date,
         version: char.release.version,

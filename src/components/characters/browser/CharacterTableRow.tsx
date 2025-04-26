@@ -16,9 +16,11 @@ import { combineStyles } from "helpers/utils";
 
 // Type imports
 import { CharacterRow } from "./CharacterTable";
+import { AttackType } from "types/_common";
 
 interface CharacterTableRowProps extends CharacterRow {
     subElement: string;
+    attackType: AttackType;
     releaseDate: string;
     version: string;
 }
