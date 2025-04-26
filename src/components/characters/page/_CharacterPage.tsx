@@ -56,7 +56,7 @@ function CharacterPage() {
             <Stack spacing={2}>
                 {matches_md_up ? (
                     <Grid container spacing={3}>
-                        <Grid size={{ md: 4, xl: "auto" }}>
+                        <Grid size={4}>
                             <Stack spacing={2}>
                                 {charSplash}
                                 {infoMisc}
