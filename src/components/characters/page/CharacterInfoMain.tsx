@@ -13,7 +13,7 @@ import { CharacterProps } from "types/character";
 function CharacterInfoMain({ character }: CharacterProps) {
     const theme = useTheme();
 
-    const { fullName, rarity, specialty } = character;
+    const { fullName, rarity, specialty, attackType } = character;
     const element = character.subElement || character.element;
 
     return (
@@ -51,6 +51,13 @@ function CharacterInfoMain({ character }: CharacterProps) {
                             src={`specialties/${specialty}`}
                             label={specialty}
                         />
+                        {attackType.map((atkType) => (
+                            <InfoChip
+                                color="tertiary"
+                                src={`specialties/attack_types/${atkType}`}
+                                label={atkType}
+                            />
+                        ))}
                     </FlexBox>
                 </Box>
             </FlexBox>
