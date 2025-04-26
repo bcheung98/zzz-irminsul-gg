@@ -22,7 +22,9 @@ export function filterCharacters(
     }
     if (filters.attackType.length > 0) {
         chars = chars.filter((char) =>
-            filters.attackType.includes(char.attackType)
+            filters.attackType.some((filter) =>
+                char.attackType.includes(filter)
+            )
         );
     }
     if (filters.rarity.length > 0) {

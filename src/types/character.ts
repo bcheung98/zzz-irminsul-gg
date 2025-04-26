@@ -17,7 +17,7 @@ export interface Character {
     element: Element;
     subElement?: string;
     specialty: Specialty;
-    attackType: AttackType;
+    attackType: AttackType[];
     skills: CharacterSkills;
     cinema: CharacterCinema;
     stats: CharacterStats;

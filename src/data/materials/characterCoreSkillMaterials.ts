@@ -89,6 +89,16 @@ export const expertChallengeMaterials = [
         rarity: "A",
         release: { version: "1.6" },
     },
+    {
+        id: "bossMat_9",
+        category: "bossMat",
+        tag: "bossMat_9",
+        name: "bossMat_9",
+        displayName: "bossMat_9",
+        source: "???",
+        rarity: "A",
+        release: { version: "2.0" },
+    },
 ] as const;
 
 export const expertChallengeMatNames = expertChallengeMaterials.map(
@@ -157,6 +167,16 @@ export const notoriousHuntMaterials = [
         source: "Sacrifice - Bringer",
         rarity: "S",
         release: { version: "1.4" },
+    },
+    {
+        id: "weeklyBossMat_5",
+        category: "weeklyBossMat",
+        tag: "weeklyBossMat_5",
+        name: "weeklyBossMat_5",
+        displayName: "weeklyBossMat_5",
+        source: "???",
+        rarity: "S",
+        release: { version: "2.0" },
     },
 ] as const;
 
