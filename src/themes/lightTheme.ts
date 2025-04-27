@@ -31,6 +31,9 @@ export const lightThemeData = {
     name: "Light",
     background: (index: number, shade?: Shade) =>
         getThemeBackgroundColors({ colors: backgroundColors, index, shade }),
+    backgroundImageColors: ["rgb(23, 46, 98)", "rgba(73, 218, 243, 0.2)"],
+    backgroundImageURL: "https://assets.irminsul.gg/main/images/Irminsul.png",
+    backgroundImageAlpha: 0.75,
     palette: {
         primary: {
             main: "rgb(0, 16, 32)",

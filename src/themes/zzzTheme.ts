@@ -31,6 +31,10 @@ export const zzzThemeData = {
     name: "Zenless",
     background: (index: number, shade?: Shade) =>
         getThemeBackgroundColors({ colors: backgroundColors, index, shade }),
+    backgroundImageColors: ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.2)"],
+    backgroundImageURL:
+        "https://assets.irminsul.gg/zzz/images/Zenless_Background.png",
+    backgroundImageAlpha: 0.25,
     palette: {
         primary: {
             main: "rgb(12, 12, 12)",
@@ -50,7 +54,7 @@ export const zzzThemeData = {
     },
     font: {
         main: {
-            family: "Rowdies, Roboto, sans-serif",
+            family: "Zenless, Roboto, sans-serif",
             weight: 300,
         },
         styled: {
@@ -93,32 +97,32 @@ export const zzzThemeData = {
                 sm: 11,
             },
             h4: {
-                xs: 26,
-                sm: 28,
+                xs: 24,
+                sm: 26,
             },
             h5: {
-                xs: 22,
-                sm: 24,
+                xs: 20,
+                sm: 22,
             },
             h6: {
-                xs: 18,
-                sm: 20,
+                xs: 16,
+                sm: 18,
             },
             body1: {
-                xs: 14,
-                sm: 16,
-            },
-            subtitle1: {
-                xs: 13,
-                sm: 15,
-            },
-            body2: {
                 xs: 12,
                 sm: 14,
             },
-            subtitle2: {
+            subtitle1: {
                 xs: 11,
                 sm: 13,
+            },
+            body2: {
+                xs: 10,
+                sm: 12,
+            },
+            subtitle2: {
+                xs: 9,
+                sm: 11,
             },
         },
     },

@@ -23,11 +23,6 @@ function Layout() {
         window.scrollTo(0, 0);
     }, [location]);
 
-    const backgroundImageColors = [
-        "rgb(23, 46, 98)",
-        "rgba(73, 218, 243, 0.2)",
-    ];
-
     return (
         <>
             <Box id="back-to-top-anchor" />
@@ -36,8 +31,8 @@ function Layout() {
                     display: "flex",
                     backgroundColor: theme.background(0),
                     backgroundImage: {
-                        xs: `linear-gradient(to bottom, ${backgroundImageColors[0]} 10%, ${backgroundImageColors[1]} 50%, ${backgroundImageColors[0]} 100%)`,
-                        sm: `linear-gradient(to bottom, ${backgroundImageColors[0]} 10%, ${backgroundImageColors[1]} 50%, ${backgroundImageColors[0]} 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
+                        xs: `linear-gradient(to bottom, ${theme.backgroundImageColors[0]} 10%, ${theme.backgroundImageColors[1]} 50%, ${theme.backgroundImageColors[0]} 100%)`,
+                        sm: `linear-gradient(to bottom, ${theme.backgroundImageColors[0]} 10%, ${theme.backgroundImageColors[1]} 50%, ${theme.backgroundImageColors[0]} 100%), url(${theme.backgroundImageURL})`,
                     },
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
@@ -50,7 +45,10 @@ function Layout() {
                     sx={{
                         minWidth: "0vw",
                         width: "100vw",
-                        backgroundColor: alpha(theme.background(0), 0.75),
+                        backgroundColor: alpha(
+                            theme.background(0),
+                            theme.backgroundImageAlpha
+                        ),
                     }}
                 >
                     <Box
