@@ -12,6 +12,7 @@ export const specialities = [
     "Anomaly",
     "Defense",
     "Support",
+    "Rupture",
 ] as const;
 
 export const attackTypes = ["Strike", "Slash", "Pierce"] as const;

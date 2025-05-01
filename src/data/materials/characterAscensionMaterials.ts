@@ -174,6 +174,41 @@ export const characterAscensionMaterials = [
         rarity: "A",
         release: { version: "1.0" },
     },
+    {
+        id: "characterAscension_5",
+        category: "characterAscension",
+        tag: "Rupture",
+        name: "Rupture Seal",
+        displayName: "Rupture Seal",
+        release: { version: "2.0" },
+    },
+    {
+        id: "characterAscension_5_0",
+        category: "characterAscension",
+        tag: "Rupture1",
+        name: "Basic Rupture Certification Seal",
+        displayName: "Basic Rupture Certification Seal",
+        rarity: "C",
+        release: { version: "2.0" },
+    },
+    {
+        id: "characterAscension_5_1",
+        category: "characterAscension",
+        tag: "Rupture2",
+        name: "Advanced Rupture Certification Seal",
+        displayName: "Advanced Rupture Certification Seal",
+        rarity: "B",
+        release: { version: "2.0" },
+    },
+    {
+        id: "characterAscension_5_2",
+        category: "characterAscension",
+        tag: "Rupture3",
+        name: "Arbiter's Certification Seal",
+        displayName: "Arbiter's Certification Seal",
+        rarity: "A",
+        release: { version: "2.0" },
+    },
 ] as const;
 
 export const characterAscensionMatNames = characterAscensionMaterials.map(

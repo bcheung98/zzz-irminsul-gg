@@ -174,6 +174,41 @@ export const weaponAscensionMaterials = [
         rarity: "A",
         release: { version: "1.0" },
     },
+    {
+        id: "weaponAscension_5",
+        category: "weaponAscension",
+        tag: "Rupture",
+        name: "Rupture Component",
+        displayName: "Rupture Component",
+        release: { version: "2.0" },
+    },
+    {
+        id: "weaponAscension_5_0",
+        category: "weaponAscension",
+        tag: "Rupture1",
+        name: "Rupture Component",
+        displayName: "Rupture Component",
+        rarity: "C",
+        release: { version: "2.0" },
+    },
+    {
+        id: "weaponAscension_5_1",
+        category: "weaponAscension",
+        tag: "Rupture2",
+        name: "Reinforced Rupture Component",
+        displayName: "Reinforced Rupture Component",
+        rarity: "B",
+        release: { version: "2.0" },
+    },
+    {
+        id: "weaponAscension_5_2",
+        category: "weaponAscension",
+        tag: "Rupture3",
+        name: "Specialized Rupture Component",
+        displayName: "Specialized Rupture Component",
+        rarity: "A",
+        release: { version: "2.0" },
+    },
 ] as const;
 
 export const weaponAscensionMatNames = weaponAscensionMaterials.map(
