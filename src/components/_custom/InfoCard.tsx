@@ -83,10 +83,7 @@ function InfoCard({
     let route;
     switch (type) {
         case "character":
-            imgSrc =
-                variant === "avatar"
-                    ? `characters/avatars/${name}`
-                    : `characters/icons/${name}`;
+            imgSrc = `characters/icons/${name}`;
             route = "agents";
             break;
         case "weapon":
@@ -196,11 +193,6 @@ function InfoCard({
                                         alt={name}
                                         id={`${id}-img`}
                                         style={imageStyle}
-                                        fallbackSrc={`images/${
-                                            type === "character"
-                                                ? "Unknown2"
-                                                : "Unknown"
-                                        }`}
                                     />
                                 </RouterLink>
                                 {variant === "material-card" && materials && (
