@@ -193,6 +193,7 @@ function Settings() {
                 onClose={handleSettingsClose}
                 maxWidth="sm"
                 fullWidth
+                disableScrollLock
             >
                 <Box sx={{ overflowY: "auto", scrollbarWidth: "thin" }}>
                     <MainContentBox

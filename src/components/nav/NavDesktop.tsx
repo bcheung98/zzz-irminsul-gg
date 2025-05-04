@@ -156,6 +156,7 @@ function NavDesktop({ navItems, linkItems, otherItems }: NavProps) {
                                 anchorEl={anchorEl}
                                 open={open}
                                 onClose={handleMenuClose}
+                                disableScrollLock
                                 sx={{
                                     "& .MuiMenu-paper": {
                                         border: `1px solid ${theme.appbar.hover}`,
