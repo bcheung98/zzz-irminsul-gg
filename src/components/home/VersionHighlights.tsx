@@ -199,6 +199,7 @@ function VersionHighlights() {
                                     rarity={weapon.rarity}
                                     info={{
                                         specialty: weapon.specialty,
+                                        subStat: weapon.stats.subStat,
                                     }}
                                 />
                             ))}

@@ -23,6 +23,7 @@ import {
 // Type imports
 import { Rarity, Specialty } from "types/_common";
 import { CharacterMaterials } from "types/materials";
+import { subStats, WeaponSubStat } from "data/weaponStats";
 
 interface InfoCardProps {
     name: string;
@@ -36,6 +37,7 @@ interface InfoCardProps {
     info?: {
         element?: string;
         specialty?: Specialty;
+        subStat?: WeaponSubStat;
     };
     materials?: CharacterMaterials;
     backgroundColor?: string;
@@ -266,6 +268,14 @@ function InfoCard({
                                     alt={info.specialty}
                                     style={infoIconStyle}
                                     tooltip={info.specialty}
+                                />
+                            )}
+                            {info.subStat && (
+                                <Image
+                                    src={`stat_icons/${info.subStat}`}
+                                    alt={info.subStat}
+                                    style={infoIconStyle}
+                                    tooltip={subStats[info.subStat].title}
                                 />
                             )}
                         </Stack>

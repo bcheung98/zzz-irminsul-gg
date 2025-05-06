@@ -155,16 +155,17 @@ function WeaponBrowser() {
             </Grid>
             {view === "icon" && (
                 <Grid container spacing={3}>
-                    {currentWeapons.map((wep) => (
+                    {currentWeapons.map((weapon) => (
                         <InfoCard
-                            key={wep.id}
-                            id={`${wep.name}-weaponBrowser`}
-                            name={wep.name}
-                            displayName={wep.displayName}
+                            key={weapon.id}
+                            id={`${weapon.name}-weaponBrowser`}
+                            name={weapon.name}
+                            displayName={weapon.displayName}
                             type="weapon"
-                            rarity={wep.rarity}
+                            rarity={weapon.rarity}
                             info={{
-                                specialty: wep.specialty,
+                                specialty: weapon.specialty,
+                                subStat: weapon.stats.subStat,
                             }}
                         />
                     ))}
