@@ -9,7 +9,9 @@ import { TextStyled } from "styled/StyledTypography";
 import Grid from "@mui/material/Grid2";
 
 // Helper imports
+import { sortBy } from "helpers/utils";
 import { useAppSelector } from "helpers/hooks";
+import { RarityMap } from "data/common";
 import { selectBangboos } from "reducers/bangboo";
 
 // Type imports
@@ -29,9 +31,7 @@ function BangbooBrowser() {
         .querySelector('meta[property="og:description"]')
         ?.setAttribute("content", documentDesc);
 
-    const bangboos = [...useAppSelector(selectBangboos)].sort((a, b) =>
-        a.displayName.localeCompare(b.displayName)
-    );
+    const bangboos = [...useAppSelector(selectBangboos)];
 
     const [searchValue, setSearchValue] = useState("");
     const handleInputChange = (event: BaseSyntheticEvent) => {
@@ -85,8 +85,9 @@ function BangbooBrowser() {
 export default BangbooBrowser;
 
 function filterBangboos(bangboos: Bangboo[], searchValue: string) {
+    let bb = [...bangboos];
     if (searchValue !== "") {
-        return bangboos.filter(
+        bb = bb.filter(
             (bangboo) =>
                 bangboo.name
                     .toLowerCase()
@@ -95,7 +96,11 @@ function filterBangboos(bangboos: Bangboo[], searchValue: string) {
                     .toLowerCase()
                     .includes(searchValue.toLowerCase())
         );
-    } else {
-        return bangboos;
     }
+    bb = bb.sort(
+        (a, b) =>
+            sortBy(RarityMap[a.rarity], RarityMap[b.rarity]) ||
+            a.displayName.localeCompare(b.displayName)
+    );
+    return bb;
 }
