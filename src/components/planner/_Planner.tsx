@@ -66,7 +66,9 @@ function Planner() {
 
     characters = characters.map((character) => {
         const currentChar = charData.find(
-            (c) => c.id === Number(character.id.split("_")[1])
+            (c) =>
+                c.id === Number(character.id.split("_")[1]) ||
+                c.name === character.name
         )!;
         character = JSON.parse(JSON.stringify(character));
         character.name = currentChar.name;
@@ -102,7 +104,9 @@ function Planner() {
     });
     weapons = weapons.map((weapon) => {
         const currentWep = wepData.find(
-            (w) => w.id === Number(weapon.id.split("_")[1])
+            (w) =>
+                w.id === Number(weapon.id.split("_")[1]) ||
+                w.name === weapon.name
         )!;
         weapon = JSON.parse(JSON.stringify(weapon));
         weapon.name = currentWep.name;
