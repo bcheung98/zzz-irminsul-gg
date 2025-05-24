@@ -106,6 +106,7 @@ function CharacterCoreSkillScaling({
                                                 "CRIT DMG",
                                                 "PEN Ratio",
                                                 "Base Energy Regen",
+                                                "HP",
                                             ].includes(stat[0])
                                                 ? `${
                                                       Number(
