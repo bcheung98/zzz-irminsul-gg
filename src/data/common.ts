@@ -36,4 +36,5 @@ export const factions = [
     "Stars of Lyra",
     "Mockingbird",
     "Yunkui Summit",
+    "Spook Shack",
 ] as const;

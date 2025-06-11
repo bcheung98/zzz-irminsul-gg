@@ -99,6 +99,16 @@ export const expertChallengeMaterials = [
         rarity: "A",
         release: { version: "2.0" },
     },
+    {
+        id: "bossMat_10",
+        category: "bossMat",
+        tag: "bossMat_10",
+        name: "???",
+        displayName: "???",
+        source: "???",
+        rarity: "A",
+        release: { version: "2.1" },
+    },
 ] as const;
 
 export const expertChallengeMatNames = expertChallengeMaterials.map(
