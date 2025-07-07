@@ -8,6 +8,7 @@ import { Bangboo } from "types/bangboo";
 export interface BangbooState {
     status: LoadingStatus;
     bangboos: Bangboo[];
+    names: string[];
 }
 
 const storedBangboos = localStorage.getItem("data/bangboos") || "null";
@@ -19,6 +20,7 @@ const { unreleasedContent = false } = JSON.parse(storedSettings);
 const initialState: BangbooState = {
     status: "idle",
     bangboos: storedBangboos !== "null" ? JSON.parse(storedBangboos) : [],
+    names: [],
 };
 
 export const bangbooSlice = createSlice({
@@ -31,6 +33,7 @@ export const bangbooSlice = createSlice({
         });
         builder.addCase(fetchBangboos.fulfilled, (state, action) => {
             let payload = action.payload;
+            state.names = action.payload.map((item) => item.name.split(" ").join("_").toLowerCase());
             if (!unreleasedContent) {
                 payload = payload.filter((item) =>
                     isUnreleasedContent(item.release.version)
@@ -49,6 +52,9 @@ export const bangbooSlice = createSlice({
 
 export const selectBangboos = (state: RootState): Bangboo[] =>
     state.bangboos.bangboos;
+
+export const selectBangbooNames = (state: RootState): string[] =>
+    state.bangboos.names;
 
 export default bangbooSlice.reducer;
 

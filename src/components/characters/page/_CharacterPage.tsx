@@ -86,7 +86,7 @@ function CharacterPage() {
             </Stack>
         );
     } else {
-        return <PageNotFound />;
+        return <PageNotFound params={params.name} />;
     }
 }
 

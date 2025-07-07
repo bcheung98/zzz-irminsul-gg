@@ -8,6 +8,7 @@ import { Character } from "types/character";
 export interface CharacterState {
     status: LoadingStatus;
     characters: Character[];
+    names: string[];
 }
 
 const storedCharacters = localStorage.getItem("data/characters") || "null";
@@ -19,6 +20,7 @@ const { unreleasedContent = false } = JSON.parse(storedSettings);
 const initialState: CharacterState = {
     status: "idle",
     characters: storedCharacters !== "null" ? JSON.parse(storedCharacters) : [],
+    names: [],
 };
 
 export const characterSlice = createSlice({
@@ -31,6 +33,7 @@ export const characterSlice = createSlice({
         });
         builder.addCase(fetchCharacters.fulfilled, (state, action) => {
             let payload = action.payload;
+            state.names = action.payload.map((item) => item.name.split(" ").join("_").toLowerCase());
             if (!unreleasedContent) {
                 payload = payload.filter((item) =>
                     isUnreleasedContent(item.release.version)
@@ -49,6 +52,9 @@ export const characterSlice = createSlice({
 
 export const selectCharacters = (state: RootState): Character[] =>
     state.characters.characters;
+
+export const selectCharacterNames = (state: RootState): string[] =>
+    state.characters.names;
 
 export default characterSlice.reducer;
 

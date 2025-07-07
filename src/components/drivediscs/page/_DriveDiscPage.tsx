@@ -52,7 +52,7 @@ function DriveDiscPage() {
             </Grid>
         );
     } else {
-        return <PageNotFound />;
+        return <PageNotFound params={params.name} />;
     }
 }
 

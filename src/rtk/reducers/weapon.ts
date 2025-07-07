@@ -8,6 +8,7 @@ import { Weapon } from "types/weapon";
 export interface WeaponState {
     status: LoadingStatus;
     weapons: Weapon[];
+    names: string[];
 }
 
 const storedWeapons = localStorage.getItem("data/weapons") || "null";
@@ -19,6 +20,7 @@ const { unreleasedContent = false } = JSON.parse(storedSettings);
 const initialState: WeaponState = {
     status: "idle",
     weapons: storedWeapons !== "null" ? JSON.parse(storedWeapons) : [],
+    names: [],
 };
 
 export const weaponSlice = createSlice({
@@ -31,6 +33,7 @@ export const weaponSlice = createSlice({
         });
         builder.addCase(fetchWeapons.fulfilled, (state, action) => {
             let payload = action.payload;
+            state.names = action.payload.map((item) => item.name.split(" ").join("_").toLowerCase());
             if (!unreleasedContent) {
                 payload = payload.filter((item) =>
                     isUnreleasedContent(item.release.version)
@@ -49,6 +52,9 @@ export const weaponSlice = createSlice({
 
 export const selectWeapons = (state: RootState): Weapon[] =>
     state.weapons.weapons;
+
+export const selectWeaponNames = (state: RootState): string[] =>
+    state.weapons.names;
 
 export default weaponSlice.reducer;
 

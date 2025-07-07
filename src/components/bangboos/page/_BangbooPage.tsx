@@ -56,7 +56,7 @@ function BangbooPage() {
             </Stack>
         );
     } else {
-        return <PageNotFound />;
+        return <PageNotFound params={params.name} />;
     }
 }
 

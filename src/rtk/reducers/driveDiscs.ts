@@ -8,6 +8,7 @@ import { DriveDisc } from "types/driveDisc";
 export interface DriveDiscState {
     status: LoadingStatus;
     driveDiscs: DriveDisc[];
+    names: string[];
 }
 
 const storedDriveDiscs = localStorage.getItem("data/driveDiscs") || "null";
@@ -19,6 +20,7 @@ const { unreleasedContent = false } = JSON.parse(storedSettings);
 const initialState: DriveDiscState = {
     status: "idle",
     driveDiscs: storedDriveDiscs !== "null" ? JSON.parse(storedDriveDiscs) : [],
+    names: [],
 };
 
 export const driveDiscSlice = createSlice({
@@ -31,6 +33,7 @@ export const driveDiscSlice = createSlice({
         });
         builder.addCase(fetchDriveDiscs.fulfilled, (state, action) => {
             let payload = action.payload;
+            state.names = action.payload.map((item) => item.name.split(" ").join("_").toLowerCase());
             if (!unreleasedContent) {
                 payload = payload.filter((item) =>
                     isUnreleasedContent(item.release.version)
@@ -49,6 +52,9 @@ export const driveDiscSlice = createSlice({
 
 export const selectDriveDiscs = (state: RootState): DriveDisc[] =>
     state.driveDiscs.driveDiscs;
+
+export const selectDriveDiscNames = (state: RootState): string[] =>
+    state.driveDiscs.names;
 
 export default driveDiscSlice.reducer;
 

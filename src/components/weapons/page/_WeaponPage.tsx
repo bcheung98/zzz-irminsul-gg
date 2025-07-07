@@ -62,7 +62,7 @@ function WeaponPage() {
             </Grid>
         );
     } else {
-        return <PageNotFound />;
+        return <PageNotFound params={params.name} />;
     }
 }
 
