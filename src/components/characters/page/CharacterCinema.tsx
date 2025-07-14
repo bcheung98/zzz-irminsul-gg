@@ -1,7 +1,7 @@
 import { BaseSyntheticEvent, useState } from "react";
 import parse, {
     HTMLReactParserOptions,
-    Element,
+    Element as DOMElement,
     domToReact,
     DOMNode,
 } from "html-react-parser";
@@ -64,32 +64,6 @@ function CharacterCinema({ character }: CharacterProps) {
         };
     };
 
-    const options: HTMLReactParserOptions = {
-        replace: (domNode) => {
-            if (domNode instanceof Element && domNode.attribs.class) {
-                const className = domNode.attribs.class;
-                if (className.split("-")[0].startsWith("text")) {
-                    const tag = className.split("-")[1];
-                    return (
-                        <span
-                            style={{
-                                color: theme.text[
-                                    tag as keyof typeof theme.text
-                                ],
-                                fontWeight:
-                                    tag === "highlight"
-                                        ? theme.font.highlight.weight
-                                        : theme.font.element.weight,
-                            }}
-                        >
-                            {domToReact(domNode.children as DOMNode[], options)}
-                        </span>
-                    );
-                }
-            }
-        },
-    };
-
     return (
         <>
             <MainContentBox
@@ -122,9 +96,16 @@ function CharacterCinema({ character }: CharacterProps) {
                             <TextStyled variant="h6-styled" sx={{ mb: "4px" }}>
                                 {`${index + 1}. ${cinema[key].name}`}
                             </TextStyled>
-                            <Text sx={{ color: theme.text.description }}>
-                                {parse(cinema[key].description, options)}
-                            </Text>
+                            {cinema[key].description
+                                .split("<br />")
+                                .map((line, i) => (
+                                    <Text
+                                        sx={{ color: theme.text.description }}
+                                        key={i}
+                                    >
+                                        {parseSkillDescription(line, index)}
+                                    </Text>
+                                ))}
                         </Grid>
                     ))}
                 </Grid>
@@ -221,3 +202,88 @@ function CharacterCinema({ character }: CharacterProps) {
 }
 
 export default CharacterCinema;
+
+function parseSkillDescription(description: string, index: number) {
+    const theme = useTheme();
+    const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
+    const options: HTMLReactParserOptions = {
+        replace: (domNode) => {
+            if (domNode instanceof DOMElement && domNode.attribs.class) {
+                const className = domNode.attribs.class;
+                if (className.split(" ")[0].startsWith("icon")) {
+                    const skill = className.split(" ")[1];
+                    return (
+                        <Image
+                            src={`skills/${getSkillIcon(skill)}`}
+                            alt={skill}
+                            style={{
+                                verticalAlign: "middle",
+                                width: "auto",
+                                height: matches_sm_up
+                                    ? `calc(${theme.typography.body1.fontSize} + 0.625rem)`
+                                    : `calc(${theme.typography.body1.fontSize} + 0.5rem)`,
+                                marginBottom: "1.5px",
+                            }}
+                        />
+                    );
+                } else if (className.split("-")[0].startsWith("text")) {
+                    const tag = className.split("-")[1];
+                    return (
+                        <span
+                            className={
+                                className.startsWith("text-value")
+                                    ? `character-skill-value-${index}`
+                                    : className
+                            }
+                            data-index={domNode.attribs["data-index"]}
+                            style={{
+                                color: theme.text[
+                                    tag
+                                        .split(" ")
+                                        .slice(-1)[0] as keyof typeof theme.text
+                                ],
+                                fontWeight:
+                                    tag === "highlight"
+                                        ? theme.font.highlight.weight
+                                        : theme.font.element.weight,
+                            }}
+                        >
+                            {domToReact(domNode.children as DOMNode[], options)}
+                        </span>
+                    );
+                }
+            }
+        },
+    };
+
+    const text = description
+        .replaceAll(`Icon_Basic`, `<span class="icon basic"></span>`)
+        .replaceAll(`Icon_Dodge`, `<span class="icon dodge"></span>`)
+        .replaceAll(`Icon_Assist`, `<span class="icon assist"></span>`)
+        .replaceAll(`Icon_Special`, `<span class="icon special"></span>`)
+        .replaceAll(`Icon_EXSpecial`, `<span class="icon ex-special"></span>`)
+        .replaceAll(`Icon_Ultimate`, `<span class="icon ultimate"></span>`)
+        .replaceAll(`Icon_Core`, `<span class="icon core"></span>`);
+    return parse(text, options);
+}
+
+function getSkillIcon(skill: string) {
+    switch (skill) {
+        case "basic":
+            return "Basic";
+        case "dodge":
+            return "Dodge";
+        case "assist":
+            return "Assist";
+        case "special":
+            return "Special";
+        case "ex-special":
+            return "SpecialEX";
+        case "ultimate":
+            return "Ultimate";
+        case "core":
+            return "Core";
+        default:
+            return "";
+    }
+}
