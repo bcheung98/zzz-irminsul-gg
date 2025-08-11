@@ -29,8 +29,10 @@ function DriveDiscBrowser() {
         .querySelector('meta[property="og:description"]')
         ?.setAttribute("content", documentDesc);
 
-    const driveDiscs = [...useAppSelector(selectDriveDiscs)].sort((a, b) =>
-        a.displayName.localeCompare(b.displayName)
+    const driveDiscs = [...useAppSelector(selectDriveDiscs)].sort(
+        (a, b) =>
+            b.release.version.localeCompare(a.release.version) ||
+            b.displayName.localeCompare(a.displayName)
     );
 
     const [searchValue, setSearchValue] = useState("");
