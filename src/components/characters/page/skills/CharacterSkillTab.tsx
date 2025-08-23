@@ -22,7 +22,7 @@ import {
     CharacterSkillKey,
 } from "types/character";
 import { Skill } from "types/skill";
-import { Element } from "types/_common";
+import { Element, Specialty } from "types/_common";
 import { CharacterMaterials } from "types/materials";
 
 interface CharacterSkillTabProps {
@@ -31,6 +31,7 @@ interface CharacterSkillTabProps {
     skillData: Skill[];
     ascension: CharacterAscensionStat;
     element: Element;
+    specialty: Specialty;
     materials: CharacterMaterials;
     colors: CharacterColors;
 }
@@ -57,6 +58,7 @@ function CharacterSkillTab({
     skillData,
     ascension,
     element,
+    specialty,
     materials,
     colors,
 }: CharacterSkillTabProps) {
@@ -73,7 +75,7 @@ function CharacterSkillTab({
                     </TextStyled>
                     {skill.description.split("<br />").map((line, i) => (
                         <Text sx={{ color: theme.text.description }} key={i}>
-                            {parseSkillDescription(line, index)}
+                            {parseSkillDescription(line, index, specialty)}
                         </Text>
                     ))}
                     <Box sx={{ pt: "16px" }}>
@@ -112,7 +114,11 @@ function CharacterSkillTab({
 
 export default CharacterSkillTab;
 
-function parseSkillDescription(description: string, index: number) {
+function parseSkillDescription(
+    description: string,
+    index: number,
+    specialty: Specialty
+) {
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
     const options: HTMLReactParserOptions = {
@@ -123,7 +129,7 @@ function parseSkillDescription(description: string, index: number) {
                     const skill = className.split(" ")[1];
                     return (
                         <Image
-                            src={`skills/${getSkillIcon(skill)}`}
+                            src={`skills/${getSkillIcon(skill, specialty)}`}
                             alt={skill}
                             style={{
                                 verticalAlign: "middle",
@@ -170,13 +176,14 @@ function parseSkillDescription(description: string, index: number) {
         .replaceAll(`Icon_Dodge`, `<span class="icon dodge"></span>`)
         .replaceAll(`Icon_Assist`, `<span class="icon assist"></span>`)
         .replaceAll(`Icon_Special`, `<span class="icon special"></span>`)
+        .replaceAll(`Icon_EXSpecial2`, `<span class="icon ex-special2"></span>`)
         .replaceAll(`Icon_EXSpecial`, `<span class="icon ex-special"></span>`)
         .replaceAll(`Icon_Ultimate`, `<span class="icon ultimate"></span>`)
         .replaceAll(`Icon_Core`, `<span class="icon core"></span>`);
     return parse(text, options);
 }
 
-function getSkillIcon(skill: string) {
+function getSkillIcon(skill: string, specialty: Specialty) {
     switch (skill) {
         case "basic":
             return "Basic";
@@ -187,7 +194,7 @@ function getSkillIcon(skill: string) {
         case "special":
             return "Special";
         case "ex-special":
-            return "SpecialEX";
+            return specialty === "Rupture" ? "SpecialEX2" : "SpecialEX";
         case "ultimate":
             return "Ultimate";
         case "core":

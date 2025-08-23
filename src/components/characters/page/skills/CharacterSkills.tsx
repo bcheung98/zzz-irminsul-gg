@@ -8,10 +8,12 @@ import ToggleButtons from "custom/ToggleButtons";
 import { StyledTab, StyledTabs, TabPanel } from "styled/StyledTabs";
 
 // MUI imports
-import { useMediaQuery, useTheme } from "@mui/material";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 // Helper imports
+import { useAppSelector } from "helpers/hooks";
 import { characterColors } from "helpers/characterColors";
+import { selectSkillDisplay, SkillDisplay } from "reducers/settings";
 import { skillDisplayButtons } from "components/Settings";
 
 // Type imports
@@ -20,14 +22,13 @@ import {
     CharacterProps,
     CharacterSkillKey,
 } from "types/character";
-import { selectSkillDisplay, SkillDisplay } from "reducers/settings";
-import { useAppSelector } from "helpers/hooks";
+import { Specialty } from "types/_common";
 
 function CharacterSkills({ character }: CharacterProps) {
     const theme = useTheme();
     const matches_sm_up = useMediaQuery(theme.breakpoints.up("sm"));
 
-    const { skills, stats, colors, element, materials } = character;
+    const { skills, stats, colors, element, specialty, materials } = character;
 
     const [tabValue, setTabValue] = useState(0);
     const handleTabChange = (_: BaseSyntheticEvent, newValue: number) => {
@@ -110,7 +111,8 @@ function CharacterSkills({ character }: CharacterProps) {
                         icon={
                             <Image
                                 src={`skills/${getSkillImage(
-                                    key as CharacterSkillKey
+                                    key as CharacterSkillKey,
+                                    specialty
                                 )}`}
                                 alt={key}
                                 style={skillIcon(index)}
@@ -128,6 +130,7 @@ function CharacterSkills({ character }: CharacterProps) {
                         skillData={skills[key as CharacterSkillKey]}
                         ascension={stats.ascension}
                         element={element}
+                        specialty={specialty}
                         materials={materials}
                         colors={colors}
                     />
@@ -139,7 +142,7 @@ function CharacterSkills({ character }: CharacterProps) {
 
 export default CharacterSkills;
 
-function getSkillImage(skill: CharacterSkillKey) {
+function getSkillImage(skill: CharacterSkillKey, specialty: Specialty) {
     switch (skill) {
         case "basic":
             return "Basic";
@@ -148,7 +151,7 @@ function getSkillImage(skill: CharacterSkillKey) {
         case "assist":
             return "Assist";
         case "special":
-            return "SpecialEX";
+            return specialty === "Rupture" ? "SpecialEX2" : "SpecialEX";
         case "chain":
             return "Ultimate";
         case "core":
