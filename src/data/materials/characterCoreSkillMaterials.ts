@@ -109,6 +109,16 @@ export const expertChallengeMaterials = [
         rarity: "A",
         release: { version: "2.1" },
     },
+    {
+        id: "bossMat_11",
+        category: "bossMat",
+        tag: "bossMat_11",
+        name: "bossMat_11",
+        displayName: "bossMat_11",
+        source: "?",
+        rarity: "A",
+        release: { version: "2.3" },
+    },
 ] as const;
 
 export const expertChallengeMatNames = expertChallengeMaterials.map(
@@ -187,6 +197,16 @@ export const notoriousHuntMaterials = [
         source: "Miasma Priest",
         rarity: "S",
         release: { version: "2.0" },
+    },
+    {
+        id: "weeklyBossMat_6",
+        category: "weeklyBossMat",
+        tag: "weeklyBossMat_6",
+        name: "weeklyBossMat_6",
+        displayName: "weeklyBossMat_6",
+        source: "?",
+        rarity: "S",
+        release: { version: "2.3" },
     },
 ] as const;
 

@@ -33,7 +33,5 @@ export function getMaterialKeyNames(
             isUnreleasedContent(mat.release.version)
         );
     }
-    return materials
-        .filter((mat) => !["1", "2", "3", "4"].includes(mat.tag.slice(-1)))
-        .map((mat) => mat.tag);
+    return materials.map((mat) => mat.tag);
 }
