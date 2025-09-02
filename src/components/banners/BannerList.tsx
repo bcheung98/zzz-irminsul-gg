@@ -1,51 +1,42 @@
 import { BaseSyntheticEvent, useEffect, useState } from "react";
 
 // Component imports
+import BannerListRow from "./BannerListRow";
+import MainContentBox from "custom/MainContentBox";
 import Image from "custom/Image";
 import SearchBar from "custom/SearchBar";
+import ToggleButtons from "custom/ToggleButtons";
 import { TextStyled } from "styled/StyledTypography";
 import { FlexBox } from "styled/StyledBox";
 import { StyledMenuItem } from "styled/StyledMenu";
 import { StyledSwitch } from "styled/StyledSwitch";
 import { StyledTooltip } from "styled/StyledTooltip";
-import SortTableHead, {
-    getComparator,
-    HeadColumn,
-    Order,
-} from "custom/SortTableHead";
 
 // MUI imports
 import {
     useTheme,
     Autocomplete,
-    Card,
     IconButton,
-    TableContainer,
-    Table,
-    TableBody,
     Stack,
+    Divider,
 } from "@mui/material";
 import HelpIcon from "@mui/icons-material/Help";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 // Helper imports
-import store from "rtk/store";
 import { useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
 import { selectWeapons } from "reducers/weapon";
 import { selectCharacterBanners, selectWeaponBanners } from "reducers/banner";
-import { isTBA } from "helpers/utils";
+import { createBannerData } from "helpers/createBannerData";
+import { sortBy } from "helpers/utils";
 import { getBackgroundColor, getRarityColor } from "helpers/rarityColors";
 
 // Type imports
-import { Element, Rarity, Specialty } from "types/_common";
-import { Banner } from "types/banner";
-import BannerListRow from "./BannerListRow";
+import { Banner, BannerData, BannerOption, BannerType } from "types/banner";
 
-interface BannerListProps {
-    type: "character" | "weapon";
-}
-
-function BannerList({ type }: BannerListProps) {
+function BannerList({ type }: { type: BannerType }) {
     const theme = useTheme();
 
     const banners =
@@ -55,35 +46,87 @@ function BannerList({ type }: BannerListProps) {
 
     const characters = useAppSelector(selectCharacters);
     const weapons = useAppSelector(selectWeapons);
+    const loading = [...characters, ...weapons].length === 0;
 
-    const [rows, setRows] = useState<BannerRow[]>([]);
+    const [rows, setRows] = useState<BannerData[]>([]);
 
     const [values, setValue] = useState<BannerOption[]>([]);
-    const options = createOptions(banners, type);
-
-    const [order, setOrder] = useState<Order>("desc");
-    const [orderBy, setOrderBy] = useState("subVersion");
-
-    const handleRequestSort = (_: BaseSyntheticEvent, property: string) => {
-        const isAsc = orderBy === property && order === "asc";
-        setOrder(isAsc ? "desc" : "asc");
-        setOrderBy(property);
-    };
+    const options = createOptions(banners);
 
     const [selected, setSelected] = useState(true);
     const handleSelect = () => {
         setSelected(!selected);
     };
 
-    const headColumns: HeadColumn[] = [{ id: "subVersion", label: "Version" }];
-
-    const smallIconStyle = { width: "16px", height: "16px" };
+    const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+    const handleDirectionChange = (
+        _: BaseSyntheticEvent,
+        newDirection: "asc" | "desc"
+    ) => {
+        if (newDirection !== null) {
+            setSortDirection(newDirection);
+        }
+    };
 
     useEffect(() => {}, [characters, weapons]);
 
     useEffect(() => {
-        setRows(createBannerRows(banners, values, selected));
-    }, [banners, values, selected]);
+        setRows(createBannerRows(banners, values));
+    }, [banners, values, selected, sortDirection]);
+
+    function createBannerRows(banners: Banner[], searchValue: BannerOption[]) {
+        let rowData: BannerData[] = [];
+        banners.forEach((banner) => {
+            const fiveStars = banner.fiveStars.map((item) =>
+                createBannerData(item, type, characters, weapons)
+            );
+            const fourStars = banner.fourStars.map((item) =>
+                createBannerData(item, type, characters, weapons)
+            );
+            rowData.push({
+                ...banner,
+                fiveStars: fiveStars,
+                fourStars: fourStars,
+            });
+        });
+        if (searchValue.length > 0) {
+            rowData = rowData.filter((banner) => {
+                function filterFn(item: BannerOption) {
+                    return [
+                        ...banner.fiveStars.map((item) => item.name),
+                        ...banner.fiveStars.map((item) => item.displayName),
+                        ...banner.fourStars.map((item) => item.name),
+                        ...banner.fourStars.map((item) => item.displayName),
+                    ].includes(item.name);
+                }
+                if (selected) {
+                    return searchValue.every(filterFn);
+                } else {
+                    return searchValue.some(filterFn);
+                }
+            });
+        }
+        if (sortDirection === "asc") {
+            rowData = rowData.reverse();
+        }
+        return rowData;
+    }
+
+    function createOptions(banners: Banner[]) {
+        const options = [
+            ...new Set(banners.map((banner) => banner.fiveStars).flat()),
+            ...new Set(banners.map((banner) => banner.fourStars).flat()),
+        ]
+            .map((id) => createBannerData(id, type, characters, weapons))
+            .sort(
+                (a, b) =>
+                    sortBy(a.rarity, b.rarity) ||
+                    sortBy(b.displayName, a.displayName)
+            );
+        return options;
+    }
+
+    const smallIconStyle = { width: "16px", height: "16px" };
 
     return (
         <>
@@ -234,117 +277,56 @@ function BannerList({ type }: BannerListProps) {
                     </IconButton>
                 </StyledTooltip>
             </FlexBox>
-            <TableContainer component={Card} sx={{ width: "100%" }}>
-                <Table>
-                    <SortTableHead
-                        order={order}
-                        orderBy={orderBy}
-                        onRequestSort={handleRequestSort}
-                        headColumns={headColumns}
-                    />
-                    <TableBody>
-                        {(rows as unknown as { [x: string]: string | number }[])
-                            .sort(getComparator(order, orderBy))
-                            .map((row, index) => (
-                                <BannerListRow
-                                    key={index}
-                                    type={type}
-                                    loading={
-                                        [...characters, ...weapons].length === 0
-                                    }
-                                    row={row as unknown as BannerRow}
-                                />
-                            ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <MainContentBox
+                title={
+                    <FlexBox
+                        sx={{
+                            width: "100%",
+                            flexWrap: "wrap",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <TextStyled sx={{ color: theme.appbar.color }}>
+                            {`${type === "character" ? "Agent" : "W-Engine"}
+                            Banner`}
+                        </TextStyled>
+                        <ToggleButtons
+                            color="primary"
+                            buttons={[
+                                {
+                                    value: "asc",
+                                    icon: <ArrowUpwardIcon fontSize="small" />,
+                                },
+                                {
+                                    value: "desc",
+                                    icon: (
+                                        <ArrowDownwardIcon fontSize="small" />
+                                    ),
+                                },
+                            ]}
+                            value={sortDirection}
+                            exclusive
+                            onChange={handleDirectionChange}
+                            highlightOnHover={false}
+                        />
+                    </FlexBox>
+                }
+                contentProps={{ padding: 0 }}
+            >
+                <Stack divider={<Divider />}>
+                    {rows.map((row, idx) => (
+                        <BannerListRow
+                            key={idx}
+                            loading={loading}
+                            type={type}
+                            row={row}
+                        />
+                    ))}
+                </Stack>
+            </MainContentBox>
         </>
     );
 }
 
 export default BannerList;
-
-interface BannerOption {
-    name: string;
-    displayName: string;
-    rarity: Rarity;
-    element?: Element;
-    specialty: Specialty;
-}
-
-function createOptions(banners: Banner[], type: "character" | "weapon") {
-    const options = [
-        ...new Set(
-            banners
-                .map((banner) => [...banner.fiveStars, ...banner.fourStars])
-                .flat()
-                .filter((item) => !isTBA(item))
-                .sort((a, b) => a.localeCompare(b))
-        ),
-    ];
-    const characters = store.getState().characters.characters;
-    const weapons = store.getState().weapons.weapons;
-    return options
-        .map((option) => {
-            if (type === "character") {
-                const character = characters.find(
-                    (char) => char.name === option
-                );
-                return {
-                    name: character?.name || "TBA",
-                    displayName: character?.fullName || "TBA",
-                    rarity: character?.rarity || "B",
-                    element: character?.element,
-                    specialty: character?.specialty,
-                } as BannerOption;
-            } else {
-                const weapon = weapons.find((wep) => wep.name === option);
-                return {
-                    name: weapon?.name || "TBA",
-                    displayName: weapon?.displayName || "TBA",
-                    rarity: weapon?.rarity || "B",
-                    specialty: weapon?.specialty,
-                } as BannerOption;
-            }
-        })
-        .sort((a, b) => a.displayName.localeCompare(b.displayName));
-}
-
-export interface BannerRow {
-    version: string;
-    subVersion: string;
-    start: string;
-    end: string;
-    fiveStars: string;
-    fourStars: string;
-}
-
-function createBannerRows(
-    banners: Banner[],
-    searchValue: BannerOption[],
-    unique: boolean
-): BannerRow[] {
-    if (searchValue.length > 0) {
-        banners = banners.filter((banner) => {
-            function filterFn(item: BannerOption) {
-                return [...banner.fiveStars, ...banner.fourStars].includes(
-                    item.name
-                );
-            }
-            if (unique) {
-                return searchValue.every(filterFn);
-            } else {
-                return searchValue.some(filterFn);
-            }
-        });
-    }
-    const rows = banners.map((banner) => ({
-        version: banner.version,
-        subVersion: banner.subVersion,
-        start: banner.start,
-        end: banner.end,
-        fiveStars: JSON.stringify(banner.fiveStars),
-        fourStars: JSON.stringify(banner.fourStars),
-    }));
-    return rows;
-}
