@@ -1,7 +1,7 @@
 import { Character } from "types/character";
 import { CharacterFilterState } from "reducers/characterFilters";
 import { BrowserSettings } from "reducers/browser";
-import { RarityMap } from "data/common";
+import { ElementMap, RarityMap, SpecialtyMap } from "data/common";
 import { createDateObject } from "./dates";
 import { sortBy } from "./utils";
 
@@ -68,21 +68,31 @@ export function filterCharacters(
             chars = chars.sort(
                 (a, b) =>
                     sortBy(RarityMap[a.rarity], RarityMap[b.rarity], reverse) ||
-                    a.fullName.localeCompare(b.fullName)
+                    sortBy(b.fullName, a.fullName)
             );
             break;
         case "element":
             chars = chars.sort(
                 (a, b) =>
-                    sortBy(b.element, a.element, reverse) ||
-                    a.fullName.localeCompare(b.fullName)
+                    sortBy(
+                        ElementMap[b.element],
+                        ElementMap[a.element],
+                        reverse
+                    ) ||
+                    sortBy(RarityMap[a.rarity], RarityMap[b.rarity]) ||
+                    sortBy(b.fullName, a.fullName)
             );
             break;
         case "specialty":
             chars = chars.sort(
                 (a, b) =>
-                    sortBy(b.specialty, a.specialty, reverse) ||
-                    a.fullName.localeCompare(b.fullName)
+                    sortBy(
+                        SpecialtyMap[b.specialty],
+                        SpecialtyMap[a.specialty],
+                        reverse
+                    ) ||
+                    sortBy(RarityMap[a.rarity], RarityMap[b.rarity]) ||
+                    sortBy(b.fullName, a.fullName)
             );
             break;
         case "release":
@@ -96,7 +106,13 @@ export function filterCharacters(
                             date: b.release.date,
                         }).obj.getTime(),
                         reverse
-                    ) || sortBy(b.fullName, a.fullName, !reverse)
+                    ) ||
+                    sortBy(
+                        RarityMap[b.rarity],
+                        RarityMap[a.rarity],
+                        !reverse
+                    ) ||
+                    sortBy(b.fullName, a.fullName, !reverse)
             );
             break;
     }

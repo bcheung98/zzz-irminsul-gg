@@ -89,9 +89,14 @@ function WeaponTable({ weapons }: { weapons: Weapon[] }) {
                         headColumns={headColumns}
                     />
                     <TableBody>
-                        {rows.sort(getComparator(order, orderBy)).map((row) => (
-                            <WeaponTableRow key={row.displayName} row={row} />
-                        ))}
+                        {rows
+                            .sort(getComparator(order, orderBy, "displayName"))
+                            .map((row) => (
+                                <WeaponTableRow
+                                    key={row.displayName}
+                                    row={row}
+                                />
+                            ))}
                     </TableBody>
                 </Table>
             </TableContainer>

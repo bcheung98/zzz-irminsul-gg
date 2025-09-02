@@ -5,6 +5,13 @@ export const elements = [
     "Electric",
     "Ether",
 ] as const;
+export enum ElementMap {
+    "Physical",
+    "Fire",
+    "Ice",
+    "Electric",
+    "Ether",
+}
 
 export const specialities = [
     "Attack",
@@ -14,6 +21,14 @@ export const specialities = [
     "Support",
     "Rupture",
 ] as const;
+export enum SpecialtyMap {
+    "Attack",
+    "Stun",
+    "Anomaly",
+    "Defense",
+    "Support",
+    "Rupture",
+}
 
 export const attackTypes = ["Strike", "Slash", "Pierce"] as const;
 

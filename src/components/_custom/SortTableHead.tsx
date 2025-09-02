@@ -61,6 +61,7 @@ function SortTableHead({
                         >
                             <TextStyled
                                 noWrap
+                                variant="body2-styled"
                                 sx={{ color: theme.appbar.color }}
                             >
                                 {column.label}
@@ -87,12 +88,17 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
 
 export function getComparator<Key extends keyof any>(
     order: Order,
-    orderBy: Key
+    orderBy: Key,
+    defaultKey: Key
 ): (
     a: { [key in Key]: number | string },
     b: { [key in Key]: number | string }
 ) => number {
     return order === "desc"
-        ? (a, b) => descendingComparator(a, b, orderBy)
-        : (a, b) => -descendingComparator(a, b, orderBy);
+        ? (a, b) =>
+              descendingComparator(a, b, orderBy) ||
+              descendingComparator(b, a, defaultKey)
+        : (a, b) =>
+              -descendingComparator(a, b, orderBy) ||
+              -descendingComparator(a, b, defaultKey);
 }
