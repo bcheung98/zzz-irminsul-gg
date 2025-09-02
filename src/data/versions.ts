@@ -1,5 +1,6 @@
 // MAKE SURE TO CHANGE THIS EVERY UPDATE!
 export const updates = [
+    { version: "2.2", name: "Do Not Go Gentle Into That Good Night" },
     { version: "2.1", name: "The Impending Crash of Waves" },
     { version: "2.0", name: "Where Clouds Embrace the Dawn" },
     { version: "1.7", name: "Bury Your Tears With the Past" },
