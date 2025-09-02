@@ -22,7 +22,7 @@ const { theme, width, skillDisplay, server, unreleasedContent } =
 
 const initialState: SettingsState = {
     theme: theme || "Dark",
-    width: width || "standard",
+    width: width || "wide",
     skillDisplay: skillDisplay || "slider",
     server: server || "NA",
     unreleasedContent: unreleasedContent || false,
