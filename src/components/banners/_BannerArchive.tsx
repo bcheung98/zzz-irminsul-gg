@@ -73,15 +73,9 @@ function BannerArchive() {
             {!matches_md_dn ? (
                 <Grid container spacing={4}>
                     <Grid size={{ xs: 12, lg: 6, xl: maxWidth }}>
-                        <TextStyled variant="h6-styled" sx={{ mb: "20px" }}>
-                            Agent Banner
-                        </TextStyled>
                         {CharacterBannerList}
                     </Grid>
                     <Grid size={{ xs: 12, lg: 6, xl: maxWidth }}>
-                        <TextStyled variant="h6-styled" sx={{ mb: "20px" }}>
-                            W-Engine Banner
-                        </TextStyled>
                         {WeaponBannerList}
                     </Grid>
                 </Grid>
