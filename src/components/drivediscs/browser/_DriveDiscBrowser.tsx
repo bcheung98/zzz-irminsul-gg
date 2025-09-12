@@ -1,16 +1,22 @@
 import { useState, BaseSyntheticEvent, useMemo } from "react";
 
 // Component imports
+import DriveDiscListRow from "./DriveDiscListRow";
 import InfoCard from "custom/InfoCard";
+import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
 import SearchBar from "custom/SearchBar";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
+import { Card } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import ViewCompactIcon from "@mui/icons-material/ViewCompact";
+import TableRowsIcon from "@mui/icons-material/TableRows";
 
 // Helper imports
-import { useAppSelector } from "helpers/hooks";
+import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import { selectDriveDiscs } from "reducers/driveDiscs";
+import { selectBrowserSettings, setBrowserView, View } from "reducers/browser";
 
 // Type imports
 import { DriveDisc } from "types/driveDisc";
@@ -29,11 +35,15 @@ function DriveDiscBrowser() {
         .querySelector('meta[property="og:description"]')
         ?.setAttribute("content", documentDesc);
 
+    const dispatch = useAppDispatch();
+
     const driveDiscs = [...useAppSelector(selectDriveDiscs)].sort(
         (a, b) =>
             b.release.version.localeCompare(a.release.version) ||
             b.displayName.localeCompare(a.displayName)
     );
+
+    const browserSettings = useAppSelector(selectBrowserSettings).driveDiscs;
 
     const [searchValue, setSearchValue] = useState("");
     const handleInputChange = (event: BaseSyntheticEvent) => {
@@ -44,6 +54,25 @@ function DriveDiscBrowser() {
         () => filterDriveDiscs(driveDiscs, searchValue),
         [driveDiscs, searchValue]
     );
+
+    const currentView = browserSettings.view;
+    const [view, setView] = useState<View>(currentView);
+    const handleView = (_: BaseSyntheticEvent, view: View) => {
+        if (view !== null) {
+            setView(view);
+            dispatch(setBrowserView({ type: "driveDiscs", view }));
+        }
+    };
+    const buttons: CustomToggleButtonProps[] = [
+        {
+            value: "icon",
+            icon: <ViewCompactIcon />,
+        },
+        {
+            value: "table",
+            icon: <TableRowsIcon />,
+        },
+    ];
 
     return (
         <>
@@ -58,6 +87,16 @@ function DriveDiscBrowser() {
                         Drive Discs
                     </TextStyled>
                 </Grid>
+                <Grid size={{ xs: 6, sm: "auto" }}>
+                    <ToggleButtons
+                        color="primary"
+                        buttons={buttons}
+                        value={view}
+                        exclusive
+                        onChange={handleView}
+                        highlightOnHover={false}
+                    />
+                </Grid>
                 <Grid size={{ xs: 12, sm: "auto" }}>
                     <SearchBar
                         placeholder="Search"
@@ -67,18 +106,31 @@ function DriveDiscBrowser() {
                     />
                 </Grid>
             </Grid>
-            <Grid container spacing={3}>
-                {currentDriveDiscs.map((disc, index) => (
-                    <InfoCard
-                        key={index}
-                        id={`${disc.name}-driveDiscBrowser`}
-                        name={disc.name}
-                        displayName={disc.displayName}
-                        type="drivedisc"
-                        rarity={disc.rarity}
-                    />
-                ))}
-            </Grid>
+            {view === "icon" && (
+                <Grid container spacing={3}>
+                    {currentDriveDiscs.map((disc, index) => (
+                        <InfoCard
+                            key={index}
+                            id={`${disc.name}-driveDiscBrowser`}
+                            name={disc.name}
+                            displayName={disc.displayName}
+                            type="drivedisc"
+                            rarity={disc.rarity}
+                        />
+                    ))}
+                </Grid>
+            )}
+            {view === "table" && (
+                <Card>
+                    {currentDriveDiscs.map((disc, index) => (
+                        <DriveDiscListRow
+                            key={index}
+                            disc={disc}
+                            index={index}
+                        />
+                    ))}
+                </Card>
+            )}
         </>
     );
 }
