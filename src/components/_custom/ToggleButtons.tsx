@@ -35,6 +35,7 @@ export function ToggleButton(props: CustomToggleButtonProps) {
 
 export interface ToggleButtonsProps extends ToggleButtonGroupProps {
     buttons: CustomToggleButtonProps[];
+    width?: string;
     spacing?: number;
     padding?: number | string;
     highlightOnHover?: boolean;
