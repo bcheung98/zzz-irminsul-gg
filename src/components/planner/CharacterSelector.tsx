@@ -1,20 +1,26 @@
-import { useMemo } from "react";
+import { BaseSyntheticEvent, useMemo, useState } from "react";
 
 // Component imports
 import Image from "custom/Image";
 import SearchBar from "custom/SearchBar";
-import { StyledMenuItem } from "styled/StyledMenu";
+import Dropdown from "custom/Dropdown";
+import ToggleButtons from "custom/ToggleButtons";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, Autocomplete, Stack } from "@mui/material";
+import { useTheme, useMediaQuery, Stack, StackProps } from "@mui/material";
 
 // Helper imports
-import { range } from "helpers/utils";
+import { range, sortBy } from "helpers/utils";
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
-import { getSelectedCharacters, setPlannerCharacters } from "reducers/planner";
+import {
+    addItem,
+    getSelectedCharacters,
+    setPlannerCharacters,
+} from "reducers/planner";
 import { getBackgroundColor, getRarityColor } from "helpers/rarityColors";
+import { elements, specialities } from "data/common";
 import {
     getExpertChallengeMaterial,
     getNotoriousHuntMaterial,
@@ -23,140 +29,196 @@ import { getCharacterAscensionMaterial } from "data/materials/characterAscension
 import { getCharacterSkillMaterial } from "data/materials/characterSkillMaterials";
 
 // Type imports
+import { Element, Specialty, Rarity } from "types/_common";
 import { Character } from "types/character";
 import { CharacterCostObject } from "types/costs";
+import { CharacterFilterState } from "reducers/characterFilters";
 
-function CharacterSelector() {
+const initialFilters: CharacterFilterState = {
+    element: [],
+    specialty: [],
+    attackType: [],
+    rarity: [],
+    faction: [],
+    bossMat: [],
+    weeklyBossMat: [],
+};
+
+function CharacterSelector({ handleClose }: { handleClose: () => void }) {
     const theme = useTheme();
+    const matches_md_up = useMediaQuery(theme.breakpoints.up("md"));
 
     const dispatch = useAppDispatch();
 
     const characters = [...useAppSelector(selectCharacters)].sort((a, b) =>
         a.fullName.localeCompare(b.fullName)
     );
-    const options = useMemo(
-        () => createOptions(characters),
-        [JSON.stringify(characters)]
+
+    const options = createOptions(characters);
+    const selected = useAppSelector(getSelectedCharacters);
+
+    const [searchValue, setSearchValue] = useState("");
+    const handleInputChange = (event: BaseSyntheticEvent) => {
+        setSearchValue(event.target.value);
+    };
+
+    const [filters, setFilters] = useState(initialFilters);
+    const filterGroups = [
+        {
+            name: "Attribute",
+            value: filters.element,
+            onChange: (_: BaseSyntheticEvent, newValues: Element[]) =>
+                setFilters({ ...filters, element: newValues }),
+            buttons: createButtons(elements, "elements"),
+        },
+        {
+            name: "Specialty",
+            value: filters.specialty,
+            onChange: (_: BaseSyntheticEvent, newValues: Specialty[]) =>
+                setFilters({ ...filters, specialty: newValues }),
+            buttons: createButtons(specialities, "specialties"),
+        },
+        {
+            name: "Rank",
+            value: filters.rarity,
+            onChange: (_: BaseSyntheticEvent, newValues: Rarity[]) =>
+                setFilters({ ...filters, rarity: newValues }),
+            buttons: createButtons(["S", "A"], "ranks/character"),
+            width: "auto",
+        },
+    ];
+
+    const currentOptions = useMemo(
+        () => filterOptions(options, selected, filters, searchValue),
+        [options, selected, filters, searchValue]
     );
-    const values = useAppSelector(getSelectedCharacters);
+
+    const handleClick = (option: CharacterCostObject) => {
+        const newValues = [...selected];
+        newValues.push(option);
+        dispatch(setPlannerCharacters(newValues));
+        dispatch(addItem(option.id));
+        handleClose();
+    };
 
     const smallIconStyle = { width: "16px", height: "16px" };
 
-    return (
-        <Autocomplete
-            multiple
-            autoComplete
-            filterSelectedOptions
-            disableClearable
-            options={options}
-            getOptionLabel={(option) => option.fullName}
-            filterOptions={(options, { inputValue }) =>
-                options.filter(
-                    (option) =>
-                        option.name
-                            .toLocaleLowerCase()
-                            .includes(inputValue.toLocaleLowerCase()) ||
-                        option.fullName
-                            .toLocaleLowerCase()
-                            .includes(inputValue.toLocaleLowerCase())
-                )
-            }
-            noOptionsText="No Agents"
-            value={values}
-            isOptionEqualToValue={(option, value) => option.name === value.name}
-            onChange={(
-                event,
-                newValue: CharacterCostObject[] | null,
-                reason
-            ) => {
-                if (
-                    event.type === "keydown" &&
-                    ((event as React.KeyboardEvent).key === "Backspace" ||
-                        (event as React.KeyboardEvent).key === "Delete") &&
-                    reason === "removeOption"
-                ) {
-                    return;
-                }
-                dispatch(
-                    setPlannerCharacters(newValue as CharacterCostObject[])
-                );
-            }}
-            renderTags={() => null}
-            renderInput={(params) => (
-                <SearchBar
-                    params={params}
-                    placeholder="Agents"
-                    inputIcon={
-                        <Image
-                            src="icons/Characters"
-                            alt="Agents"
-                            style={{
-                                width: "32px",
-                                marginLeft: "4px",
-                                backgroundColor: theme.appbar.backgroundColor,
-                                borderRadius: "64px",
-                            }}
-                        />
-                    }
-                />
-            )}
-            renderOption={(props, option) => (
-                <StyledMenuItem
-                    {...props}
-                    key={option.fullName}
-                    sx={{
-                        "&:hover": {
-                            backgroundColor: theme.menu.selectedHover,
-                        },
-                        "&:not(:last-child)": {
-                            borderBottom: `1px solid ${theme.border.color.primary}`,
-                        },
-                    }}
-                >
-                    <Stack spacing={2} direction="row" alignItems="center">
-                        <Stack
-                            spacing={1}
-                            sx={{
-                                p: "4px",
-                                borderRadius: "16px",
-                                backgroundColor: theme.appbar.backgroundColor,
-                            }}
-                        >
-                            <Image
-                                src={`elements/${option.element}`}
-                                alt={option.element}
-                                style={smallIconStyle}
-                                tooltip={option.element}
-                            />
+    const stackParams: StackProps = {
+        spacing: 2,
+        direction: "row",
+        alignItems: "center",
+        sx: {
+            p: 1,
+            borderRadius: "4px",
+            backgroundColor: theme.background(0, "dark"),
+            "&:hover": {
+                backgroundColor: theme.background(0, "light"),
+                cursor: "pointer",
+            },
+        },
+    };
 
-                            <Image
-                                src={`specialties/${option.specialty}`}
-                                alt={option.specialty}
-                                style={smallIconStyle}
-                                tooltip={option.specialty}
+    return (
+        <Stack spacing={2}>
+            <Stack spacing={2}>
+                <SearchBar
+                    placeholder="Search"
+                    value={searchValue}
+                    onChange={handleInputChange}
+                    size={{ height: "36px" }}
+                />
+                <Dropdown title="Filters">
+                    {filterGroups.map((filter, index) => (
+                        <Stack key={index} spacing={1}>
+                            <ToggleButtons
+                                color="secondary"
+                                buttons={filter.buttons}
+                                value={filter.value}
+                                onChange={filter.onChange}
+                                width={filter.width || undefined}
+                                spacing={4}
+                                padding={
+                                    "label" in filter.buttons[0] ? "0 8px" : 0
+                                }
                             />
                         </Stack>
-                        <Image
-                            src={`characters/icons/${option.name}`}
-                            alt={option.name}
-                            style={{
-                                width: "48px",
-                                height: "48px",
-                                border: `2px solid ${getRarityColor(
-                                    option.rarity
-                                )}`,
-                                borderRadius: theme.mainContentBox.borderRadius,
-                                backgroundColor: theme.background(2),
-                                boxShadow: `inset 0 0 24px 16px ${getBackgroundColor(
-                                    option.rarity
-                                )}`,
-                            }}
-                        />
-                        <TextStyled noWrap>{option.fullName}</TextStyled>
-                    </Stack>
-                </StyledMenuItem>
-            )}
-        />
+                    ))}
+                </Dropdown>
+            </Stack>
+            <Stack
+                spacing={1}
+                sx={{
+                    height: "50vh",
+                    maxHeight: "600px",
+                    overflowY: "auto",
+                }}
+            >
+                {currentOptions.length > 0 ? (
+                    currentOptions.map((option) => (
+                        <Stack
+                            key={option.id}
+                            {...stackParams}
+                            onClick={() => handleClick(option)}
+                        >
+                            <Stack
+                                spacing={1}
+                                sx={{
+                                    p: "4px",
+                                    borderRadius: "16px",
+                                    backgroundColor:
+                                        theme.appbar.backgroundColor,
+                                }}
+                            >
+                                <Image
+                                    src={`elements/${option.element}`}
+                                    alt={option.element}
+                                    style={smallIconStyle}
+                                    tooltip={option.element}
+                                />
+
+                                <Image
+                                    src={`specialties/${option.specialty}`}
+                                    alt={option.specialty}
+                                    style={smallIconStyle}
+                                    tooltip={option.specialty}
+                                />
+                            </Stack>
+                            <Image
+                                src={`characters/icons/${option.name}`}
+                                alt={option.name}
+                                style={{
+                                    width: matches_md_up ? "48px" : "40px",
+                                    height: matches_md_up ? "48px" : "40px",
+                                    border: `2px solid ${getRarityColor(
+                                        option.rarity
+                                    )}`,
+                                    borderRadius:
+                                        theme.mainContentBox.borderRadius,
+                                    backgroundColor: theme.background(2),
+                                    boxShadow: `inset 0 0 24px 16px ${getBackgroundColor(
+                                        option.rarity
+                                    )}`,
+                                }}
+                            />
+                            <TextStyled
+                                variant={
+                                    matches_md_up
+                                        ? "body1-styled"
+                                        : "body2-styled"
+                                }
+                                noWrap
+                            >
+                                {option.fullName}
+                            </TextStyled>
+                        </Stack>
+                    ))
+                ) : (
+                    <TextStyled sx={{ textAlign: "center" }}>
+                        No agents
+                    </TextStyled>
+                )}
+            </Stack>
+        </Stack>
     );
 }
 
@@ -231,4 +293,53 @@ function createOptions(characters: Character[]) {
                 dataFormat: "v2",
             } as CharacterCostObject)
     );
+}
+
+function filterOptions(
+    characters: CharacterCostObject[],
+    selected: CharacterCostObject[],
+    filters: CharacterFilterState,
+    searchValue: string
+) {
+    let chars: CharacterCostObject[];
+    chars = characters.filter(
+        (char) => !selected.map((char) => char.id).includes(char.id)
+    );
+    if (filters.element.length > 0) {
+        chars = chars.filter((char) => filters.element.includes(char.element));
+    }
+    if (filters.specialty.length > 0) {
+        chars = chars.filter((char) =>
+            filters.specialty.includes(char.specialty)
+        );
+    }
+    if (filters.rarity.length > 0) {
+        chars = chars.filter((char) => filters.rarity.includes(char.rarity));
+    }
+    if (searchValue !== "") {
+        chars = chars.filter(
+            (char) =>
+                char.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+                char.fullName.toLowerCase().includes(searchValue.toLowerCase())
+        );
+    }
+    chars = chars.sort(
+        (a, b) => sortBy(a.rarity, b.rarity) || sortBy(b.fullName, a.fullName)
+    );
+
+    return chars;
+}
+
+function createButtons<T extends string>(items: readonly T[], url: string) {
+    return items.map((item) => ({
+        value: item,
+        icon: url && (
+            <Image
+                src={`${url}/${item}`}
+                alt={`${item}`}
+                style={{ width: "32px", padding: "4px", borderRadius: "4px" }}
+                tooltip={!url.startsWith("ranks") ? item : ""}
+            />
+        ),
+    }));
 }

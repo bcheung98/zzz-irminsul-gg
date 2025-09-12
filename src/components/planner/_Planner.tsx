@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 // Component imports
-import CharacterSelector from "./CharacterSelector";
-import WeaponSelector from "./WeaponSelector";
+import PlannerSelector from "./PlannerSelector";
+import PlannerListBase from "./PlannerListBase";
 import TotalCost from "./TotalCost";
 import PlannerCard from "./PlannerCard";
 import { TextStyled } from "styled/StyledTypography";
@@ -15,8 +15,10 @@ import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import { selectCharacters } from "reducers/character";
 import { selectWeapons } from "reducers/weapon";
 import {
+    getItems,
     getSelectedCharacters,
     getSelectedWeapons,
+    setItems,
     setPlannerCharacters,
     setPlannerWeapons,
 } from "reducers/planner";
@@ -123,9 +125,26 @@ function Planner() {
         );
     }
 
+    let items = useAppSelector(getItems);
+    if ([...characters, ...weapons].length > 0 && items.length === 0) {
+        items = [
+            ...characters.map((char) => char.id),
+            ...weapons.map((wep) => wep.id),
+        ];
+    }
+
+    const data = items.map((item) => {
+        if (item.startsWith("character")) {
+            return characters.find((char) => char.id === item)!;
+        } else {
+            return weapons.find((wep) => wep.id === item)!;
+        }
+    });
+
     useEffect(() => {
         dispatch(setPlannerCharacters(characters));
         dispatch(setPlannerWeapons(weapons));
+        dispatch(setItems(items));
     }, []);
 
     return (
@@ -136,13 +155,18 @@ function Planner() {
             >
                 Ascension Planner
             </TextStyled>
-            <Grid container spacing={4}>
-                <Grid size={{ xs: 12, lg: 6, xl: maxWidthXL }}>
-                    <CharacterSelector />
+            <Grid container spacing={2}>
+                <Grid size="auto">
+                    <PlannerSelector type="character" />
                 </Grid>
-                <Grid size={{ xs: 12, lg: 6, xl: maxWidthXL }}>
-                    <WeaponSelector />
+                <Grid size="auto">
+                    <PlannerSelector type="weapon" />
                 </Grid>
+                {items.length > 0 && (
+                    <Grid size="auto">
+                        <PlannerListBase />
+                    </Grid>
+                )}
             </Grid>
             <Grid container spacing={4} sx={{ my: "24px" }}>
                 <Grid size={{ xs: 12, xl: maxWidthXL * 2 }}>
@@ -157,7 +181,7 @@ function Planner() {
                     xl: "left",
                 }}
             >
-                {[...characters, ...weapons].map((item) => (
+                {data.map((item) => (
                     <Grid
                         key={item.id}
                         size={{ xs: 12, lg: maxWidthLG, xl: maxWidthXL }}
