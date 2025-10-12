@@ -53,6 +53,7 @@ function CharacterInfoMain({ character }: CharacterProps) {
                         />
                         {attackType.map((atkType) => (
                             <InfoChip
+                                key={atkType}
                                 color="tertiary"
                                 src={`specialties/attack_types/${atkType}`}
                                 label={atkType}
