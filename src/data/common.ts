@@ -52,4 +52,5 @@ export const factions = [
     "Mockingbird",
     "Yunkui Summit",
     "Spook Shack",
+    "Krampus Compliance Authority",
 ] as const;
