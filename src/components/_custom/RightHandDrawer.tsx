@@ -62,7 +62,7 @@ function RightHandDrawer() {
                         width: open ? width : 0,
                         flexShrink: 0,
                         "& .MuiDrawer-paper": {
-                            mr: "-1px",
+                            mr: open ? 0 : "-1px",
                             width: open ? width : 0,
                             borderLeft: `1px solid ${theme.border.color.primary}`,
                             backgroundColor: theme.appbar.backgroundColor,
