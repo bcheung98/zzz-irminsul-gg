@@ -324,7 +324,10 @@ function filterOptions(
         );
     }
     chars = chars.sort(
-        (a, b) => sortBy(a.rarity, b.rarity) || sortBy(b.fullName, a.fullName)
+        (a, b) =>
+            sortBy(a.release.version, b.release.version) ||
+            sortBy(a.rarity, b.rarity) ||
+            sortBy(b.fullName, a.fullName)
     );
 
     return chars;

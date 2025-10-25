@@ -265,6 +265,7 @@ function filterOptions(
     }
     weps = weps.sort(
         (a, b) =>
+            sortBy(a.release.version, b.release.version) ||
             sortBy(RarityMap[a.rarity], RarityMap[b.rarity]) ||
             sortBy(b.displayName, a.displayName)
     );
