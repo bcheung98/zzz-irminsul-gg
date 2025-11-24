@@ -119,6 +119,16 @@ export const expertChallengeMaterials = [
         rarity: "A",
         release: { version: "2.3" },
     },
+    {
+        id: "bossMat_12",
+        category: "bossMat",
+        tag: "bossMat_12",
+        name: "???",
+        displayName: "???",
+        source: "???",
+        rarity: "A",
+        release: { version: "2.5" },
+    },
 ] as const;
 
 export const expertChallengeMatNames = expertChallengeMaterials.map(
@@ -207,6 +217,16 @@ export const notoriousHuntMaterials = [
         source: '"Corrupted Wandering Hunter"',
         rarity: "S",
         release: { version: "2.3" },
+    },
+    {
+        id: "weeklyBossMat_7",
+        category: "weeklyBossMat",
+        tag: "weeklyBossMat_7",
+        name: "???",
+        displayName: "???",
+        source: "???",
+        rarity: "S",
+        release: { version: "2.5" },
     },
 ] as const;
 
