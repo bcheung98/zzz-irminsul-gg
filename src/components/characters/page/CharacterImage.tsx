@@ -206,7 +206,7 @@ function CharacterImage({ character }: CharacterProps) {
                             >
                                 <Box>
                                     <TextStyled
-                                        variant="h5-styled"
+                                        variant="h6-styled"
                                         gutterBottom
                                     >
                                         {outfit.name !== ""
