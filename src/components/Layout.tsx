@@ -5,6 +5,8 @@ import { Outlet, useLocation } from "react-router";
 import RightHandDrawer from "custom/RightHandDrawer";
 import Nav from "./nav/Nav";
 import NavBottom from "./nav/NavBottom";
+import RouterLink from "./nav/RouterLink";
+import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
 import { useTheme, alpha, Box } from "@mui/material";
@@ -53,10 +55,38 @@ function Layout() {
                 >
                     <Box
                         sx={{
+                            p: 2,
+                            mt: { xs: "56px", sm: "64px" },
+                            backgroundColor: theme.palette.error.main,
+                            borderRadius: 0,
+                            textAlign: "center",
+                            color: theme.text.primary,
+                        }}
+                    >
+                        <RouterLink to="https://irminsul.gg/genshin">
+                            <TextStyled sx={{ textDecoration: "underline" }}>
+                                The new version of IRMINSUL.GG is here!
+                            </TextStyled>
+                        </RouterLink>
+                        <TextStyled>
+                            Please use the new site for the most up to date
+                            info. This site will be shut down on February 1,
+                            2026.
+                        </TextStyled>
+                        <RouterLink
+                            to="https://irminsul.gg/blog/irminsul-gg-v2-release-notes"
+                            openInNewTab
+                        >
+                            <TextStyled sx={{ textDecoration: "underline" }}>
+                                Learn more.
+                            </TextStyled>
+                        </RouterLink>
+                    </Box>
+                    <Box
+                        sx={{
                             px: "24px",
                             pt: "16px",
                             pb: "48px",
-                            mt: "64px",
                             minHeight: "100vh",
                             width: {
                                 xs: "100%",
