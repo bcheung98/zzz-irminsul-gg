@@ -63,7 +63,7 @@ function Layout() {
                             color: theme.text.primary,
                         }}
                     >
-                        <RouterLink to="https://irminsul.gg/genshin">
+                        <RouterLink to="https://irminsul.gg/zzz">
                             <TextStyled sx={{ textDecoration: "underline" }}>
                                 The new version of IRMINSUL.GG is here!
                             </TextStyled>

@@ -1,5 +1,6 @@
 // MAKE SURE TO CHANGE THIS EVERY UPDATE!
 export const updates = [
+    { version: "2.5", name: "To Be Fuel for the Night" },
     { version: "2.4", name: "On the Precipice of the Abyss" },
     { version: "2.3", name: "Memories of Dreams Bygone" },
     { version: "2.2", name: "Do Not Go Gentle Into That Good Night" },
